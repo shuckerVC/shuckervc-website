@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing — shuckerVC</title>
+  <meta name="description" content="White papers, perspectives, and portfolio news from the shuckerVC team — everything we're thinking about, in one place.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="wr-nav">
+    <a class="nav-logo" href="index.html#top" aria-label="shuckerVC home" style="width:auto;">
+      <img src="assets/logo/logo-white.png" alt="shuckerVC" style="position:static;transform:none;height:36px;">
+    </a>
+    <div class="wr-navlinks">
+      <a href="index.html#strategy">Strategy</a>
+      <a href="index.html#focus">Founder focus</a>
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#team">Team</a>
+      <a href="writing.html" class="is-active">Writing</a>
+      <a class="nav-cta" href="index.html#contact">Submit your company</a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="wr-header">
+    <div class="wr-head-wrap">
+      <a class="wr-back" href="index.html#top">← Back to shuckerVC</a>
+      <div class="wr-head-eyebrow"><span></span><span>Writing</span></div>
+      <h1 class="wr-h1">Field notes on focus, AI, and how software gets built.</h1>
+      <p class="wr-sub">White papers, perspectives, and portfolio news from the shuckerVC team — everything we're thinking about, in one place.</p>
+    </div>
+  </header>
+
+  <div id="wrSec"></div>
+
+  <!-- ARCHIVE VIEW -->
+  <section class="wr-archive" id="archiveView">
+    <div class="container">
+      <div class="wr-toolbar">
+        <div class="wr-chips" id="wrChips"></div>
+        <div class="wr-tools">
+          <span class="wr-count" id="wrCount"></span>
+          <button type="button" class="wr-sort" id="wrSort"></button>
+        </div>
+      </div>
+      <div id="wrFeat"></div>
+      <div class="wr-grid" id="wrGrid"></div>
+      <div class="wr-empty" id="wrEmpty" hidden>No writing in this category yet.</div>
+    </div>
+  </section>
+
+  <!-- READER VIEW -->
+  <section class="wr-reader" id="readerView" hidden>
+    <div class="wr-bar">
+      <div class="wr-bar-inner">
+        <button type="button" class="wr-bar-btn" data-close>← All writing</button>
+        <span class="wr-bar-read" id="wrBarRead"></span>
+        <button type="button" class="wr-bar-x" data-close aria-label="Close">×</button>
+      </div>
+    </div>
+    <article class="wr-article" id="wrArticle"></article>
+    <div class="wr-more">
+      <div class="wr-more-head">
+        <h3>More writing</h3>
+        <div class="wr-railbtns">
+          <button type="button" class="wr-railbtn" id="wrPrev" aria-label="Previous">←</button>
+          <button type="button" class="wr-railbtn" id="wrNext" aria-label="Next">→</button>
+        </div>
+      </div>
+      <div class="wr-rail" id="wrRail"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="wr-cta">
+    <div class="wr-cta-inner">
+      <h2>Building something we should read about?</h2>
+      <p>We co-invest in oversubscribed rounds alongside top lead investors.</p>
+      <a class="btn btn--ink btn--lg" href="index.html#contact">Submit your company</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <img class="footer-logo" src="assets/logo/lockup-gold-white.png" alt="shuckerVC">
+      <nav class="footer-links">
+        <a href="index.html#strategy">Strategy</a>
+        <a href="index.html#portfolio">Portfolio</a>
+        <a href="index.html#team">Team</a>
+        <a href="writing.html">Writing</a>
+      </nav>
+      <span class="footer-legal">© shuckerVC 2026 · Silicon Valley</span>
+    </div>
+  </footer>
+
+  <script src="writing.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{
+  "_comment": "Evergreen long-form essays shown in the Writing page + Insights feed but NOT maintained as posts in the Notion 🥁 shuckerVC Blog. The sync merges these with the live Notion posts (Notion wins on id/title collisions). To make one Notion-driven, add it as a Blog post and delete it here. The white paper + Support Partner bodies are copied 1:1 from the source PDF / Notion page.",
+  "essays": [
+    {
+      "id": "saas-pricing",
+      "tag": "White paper",
+      "date": "2026-05-15",
+      "title": "AI is Eating Software",
+      "excerpt": "Just as cloud and mobile once disrupted enterprise software, AI is now poised to be the next transformative force in the B2B SaaS landscape. With 60% of Y-Combinator's recent startups focused on AI, the potential for disruption is evident.",
+      "author": "JP Persico",
+      "initials": "JP",
+      "read": "5 min read",
+      "url": "https://shuckervc.notion.site/shuckervc-news",
+      "body": [
+        { "t": "p", "text": "The introduction of the Macintosh computer was a watershed moment in personal computing, setting new standards and reshaping user experiences. Similarly, the enterprise B2B software landscape was profoundly disrupted by the cloud and mobile revolutions, giving birth to the B2B SaaS industry we recognize today. Now, as we stand on the cusp of an AI-driven transformation, it feels reminiscent of that Macintosh moment. AI is poised to be the next significant disruptor, promising to redefine the B2B SaaS space. This isn't just another technological wave; it's a foundational shift that redefines business models, value propositions, and the very essence of enterprise solutions." },
+        { "t": "h", "text": "The Data Speaks: Y-Combinator's AI Surge" },
+        { "t": "p", "text": "A telling sign of this AI-driven transformation is evident in the composition of Y-Combinator's recent batch. An impressive 60% of the startups from YC's S23 batch are rooted in AI and machine learning. This isn't a fleeting trend; it's a testament to the industry's recognition of AI's potential and the entrepreneurial drive to harness it." },
+        { "t": "h", "text": "Disruption of the Disruptors" },
+        { "t": "p", "text": "The B2B SaaS landscape, which itself emerged from the disruption of traditional enterprise software by cloud and mobile technologies, is now witnessing another wave of disruption from AI-first startups. These new entrants, backed by powerful algorithms and deep learning models, are challenging even the most established SaaS giants. The message is clear: adapt to the AI era or risk obsolescence." },
+        { "t": "h", "text": "Reimagining Enterprise Solutions" },
+        { "t": "p", "text": "AI's potential isn't limited to enhancing existing solutions. It's about re-envisioning entire enterprise workflows. For instance, Postscript's AI-driven approach to SMS marketing is not just an enhancement; it's a paradigm shift in how businesses engage with customers. Another compelling example is Ironclad, a company that's revolutionizing contract life cycle management through AI. Ironclad's AI capabilities automatically analyze contracts, flag areas that require a thorough review, and provide suggestions on how to negotiate based on legal-approved guidelines. What once involved countless meetings and document revisions is now streamlined by AI." },
+        { "t": "h", "text": "AI Co-Pilots: The New Norm" },
+        { "t": "p", "text": "In sectors like finance, insurance, and brokerage, AI is transitioning from being a backend tool to a frontline co-pilot. It's not just about automation; it's about enhancing human capabilities, offering insights, and driving decision-making." },
+        { "t": "h", "text": "A Strategic Imperative" },
+        { "t": "p", "text": "For established B2B SaaS players, the rise of AI is both a challenge and an opportunity. It's not just about integrating AI modules into existing platforms; it's about a strategic realignment. Companies need to rethink their core value propositions, workflows, and customer engagement strategies in the context of AI." },
+        { "t": "h", "text": "Beyond the Hype: AI's Tangible Value" },
+        { "t": "p", "text": "While AI often finds itself surrounded by hype, its tangible impact in the B2B SaaS space is undeniable. Whether it's predictive analytics, intelligent automation, or deep personalization, AI is not just a feature; it's becoming the core of value creation." },
+        { "t": "h", "text": "Harness the moment with shuckerVC" },
+        { "t": "p", "text": "In this transformative era, where AI is reshaping the B2B SaaS landscape, there lies a pivotal moment for visionary startups. At shuckerVC, we're not just observers of this shift; we're active participants. As a Bay Area seed fund, our focus is laser-sharp: backing AI-powered B2B software companies in the US. We believe in the power of AI and are deeply committed to supporting the founders leading this revolution." },
+        { "t": "p", "text": "The journey of innovation is demanding. Founders, in their drive to innovate and solve hard problems with scarce resources, often find themselves wearing multiple hats and juggling myriad roles. This multitasking, while commendable, can slow their momentum, diverting attention from core objectives and diluting their focus. shuckerVC understands this challenge and is here to help. Our Ops Team allows founders to delegate whole back-office tasks to our team, offering these services at cost, ensuring they can maintain their focus and accelerate their vision." },
+        { "t": "p", "text": "With our specialized focus and a vast network that includes relationships with over 400 VC firms and top accelerators, we're continuously seeking the technical founders who will define the next chapter of B2B SaaS, powered by AI." }
+      ]
+    },
+    {
+      "id": "support-partner",
+      "tag": "Perspective",
+      "date": "2026-04-15",
+      "title": "Our Support Partner Model",
+      "excerpt": "The bottleneck for early founders isn't capital — it's operational drag. How we embed a full-time operator in every portfolio company, at cost and with zero dilution.",
+      "author": "shuckerVC",
+      "initials": "sV",
+      "read": "6 min read",
+      "url": "https://shuckervc.notion.site/our-support-partner-model",
+      "body": [
+        { "t": "p", "text": "At shuckerVC, we believe the biggest bottleneck for technical founders isn't capital — it's operational drag. That's why we built the Support Partner Model: a dedicated, full-time operational partner embedded in each portfolio company to handle everything outside of product and engineering." },
+        { "t": "p", "text": "This is our core differentiator as a fund, and it's the reason founders choose us — even when they have competing term sheets on the table." },
+        { "t": "h", "text": "How It Works" },
+        { "t": "p", "text": "When a company joins the shuckerVC portfolio, we deploy a Support Partner — a full-time W2 employee hired through shuckerVC's separate LLC. The portfolio company pays their salary at cost, with zero markup from shuckerVC and zero equity dilution for the founder." },
+        { "t": "p", "text": "Support Partners are embedded within each portfolio company, working directly with the leadership team through its highest-growth phase. From day one, they implement systems and processes that prevent organizational terminal velocity, ensuring no single person becomes the constraint to growth. As the company scales, these systems enable a smooth transition to functional leads who sustain and extend that velocity." },
+        { "t": "q", "text": "We help companies break through terminal velocity by building the system that prevents it." },
+        { "t": "h", "text": "What Support Partners Do" },
+        { "t": "p", "text": "Support Partners handle everything that isn't product or engineering. People Operations: recruiting, hiring, HR, payroll, benefits administration, onboarding, and performance reviews — at Algorized, a single Support Partner hired 12 people in 9 months. Financial Operations: monthly book closing, expense management, financial forecasting, accounting coordination, vendor payments, and revenue collection, serving as the interface between the company and its bookkeeping vendor. Growth & Marketing: LinkedIn management, website management, event coordination, PR support, and investor update preparation. Administrative & Compliance: office operations, vendor management, SOC2 compliance coordination, legal document collection, and Series A prep support." },
+        { "t": "h", "text": "Compensation & Alignment" },
+        { "t": "p", "text": "Rather than taking equity from portfolio companies, Support Partners receive an allocation from shuckerVC's GP carry pool. This structure is deliberate. For founders: no equity dilution — you get experienced operational talent at cost, not at the $240K+ market rate for a chief of staff. For Support Partners: alignment with overall fund performance rather than the fate of a single company — they succeed when the entire portfolio succeeds. For LPs: direct value creation in portfolio companies that accelerates returns across the fund." },
+        { "t": "h", "text": "Talent Pipeline" },
+        { "t": "p", "text": "We recruit Support Partners who are natural problem solvers — specifically those transitioning out of consulting who want hands-on startup experience but lack access to early-stage companies. We source candidates through non-public job platforms and present a bench of 4–5 vetted candidates to each founder for interviews and selection. What we look for: 2 to 3 years of consulting experience; an AI-native mindset (we can teach enterprise skills, but it's harder to teach AI orchestration); career pivoters with strong operational instincts; and people who thrive as problem solvers and orchestrators, not just executors." },
+        { "t": "h", "text": "Two Career Paths for Support Partners" },
+        { "t": "p", "text": "Company Hire: the portfolio company hires them directly as a permanent W2 employee — we do not block or restrict this natural transition. Redeploy: they stay with shuckerVC and move to the next portfolio company, building deep cross-company operational expertise. This creates a talent recycling system across our target portfolio of 20 companies, where operational knowledge compounds across the fund." },
+        { "t": "h", "text": "Proven Results: Algorized" },
+        { "t": "p", "text": "Before: 4 people, early-stage revenue. After: 15 people, substantially higher revenue, raising a strong up-round from its seed valuation. Impact: the Support Partner hired 12 people in 9 months and managed all HR, office operations, and marketing — freeing the CEO to focus exclusively on technology and fundraising. Outcome: Algorized chose shuckerVC over 3 other term sheets specifically because of the Support Partner offering." },
+        { "t": "h", "text": "Why Founders Choose Us" },
+        { "t": "q", "text": "Founders choose shuckerVC over other term sheets specifically for the Support Partner offering." },
+        { "t": "p", "text": "Technical founders face a fundamental tension: every hour spent on HR, finance, compliance, and vendor management is an hour not spent on product or customers. Our model resolves that tension completely. For founders, the value proposition is simple: get an experienced operational partner at cost, with no equity dilution, who is fully aligned with your success through fund carry." }
+      ]
+    },
+    {
+      "id": "atlas",
+      "tag": "Perspective",
+      "date": "2026-03-15",
+      "title": "Why we backed Atlas: monetizing impact, not tokens",
+      "excerpt": "As compute costs collapse, durable SaaS won't meter tokens — it'll price the outcomes it delivers. The thesis behind our investment in Atlas.",
+      "author": "Graham Siegel",
+      "initials": "GS",
+      "read": "5 min read",
+      "cover": "assets/insights/atlas.jpg",
+      "url": "https://shuckervc.notion.site/shuckervc-news",
+      "body": [
+        { "t": "h", "text": "The end of token metering" },
+        { "t": "p", "text": "As compute costs collapse, pricing software by tokens consumed becomes a race to the bottom. Durable companies won't meter the cost of the work — they'll price the value of the outcome it produces." },
+        { "t": "p", "text": "Atlas builds the layer that makes that possible: dynamic, outcome-based pricing and monetization for AI-native SaaS." },
+        { "t": "h", "text": "Why we invested" },
+        { "t": "p", "text": "Michael is a three-time founder who has lived the pricing problem from the inside. The team is building exactly where we believe the market is heading, and they're doing it with the operating discipline we look for." },
+        { "t": "p", "text": "It's a classic shuckerVC investment: a technical founder, a market ripe for change, and an oversubscribed round alongside a top lead investor." }
+      ]
+    },
+    {
+      "id": "algorized",
+      "tag": "News",
+      "date": "2026-02-15",
+      "title": "Algorized raises its Series A",
+      "excerpt": "Our edge-AI perception company closes its Series A alongside Amazon — bringing robots that sense and anticipate people to the factory floor.",
+      "author": "shuckerVC",
+      "initials": "sV",
+      "read": "3 min read",
+      "cover": "assets/insights/algorized.jpg",
+      "url": "https://shuckervc.notion.site/shuckervc-news",
+      "body": [
+        { "t": "p", "text": "Algorized, our edge-AI perception company, has closed its Series A alongside Amazon." },
+        { "t": "p", "text": "The company builds perception that lets robots sense and anticipate people on the factory floor — making industrial automation safer and more adaptive." },
+        { "t": "p", "text": "We backed Algorized at seed and embedded a Support Partner to handle finance ops and Series A prep, so founder Natalya Lopareva could stay focused on the technology. We could not be happier to see the milestone." }
+      ]
+    }
+  ]
+}

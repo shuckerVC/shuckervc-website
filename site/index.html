@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>shuckerVC — Fueling founder focus</title>
+  <meta name="description" content="shuckerVC is an $8M Bay Area seed fund co-investing in oversubscribed rounds for B2B software founders — with hands-on operating support so they stay on product and customers.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- cursor spotlight (desktop only) -->
+  <div class="sv-spot" id="spot" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="#top" aria-label="shuckerVC home">
+      <img data-logo="white" src="assets/logo/logo-white.png" alt="shuckerVC">
+      <img data-logo="color" src="assets/logo/logo-color.png" alt="shuckerVC">
+    </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <span data-navicon></span><span data-navicon></span><span data-navicon></span>
+    </button>
+    <div class="nav-links" id="navLinks" data-open="false">
+      <a data-navlink href="#strategy">Strategy</a>
+      <a data-navlink href="#focus">Founder focus</a>
+      <a data-navlink href="#portfolio">Portfolio</a>
+      <a data-navlink href="#team">Team</a>
+      <a data-navlink href="#insights">Insights</a>
+      <a class="nav-cta" data-magnetic href="#contact">Submit your company</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-wrap container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--hero">Fueling founder focus</span>
+      </div>
+      <h1 data-reveal data-delay="90" class="hero-title">Backing focused founders, together with the best in venture.</h1>
+      <p data-reveal data-delay="180" class="hero-sub">shuckerVC is an $8M Bay Area seed fund co-investing in oversubscribed rounds for B2B software founders — with hands-on operating support so they stay on product and customers.</p>
+      <div data-reveal data-delay="260" class="hero-actions">
+        <a data-magnetic href="#contact" class="btn btn--gold btn--lg">Submit your company</a>
+        <a data-magnetic href="#strategy" class="btn btn--ghost btn--lg">Our thesis</a>
+      </div>
+      <div data-reveal data-delay="360" class="hero-stats">
+        <div>
+          <div class="stat-num stat-num--gold"><span data-count="8" data-prefix="$" data-suffix="M">$8M</span></div>
+          <div class="stat-label">Bay Area seed fund</div>
+        </div>
+        <div>
+          <div class="stat-num"><span data-count="500" data-prefix="≤ $" data-suffix="K">≤ $500K</span></div>
+          <div class="stat-label">Pre-seed &amp; seed checks</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- STRATEGY -->
+  <section id="strategy" class="sv-sec sec--cream">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Our strategy</span>
+        <h2 class="h2 mw-20">We believe focused founders build the strongest companies.</h2>
+      </div>
+      <p data-reveal data-delay="120" class="lead mw-64">We invest in early-stage, U.S.-based B2B software companies — industry and technology agnostic, with a bias toward technical founders chasing markets ripe for digital transformation. Our operating model earns us a seat in oversubscribed rounds alongside top lead investors.</p>
+      <div data-reveal data-delay="220" class="strat-look">
+        <div class="strat-look-label">What we look for</div>
+        <div class="strat-look-words">
+          Pre-seed<span class="slash">/</span>Seed<span class="slash">/</span>B2B software<span class="slash">/</span>AI-native<span class="slash">/</span>Co-invest<span class="slash">/</span>US-based
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER FOCUS -->
+  <section id="focus" class="sv-sec sec--white">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>The Support Partner Model</span>
+      </div>
+      <div data-reveal data-delay="80" class="focus-intro">
+        <h2 class="h2">The biggest bottleneck isn't capital — it's operational drag.</h2>
+        <p class="lead">So we built a different kind of fund. We embed a dedicated, full-time operator in every portfolio company to handle everything outside product and engineering — at cost, with zero equity dilution. It's the reason founders choose us, even with competing term sheets on the table.</p>
+      </div>
+
+      <div class="focus-grid">
+        <div class="focus-timeline" id="focusTimeline">
+          <div class="focus-rail"><span data-f-fill></span></div>
+
+          <div data-f-step class="focus-step">
+            <span data-dot class="focus-dot"></span>
+            <span data-num class="focus-num">01</span>
+            <h3 class="focus-step-title">Time to market</h3>
+            <p class="focus-step-body">Shipping fast is everything — yet founders get pulled into bookkeeping, hiring, and admin. We take that off the table so you stay on product and customers.</p>
+            <div class="focus-tag-wrap"><span class="focus-tag"><span class="focus-tag-dot"></span>Faster to milestones</span></div>
+          </div>
+          <div data-f-step class="focus-step">
+            <span data-dot class="focus-dot"></span>
+            <span data-num class="focus-num">02</span>
+            <h3 class="focus-step-title">A dedicated Support Partner</h3>
+            <p class="focus-step-body">A full-time Support Partner embeds with your team to own back-office work — finance ops, hiring, vendors, and reporting.</p>
+            <div class="focus-tag-wrap"><span class="focus-tag"><span class="focus-tag-dot"></span>1,000s of hours saved</span></div>
+          </div>
+          <div data-f-step class="focus-step">
+            <span data-dot class="focus-dot"></span>
+            <span data-num class="focus-num">03</span>
+            <h3 class="focus-step-title">Integrated operations</h3>
+            <p class="focus-step-body">Beyond the Support Partner: playbooks, software, and at-cost access to finance, people, and growth experts.</p>
+            <div class="focus-tag-wrap"><span class="focus-tag"><span class="focus-tag-dot"></span>At-cost embedded support</span></div>
+          </div>
+        </div>
+
+        <div class="focus-aside">
+          <div class="video-frame">
+            <video controls playsinline preload="metadata"
+                   poster=""
+                   src="assets/video/shuckerVC_Support_Partner_Teaser.mp4"></video>
+          </div>
+          <div class="video-cap">
+            <span class="eyebrow eyebrow--gold">Now showing</span>
+            <span class="video-cap-title" data-f-cap>Time to market</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal class="focus-hiw">
+        <div class="focus-hiw-grid">
+          <div>
+            <span class="eyebrow eyebrow--gold">How it works</span>
+            <p class="focus-hiw-body">When a company joins the portfolio, we deploy a full-time W2 Support Partner hired through shuckerVC's LLC. The company pays their salary at cost — zero markup, zero dilution — and they embed with the leadership team through its highest-growth phase.</p>
+          </div>
+          <div>
+            <span class="eyebrow eyebrow--gold">What they own</span>
+            <p class="focus-hiw-body">Everything that isn't product or engineering: recruiting and HR, monthly book closing and forecasting, growth and marketing, plus office ops, SOC2, and Series A prep.</p>
+          </div>
+          <div>
+            <span class="eyebrow eyebrow--gold">Why it aligns</span>
+            <p class="focus-hiw-body">Support Partners earn from our GP carry pool, not portfolio equity — so they're aligned with the whole fund's success, not the fate of any single company.</p>
+          </div>
+        </div>
+        <blockquote class="focus-quote">"Founders choose shuckerVC over other term sheets specifically for the Support Partner offering."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="sv-sec sec--warm">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Portfolio</span>
+        <h2 class="h2 mw-18">The next interface shift, backed early.</h2>
+        <p class="lead mw-60">We believe conversational AI is the biggest leap in interfaces in 40 years. The startups capitalizing today become tomorrow's leaders.</p>
+      </div>
+
+      <div data-reveal data-delay="120" class="port-chips" id="portChips"></div>
+      <div class="port-grid" id="portGrid"></div>
+      <div class="port-showcase" id="portShowcase" hidden></div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="sv-sec sec--white">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Team</span>
+        <h2 class="h2">Operators first, investors second.</h2>
+      </div>
+      <div class="team-grid" id="teamGrid">
+        <div data-reveal data-delay="0" data-gp class="team-member">
+          <div class="team-avatar"><img src="assets/team/jp-persico.jpg" alt="Jean-Philippe Persico"></div>
+          <h3 class="team-name">Jean-Philippe "JP" Persico</h3>
+          <p class="team-role">Managing Partner</p>
+        </div>
+        <div data-reveal data-delay="90" data-gp class="team-member">
+          <div class="team-avatar"><img src="assets/team/graham-siegel.jpeg" alt="Graham Siegel"></div>
+          <h3 class="team-name">Graham Siegel</h3>
+          <p class="team-role">Managing Partner</p>
+        </div>
+        <div data-reveal data-delay="180" class="team-member">
+          <div class="team-avatar team-avatar--initials">GR</div>
+          <h3 class="team-name">Gabe Regalado</h3>
+          <p class="team-role">Venture Partner</p>
+        </div>
+        <div data-reveal data-delay="270" class="team-member">
+          <div class="team-avatar team-avatar--initials">ML</div>
+          <h3 class="team-name">Megan Liu</h3>
+          <p class="team-role">Support Partner</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights" class="sv-sec sec--warm">
+    <div class="container">
+      <div data-reveal>
+        <div class="ins-head">
+          <div>
+            <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Insights</span>
+            <h2 class="h2 mw-16">What we're thinking about.</h2>
+          </div>
+          <a class="ins-all" href="writing.html">All writing →</a>
+        </div>
+      </div>
+      <div data-reveal data-delay="80" class="ins-chips" id="insChips"></div>
+      <div data-reveal data-delay="140" class="ins-grid">
+        <div id="insFeat"></div>
+        <div class="ins-list" id="insList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="sv-sec sec--gold">
+    <div data-reveal class="container cta-inner">
+      <h2 class="h2 cta-title">Tell us about your company.</h2>
+      <p class="cta-sub">We co-invest in oversubscribed rounds alongside top lead investors.</p>
+      <a data-magnetic href="#top" class="btn btn--ink btn--lg">Submit your company</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <img class="footer-logo" src="assets/logo/lockup-gold-white.png" alt="shuckerVC">
+      <nav class="footer-links">
+        <a href="#strategy">Strategy</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#team">Team</a>
+        <a href="#insights">Insights</a>
+      </nav>
+      <span class="footer-legal">© shuckerVC 2026 · Silicon Valley</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+*.swp
+Thumbs.db
+
+# Node
+node_modules/
+
+# Local dev / scratch
+.claude/serve.js
+**/scratchpad/
+*.log

@@ -583,6 +583,76 @@
       "sort": 20260415
     },
     {
+      "id": "q1-2026-update",
+      "tag": "Newsletter",
+      "date": "Apr 2026",
+      "title": "Q1 2026 update",
+      "excerpt": "A landmark quarter — we closed Fund I, welcomed Brev to the portfolio, Algorized closed its Series A, and the team was out across the Bay Area AI ecosystem.",
+      "author": "shuckerVC",
+      "initials": "sV",
+      "read": "5 min read",
+      "url": "https://shuckervc.notion.site/shuckervc-news",
+      "body": [
+        {
+          "t": "p",
+          "text": "Q1 was a landmark quarter for shuckerVC. We held the final close of Fund I, welcomed Brev as a new portfolio company, and Algorized closed its Series A — twelve months after our seed entry. We're now fully focused on deployment and portfolio support."
+        },
+        {
+          "t": "h",
+          "text": "New portfolio company: Brev"
+        },
+        {
+          "t": "p",
+          "text": "We're pleased to introduce the newest member of the shuckerVC portfolio: Brev, founded by Chris Pitchford (CEO) and Vic Hu (CTO). Chris co-founded Shyft (Techstars Seattle '16) and then ran go-to-market as VP of Sales at Ally.io — the OKR platform Microsoft acquired in 2021 to anchor Viva Goals. Vic was an ML platform tech lead at Iterative Health, with earlier engineering roles at Meta and Panopto."
+        },
+        {
+          "t": "p",
+          "text": "Brev builds AI-native agents that run goal cadences, meeting workflows, and routine operating decisions — converting the OKR and business-review stack Chris sold at Ally from a system that tracks execution into one that executes. What caught our attention: the team operates as a handful of engineers augmented by AI agents running around the clock, and ranks among the top Bay Area companies for engineering output. Brev is a clean expression of the thesis we underwrite — small, AI-leveraged teams compounding output faster than their headcount-rich competitors."
+        },
+        {
+          "t": "h",
+          "text": "Algorized — Series A"
+        },
+        {
+          "t": "p",
+          "text": "The headline of Q1 was Algorized's Series A, closed twelve months after our seed entry. The team scaled meaningfully over the year, continued hiring across engineering, and brought on a Head of Commercial who previously ran commercial at Field AI. Our embedded Support Partner was integral to the rapid scaling and will remain in place for the foreseeable future."
+        },
+        {
+          "t": "h",
+          "text": "Across the existing portfolio"
+        },
+        {
+          "t": "p",
+          "text": "Atlas opened Q1 with expanded customer contracts and cleanly navigated a co-founder transition, with Michael Hoy continuing to lead as CEO. The team is intensifying its focus on outcome-based pricing, which has become a cornerstone go-to-market motion for companies shipping agentic software. Sindarin moved out of POC into commercial launch, working through a substantial backlog of inbound demand built up during its waitlist period."
+        },
+        {
+          "t": "h",
+          "text": "Out across the ecosystem"
+        },
+        {
+          "t": "p",
+          "text": "Q1 was one of our most active quarters — closing Fund I, deploying into new investments, and showing up across the Bay Area. Our presence in San Francisco and Silicon Valley, at a moment when the AI cycle is concentrated here more than anywhere else, is a structural advantage we're leaning into hard."
+        },
+        {
+          "t": "p",
+          "text": "Highlights included the Sutton Capital PE & VC Investor Summit; an ACG panel JP moderated with Amy Yin (Defy VC), Tejal Shah (US Capital), and Karen Sheffield (Pachamama VC); and a six-hour VC conference featuring David Cohen (Techstars) and Peter Walker (Carta). We supported Algorized at CES, where the company demoed a KUKA robot arm with live human-machine interaction, won multiple press awards, and was featured on the main stage — with JP moderating a conversation between the CEOs of KUKA and Algorized on the future of robotics and physical AI. We also hosted our second SkyDeck Investor Brunch in Uptown Oakland ahead of Berkeley SkyDeck Demo Day, and joined venture panels across the emerging-manager community."
+        },
+        {
+          "t": "h",
+          "text": "Looking ahead"
+        },
+        {
+          "t": "p",
+          "text": "Q2 is shaping up to be packed with demo days and high-signal gatherings across the Bay Area — from StrictlyVC San Francisco and a16z Speedrun Demo Day to the Silicon Valley Economic Forum and our own founder-and-investor evenings. If you'd like an introduction around any of these, reach out anytime."
+        },
+        {
+          "t": "p",
+          "text": "— Graham & JP, Managing Partners, shuckerVC"
+        }
+      ],
+      "sort": 20260401
+    },
+    {
       "id": "atlas",
       "tag": "Perspective",
       "date": "Mar 2026",
@@ -647,6 +717,68 @@
         }
       ],
       "sort": 20260215
+    },
+    {
+      "id": "2025-in-review",
+      "tag": "Newsletter",
+      "date": "Jan 2026",
+      "title": "2025 in review",
+      "excerpt": "A look back at 2025 — how we invested, what we're prioritizing in 2026, the Algorized × KUKA partnership at CES, and qualitative progress across the portfolio.",
+      "author": "shuckerVC",
+      "initials": "sV",
+      "read": "5 min read",
+      "url": "https://shuckervc.notion.site/shuckervc-news",
+      "body": [
+        {
+          "t": "p",
+          "text": "Heading into 2026, our conviction is unchanged: we back deep domain-expert founders building AI-native software. That expertise may be in building AI-native systems — as with Algorized and Sindarin — or in deep product and market understanding, as with Atlas and Runreal. As we invest alongside top-tier venture firms, we continue to build our own independent conviction about where durable value is created."
+        },
+        {
+          "t": "q",
+          "text": "AI changes how software is built — but business models determine how value is captured."
+        },
+        {
+          "t": "h",
+          "text": "How we invested in 2025"
+        },
+        {
+          "t": "p",
+          "text": "Over the year we evaluated a large volume of inbound opportunities, alongside outbound prospects sourced through accelerator partnerships and the broader AI-native ecosystem. Technical quality across the market keeps improving, but we stayed cautious in an environment crowded with opportunism and fragile business models. We declined many opportunities for the same recurring reasons: business models overly dependent on usage, tokens, or infrastructure arbitrage; AI bolted on as a feature rather than the cornerstone; and go-to-market strategies that were unclear or untested."
+        },
+        {
+          "t": "h",
+          "text": "What we're prioritizing in 2026"
+        },
+        {
+          "t": "p",
+          "text": "We're prioritizing companies where AI enablement supports outcome- or value-based business models rather than seats or tokens; significant, measurable economic impact — value created or costs removed; and software embedded in decision-making and execution, not just workflows. Areas of particular interest include recruiting and sourcing platforms where agentic systems replace manual coordination and outreach; lead management and 'SDR-light' systems focused on results rather than activity; and 'picks-and-shovels' infrastructure for AI-native SaaS — pricing, monetization, and control layers, with Atlas as a clear example. We'll maintain our concentrated, hands-on approach."
+        },
+        {
+          "t": "h",
+          "text": "Algorized × KUKA at CES"
+        },
+        {
+          "t": "p",
+          "text": "At CES 2026 we hosted a fireside chat with Natalya Lopareva (CEO, Algorized) and Christoph Schell (CEO, KUKA Group) on AI-driven robotics, safety, and human collaboration at the SwissTech Stage in Eureka Park. The conversation centered on a fundamental shift underway in robotics: moving from reactive safety systems — cages, light curtains, emergency stops — to perception-driven collaboration, where robots understand and anticipate human presence and behavior in real time."
+        },
+        {
+          "t": "p",
+          "text": "Algorized's perception and edge-AI technology, combined with KUKA's industrial robotics platform, points to a future where robots are no longer isolated from people but can safely operate alongside them — unlocking higher productivity, more flexible automation, and entirely new deployment environments. For shuckerVC, it underscores a core thesis: the next generation of robotics won't be defined by autonomy alone, but by awareness. Perception is becoming foundational infrastructure for safer, more adaptive, more human-centric machines across manufacturing, logistics, healthcare, and beyond."
+        },
+        {
+          "t": "h",
+          "text": "Across the portfolio"
+        },
+        {
+          "t": "p",
+          "text": "Runreal closed the year with strong momentum, securing pilot studios and bringing on an ex-Amazon AWS engineer as a founding engineer, with its self-serve platform and AI agents heading into pilot testing with a major studio in early 2026. Atlas demonstrated strong product-market fit and deal velocity in its core vertical-AI segment, validating our thesis that AI-native companies recognize the strategic value of dynamic, outcome-based pricing. Sindarin (FetchDesk) opened beta testing with strong early results and rolled out a new speaker-isolation and noise-suppression model — foundational for enterprise voice — while using its own AI agents to accelerate development."
+        },
+        {
+          "t": "p",
+          "text": "— Graham & JP, Managing Partners, shuckerVC"
+        }
+      ],
+      "sort": 20260105
     }
   ]
 }

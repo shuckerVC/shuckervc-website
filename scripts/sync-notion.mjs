@@ -3,8 +3,8 @@
  * sync-notion.mjs — Build-time sync of the shuckerVC Insights feed.
  *
  * Pulls posts from the Notion "🥁 shuckerVC Blog" database, maps them to the
- * shape the site's Insights section renders, merges in the hand-maintained
- * white papers (scripts/whitepapers.json), and writes site/insights.json.
+ * shape the site's Insights section renders, merges in the evergreen essays
+ * (scripts/essays.json, incl. full bodies), and writes site/insights.json.
  *
  * Notion is the source of truth for the Welcome/Perspective/News posts.
  * A post appears in the feed only when it has BOTH a Category and a Published
@@ -19,6 +19,7 @@
  *   NOTION_BLOG_DB_ID     (optional) Blog database id. Defaults to the known id.
  */
 import { readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -35,6 +36,17 @@ const EDITOR_MAP = {
   // 'notion-user-uuid': { author: 'JP Persico', initials: 'JP' },
 };
 const DEFAULT_AUTHOR = { author: 'shuckerVC', initials: 'sV' };
+
+// Stable, friendly post ids (used in deep-links #<id> and cover filenames
+// assets/insights/<id>.jpg). Keep these matching the committed covers so a live
+// sync doesn't change URLs or drop featured images. Unmapped titles fall back to
+// a slug. Add new posts here as they're published.
+const TITLE_ID = {
+  'Welcome Lodg': 'lodg',
+  'Welcome Cascade': 'cascade',
+  'Welcome Brev.io': 'brev',
+};
+const slugify = (t) => (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24) || 'post';
 
 if (!TOKEN) {
   console.error('Missing NOTION_TOKEN. Set it and re-run.');
@@ -130,19 +142,24 @@ async function main() {
 
     const editorId = props.Editor?.people?.[0]?.id;
     const byline = EDITOR_MAP[editorId] || DEFAULT_AUTHOR;
+    const title = richText(props.Name?.title);
+    const id = TITLE_ID[title] || slugify(title);
     const content = await fetchContent(p.id);
+    // Notion page cover wins; otherwise fall back to a committed local cover.
+    const localCover = `assets/insights/${id}.jpg`;
+    const cover = (await coverFor(p)) || (existsSync(join(ROOT, 'site', localCover)) ? localCover : undefined);
 
     posts.push({
-      id: p.id.replace(/-/g, '').slice(0, 12),
+      id,
       tag: category,
       sort: sortKey(published),
-      title: richText(props.Name?.title),
+      title,
       excerpt: richText(props['AI custom autofill']?.rich_text),
       author: byline.author,
       initials: byline.initials,
       date: monthYear(published),
       read: content.read,
-      cover: await coverFor(p),
+      cover,
       url: p.public_url || p.url,
       body: content.body,
     });

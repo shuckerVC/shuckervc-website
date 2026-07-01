@@ -597,6 +597,8 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   .sv-sec { padding: 64px 0; }
   .container { padding-left: 20px; padding-right: 20px; }
   .hero-wrap { padding: 116px 20px 64px; min-height: 0; }
+  /* decorative scroll hint collides with the stats on short mobile heroes */
+  .hero-scroll { display: none; }
 
   .focus-grid { grid-template-columns: 1fr; gap: 36px; margin-top: 40px; }
   .focus-aside { position: static; top: auto; margin-top: 4px; }

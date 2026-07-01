@@ -573,7 +573,7 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   .wr-archive .container, .wr-more, .wr-cta-inner { padding-left: 20px; padding-right: 20px; }
   .wr-grid { grid-template-columns: 1fr; }
   .wr-feat-inner { grid-template-columns: 1fr; }
-  .wr-feat-media { min-height: 240px; }
+  .wr-feat-media { min-height: 0; aspect-ratio: 16 / 10; }
   .wr-railbtn { display: none; }
 }
 
@@ -603,4 +603,11 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   .focus-hiw-grid { grid-template-columns: 1fr; gap: 28px; }
   .ins-grid { grid-template-columns: 1fr; gap: 34px; }
   .ins-list { padding-right: 0; }
+
+  /* Banners: on mobile, wide screenshots/covers become landscape banners
+     instead of tall over-cropped boxes. */
+  .showcase-body { grid-template-columns: 1fr; }
+  .showcase-shot { min-height: 0; aspect-ratio: 16 / 10; }
+  .showcase-main { padding: 28px; }
+  .ins-feat-cover { aspect-ratio: 16 / 10; }
 }

@@ -103,7 +103,7 @@ async function fetchContent(pageId) {
 // Resolve a post's featured cover from its Notion page cover. External covers
 // are referenced by URL; Notion-hosted (file) covers have expiring URLs, so we
 // download them into site/assets/insights/ and reference the local copy.
-async function coverFor(page) {
+async function coverFor(page, id) {
   const c = page.cover;
   if (!c) return undefined;
   if (c.type === 'external') return c.external?.url || undefined;
@@ -112,7 +112,6 @@ async function coverFor(page) {
       const res = await fetch(c.file.url);
       if (!res.ok) return undefined;
       const ext = (new URL(c.file.url).pathname.match(/\.(jpe?g|png|webp|gif)$/i) || ['', 'jpg'])[1].toLowerCase();
-      const id = page.id.replace(/-/g, '').slice(0, 12);
       const rel = `assets/insights/${id}.${ext}`;
       await writeFile(join(ROOT, 'site', rel), Buffer.from(await res.arrayBuffer()));
       return rel;
@@ -148,7 +147,7 @@ async function main() {
     const content = await fetchContent(p.id);
     // Notion page cover wins; otherwise fall back to a committed local cover.
     const localCover = `assets/insights/${id}.jpg`;
-    const cover = (await coverFor(p)) || (existsSync(join(ROOT, 'site', localCover)) ? localCover : undefined);
+    const cover = (await coverFor(p, id)) || (existsSync(join(ROOT, 'site', localCover)) ? localCover : undefined);
 
     posts.push({
       id,

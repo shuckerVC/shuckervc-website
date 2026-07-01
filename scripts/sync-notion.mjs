@@ -138,6 +138,7 @@ async function main() {
     const props = p.properties || {};
     const category = props.Category?.select?.name;
     const published = props.Published?.date?.start;
+    console.log(`  page: "${richText(props.Name?.title)}" cat=${category || '∅'} pub=${published || '∅'}`);
     if (!category || !published) continue; // drafts / uncategorised are skipped
 
     const editorId = props.Editor?.people?.[0]?.id;

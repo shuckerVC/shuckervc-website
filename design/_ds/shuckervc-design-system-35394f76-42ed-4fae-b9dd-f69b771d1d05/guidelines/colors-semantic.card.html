@@ -1,0 +1,23 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Semantic Usage" subtitle="Surfaces, text & on-brand pairings in context" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface-page); font-family: var(--font-sans); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .tile { border-radius: var(--radius-md); padding: 16px; min-height: 92px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border); }
+  .lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.8; }
+  .big { font-size: 15px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="tile" style="background:var(--surface-page); color:var(--text-primary)"><span class="lbl">surface-page</span><span class="big">Primary text</span></div>
+    <div class="tile" style="background:var(--surface-muted); color:var(--text-secondary)"><span class="lbl">surface-muted</span><span class="big">Secondary</span></div>
+    <div class="tile" style="background:var(--surface-brand); color:var(--text-on-brand)"><span class="lbl">surface-brand</span><span class="big">On gold = ink</span></div>
+    <div class="tile" style="background:var(--surface-ink); color:var(--text-inverse)"><span class="lbl" style="color:var(--gold-400)">surface-ink</span><span class="big">Inverse text</span></div>
+  </div>
+</body>
+</html>

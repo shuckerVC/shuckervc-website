@@ -1,0 +1,91 @@
+<!-- @dsCard group="Components" viewport="700x560" name="Core Primitives" subtitle="Buttons, badges, inputs, avatars, stats & cards" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 24px; background: var(--surface-page); font-family: var(--font-sans); }
+  .group { margin-bottom: 22px; }
+  .glabel { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; }
+  .rowf { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, Badge, Card, Input, Avatar, Eyebrow, Stat } = window.ShuckerVCDesignSystem_35394f;
+  const Arrow = () => <span style={{fontSize:'1.1em',lineHeight:1}}>→</span>;
+
+  function Demo() {
+    return (
+      <div>
+        <div className="group">
+          <div className="glabel">Buttons</div>
+          <div className="rowf">
+            <Button variant="primary">Submit Your Company</Button>
+            <Button variant="dark" iconRight={<Arrow/>}>Our strategy</Button>
+            <Button variant="secondary">Learn more</Button>
+            <Button variant="ghost">Skip</Button>
+            <Button variant="primary" size="sm">Small</Button>
+            <Button variant="primary" disabled>Disabled</Button>
+          </div>
+        </div>
+
+        <div className="group">
+          <div className="glabel">Badges &amp; Eyebrow</div>
+          <div className="rowf">
+            <Badge variant="gold">Seed</Badge>
+            <Badge variant="goldSoft">Pre-seed</Badge>
+            <Badge variant="ink">Portfolio</Badge>
+            <Badge variant="outline">B2B SaaS</Badge>
+            <Badge variant="teal">AI-native</Badge>
+            <Eyebrow>Real Value Added</Eyebrow>
+          </div>
+        </div>
+
+        <div className="group">
+          <div className="glabel">Input</div>
+          <div className="rowf" style={{alignItems:'flex-start'}}>
+            <Input label="Work email" type="email" placeholder="you@company.com" style={{width:220}} />
+            <Input label="Round size" hint="Required" invalid placeholder="$2.5M" style={{width:180}} />
+          </div>
+        </div>
+
+        <div className="group">
+          <div className="glabel">Avatars &amp; Stats</div>
+          <div className="rowf" style={{gap:28}}>
+            <Avatar src="../../assets/team/jp-persico.jpg" name="JP Persico" size={56} ring />
+            <Avatar src="../../assets/team/graham-siegel.jpeg" name="Graham Siegel" size={56} ring />
+            <Avatar name="Megan Liu" size={56} />
+            <Stat value="$8M" label="Bay Area seed fund" />
+            <Stat value="3.08" label="DPI prior fund" tone="gold" />
+          </div>
+        </div>
+
+        <div className="group" style={{marginBottom:0}}>
+          <div className="glabel">Cards</div>
+          <div className="rowf" style={{alignItems:'stretch'}}>
+            <Card interactive style={{width:220}}>
+              <Eyebrow>01</Eyebrow>
+              <h3 style={{margin:'10px 0 6px',fontSize:18}}>Time to Market</h3>
+              <p style={{margin:0,fontSize:13,color:'var(--text-secondary)'}}>Ship fast without juggling back-office tasks.</p>
+            </Card>
+            <Card tone="ink" style={{width:220}}>
+              <Eyebrow color="inverse">Founder Focus</Eyebrow>
+              <h3 style={{margin:'10px 0 6px',fontSize:18,color:'#fff'}}>The rest is on us</h3>
+              <p style={{margin:0,fontSize:13,color:'rgba(255,255,255,0.72)'}}>A full-time Support Partner owns ops.</p>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>

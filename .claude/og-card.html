@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#222}</style>
+</head>
+<body>
+<canvas id="c" width="1200" height="630"></canvas>
+<script>
+  var c = document.getElementById('c'), x = c.getContext('2d');
+  var W = 1200, H = 630;
+  function draw(img) {
+    // brand ink background (echoes the hero radial)
+    var g = x.createRadialGradient(W*0.68, H*0.40, 0, W*0.68, H*0.40, W*0.85);
+    g.addColorStop(0, '#1b1a17'); g.addColorStop(0.55, '#111111'); g.addColorStop(1, '#0c0c0b');
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    // faint gold glow behind the mark
+    var gg = x.createRadialGradient(W*0.5, H*0.44, 0, W*0.5, H*0.44, 340);
+    gg.addColorStop(0, 'rgba(255,205,60,0.12)'); gg.addColorStop(1, 'rgba(255,205,60,0)');
+    x.fillStyle = gg; x.fillRect(0, 0, W, H);
+    // lockup (gold mark + white wordmark), centered, nudged up to make room for the tagline
+    var lw = 720, lh = lw * img.naturalHeight / img.naturalWidth;
+    x.drawImage(img, (W - lw) / 2, H*0.44 - lh/2 - 26, lw, lh);
+    // tagline — brand eyebrow style: uppercase gold, wide tracking
+    x.fillStyle = '#ffcd3c';
+    x.font = '700 28px Lato, sans-serif';
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    try { x.letterSpacing = '0.26em'; } catch (e) {}
+    x.fillText('FUELING FOUNDER FOCUS', W/2 + 9, H*0.735);
+    window.__og = c.toDataURL('image/png');
+    document.title = 'OG_READY';
+  }
+  var img = new Image();
+  img.onload = function () {
+    (document.fonts && document.fonts.load ? document.fonts.load('700 28px Lato').then(function(){return document.fonts.ready;}) : Promise.resolve())
+      .then(function () { requestAnimationFrame(function(){ requestAnimationFrame(function(){ draw(img); }); }); });
+  };
+  img.src = 'assets/logo/lockup-gold-white.png';
+</script>
+</body>
+</html>

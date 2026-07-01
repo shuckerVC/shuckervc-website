@@ -1,5 +1,5 @@
 {
-  "_generated": "from Notion 🥁 shuckerVC Blog (2026-07-01T01:28:13.361Z)",
+  "_generated": "from Notion 🥁 shuckerVC Blog (2026-07-01T01:32:00.789Z)",
   "posts": [
     {
       "id": "lodg",
@@ -320,6 +320,177 @@
         }
       ],
       "sort": 20260515
+    },
+    {
+      "id": "brev",
+      "tag": "Perspective",
+      "sort": 20260423,
+      "title": "Welcome Brev.io",
+      "excerpt": "Brev uses autonomous AI agents to execute goals, replacing traditional tracking dashboards.",
+      "author": "shuckerVC",
+      "initials": "sV",
+      "date": "Apr 2026",
+      "read": "7 min read",
+      "cover": "assets/insights/brev.png",
+      "url": "https://shuckervc.notion.site/Welcome-Brev-io-33411beb3a43805c8685e5ae31a9b175",
+      "body": [
+        {
+          "t": "h",
+          "text": "Why We Invested in Brev.io: The End of Goal Tracking, The Start of Goal Execution"
+        },
+        {
+          "t": "p",
+          "text": "On December 31, 2025, Microsoft quietly retired Viva Goals. A few months earlier, WorkBoard acquired Quantive. In a single year, the enterprise goal management market lost its two largest platforms — displacing thousands of companies and leaving a once-in-a-decade vacuum."
+        },
+        {
+          "t": "p",
+          "text": "That vacuum is exactly where Brev stepped in."
+        },
+        {
+          "t": "p",
+          "text": "But this isn't a solution about replacing one OKR tracker with another. It's a story about why tracking was never enough — and what happens when AI agents stop observing your goals and start executing on them."
+        },
+        {
+          "t": "h",
+          "text": "The Problem No Dashboard Ever Solved"
+        },
+        {
+          "t": "p",
+          "text": "Here's a number that should bother every operator: 90% of business goals fail. Not because the goals were wrong. Not because the teams were lazy. Because the coordination infrastructure to execute them is fundamentally broken."
+        },
+        {
+          "t": "p",
+          "text": "A typical 500-person company employs a double-digit number of coordination FTEs — each at $150–500K loaded cost — whose entire job is chasing status updates, compiling reports, following up on meeting action items, and toggling between nine or more disconnected tools. In some extreme cases, management spends half its time on this manual coordination work, instead of executing on the goals it’s trying to achieve while keeping up with reporting. And that cost scales linearly. Every new team, every new initiative, every new quarter — different tactics, more overhead, same failure rate."
+        },
+        {
+          "t": "p",
+          "text": "The legacy OKR platforms — Lattice, Culture Amp, 15Five, the now-retired Viva Goals — addressed this by adding dashboards. More reporting. More check-ins. More process. They tracked goals without ever executing on them. They made the problem more visible without making it smaller."
+        },
+        {
+          "t": "h",
+          "text": "What Brev Actually Does"
+        },
+        {
+          "t": "p",
+          "text": "Brev is an AI-native execution platform built on what the team calls the Agent Triad — three specialized AI agents that work together to close the gap between setting a goal and achieving it."
+        },
+        {
+          "t": "p",
+          "text": "The Observer Agent monitors meetings, Slack threads, project management tools, CRM updates, engineering commits — 22+ integrations feeding into what Brev calls the Sensor Mesh. It captures what's actually happening across the organization, including the qualitative signal from real conversations that no dashboard can surface."
+        },
+        {
+          "t": "p",
+          "text": "The Alignment Agent maps all of that activity back to strategic goals. It detects drift, identifies off-track initiatives, and generates cross-source signals that don't exist in any competing product — metrics like off-goal meeting percentage, velocity drain, noise ratio, and organizational drift."
+        },
+        {
+          "t": "p",
+          "text": "The Execution Agent takes autonomous action. It assigns tasks, follows up on commitments, generates artifacts, and drives accountability without a human in the loop."
+        },
+        {
+          "t": "p",
+          "text": "This isn't a feature bolted onto a tracking tool. The AI is the product."
+        },
+        {
+          "t": "h",
+          "text": "Why Now: A Perfect Storm"
+        },
+        {
+          "t": "p",
+          "text": "Three forces are converging to make this problem solvable — and this company fundable — right now."
+        },
+        {
+          "t": "p",
+          "text": "Market displacement. The Viva Goals retirement and the WorkBoard/Quantive consolidation removed the incumbent platforms that enterprises relied on. Thousands of companies are actively searching for alternatives. That migration demand is time-limited and favors whoever moves fastest."
+        },
+        {
+          "t": "p",
+          "text": "AI agent maturity. For the first time, AI agent technology has advanced enough to autonomously execute on operational workflows — not just prompt or summarize them. The shift from passive intelligence to active execution is the architectural leap that makes Brev possible."
+        },
+        {
+          "t": "p",
+          "text": "Headcount pressure. Enterprises are under relentless pressure to reduce ops headcount through automation. Brev doesn't sell against a $20–50K SaaS budget. It sells against the $1.5–2M annual ops payroll at a 200–2,000 person company."
+        },
+        {
+          "t": "h",
+          "text": "The Numbers That Earned Our Conviction"
+        },
+        {
+          "t": "p",
+          "text": "We don't invest on narrative alone. Here's what the data showed:"
+        },
+        {
+          "t": "p",
+          "text": "Expansion economics are working. Customers are meaningfully expanding their ACV after adoption. The adoption rate of the agents and the week-over-week execution expansion are early proof points, and demonstrate real value derived by customers."
+        },
+        {
+          "t": "p",
+          "text": "Sales velocity is real. Founder-led sales have generated tremendous early growth that created a clear pathway to replicate this with the right mix of technology and headcount. Their SOC 2 Type II certification enables them to have actual conversations about product adoption and not just pilots."
+        },
+        {
+          "t": "p",
+          "text": "Capital efficiency is exceptional. Today’s founders have to embrace the fast moving pace of technology to create products that enterprises want. Seeing the team use tools to augment their velocity, has produced feature outputs that typically require 2 to 3 times the size of the current engineering team."
+        },
+        {
+          "t": "p",
+          "text": "The founding team matches the moment. CEO Chris Pitchford was VP of Sales at Ally.io, acquired by Microsoft, where he closed six-figure enterprise deals with Fortune 100 companies. He has deep relationships with the exact VP Ops / Chief of Staff buyer persona Brev targets. CTO Vic Hu brings AI/ML engineering credentials from Meta and Indeed, and has built the kind of lean, high-output engineering culture that seed-stage companies need to thrive."
+        },
+        {
+          "t": "h",
+          "text": "The Market Is Moving Our Direction — Fast"
+        },
+        {
+          "t": "p",
+          "text": "Since we committed to this investment, the macro environment has only reinforced our thesis. Several converging signals tell us we're not early to the agentic enterprise — we're right on time."
+        },
+        {
+          "t": "p",
+          "text": "OpenClaw proved that AI agents are no longer theoretical. In early 2026, OpenClaw — an open-source autonomous AI agent framework — went from obscurity to 250,000+ GitHub stars in under 60 days, surpassing React's decade-long record. Its creator was hired by OpenAI. Jensen Huang called it \"probably the single most important release of software, probably ever\" at GTC 2026, and said every company now needs an agent strategy. OpenClaw didn't just go viral with developers — it triggered enterprise security responses (Nvidia released NemoClaw with sandboxing within weeks) and government-level policy debates. The signal is clear:"
+        },
+        {
+          "t": "q",
+          "text": "Autonomous agents that execute tasks — not chatbots that generate text — are the next computing paradigm. That's exactly the shift Brev was built for."
+        },
+        {
+          "t": "p",
+          "text": "The enterprise stack is being rebuilt around agents. Salesforce reported 114% growth in AI platform ARR and rebranded its entire product suite around Agentforce. Microsoft is moving beyond Copilot toward autonomous agents in Agent 365. Salesforce's own CTO declared that \"single AI agents will become digital dead-end islands\" and that the multi-agent enterprise is arriving in 2026. When the two largest enterprise software companies on earth are restructuring their platforms around agentic architectures, that's not a feature trend — it's an infrastructure shift."
+        },
+        {
+          "t": "p",
+          "text": "The \"SaaSpocalypse\" narrative is reshaping buyer behavior. Enterprise buyers are increasingly aware that AI will challenge seat-based SaaS."
+        },
+        {
+          "t": "q",
+          "text": "Procurement teams are shifting evaluation criteria from feature checklists to measurable business outcomes — revenue expansion, margin improvement, headcount displacement."
+        },
+        {
+          "t": "p",
+          "text": "This is precisely the conversation Brev wins. Selling against $1.5–2M in ops payroll rather than a $20–50K SaaS line item puts Brev in a fundamentally different budget conversation than legacy tools."
+        },
+        {
+          "t": "p",
+          "text": "CIO adoption data confirms the tipping point. A recent Salesforce study found that CIO AI adoption has surged 282%. Gartner projects that more than 40% of agentic AI projects will fail by 2027 — but the failures will cluster around companies that treat agents to serve information not autonomous execution layers. The enterprises that move first and build governance frameworks now will compound their advantage. Brev's SOC 2 Type II certification and enterprise-grade architecture position it to capture exactly these early movers."
+        },
+        {
+          "t": "p",
+          "text": "The displacement window is real and closing. Thousands of companies lost their goal management platform when Viva Goals shut down in December 2025. Viva Goals was a tracking tool, highly replaceable and therefore not generating the outcomes modern organizations are looking for. Brev is execution-first. The market will decide in the next 12–18 months which paradigm wins — and every macro signal points toward autonomous execution."
+        },
+        {
+          "t": "h",
+          "text": "Our Thesis"
+        },
+        {
+          "t": "p",
+          "text": "At shuckerVC, we invest in AI-native B2B software that transforms traditional industries through outcome-based models and genuine technical moats. Brev fits squarely within that thesis on every dimension."
+        },
+        {
+          "t": "p",
+          "text": "The compound data integration — meetings, tools, goals, and execution outcomes synthesized into a unified management information system — creates switching costs that deepen with every quarter of usage. Each customer's accumulated institutional knowledge becomes irreplaceable. This is the architecture of an enterprise MIS, and like Palantir's Foundry, the moat is self-reinforcing."
+        },
+        {
+          "t": "p",
+          "text": "We're glad to be backing Chris, Vic, and the Brev team as they build the future of enterprise execution. We look forward to introducing their new Support Partner in the coming weeks."
+        }
+      ]
     },
     {
       "id": "support-partner",

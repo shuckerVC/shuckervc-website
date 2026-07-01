@@ -5,6 +5,7 @@
       "name": "site",
       "runtimeExecutable": "node",
       "runtimeArgs": [".claude/serve.js"],
+      "autoPort": true,
       "port": 8124
     }
   ]

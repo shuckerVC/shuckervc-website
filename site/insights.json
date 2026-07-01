@@ -1,58 +1,118 @@
 {
-  "_generated": "Notion 🥁 shuckerVC Blog (bodies) + scripts/essays.json — regenerate with scripts/sync-notion.mjs",
+  "_generated": "from Notion 🥁 shuckerVC Blog (2026-07-01T01:08:08.399Z)",
   "posts": [
     {
       "id": "lodg",
       "tag": "News",
       "sort": 20260604,
       "title": "Welcome Lodg",
-      "excerpt": "An AI workforce that automates property-management tasks — qualification, scheduling, follow-up, and tenant operations — boosting efficiency across the mid-market.",
+      "excerpt": "AI workforce automates property management tasks, boosting efficiency across mid‑market.",
       "author": "shuckerVC",
       "initials": "sV",
       "date": "Jun 2026",
-      "read": "6 min read",
-      "cover": "assets/insights/lodg.jpg",
-      "url": "https://shuckervc.notion.site/welcome-lodg",
+      "read": "5 min read",
+      "cover": "assets/insights/37511beb3a43.jpg",
+      "url": "https://shuckervc.notion.site/Welcome-Lodg-37511beb3a4381e3bdddf5839b0d78a2",
       "body": [
+        {
+          "t": "h",
+          "text": "AI Workforce for Property Management"
+        },
         {
           "t": "p",
           "text": "Property management at the mid-market and long tail — some 60,000 U.S. property managers running 100–5,000 units — is structurally labor-bound: 40–200 units per full-time employee, at roughly 10% EBITDA margins. The labor model is breaking under wage inflation at the precise moment LLMs crossed the reliability threshold to execute multi-step workflows across the legacy stack — without a rip-and-replace."
         },
         {
+          "t": "p",
+          "text": "The incumbents, meanwhile, just peaked. On May 28, 2026, Entrata filed for its IPO with the strongest numbers property management software has ever produced: 2.5 million units on platform — roughly 10% of U.S. multifamily — and $143.5M in revenue in the first quarter of 2026 alone. Entrata and AppFolio both ship AI offerings today, but their AI answers questions about the work; the work itself still routes to a human. Lodg's customers operate at 500+ units per FTE — with core workflows at 95%+ automation — on a book of business assembled in three months, entirely inbound."
+        },
+        {
           "t": "q",
-          "text": "That opening is exactly what Lodg was built for: an AI workforce that does the work of property management — leasing, screening, maintenance, delinquency, renewals — instead of another system that records it."
-        },
-        {
-          "t": "h",
-          "text": "The problem no platform ever solved"
+          "text": "The incumbents' AI talks. Lodg's works."
         },
         {
           "t": "p",
-          "text": "AppFolio, Yardi, and Entrata built billion-dollar platforms that store the data — the leases, the ledgers, the work orders — and the industry pays $24B a year for them. But every new door under management still means more leasing calls, more screens, more dispatches, more follow-ups. Labor scales linearly with the portfolio. The systems of record made the work more visible; they never made it smaller."
+          "text": "The system-of-record era just peaked with an IPO filing. The next $100B in property management doesn't go to whoever stores the data — it goes to whoever executes."
         },
         {
           "t": "h",
-          "text": "What Lodg actually does"
+          "text": "The Problem No Property Management Platform Ever Solved"
         },
         {
           "t": "p",
-          "text": "Lodg is an AI workforce for property managers — agents that execute end-to-end workflows across the systems managers already run on. Leasing and applications, maintenance triage and dispatch, renewals, payments, and delinquency — handled end-to-end, with a human stepping in only where judgment is required. Lodg's customers operate at 500+ units per FTE, with core workflows at 95%+ automation. This isn't a copilot suggesting replies. The workforce is the product."
+          "text": "The software era's answer to the labor problem was the system of record. AppFolio, Yardi, and Entrata built billion-dollar platforms that store the data — the leases, the ledgers, the work orders — and the industry pays $24B a year for them. But every new door under management still means more leasing calls, more application screens, more maintenance dispatches, more delinquency follow-ups. Labor scales linearly with the portfolio, and there is no operating leverage anywhere in the model."
+        },
+        {
+          "t": "p",
+          "text": "The systems of record made the work more visible. They never made it smaller."
         },
         {
           "t": "h",
-          "text": "Why now"
+          "text": "What Lodg Actually Does"
         },
         {
           "t": "p",
-          "text": "The incumbents' AI validates the category and exposes the gap — agents built on a system of record assist and summarize where the work demands execution. Operators are restructuring teams under margin pressure, the one moment they'll put technology at the center of operations. And LLMs finally crossed from drafting a message to running a multi-step workflow reliably enough to be accountable for the outcome."
+          "text": "Lodg is an AI workforce for property managers — agents that execute end-to-end workflows across the systems managers already run on. No rip-and-replace, no migration project, no new system to learn. The agents plug into the existing stack and start taking work off the team's plate."
+        },
+        {
+          "t": "q",
+          "text": "Leasing and applications. From the first inquiry to a screened, decision-ready application — inbound calls and texts answered, showings coordinated, applicants screened and packaged. The workflows that consume entire teams run at 95%+ automation in production."
+        },
+        {
+          "t": "q",
+          "text": "Maintenance. Requests come in at all hours; the agents answer, triage, resolve what can be resolved remotely, and dispatch what can't. One customer's first night live: a 2 a.m. maintenance call answered and resolved before anyone woke up — no work order ever created."
+        },
+        {
+          "t": "q",
+          "text": "Renewals, payments, and delinquency. The most complex workflows in the business — multi-party negotiations between owners and tenants, comps, payment plans, collections conversations — handled end-to-end with a human stepping in only where judgment is required."
+        },
+        {
+          "t": "p",
+          "text": "This isn't a copilot suggesting replies inside a system of record. The workforce is the product."
         },
         {
           "t": "h",
-          "text": "Our thesis"
+          "text": "Why Now"
         },
         {
           "t": "p",
-          "text": "Lodg is agentic from the ground up, priced on work completed rather than seats, and the moat compounds — every workflow the agents execute feeds the next. Lodg sells against the $100B property-management labor market, not the $24B software market. We're glad to be backing Jake, Amitav, and the Lodg team as they put property management on autopilot."
+          "text": "Three forces are converging to make this company fundable right now."
+        },
+        {
+          "t": "h",
+          "text": "The Numbers That Earned Our Conviction"
+        },
+        {
+          "t": "p",
+          "text": "We don't invest on narrative alone. Here's what the data showed:"
+        },
+        {
+          "t": "p",
+          "text": "The book of business compounded — without a dollar of outbound. In three months, Lodg went from first deployments to an exponentially growing customer base: every operator arrived inbound or by referral, and unsolicited interest is coming from category-adjacent CEOs. More telling is where the growth comes from — operators who already run on the incumbents' platforms. Lodg is winning the work layer on top of the systems of record, before the incumbents' own AI gets there."
+        },
+        {
+          "t": "p",
+          "text": "The labor math is already validated — in production. The 500+ units per FTE isn't a projection; it's how Lodg's paying customers operate today, across their real portfolios. And the pricing matches the promise: Lodg charges for work completed — not for seats, not for licenses. The operator's cost scales with outcomes, and an agent that doesn't do the work doesn't get paid. For the operator, that's not just an efficiency gain — it's a different business model on both sides of the transaction."
+        },
+        {
+          "t": "p",
+          "text": "The founding team matches the moment. CEO Jake Drutchas combines MIT engineering and business training with operating scar tissue: on the founding team at Wurthy, he scaled SMB finance-agent sales from zero to $1M+ ARR while running ops, finance, and customer success. CTO Amitav Chakravartty is a YC alum, former Director of Engineering at Cohesity, and co-founder/CTO of VaycayHero — he has built both venture-scale infrastructure and proptech specifically."
+        },
+        {
+          "t": "h",
+          "text": "Our Thesis"
+        },
+        {
+          "t": "p",
+          "text": "At shuckerVC, we invest in AI-native B2B software that transforms traditional industries through outcome-based models and genuine technical moats. Lodg hits all three pillars: the product is agentic from the ground up rather than bolted onto a legacy system, it's priced on work completed rather than seats, and the moat compounds — every workflow the agents execute feeds back into how the next one runs, across every property and every market Lodg operates in. A competitor can copy the feature list in a quarter. They can't copy years of accumulated execution."
+        },
+        {
+          "t": "p",
+          "text": "Lodg sells against the $100B property management labor market, not the $24B software market — and reaches the long tail of operators that enterprise platforms will never serve."
+        },
+        {
+          "t": "p",
+          "text": "We're glad to be backing Jake, Amitav, and the Lodg team as they put property management on autopilot. We're hiring Lodg's Support Partner now — the role is open here."
         }
       ]
     },
@@ -61,53 +121,121 @@
       "tag": "News",
       "sort": 20260520,
       "title": "Welcome Cascade",
-      "excerpt": "Why we invested in the first AI-traversable graph of US construction — matching firms to the projects they can actually win, with outcome-aligned economics.",
+      "excerpt": "Cascade builds AI construction graph, unlocking capital flow for builders.",
       "author": "shuckerVC",
       "initials": "sV",
       "date": "May 2026",
-      "read": "7 min read",
-      "cover": "assets/insights/cascade.jpg",
-      "url": "https://shuckervc.notion.site/welcome-cascade",
+      "read": "4 min read",
+      "cover": "assets/insights/36711beb3a43.png",
+      "url": "https://shuckervc.notion.site/Welcome-Cascade-36711beb3a438102bf91f263e53c963f",
       "body": [
         {
-          "t": "p",
-          "text": "In February 2026, the U.S. government allocated $2.1 billion to the Intel Ohio fab. Months later, $180 million of that landed with the Georgia DOT. Then Fulton County cut an RFP. Then a single subcontractor — one of thousands who could have qualified — won the work. That chain happens thousands of times a year across the $2 trillion American construction economy. Until Cascade, no one had a structured map of it."
+          "t": "h",
+          "text": "Why We Invested in Cascade: Creating Value Through the First Construction Graph"
         },
         {
           "t": "p",
-          "text": "shuckerVC invested $400K at a $25M post-money cap. Cascade isn't replacing an incumbent — it's building the first construction graph: a structured, AI-traversable model of how American capital becomes American construction, with intelligent agents that traverse it on behalf of the firms that build."
+          "text": "In February 2026, the U.S. government allocated $2.1 billion to the Intel Ohio fab. Months later, $180 million of that landed with the Georgia DOT. Then Fulton County cut RFP 24-B-3891. Then a single subcontractor — one of thousands who could have qualified — won the work."
+        },
+        {
+          "t": "p",
+          "text": "That chain happens thousands of times a year across the $2 trillion American construction economy. Until Cascade, no one had a structured map of it."
+        },
+        {
+          "t": "p",
+          "text": "shuckerVC invested $400K at a $25M post-money cap. Cascade isn't replacing an incumbent — it's building the first construction graph. A structured, AI-traversable model of how American capital becomes American construction, with intelligent agents that traverse it on behalf of the firms that build."
         },
         {
           "t": "h",
-          "text": "The problem no database ever solved"
+          "text": "The Problem No Database Ever Solved"
         },
         {
           "t": "p",
-          "text": "30 to 50 percent of capability-matched bid opportunities never reach the firms that should win them. The market is roughly $2 trillion across 1.45 million firms, fragmented across hundreds of jurisdictions. The incumbents — Dodge, ConstructConnect, BidNet — digitized the database. They never digitized the intelligence."
+          "text": "Here's a number that should bother every AEC operator: 30 to 50 percent of capability-matched bid opportunities never reach the firms that should win them."
+        },
+        {
+          "t": "p",
+          "text": "The American construction market is roughly $2 trillion in annual spend across 1.45 million firms, fragmented across hundreds of state and local jurisdictions with no federal equivalent of Deltek GovWin. The incumbents that own this layer — Dodge, ConstructConnect, BidNet, IMS — sell what they sold in 2019: a list of RFPs and a keyword search box. They digitized the database. They never digitized the intelligence."
+        },
+        {
+          "t": "p",
+          "text": "The pain is existential, not operational. Cascade CEO Hannia Zia grew up watching her father's construction business fail because he couldn't find enough projects to bid on."
         },
         {
           "t": "h",
-          "text": "What Cascade actually does"
+          "text": "What Cascade Actually Does"
         },
         {
           "t": "p",
-          "text": "Cascade is built on a single insight: before you ship intelligent agents into a vertical, you build the structured semantic model of the vertical itself. A machine-readable graph of federal programs, agencies, counties, owners, permits, and the firms that build; frictionless onboarding that stands up a new AEC firm in minutes; and an agent fleet that surfaces opportunities, drafts proposals, scores win probability, and navigates compliance. The structured model of the industry is the product."
+          "text": "Cascade is built on a single architectural insight: before you ship intelligent agents into a vertical, you build the structured semantic model of the vertical itself."
+        },
+        {
+          "t": "p",
+          "text": "The construction graph. A machine-readable model of how American capital becomes American construction — federal programs, agencies, counties, owners, permits, jurisdictions, and the firms that build. The incumbents have spent two decades selling lists. Cascade is selling intelligence."
+        },
+        {
+          "t": "p",
+          "text": "Frictionless onboarding. Cascade stands up a new AEC firm in minutes, not months. The platform learns what the firm does, where it works, what it's qualified for, and what it has won before — then matches the firm to opportunities it should be bidding on."
+        },
+        {
+          "t": "p",
+          "text": "An agent fleet built for the work. Intelligent agents run on top of the graph — surfacing opportunities, drafting proposals, scoring win probability, structuring teaming arrangements, navigating compliance. The agents don't just observe the work. They do it."
+        },
+        {
+          "t": "p",
+          "text": "This isn't AI bolted onto an RFP database. The structured model of the industry is the product."
         },
         {
           "t": "h",
-          "text": "The signals that earned our conviction"
+          "text": "Why Now"
         },
         {
           "t": "p",
-          "text": "Inbound pull with no outbound. Outcome-aligned economics that grow with customer wins. Two founders who shipped a working agent platform on a structured industry graph in three months. CEO Hannia Zia scaled Google Pay from zero to 100 million users; CTO Joana Ferreira is ex-Google ML and was a founding engineer at trading apps."
-        },
-        {
-          "t": "q",
-          "text": "The construction graph is a methodology moat — building it requires industry depth, not just prompt engineering. Every customer interaction labels the dataset, so the moat deepens with each cohort."
+          "text": "AEC AI adoption doubled year-over-year. BuiltWorlds tracks forty AI-native AEC solutions in 2026, up from a handful the year before. Cascade's customer roster already spans firms across architecture, data center development, and energy manufacturing."
         },
         {
           "t": "p",
-          "text": "We're glad to be backing Hannia, Joana, and the Cascade team as they build the structured map of how America gets built."
+          "text": "Federal capital is reshaping where construction happens. CHIPS and IIJA have committed over a trillion dollars through 2028. AEC firms that can't trace capital flow from program to RFP at speed will lose work to firms that can."
+        },
+        {
+          "t": "p",
+          "text": "The category has no entrenched competitor — yet. Dodge and ConstructConnect have not shipped production AI as of February 2026. The April 2026 Autodesk Construction Cloud roadmap shows no public AI-bid-matching signal. The window for the first construction graph is open today."
+        },
+        {
+          "t": "h",
+          "text": "The Signals That Earned Our Conviction"
+        },
+        {
+          "t": "p",
+          "text": "Inbound pull, no outbound. Cascade has reached its first cohort of customers without paid marketing and without an SDR-led sales motion. Demand is finding the product, not the other way around. That is what category creation looks like before the category has a name."
+        },
+        {
+          "t": "p",
+          "text": "Outcome-aligned economics. Cascade's revenue model grows with customer wins — when their customers win contracts through the platform, Cascade benefits. That replaces the per-seat SaaS pricing the AI era is rendering obsolete and matches our outcome-based-pricing thesis."
+        },
+        {
+          "t": "p",
+          "text": "Two founders, working platform. Cascade is two co-founders plus a small team of interns and contractors. They have shipped a working agent platform on top of a structured industry graph in three months. That kind of velocity is what vertical AI demands and what traditional engineering org charts cannot produce."
+        },
+        {
+          "t": "p",
+          "text": "The founding team matches the moment. CEO Hannia Zia scaled Google Pay from zero to 100 million users. CTO Joana Ferreira is ex-Google ML and was a founding engineer at trading apps — the most articulate technical founder we encountered at a16z Speedrun SR006."
+        },
+        {
+          "t": "h",
+          "text": "Our Thesis"
+        },
+        {
+          "t": "p",
+          "text": "At shuckerVC, we invest in AI-native B2B software that transforms traditional industries through outcome-based pricing and genuine technical moats. Cascade hits every dimension."
+        },
+        {
+          "t": "p",
+          "text": "The moats are stacked and self-reinforcing. The construction graph is a methodology moat — building it requires industry depth, not just prompt engineering. Every customer interaction labels the dataset, so the moat deepens with each cohort. Like Palantir's Foundry, the value compounds with use."
+        },
+        {
+          "t": "p",
+          "text": "We're glad to be backing Hannia, Joana, and the Cascade team as they build the structured map of how America gets built. We're hiring Cascade's Support Partner now — the role is open here."
         }
       ]
     },
@@ -192,65 +320,6 @@
         }
       ],
       "sort": 20260515
-    },
-    {
-      "id": "brev",
-      "tag": "Perspective",
-      "sort": 20260423,
-      "title": "Welcome Brev.io",
-      "excerpt": "The bottleneck for early founders isn't capital — it's operational drag. Brev's autonomous AI agents execute goals, replacing the traditional tracking dashboard.",
-      "author": "shuckerVC",
-      "initials": "sV",
-      "date": "Apr 2026",
-      "read": "6 min read",
-      "cover": "assets/insights/brev.jpg",
-      "url": "https://shuckervc.notion.site/welcome-brev-io",
-      "body": [
-        {
-          "t": "p",
-          "text": "On December 31, 2025, Microsoft quietly retired Viva Goals. A few months earlier, WorkBoard acquired Quantive. In a single year, the enterprise goal-management market lost its two largest platforms — leaving a once-in-a-decade vacuum. That vacuum is exactly where Brev stepped in."
-        },
-        {
-          "t": "p",
-          "text": "But this isn't about replacing one OKR tracker with another. It's about why tracking was never enough — and what happens when AI agents stop observing your goals and start executing on them."
-        },
-        {
-          "t": "h",
-          "text": "The problem no dashboard ever solved"
-        },
-        {
-          "t": "p",
-          "text": "90% of business goals fail — not because the goals were wrong, but because the coordination infrastructure to execute them is broken. A 500-person company employs a double-digit number of coordination FTEs chasing status updates and toggling between nine or more tools. Legacy OKR platforms answered with more dashboards. They tracked goals without ever executing on them."
-        },
-        {
-          "t": "h",
-          "text": "What Brev actually does"
-        },
-        {
-          "t": "p",
-          "text": "Brev is an AI-native execution platform built on the Agent Triad. The Observer Agent monitors meetings, Slack, project tools, CRM, and commits across 22+ integrations. The Alignment Agent maps that activity back to strategic goals and detects drift. The Execution Agent takes autonomous action — assigning tasks, following up on commitments, and driving accountability without a human in the loop. The AI is the product."
-        },
-        {
-          "t": "h",
-          "text": "Why now"
-        },
-        {
-          "t": "p",
-          "text": "Market displacement from the Viva Goals retirement; AI agents mature enough to execute operational workflows, not just summarize them; and headcount pressure that puts Brev against a $1.5–2M annual ops payroll rather than a $20–50K SaaS line item."
-        },
-        {
-          "t": "q",
-          "text": "Autonomous agents that execute tasks — not chatbots that generate text — are the next computing paradigm. That's exactly the shift Brev was built for."
-        },
-        {
-          "t": "h",
-          "text": "Our thesis"
-        },
-        {
-          "t": "p",
-          "text": "The compound data integration — meetings, tools, goals, and execution outcomes synthesized into a unified MIS — creates switching costs that deepen every quarter. Like Palantir's Foundry, the moat is self-reinforcing. We're glad to be backing Chris, Vic, and the Brev team as they build the future of enterprise execution."
-        }
-      ]
     },
     {
       "id": "support-partner",

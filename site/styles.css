@@ -340,9 +340,12 @@ a { color: inherit; }
 .showcase-catpill { display: inline-flex; align-items: center; height: 28px; padding: 0 14px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 /* Full-width hero banner on top, details below — shows the whole website hero
    without side-cropping, and renders consistently for every company. */
-.showcase-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+.showcase-body { display: block; }
 .showcase-shot { position: relative; aspect-ratio: 5 / 2; overflow: hidden; background: #f1eee7; display: flex; align-items: center; justify-content: center; text-decoration: none; }
 .showcase-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .5s var(--ease-out); }
+/* companies whose screenshot content is vertical: show it in full, uncropped */
+.showcase-shot--contain { background: #0c0c0b; }
+.showcase-shot--contain img { object-fit: contain; object-position: center; }
 a.showcase-shot:hover img { transform: scale(1.03); }
 .showcase-shot-ph { color: var(--gray-400); font-size: 13px; font-weight: 700; text-align: center; padding: 24px; }
 .showcase-shot-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; z-index: 1; }

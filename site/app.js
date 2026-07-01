@@ -349,11 +349,12 @@
      ============================================================ */
   var INS_NOTION = 'https://shuckervc.notion.site/shuckervc-news';
   var INS_SP = 'https://shuckervc.notion.site/our-support-partner-model';
-  var INS_TAGS = ['All', 'White paper', 'Perspective', 'News'];
+  var INS_TAGS = ['All', 'White paper', 'Perspective', 'News', 'Newsletter'];
   var INS_TC = {
     'White paper': { bg: '#fff6da', fg: '#8a6400', dot: '#ffc009', solidFg: '#111111' },
     'Perspective': { bg: '#e3f1ee', fg: '#1f6b5e', dot: '#33a08f', solidFg: '#ffffff' },
-    'News': { bg: '#ece9e2', fg: '#4a463f', dot: '#111111', solidFg: '#ffffff' }
+    'News': { bg: '#ece9e2', fg: '#4a463f', dot: '#111111', solidFg: '#ffffff' },
+    'Newsletter': { bg: '#e8edf3', fg: '#35507a', dot: '#3f5b7c', solidFg: '#ffffff' }
   };
   // Fallback data — mirrors site/insights.json so the page renders even when
   // the JSON can't be fetched (e.g. opened over file://). At runtime this is
@@ -421,7 +422,8 @@
           '<span class="ins-feat-meta"><b>' + feat.author + '</b> · ' + feat.date + '</span></div>' +
       '</a>' : '';
 
-    listEl.innerHTML = sorted.slice(1).map(function (p) {
+    // Homepage teaser: cap to a few recent; the full archive lives on writing.html.
+    listEl.innerHTML = sorted.slice(1, 5).map(function (p) {
       return '<a class="ins-row" href="writing.html#' + encodeURIComponent(p.id) + '">' +
         '<div class="ins-row-body">' +
           insLightBadge(p.tag) +

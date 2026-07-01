@@ -5,11 +5,12 @@
 (function () {
   'use strict';
 
-  var TAGS = ['All', 'White paper', 'Perspective', 'News'];
+  var TAGS = ['All', 'White paper', 'Perspective', 'News', 'Newsletter'];
   var TC = {
     'White paper': { solidBg: '#ffc009', solidFg: '#111111' },
     'Perspective': { solidBg: '#33a08f', solidFg: '#ffffff' },
-    'News': { solidBg: '#111111', solidFg: '#ffffff' }
+    'News': { solidBg: '#111111', solidFg: '#ffffff' },
+    'Newsletter': { solidBg: '#3f5b7c', solidFg: '#ffffff' }
   };
 
   var POSTS = [];

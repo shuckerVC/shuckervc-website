@@ -24,7 +24,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://shuckervc.github.io/shuckervc-website/
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,6 +33,24 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
-      - name: Deploy
-        id: deployment
+      # GitHub Pages' backend intermittently fails a created deployment with
+      # "Deployment failed, try again later" — retry with backoff so a transient
+      # failure doesn't fail the whole run.
+      - name: Deploy (attempt 1)
+        id: dep1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Backoff before retry
+        if: steps.dep1.outcome == 'failure'
+        run: sleep 60
+      - name: Deploy (attempt 2)
+        id: dep2
+        if: steps.dep1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Backoff before final retry
+        if: steps.dep1.outcome == 'failure' && steps.dep2.outcome == 'failure'
+        run: sleep 150
+      - name: Deploy (final attempt)
+        if: steps.dep1.outcome == 'failure' && steps.dep2.outcome == 'failure'
         uses: actions/deploy-pages@v4

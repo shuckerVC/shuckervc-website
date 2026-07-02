@@ -5,11 +5,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # The Notion sync commits via GITHUB_TOKEN, which can't trigger the push
-  # event above — so also deploy whenever that workflow finishes.
-  workflow_run:
-    workflows: ["Sync Insights from Notion"]
-    types: [completed]
+  # The Notion sync dispatches this workflow directly when it actually commits a
+  # change (its GITHUB_TOKEN push can't fire the push event above), so we only
+  # deploy on real content changes — not on every hourly sync run.
   workflow_dispatch: {}
 
 permissions:

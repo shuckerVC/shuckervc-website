@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # to dispatch the deploy workflow on a real change
 
 jobs:
   sync:
@@ -22,19 +23,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - name: Sync from Notion
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: node scripts/sync-notion.mjs
-      - name: Commit changes if any
+      - name: Commit + deploy only if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "shuckerVC bot"
           git config user.email "bot@shucker.vc"
           git add site/insights.json site/assets/insights
-          if ! git diff --cached --quiet; then
+          if git diff --cached --quiet; then
+            echo "No changes — skipping commit and deploy."
+          else
             git commit -m "chore: sync insights from Notion"
             git push
-          else
-            echo "No changes."
+            gh workflow run "Deploy to GitHub Pages" --repo "$GITHUB_REPOSITORY"
           fi

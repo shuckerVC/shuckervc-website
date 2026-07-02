@@ -31,6 +31,6 @@ for (const e of essays.essays || []) {
 }
 merged.sort((a, b) => b.sort - a.sort);
 
-const out = { _generated: current._generated, posts: merged };
+const out = { _generated: 'from Notion 🥁 shuckerVC Blog + scripts/essays.json', posts: merged };
 await writeFile(join(ROOT, 'site/insights.json'), JSON.stringify(out, null, 2) + '\n');
 console.log(`Wrote site/insights.json with ${merged.length} posts (${notionPosts.length} Notion + ${merged.length - notionPosts.length} essays).`);

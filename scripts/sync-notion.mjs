@@ -178,7 +178,7 @@ async function main() {
   posts.sort((a, b) => b.sort - a.sort);
 
   const out = {
-    _generated: `from Notion 🥁 shuckerVC Blog (${new Date().toISOString()})`,
+    _generated: 'from Notion 🥁 shuckerVC Blog + scripts/essays.json',
     posts,
   };
   await writeFile(join(ROOT, 'site/insights.json'), JSON.stringify(out, null, 2) + '\n');

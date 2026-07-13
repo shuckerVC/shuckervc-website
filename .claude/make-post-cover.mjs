@@ -37,22 +37,39 @@ if (!opts.id || !opts.title || !opts.tag) {
 
 const { id, title, tag, author } = opts;
 
-// Brand colors
+// Brand colors from shuckerVC design system
 const colors = {
-  bg: '#1a1a1a',
-  gold: '#d4af37',
-  lightText: '#e8e8e8',
+  // Core brand
+  bg: '#111111',        // ink-900 (primary text / dark surfaces)
+  bgSecondary: '#2a2a2a', // ink-700 (secondary dark)
+  gold: '#ffcd3c',      // gold-400 (PRIMARY brand gold)
+  goldDeep: '#ffc009',  // gold-500 (deep amber)
+  goldLight: '#ffda6f', // gold-300 (light gold)
+  white: '#ffffff',
+
+  // Secondary accents
+  teal: '#00b49b',      // teal-600 (preferred accent)
+  sand: '#b5aa99',      // sand-300 (warm stone)
+  bark: '#4e4637',      // bark-700 (olive-brown)
+
+  // Status colors
+  success: '#1f9d6b',   // Algorized green
+  warning: '#e8a317',   // Warning amber
+  danger: '#d2452b',    // Danger red
+  info: '#00b49b',      // Teal (same as accent)
+
+  // Tag styling per category
   tagBg: {
-    'News': '#e8edf3',
-    'Perspective': '#f0f4f9',
-    'White paper': '#e5f5f7',
-    'Newsletter': '#e8edf3',
+    'News': '#e6e2d9',           // warm hairline (gray-200)
+    'Perspective': '#f4f1ea',    // warm off-white surface (gray-100)
+    'White paper': '#faf8f2',    // page tint (gray-50)
+    'Newsletter': '#f4f1ea',     // warm surface
   },
   tagText: {
-    'News': '#35507a',
-    'Perspective': '#2d5a6d',
-    'White paper': '#1f6b7f',
-    'Newsletter': '#3f5b7c',
+    'News': '#111111',           // ink-900
+    'Perspective': '#3d3b37',    // ink-600
+    'White paper': '#3d3b37',    // ink-600
+    'Newsletter': '#111111',     // ink-900
   },
 };
 
@@ -62,13 +79,20 @@ const height = 630;
 const canvas = createCanvas(width, height);
 const ctx = canvas.getContext('2d');
 
-// Dark background with subtle gradient
+// Dark background (brand ink-900)
 ctx.fillStyle = colors.bg;
 ctx.fillRect(0, 0, width, height);
 
-// Add subtle gold accent bar on left
+// Add brand gold accent bar on left (gold-400)
 ctx.fillStyle = colors.gold;
 ctx.fillRect(0, 0, 8, height);
+
+// Subtle gradient overlay for depth
+const grad = ctx.createLinearGradient(0, 0, width, height);
+grad.addColorStop(0, 'rgba(255, 205, 60, 0.02)'); // Subtle gold tint top-left
+grad.addColorStop(1, 'rgba(0, 0, 0, 0.1)');      // Subtle dark bottom-right
+ctx.fillStyle = grad;
+ctx.fillRect(0, 0, width, height);
 
 // Tag badge (top-left, after the accent bar)
 const tagBg = colors.tagBg[tag] || '#f0f4f9';
@@ -87,12 +111,12 @@ ctx.textAlign = 'center';
 ctx.textBaseline = 'middle';
 ctx.fillText(tag.toUpperCase(), tagX + tagWidth / 2, tagY + tagHeight / 2);
 
-// Title (centered, with word wrapping)
+// Title (centered, with word wrapping) — white text on dark ink
 const titleMaxWidth = width - 100;
 const titleFontSize = 56;
 const lineHeight = 72;
 
-ctx.fillStyle = colors.lightText;
+ctx.fillStyle = colors.white;
 ctx.font = `bold ${titleFontSize}px -apple-system, BlinkMacSystemFont, "Segoe UI", serif`;
 ctx.textAlign = 'left';
 ctx.textBaseline = 'top';
@@ -121,17 +145,17 @@ lines.forEach((line, i) => {
   ctx.fillText(line, 50, titleStartY + i * lineHeight);
 });
 
-// Author byline (bottom-right)
+// Author byline (bottom-right) — gold accent
 if (author) {
-  ctx.fillStyle = colors.gold;
+  ctx.fillStyle = colors.goldLight;
   ctx.font = '14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
   ctx.textAlign = 'right';
   ctx.textBaseline = 'bottom';
   ctx.fillText(`— ${author}`, width - 50, height - 40);
 }
 
-// shuckerVC mark (bottom-left corner, small)
-ctx.fillStyle = colors.gold;
+// shuckerVC mark (bottom-left corner, small) — gold accent
+ctx.fillStyle = colors.goldLight;
 ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 ctx.textAlign = 'left';
 ctx.textBaseline = 'bottom';

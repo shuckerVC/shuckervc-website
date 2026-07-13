@@ -1,0 +1,16 @@
+{
+  "name": "shuckervc-website",
+  "version": "1.0.0",
+  "description": "shuckerVC marketing site with Notion-synced Insights feed",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-notion.mjs",
+    "cover": "node .claude/make-post-cover.mjs"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

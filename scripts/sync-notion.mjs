@@ -22,6 +22,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { spawn } from 'child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -33,9 +34,11 @@ const WPM = 200;
 
 // Map a Notion Editor (person) user-id -> byline. Extend as needed.
 const EDITOR_MAP = {
-  // 'notion-user-uuid': { author: 'JP Persico', initials: 'JP' },
+  // Add editor mappings here: 'notion-user-uuid': { author: 'Name', initials: 'XX' }
+  // Run sync once to see unknown editor IDs logged to console.
 };
 const DEFAULT_AUTHOR = { author: 'shuckerVC', initials: 'sV' };
+const unknownEditors = new Set();
 
 // Stable, friendly post ids (used in deep-links #<id> and cover filenames
 // assets/insights/<id>.jpg). Keep these matching the committed covers so a live
@@ -141,6 +144,7 @@ async function main() {
     if (!category || !published) continue; // drafts / uncategorised are skipped
 
     const editorId = props.Editor?.people?.[0]?.id;
+    if (editorId && !EDITOR_MAP[editorId]) unknownEditors.add(editorId);
     const byline = EDITOR_MAP[editorId] || DEFAULT_AUTHOR;
     const title = richText(props.Name?.title);
     const id = TITLE_ID[title] || slugify(title);
@@ -177,12 +181,42 @@ async function main() {
 
   posts.sort((a, b) => b.sort - a.sort);
 
+  if (unknownEditors.size > 0) {
+    console.log('Unknown editor IDs found (add to EDITOR_MAP to credit them):');
+    unknownEditors.forEach(id => console.log(`  '${id}': { author: 'Name', initials: 'XX' },`));
+  }
+
+  // Auto-generate covers for posts missing them (from Notion only; essays should have manual covers)
+  const postsNeedingCovers = posts.filter(p => !p.cover && p.url.includes('notion.site'));
+  for (const post of postsNeedingCovers) {
+    await generateCover(post);
+  }
+
   const out = {
     _generated: 'from Notion 🥁 shuckerVC Blog + scripts/essays.json',
     posts,
   };
   await writeFile(join(ROOT, 'site/insights.json'), JSON.stringify(out, null, 2) + '\n');
   console.log(`Wrote site/insights.json with ${posts.length} posts.`);
+}
+
+async function generateCover(post) {
+  return new Promise((resolve) => {
+    const args = [
+      join(ROOT, '.claude/make-post-cover.mjs'),
+      '--id', post.id,
+      '--title', post.title,
+      '--tag', post.tag,
+      '--author', post.author,
+    ];
+    const proc = spawn('node', args, { stdio: 'inherit' });
+    proc.on('close', (code) => {
+      if (code === 0) {
+        post.cover = `assets/insights/${post.id}.jpg`;
+      }
+      resolve();
+    });
+  });
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

@@ -144,7 +144,10 @@ async function main() {
     if (!category || !published) continue; // drafts / uncategorised are skipped
 
     const editorId = props.Editor?.people?.[0]?.id;
-    if (editorId && !EDITOR_MAP[editorId]) unknownEditors.add(editorId);
+    const editorName = props.Editor?.people?.[0]?.name;
+    if (editorId && !EDITOR_MAP[editorId]) {
+      unknownEditors.add({ id: editorId, name: editorName });
+    }
     const byline = EDITOR_MAP[editorId] || DEFAULT_AUTHOR;
     const title = richText(props.Name?.title);
     const id = TITLE_ID[title] || slugify(title);
@@ -183,7 +186,10 @@ async function main() {
 
   if (unknownEditors.size > 0) {
     console.log('Unknown editor IDs found (add to EDITOR_MAP to credit them):');
-    unknownEditors.forEach(id => console.log(`  '${id}': { author: 'Name', initials: 'XX' },`));
+    unknownEditors.forEach(({ id, name }) => {
+      const initials = (name || 'Name').split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      console.log(`  '${id}': { author: '${name || 'Name'}', initials: '${initials}' },`);
+    });
   }
 
   // Auto-generate covers for posts missing them (from Notion only; essays should have manual covers)

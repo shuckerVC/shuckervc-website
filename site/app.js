@@ -170,7 +170,7 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Operator and investor',
       bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
-      photo: 'assets/team/jp-persico-sq.png',
+      photo: 'assets/team/jp-persico.jpg',
       linkedin: 'https://www.linkedin.com/in/jppersico',
       sortOrder: 0
     },
@@ -190,7 +190,7 @@
       title: 'Venture Partner',
       tagline: 'Investor Relations and Real Estate Professional',
       bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
-      photo: 'assets/team/gabe-regalado-sq.png',
+      photo: 'assets/team/gabe-regalado.jpg',
       linkedin: 'https://www.linkedin.com/in/gabedregalado',
       sortOrder: 2
     }
@@ -318,18 +318,56 @@
     var gridEl = document.getElementById('portGrid');
     var showcaseEl = document.getElementById('portShowcase');
 
-    // fund supertile (simplified version)
+    // fund supertile with Fund Two placeholder
     if (fundEl) {
-      var tile = document.createElement('div');
-      tile.className = 'port-fund-tile';
-      tile.innerHTML = '<div class="port-fund-row">' +
-        '<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">' +
+      var fundGrid = document.createElement('div');
+      fundGrid.className = 'port-fund-grid';
+
+      var fundOne = document.createElement('div');
+      fundOne.className = 'port-fund-tile' + (portState.fundOpen ? ' is-open' : '');
+      fundOne.style.cursor = 'pointer';
+      fundOne.innerHTML = '<div class="port-fund-row">' +
+        '<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;flex:1">' +
           '<span class="port-fund-name">' + FUND.name + '</span>' +
           '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
         '</div>' +
+        '<span class="port-fund-plus"' + (portState.fundOpen ? '' : ' style="opacity:0"') + '>+</span>' +
       '</div>';
+
+      if (portState.fundOpen) {
+        fundOne.innerHTML += '<div class="port-fund-details" style="margin-top:16px;padding-top:18px;border-top:1px solid #efece5">' +
+          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">' +
+            '<div style="display:flex;flex-direction:column;gap:4px">' +
+              '<span class="port-fund-stat">' + FUND.size + '</span>' +
+              '<span class="port-fund-label">Fund size</span>' +
+            '</div>' +
+            '<div style="display:flex;flex-direction:column;gap:4px">' +
+              '<span class="port-fund-stat">' + FUND.checkSize + '</span>' +
+              '<span class="port-fund-label">Max check</span>' +
+            '</div>' +
+            '<div style="display:flex;flex-direction:column;gap:4px">' +
+              '<span class="port-fund-stat">' + FUND.count + '</span>' +
+              '<span class="port-fund-label">Portfolio companies</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }
+
+      fundOne.addEventListener('click', function () {
+        portState.fundOpen = !portState.fundOpen;
+        portState.expanded = null;
+        renderPortfolio();
+      });
+
+      var fundTwo = document.createElement('div');
+      fundTwo.className = 'port-fund-placeholder';
+      fundTwo.innerHTML = 'Fund Two — future slot';
+
+      fundGrid.appendChild(fundOne);
+      fundGrid.appendChild(fundTwo);
+
       fundEl.innerHTML = '';
-      fundEl.appendChild(tile);
+      fundEl.appendChild(fundGrid);
     }
 
     // chips
@@ -370,7 +408,7 @@
         if (p.coInvestor) {
           info += '<div class="port-coinv"><span class="port-coinv-label">Co-investing with</span><span class="port-coinv-pill">' + p.coInvestor + '</span></div>';
         }
-        info += '<div class="port-hint" style="color:' + p.tint + '">Click to see the product ↗</div>';
+        info += '<div class="port-hint" style="color:' + p.tint + '">Click to expand ↗</div>';
         info += '</div>';
       }
 
@@ -379,7 +417,6 @@
         '<div class="port-cat">' + p.cat + '</div>' +
         (p.milestone ? '<div class="port-milestone"><span class="port-milestone-dot"></span>' + p.milestone + ' ↗</div>' : '') +
         '<p class="port-desc">' + p.desc + '</p>' +
-        '<p class="port-founder">' + founderLine(p) + '</p>' +
         info;
 
       card.addEventListener('mouseenter', function () {

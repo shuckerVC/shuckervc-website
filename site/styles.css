@@ -391,6 +391,12 @@ a { color: inherit; }
 .port-fund-stat-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin-top: 4px; }
 
 .port-chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 34px 0 6px; }
+@media (max-width: 720px) {
+  /* mobile: single scrolling filter row, per design 1e */
+  .port-chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+  .port-chips::-webkit-scrollbar { display: none; }
+  .port-chips .chip { flex: none; }
+}
 .chip {
   display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 999px;
   cursor: pointer; font-size: 14px; font-weight: 700; font-family: var(--font-sans);
@@ -410,7 +416,13 @@ a { color: inherit; }
 .port-card:hover { box-shadow: var(--shadow-md); }
 .port-name-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .port-name { font-family: var(--font-sans); font-weight: 900; font-size: 26px; letter-spacing: -0.02em; color: var(--ink-900); line-height: 1; transition: color .3s ease; }
-.port-chev { font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1; transition: transform .3s var(--ease-out); }
+/* plus affordance: hidden at rest, revealed on hover (desktop); always
+   visible where hover doesn't exist (touch), per design 1e */
+.port-chev { font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1; opacity: 0; transition: transform .3s var(--ease-out), opacity .22s ease; }
+.port-card:hover .port-chev, .port-card.is-hover .port-chev { opacity: 1; }
+@media (hover: none) {
+  .port-chev { opacity: 1; }
+}
 .port-cat { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-top: 14px; }
 .port-milestone {
   display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; height: 28px; padding: 0 13px;
@@ -489,11 +501,24 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 }
 .team-photo { width: 100%; height: 100%; object-fit: cover; }
 .team-member-name { font-size: 17px; font-weight: 700; margin: 18px 0 6px; color: var(--ink-900); }
-.team-member-tagline { font-size: 13px; font-weight: 400; color: var(--gray-500); margin: 0; line-height: 1.4; }
+.team-member-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-600); margin: 0; }
+.team-teaser {
+  transition: opacity .42s cubic-bezier(.22,1,.36,1), transform .42s cubic-bezier(.22,1,.36,1);
+}
 .team-bar { display: block; width: 26px; height: 3px; border-radius: 3px; background: var(--gold-400); margin: 14px auto 0; }
-.team-expanded { transition: opacity .3s ease; }
-.team-bio { font-size: 14px; line-height: 1.65; color: var(--ink-600); margin: 14px 0 0; text-align: left; }
-.team-linkedin { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }
+.team-expanded {
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height .3s var(--ease-out), opacity .3s ease;
+}
+.team-card[aria-expanded="true"] .team-expanded { max-height: 340px; opacity: 1; }
+.team-member-tagline { font-size: 13px; font-weight: 400; color: var(--gray-500); margin: 14px 0 0; line-height: 1.4; }
+.team-bio { font-size: 14px; line-height: 1.65; color: var(--ink-4a); margin: 12px 0 0; text-align: left; }
+.team-linkedin { display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 4px; font-size: 13px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }
+.team-linkedin:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .team-teaser { transition: none; }
+  .team-expanded { transition-duration: 50ms; }
+}
 
 /* ============================================================
    INSIGHTS

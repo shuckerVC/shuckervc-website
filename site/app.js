@@ -170,7 +170,7 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Operator and investor',
       bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
-      photo: 'assets/team/jp-persico.jpg',
+      photo: 'assets/team/jp-persico-sq.jpg',
       linkedin: 'https://www.linkedin.com/in/jppersico',
       sortOrder: 0
     },
@@ -180,7 +180,7 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Four-time startup founder',
       bio: 'At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.',
-      photo: 'assets/team/graham-siegel.jpeg',
+      photo: 'assets/team/graham-siegel-sq.jpg',
       linkedin: 'https://www.linkedin.com/in/grahamsiegel',
       sortOrder: 1
     },
@@ -190,7 +190,7 @@
       title: 'Venture Partner',
       tagline: 'Investor Relations and Real Estate Professional',
       bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
-      photo: 'assets/team/Gabe-regalado.png',
+      photo: 'assets/team/gabe-regalado-sq.jpg',
       linkedin: 'https://www.linkedin.com/in/gabedregalado',
       sortOrder: 2
     }
@@ -220,65 +220,81 @@
     if (!grid) return;
     grid.innerHTML = '';
 
+    // Open/close toggles classes on existing DOM (no re-render), so the
+    // expand/collapse CSS transitions actually animate.
+    function setOpen(id) {
+      teamState.openId = id;
+      [].slice.call(grid.querySelectorAll('.team-card')).forEach(function (c) {
+        c.setAttribute('aria-expanded', c.getAttribute('data-member-id') === id ? 'true' : 'false');
+      });
+    }
+
     TEAM.forEach(function (m, idx) {
       var card = document.createElement('div');
       card.className = 'team-card';
       card.setAttribute('data-member-id', m.id);
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
-      card.setAttribute('aria-expanded', teamState.openId === m.id ? 'true' : 'false');
+      card.setAttribute('aria-expanded', 'false');
 
-      var isOpen = teamState.openId === m.id;
+      // scroll-teaser: reveal slot fades/slides in once, staggered 120ms/card
+      var teaserStyle = prefersReduced
+        ? ''
+        : ' style="opacity:0;transform:translateY(6px);transition-delay:' + (idx * 120) + 'ms"';
 
       card.innerHTML =
         '<div class="team-photo-wrap">' +
           '<img src="' + m.photo + '" alt="' + m.name + '" class="team-photo">' +
         '</div>' +
         '<h3 class="team-member-name">' + m.name + '</h3>' +
-        '<p class="team-member-tagline">' + m.tagline + '</p>' +
-        '<span class="team-bar"></span>' +
-        (isOpen ?
-          '<div class="team-expanded" style="opacity:1">' +
+        '<p class="team-member-title">' + m.title + '</p>' +
+        '<div class="team-teaser"' + teaserStyle + '>' +
+          '<span class="team-bar"></span>' +
+          '<div class="team-expanded">' +
+            '<p class="team-member-tagline">' + m.tagline + '</p>' +
             '<p class="team-bio">' + m.bio + '</p>' +
-            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
-          '</div>'
-          : '<div class="team-expanded" style="opacity:0">' +
-            '<p class="team-bio">' + m.bio + '</p>' +
-            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
-          '</div>'
-        );
+            (m.linkedin ? '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' : '') +
+          '</div>' +
+        '</div>';
 
       function onOpen() {
         if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
-        if (teamState.openId === m.id) return;
-        teamState.openId = m.id;
-        renderTeam();
+        if (teamState.openId !== m.id) {
+          setOpen(m.id);
+          teamState.openedAt = Date.now();
+        }
       }
 
+      // 120ms close delay so crossing the gap between cards doesn't flicker
       function onClose() {
         if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
         teamState.closeTimeout = setTimeout(function () {
-          if (teamState.openId === m.id) {
-            teamState.openId = null;
-            renderTeam();
-          }
+          if (teamState.openId === m.id) setOpen(null);
         }, 120);
       }
 
-      if (!prefersReduced) {
-        card.addEventListener('mouseenter', onOpen);
-        card.addEventListener('mouseleave', onClose);
-        card.addEventListener('focus', onOpen);
-        card.addEventListener('blur', onClose);
-      }
-      card.addEventListener('click', function () {
+      function onToggle() {
         if (teamState.openId === m.id) {
-          teamState.openId = null;
+          // a tap fires mouseenter/focus (open) then click — don't let that
+          // same tap immediately toggle the card closed again
+          if (Date.now() - (teamState.openedAt || 0) < 350) return;
+          setOpen(null);
         } else {
-          teamState.openId = m.id;
+          setOpen(m.id);
+          teamState.openedAt = Date.now();
         }
-        renderTeam();
+      }
+
+      card.addEventListener('mouseenter', onOpen);
+      card.addEventListener('mouseleave', onClose);
+      card.addEventListener('focus', onOpen);
+      card.addEventListener('blur', onClose);
+      card.addEventListener('click', onToggle);
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); }
       });
+      var lnk = card.querySelector('.team-linkedin');
+      if (lnk) lnk.addEventListener('click', function (e) { e.stopPropagation(); });
 
       grid.appendChild(card);
     });

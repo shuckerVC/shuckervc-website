@@ -190,7 +190,7 @@
       title: 'Venture Partner',
       tagline: 'Investor Relations and Real Estate Professional',
       bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
-      photo: 'assets/team/gabe-regalado.jpg',
+      photo: 'assets/team/Gabe-regalado.png',
       linkedin: 'https://www.linkedin.com/in/gabedregalado',
       sortOrder: 2
     }

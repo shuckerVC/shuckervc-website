@@ -288,13 +288,90 @@ a { color: inherit; }
    PORTFOLIO
    ============================================================ */
 #portFund { margin-top: 34px; }
+.port-fund-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start;
+}
+@media (max-width: 720px) {
+  .port-fund-grid { grid-template-columns: 1fr; }
+}
 .port-fund-tile {
   background: #fff; border: 1px solid var(--border); border-radius: 18px;
-  padding: 26px 28px; cursor: pointer; transition: border-color .3s ease;
+  padding: 26px 28px; cursor: pointer; transition: all var(--dur-base) ease;
+  box-shadow: var(--shadow-sm);
 }
-.port-fund-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.port-fund-name { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--ink-900); }
+.port-fund-tile:hover {
+  border-color: var(--gold-500);
+  box-shadow: 0 12px 30px rgba(17,17,17,0.09);
+}
+.port-fund-tile:hover .port-fund-name {
+  color: var(--gold-deep);
+}
+.port-fund-tile:hover .port-fund-plus,
+.port-fund-tile.is-open .port-fund-plus {
+  opacity: 1;
+}
+.port-fund-tile.is-open {
+  border-color: var(--gold-500);
+  box-shadow: 0 18px 44px rgba(17,17,17,0.12);
+}
+.port-fund-tile.is-open .port-fund-plus {
+  transform: rotate(45deg);
+}
+/* active = ink fill + gold text: the selected-chip treatment at tile scale */
+.port-fund-tile.is-active,
+.port-fund-tile.is-active:hover {
+  background: var(--ink-900); border-color: var(--ink-900);
+  box-shadow: 0 12px 30px rgba(17,17,17,0.16);
+}
+.port-fund-tile.is-active .port-fund-name,
+.port-fund-tile.is-active:hover .port-fund-name { color: var(--gold-400); }
+.port-fund-tile.is-active .port-fund-meta { color: rgba(255,255,255,0.72); }
+.port-fund-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.port-fund-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; flex: 1; }
+.port-fund-name { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--ink-900); transition: color var(--dur-base) ease; }
 .port-fund-meta { font-size: 15px; color: var(--gray-500); }
+.port-fund-plus {
+  font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1;
+  opacity: 0; transition: opacity var(--dur-base) ease, transform var(--dur-base) ease;
+  background: none; border: none; cursor: pointer; padding: 0; font-family: inherit;
+}
+.port-fund-filtering {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--gold-400);
+}
+.port-fund-filtering-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-400); }
+.port-fund-details {
+  margin-top: 16px;
+}
+.port-fund-thesis-box {
+  padding: 14px 16px; border: 1.5px dashed #ffe08a; border-radius: 10px; background: #fffdf5;
+  font-size: 13px; line-height: 1.6; color: var(--gold-text); font-style: italic;
+}
+.port-fund-stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 20px; padding-top: 18px; border-top: 1px solid #efece5;
+}
+.port-fund-stat-col { display: flex; flex-direction: column; gap: 4px; }
+.port-fund-stat {
+  font-family: var(--font-display); font-size: 30px; line-height: 1;
+  color: var(--ink-900); display: block;
+}
+.port-fund-stat--gold { color: var(--gold-deep); }
+.port-fund-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gray-400); margin-top: 4px; display: block;
+}
+.port-fund-hint {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 18px;
+  font-size: 12px; font-weight: 700; color: var(--gold-deep);
+}
+.port-count { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 13px; }
+.port-count-label { font-weight: 700; color: var(--ink-700); }
+.port-count-sep { color: var(--gray-400); }
+.port-count-clear {
+  font-weight: 700; color: var(--gold-deep); background: none; border: none;
+  cursor: pointer; font-family: inherit; font-size: 13px; padding: 0;
+}
 .port-fund-toggle {
   font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1;
   background: none; border: none; cursor: pointer; transition: opacity .3s ease, transform .3s ease;
@@ -314,6 +391,12 @@ a { color: inherit; }
 .port-fund-stat-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-400); margin-top: 4px; }
 
 .port-chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 34px 0 6px; }
+@media (max-width: 720px) {
+  /* mobile: single scrolling filter row, per design 1e */
+  .port-chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+  .port-chips::-webkit-scrollbar { display: none; }
+  .port-chips .chip { flex: none; }
+}
 .chip {
   display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 999px;
   cursor: pointer; font-size: 14px; font-weight: 700; font-family: var(--font-sans);
@@ -333,7 +416,13 @@ a { color: inherit; }
 .port-card:hover { box-shadow: var(--shadow-md); }
 .port-name-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .port-name { font-family: var(--font-sans); font-weight: 900; font-size: 26px; letter-spacing: -0.02em; color: var(--ink-900); line-height: 1; transition: color .3s ease; }
-.port-chev { font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1; transition: transform .3s var(--ease-out); }
+/* plus affordance: hidden at rest, revealed on hover (desktop); always
+   visible where hover doesn't exist (touch), per design 1e */
+.port-chev { font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1; opacity: 0; transition: transform .3s var(--ease-out), opacity .22s ease; }
+.port-card:hover .port-chev, .port-card.is-hover .port-chev { opacity: 1; }
+@media (hover: none) {
+  .port-chev { opacity: 1; }
+}
 .port-cat { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-top: 14px; }
 .port-milestone {
   display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; height: 28px; padding: 0 13px;
@@ -412,13 +501,24 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 }
 .team-photo { width: 100%; height: 100%; object-fit: cover; }
 .team-member-name { font-size: 17px; font-weight: 700; margin: 18px 0 6px; color: var(--ink-900); }
-.team-member-title { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold-dark); margin: 0; }
+.team-member-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-600); margin: 0; }
+.team-teaser {
+  transition: opacity .42s cubic-bezier(.22,1,.36,1), transform .42s cubic-bezier(.22,1,.36,1);
+}
 .team-bar { display: block; width: 26px; height: 3px; border-radius: 3px; background: var(--gold-400); margin: 14px auto 0; }
-.team-teaser { min-height: 17px; }
-.team-expanded { transition: opacity .3s ease; }
-.team-tagline { font-size: 13px; color: var(--gray-500); margin: 12px 0 0; }
-.team-bio { font-size: 14px; line-height: 1.65; color: var(--ink-600); margin: 14px 0 0; text-align: left; }
-.team-linkedin { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }
+.team-expanded {
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height .3s var(--ease-out), opacity .3s ease;
+}
+.team-card[aria-expanded="true"] .team-expanded { max-height: 340px; opacity: 1; }
+.team-member-tagline { font-size: 13px; font-weight: 400; color: var(--gray-500); margin: 14px 0 0; line-height: 1.4; }
+.team-bio { font-size: 14px; line-height: 1.65; color: var(--ink-4a); margin: 12px 0 0; text-align: left; }
+.team-linkedin { display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 4px; font-size: 13px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }
+.team-linkedin:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .team-teaser { transition: none; }
+  .team-expanded { transition-duration: 50ms; }
+}
 
 /* ============================================================
    INSIGHTS

@@ -170,8 +170,8 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Operator and investor',
       bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
-      photo: 'assets/team/jp-persico-sq.png',
-      linkedin: 'https://linkedin.com',
+      photo: 'assets/team/jp-persico-sq.jpg',
+      linkedin: 'https://www.linkedin.com/in/jppersico',
       sortOrder: 0
     },
     {
@@ -180,8 +180,8 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Four-time startup founder',
       bio: 'At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.',
-      photo: 'assets/team/graham-siegel.jpeg',
-      linkedin: 'https://linkedin.com',
+      photo: 'assets/team/graham-siegel-sq.jpg',
+      linkedin: 'https://www.linkedin.com/in/grahamsiegel',
       sortOrder: 1
     },
     {
@@ -190,8 +190,8 @@
       title: 'Venture Partner',
       tagline: 'Investor Relations and Real Estate Professional',
       bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
-      photo: 'assets/team/gabe-regalado-sq.png',
-      linkedin: 'https://linkedin.com',
+      photo: 'assets/team/gabe-regalado-sq.jpg',
+      linkedin: 'https://www.linkedin.com/in/gabedregalado',
       sortOrder: 2
     }
   ];
@@ -220,17 +220,27 @@
     if (!grid) return;
     grid.innerHTML = '';
 
+    // Open/close toggles classes on existing DOM (no re-render), so the
+    // expand/collapse CSS transitions actually animate.
+    function setOpen(id) {
+      teamState.openId = id;
+      [].slice.call(grid.querySelectorAll('.team-card')).forEach(function (c) {
+        c.setAttribute('aria-expanded', c.getAttribute('data-member-id') === id ? 'true' : 'false');
+      });
+    }
+
     TEAM.forEach(function (m, idx) {
       var card = document.createElement('div');
       card.className = 'team-card';
       card.setAttribute('data-member-id', m.id);
-      card.setAttribute('data-reveal', '');
-      card.setAttribute('data-delay', String(idx * 120));
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
-      card.setAttribute('aria-expanded', teamState.openId === m.id ? 'true' : 'false');
+      card.setAttribute('aria-expanded', 'false');
 
-      var isOpen = teamState.openId === m.id;
+      // scroll-teaser: reveal slot fades/slides in once, staggered 120ms/card
+      var teaserStyle = prefersReduced
+        ? ''
+        : ' style="opacity:0;transform:translateY(6px);transition-delay:' + (idx * 120) + 'ms"';
 
       card.innerHTML =
         '<div class="team-photo-wrap">' +
@@ -238,53 +248,53 @@
         '</div>' +
         '<h3 class="team-member-name">' + m.name + '</h3>' +
         '<p class="team-member-title">' + m.title + '</p>' +
-        '<div class="team-teaser" style="opacity:0;transform:translateY(6px);transition:opacity .42s ease,transform .42s cubic-bezier(.22,1,.36,1)">' +
+        '<div class="team-teaser"' + teaserStyle + '>' +
           '<span class="team-bar"></span>' +
-        '</div>' +
-        (isOpen ?
-          '<div class="team-expanded" style="opacity:1">' +
-            '<p class="team-tagline">' + m.tagline + '</p>' +
+          '<div class="team-expanded">' +
+            '<p class="team-member-tagline">' + m.tagline + '</p>' +
             '<p class="team-bio">' + m.bio + '</p>' +
-            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
-          '</div>'
-          : '<div class="team-expanded" style="opacity:0">' +
-            '<p class="team-tagline">' + m.tagline + '</p>' +
-            '<p class="team-bio">' + m.bio + '</p>' +
-            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
-          '</div>'
-        );
+            (m.linkedin ? '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' : '') +
+          '</div>' +
+        '</div>';
 
       function onOpen() {
         if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
-        if (teamState.openId === m.id) return;
-        teamState.openId = m.id;
-        renderTeam();
+        if (teamState.openId !== m.id) {
+          setOpen(m.id);
+          teamState.openedAt = Date.now();
+        }
       }
 
+      // 120ms close delay so crossing the gap between cards doesn't flicker
       function onClose() {
         if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
         teamState.closeTimeout = setTimeout(function () {
-          if (teamState.openId === m.id) {
-            teamState.openId = null;
-            renderTeam();
-          }
+          if (teamState.openId === m.id) setOpen(null);
         }, 120);
       }
 
-      if (!prefersReduced) {
-        card.addEventListener('mouseenter', onOpen);
-        card.addEventListener('mouseleave', onClose);
-        card.addEventListener('focus', onOpen);
-        card.addEventListener('blur', onClose);
-      }
-      card.addEventListener('click', function () {
+      function onToggle() {
         if (teamState.openId === m.id) {
-          teamState.openId = null;
+          // a tap fires mouseenter/focus (open) then click — don't let that
+          // same tap immediately toggle the card closed again
+          if (Date.now() - (teamState.openedAt || 0) < 350) return;
+          setOpen(null);
         } else {
-          teamState.openId = m.id;
+          setOpen(m.id);
+          teamState.openedAt = Date.now();
         }
-        renderTeam();
+      }
+
+      card.addEventListener('mouseenter', onOpen);
+      card.addEventListener('mouseleave', onClose);
+      card.addEventListener('focus', onOpen);
+      card.addEventListener('blur', onClose);
+      card.addEventListener('click', onToggle);
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); }
       });
+      var lnk = card.querySelector('.team-linkedin');
+      if (lnk) lnk.addEventListener('click', function (e) { e.stopPropagation(); });
 
       grid.appendChild(card);
     });
@@ -324,21 +334,77 @@
     var gridEl = document.getElementById('portGrid');
     var showcaseEl = document.getElementById('portShowcase');
 
-    // fund supertile (simplified version)
+    // Fund supertile — half-width grid slot so Fund Two can drop in beside it
+    // later. Grammar: the plus toggles expand; the tile body toggles the
+    // Fund I filter (shared state with the "Fund I" chip below).
+    var fundActive = portState.filter === 'Fund I';
     if (fundEl) {
-      var tile = document.createElement('div');
-      tile.className = 'port-fund-tile';
-      tile.innerHTML = '<div class="port-fund-row">' +
-        '<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">' +
+      var fundGrid = document.createElement('div');
+      fundGrid.className = 'port-fund-grid';
+
+      var fundOne = document.createElement('div');
+      fundOne.className = 'port-fund-tile' +
+        (portState.fundOpen && !fundActive ? ' is-open' : '') +
+        (fundActive ? ' is-active' : '');
+
+      var fundRight = fundActive
+        ? '<span class="port-fund-filtering"><span class="port-fund-filtering-dot"></span>Filtering</span>'
+        : '<button type="button" class="port-fund-plus" aria-label="Toggle Fund One details" aria-expanded="' + (portState.fundOpen ? 'true' : 'false') + '">+</button>';
+
+      var fundHtml = '<div class="port-fund-row">' +
+        '<div class="port-fund-head">' +
           '<span class="port-fund-name">' + FUND.name + '</span>' +
           '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
         '</div>' +
+        fundRight +
       '</div>';
+
+      if (portState.fundOpen && !fundActive) {
+        fundHtml += '<div class="port-fund-details">' +
+          '<div class="port-fund-thesis-box">Official fund thesis — TBD.</div>' +
+          '<div class="port-fund-stats-grid">' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat">' + FUND.size + '</span>' +
+              '<span class="port-fund-label">Fund size</span>' +
+            '</div>' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat">' + FUND.checkSize + '</span>' +
+              '<span class="port-fund-label">Max check</span>' +
+            '</div>' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.count + '</span>' +
+              '<span class="port-fund-label">Portfolio companies</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="port-fund-hint">Click tile to filter the portfolio to Fund I ↓</div>' +
+        '</div>';
+      }
+      fundOne.innerHTML = fundHtml;
+
+      // tile body toggles the shared Fund I filter state
+      fundOne.addEventListener('click', function () {
+        portState.filter = fundActive ? 'All' : 'Fund I';
+        portState.expanded = null;
+        portState.fundOpen = false;
+        renderPortfolio();
+      });
+      // the plus toggles expand/collapse without touching the filter
+      var fundPlus = fundOne.querySelector('.port-fund-plus');
+      if (fundPlus) {
+        fundPlus.addEventListener('click', function (e) {
+          e.stopPropagation();
+          portState.fundOpen = !portState.fundOpen;
+          renderPortfolio();
+        });
+      }
+
+      fundGrid.appendChild(fundOne);
       fundEl.innerHTML = '';
-      fundEl.appendChild(tile);
+      fundEl.appendChild(fundGrid);
     }
 
-    // chips
+    // chips — an active chip (other than All) toggles back off, so the
+    // Fund I tag and the supertile deactivate each other symmetrically
     chipsEl.innerHTML = '';
     PORT_FILTERS.forEach(function (f) {
       var b = document.createElement('button');
@@ -346,13 +412,36 @@
       b.className = 'chip' + (f === portState.filter ? ' is-active' : '');
       b.textContent = f;
       b.addEventListener('click', function () {
-        portState.filter = f; portState.expanded = null; portState.fundOpen = false; renderPortfolio();
+        portState.filter = (portState.filter === f && f !== 'All') ? 'All' : f;
+        portState.expanded = null; portState.fundOpen = false; renderPortfolio();
       });
       chipsEl.appendChild(b);
     });
 
     var filtered = PORT.filter(function (p) { return portState.filter === 'All' || portState.filter === 'Fund I' || (p.tags && p.tags.indexOf(portState.filter) !== -1); });
     var active = filtered.filter(function (p) { return p.id === portState.expanded; })[0] || null;
+
+    // result count + clear line confirms the Fund I state near the grid
+    var countEl = document.getElementById('portCount');
+    if (!countEl) {
+      countEl = document.createElement('div');
+      countEl.id = 'portCount';
+      countEl.className = 'port-count';
+      chipsEl.insertAdjacentElement('afterend', countEl);
+    }
+    if (fundActive && !active) {
+      countEl.hidden = false;
+      countEl.innerHTML =
+        '<span class="port-count-label">Showing ' + filtered.length + ' Fund I companies</span>' +
+        '<span class="port-count-sep">·</span>' +
+        '<button type="button" class="port-count-clear">Clear filter ✕</button>';
+      countEl.querySelector('.port-count-clear').addEventListener('click', function () {
+        portState.filter = 'All'; renderPortfolio();
+      });
+    } else {
+      countEl.hidden = true;
+      countEl.innerHTML = '';
+    }
 
     if (active) {
       gridEl.hidden = true; gridEl.innerHTML = '';
@@ -376,7 +465,7 @@
         if (p.coInvestor) {
           info += '<div class="port-coinv"><span class="port-coinv-label">Co-investing with</span><span class="port-coinv-pill">' + p.coInvestor + '</span></div>';
         }
-        info += '<div class="port-hint" style="color:' + p.tint + '">Click to see the product ↗</div>';
+        info += '<div class="port-hint" style="color:' + p.tint + '">Click to expand ↗</div>';
         info += '</div>';
       }
 
@@ -385,7 +474,6 @@
         '<div class="port-cat">' + p.cat + '</div>' +
         (p.milestone ? '<div class="port-milestone"><span class="port-milestone-dot"></span>' + p.milestone + ' ↗</div>' : '') +
         '<p class="port-desc">' + p.desc + '</p>' +
-        '<p class="port-founder">' + founderLine(p) + '</p>' +
         info;
 
       card.addEventListener('mouseenter', function () {

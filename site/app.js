@@ -305,6 +305,7 @@
     { id: 'runreal', name: 'Runreal', cat: 'Dev Tools', tags: ['Dev Tools'], tint: '#6b7689', coInvestor: 'a16z', site: 'https://runreal.dev', shot: 'assets/portfolio/runreal.jpg', fit: 'contain', desc: 'AI agents and self-serve tooling for studios building on Unreal Engine.', founders: [{ name: 'Marwan Hilmi', note: 'Co-creator of the PS5 title Godfall', url: 'https://www.linkedin.com/in/marwanhilmi' }] },
     { id: 'algorized', name: 'Algorized', cat: 'Robotics Perception', tags: ['Infrastructure', 'Support Partner'], milestone: 'Raised Series A', tint: '#00b49b', coInvestor: 'Amazon', site: 'https://www.algorized.com', shot: 'assets/portfolio/algorized.jpg', desc: 'Edge-AI perception that lets robots sense and anticipate people on the factory floor.', founders: [{ name: 'Natalya Lopareva', note: 'Founder & CEO', url: 'https://www.linkedin.com/in/natalyalopareva' }] }
   ];
+  PORT.forEach(function (p) { if (!p.tags.includes('Fund I')) p.tags.push('Fund I'); });
   var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
   var FUND = { name: 'Fund One', size: '$8M', checkSize: '$500K', count: PORT.length };
 

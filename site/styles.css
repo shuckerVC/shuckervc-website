@@ -288,15 +288,11 @@ a { color: inherit; }
    PORTFOLIO
    ============================================================ */
 #portFund { margin-top: 34px; }
-.port-fund-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start;
-}
-@media (max-width: 720px) {
-  .port-fund-grid { grid-template-columns: 1fr; }
-}
 .port-fund-tile {
+  width: min(100%, 580px);
   background: #fff; border: 1px solid var(--border); border-radius: 18px;
-  padding: 26px 28px; cursor: pointer; transition: all var(--dur-base) ease;
+  padding: 26px 28px; cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, box-shadow .3s ease;
   box-shadow: var(--shadow-sm);
 }
 .port-fund-tile:hover {
@@ -332,7 +328,7 @@ a { color: inherit; }
 .port-fund-meta { font-size: 15px; color: var(--gray-500); }
 .port-fund-plus {
   font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1;
-  opacity: 0; transition: opacity var(--dur-base) ease, transform var(--dur-base) ease;
+  opacity: 0; transition: opacity var(--dur-base) ease, transform .3s var(--ease-out);
   background: none; border: none; cursor: pointer; padding: 0; font-family: inherit;
 }
 .port-fund-filtering {
@@ -340,30 +336,47 @@ a { color: inherit; }
   letter-spacing: .1em; text-transform: uppercase; color: var(--gold-400);
 }
 .port-fund-filtering-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-400); }
+/* details: collapsed by default; open on tile hover or when pinned open via
+   the plus; always open on touch/small screens (see media queries below) */
 .port-fund-details {
-  margin-top: 16px;
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: max-height .4s var(--ease-out), opacity .3s ease;
 }
-.port-fund-thesis-box {
-  padding: 14px 16px; border: 1.5px dashed #ffe08a; border-radius: 10px; background: #fffdf5;
-  font-size: 13px; line-height: 1.6; color: var(--gold-text); font-style: italic;
+.port-fund-tile:hover .port-fund-details,
+.port-fund-tile.is-open .port-fund-details {
+  max-height: 480px; opacity: 1;
 }
+.port-fund-thesis {
+  font-size: 14px; line-height: 1.65; color: var(--gray-500); margin: 16px 0 0;
+}
+.port-fund-tile.is-active .port-fund-thesis { color: rgba(255,255,255,0.8); }
 .port-fund-stats-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   margin-top: 20px; padding-top: 18px; border-top: 1px solid #efece5;
 }
+.port-fund-tile.is-active .port-fund-stats-grid { border-top-color: rgba(255,255,255,0.14); }
 .port-fund-stat-col { display: flex; flex-direction: column; gap: 4px; }
 .port-fund-stat {
   font-family: var(--font-display); font-size: 30px; line-height: 1;
   color: var(--ink-900); display: block;
 }
 .port-fund-stat--gold { color: var(--gold-deep); }
+.port-fund-tile.is-active .port-fund-stat { color: #ffffff; }
+.port-fund-tile.is-active .port-fund-stat--gold { color: var(--gold-400); }
 .port-fund-label {
   font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   color: var(--gray-400); margin-top: 4px; display: block;
 }
+.port-fund-tile.is-active .port-fund-label { color: rgba(255,255,255,0.6); }
 .port-fund-hint {
   display: inline-flex; align-items: center; gap: 7px; margin-top: 18px;
   font-size: 12px; font-weight: 700; color: var(--gold-deep);
+}
+.port-fund-tile.is-active .port-fund-hint { color: var(--gold-400); }
+/* touch / small screens: details always open, no plus (tap = filter) */
+@media (hover: none), (max-width: 720px) {
+  .port-fund-details { max-height: none; opacity: 1; }
+  .port-fund-plus { display: none; }
 }
 .port-count { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 13px; }
 .port-count-label { font-weight: 700; color: var(--ink-700); }

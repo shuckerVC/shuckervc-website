@@ -317,7 +317,13 @@
   ];
   PORT.forEach(function (p) { if (!p.tags.includes('Fund I')) p.tags.push('Fund I'); });
   var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
-  var FUND = { name: 'Fund One', size: '$8M', checkSize: '$500K', count: PORT.length };
+  var FUND = {
+    name: 'Fund One',
+    size: '$8M',
+    checkSize: '$500K',
+    count: PORT.length,
+    thesis: 'shuckerVC is a $8M Bay Area seed fund that backs AI-powered B2B software companies in the US using our experience investing in seed-stage SaaS companies, resulting in a 3.08 DPI.'
+  };
 
   var portState = { filter: 'All', expanded: null, fundOpen: false };
 
@@ -334,14 +340,12 @@
     var gridEl = document.getElementById('portGrid');
     var showcaseEl = document.getElementById('portShowcase');
 
-    // Fund supertile — half-width grid slot so Fund Two can drop in beside it
-    // later. Grammar: the plus toggles expand; the tile body toggles the
-    // Fund I filter (shared state with the "Fund I" chip below).
+    // Fund supertile — full-flow tile capped at 580px (per v2 main file).
+    // Grammar: tile body toggles the Fund I filter (shared with the chip);
+    // the plus pins the details open. The details panel itself also opens
+    // on hover (CSS) and is always open on touch/small screens (CSS).
     var fundActive = portState.filter === 'Fund I';
     if (fundEl) {
-      var fundGrid = document.createElement('div');
-      fundGrid.className = 'port-fund-grid';
-
       var fundOne = document.createElement('div');
       fundOne.className = 'port-fund-tile' +
         (portState.fundOpen && !fundActive ? ' is-open' : '') +
@@ -351,17 +355,20 @@
         ? '<span class="port-fund-filtering"><span class="port-fund-filtering-dot"></span>Filtering</span>'
         : '<button type="button" class="port-fund-plus" aria-label="Toggle Fund One details" aria-expanded="' + (portState.fundOpen ? 'true' : 'false') + '">+</button>';
 
-      var fundHtml = '<div class="port-fund-row">' +
-        '<div class="port-fund-head">' +
-          '<span class="port-fund-name">' + FUND.name + '</span>' +
-          '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
-        '</div>' +
-        fundRight +
-      '</div>';
+      var fundHint = fundActive
+        ? 'Filtering to Fund I — click tile to clear'
+        : 'Click tile to filter the portfolio to Fund I ↓';
 
-      if (portState.fundOpen && !fundActive) {
-        fundHtml += '<div class="port-fund-details">' +
-          '<div class="port-fund-thesis-box">Official fund thesis — TBD.</div>' +
+      fundOne.innerHTML =
+        '<div class="port-fund-row">' +
+          '<div class="port-fund-head">' +
+            '<span class="port-fund-name">' + FUND.name + '</span>' +
+            '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
+          '</div>' +
+          fundRight +
+        '</div>' +
+        '<div class="port-fund-details">' +
+          '<p class="port-fund-thesis">' + FUND.thesis + '</p>' +
           '<div class="port-fund-stats-grid">' +
             '<div class="port-fund-stat-col">' +
               '<span class="port-fund-stat">' + FUND.size + '</span>' +
@@ -376,10 +383,8 @@
               '<span class="port-fund-label">Portfolio companies</span>' +
             '</div>' +
           '</div>' +
-          '<div class="port-fund-hint">Click tile to filter the portfolio to Fund I ↓</div>' +
+          '<div class="port-fund-hint">' + fundHint + '</div>' +
         '</div>';
-      }
-      fundOne.innerHTML = fundHtml;
 
       // tile body toggles the shared Fund I filter state
       fundOne.addEventListener('click', function () {
@@ -388,7 +393,7 @@
         portState.fundOpen = false;
         renderPortfolio();
       });
-      // the plus toggles expand/collapse without touching the filter
+      // the plus pins the details open without touching the filter
       var fundPlus = fundOne.querySelector('.port-fund-plus');
       if (fundPlus) {
         fundPlus.addEventListener('click', function (e) {
@@ -398,9 +403,8 @@
         });
       }
 
-      fundGrid.appendChild(fundOne);
       fundEl.innerHTML = '';
-      fundEl.appendChild(fundGrid);
+      fundEl.appendChild(fundOne);
     }
 
     // chips — an active chip (other than All) toggles back off, so the

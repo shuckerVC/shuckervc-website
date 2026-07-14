@@ -289,7 +289,10 @@ a { color: inherit; }
    ============================================================ */
 #portFund { margin-top: 34px; }
 .port-fund-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start;
+}
+@media (max-width: 720px) {
+  .port-fund-grid { grid-template-columns: 1fr; }
 }
 .port-fund-tile {
   background: #fff; border: 1px solid var(--border); border-radius: 18px;
@@ -303,35 +306,71 @@ a { color: inherit; }
 .port-fund-tile:hover .port-fund-name {
   color: var(--gold-deep);
 }
-.port-fund-tile:hover .port-fund-plus {
+.port-fund-tile:hover .port-fund-plus,
+.port-fund-tile.is-open .port-fund-plus {
   opacity: 1;
+}
+.port-fund-tile.is-open {
+  border-color: var(--gold-500);
+  box-shadow: 0 18px 44px rgba(17,17,17,0.12);
 }
 .port-fund-tile.is-open .port-fund-plus {
   transform: rotate(45deg);
 }
+/* active = ink fill + gold text: the selected-chip treatment at tile scale */
+.port-fund-tile.is-active,
+.port-fund-tile.is-active:hover {
+  background: var(--ink-900); border-color: var(--ink-900);
+  box-shadow: 0 12px 30px rgba(17,17,17,0.16);
+}
+.port-fund-tile.is-active .port-fund-name,
+.port-fund-tile.is-active:hover .port-fund-name { color: var(--gold-400); }
+.port-fund-tile.is-active .port-fund-meta { color: rgba(255,255,255,0.72); }
 .port-fund-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.port-fund-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; flex: 1; }
 .port-fund-name { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--ink-900); transition: color var(--dur-base) ease; }
 .port-fund-meta { font-size: 15px; color: var(--gray-500); }
 .port-fund-plus {
   font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1;
   opacity: 0; transition: opacity var(--dur-base) ease, transform var(--dur-base) ease;
+  background: none; border: none; cursor: pointer; padding: 0; font-family: inherit;
 }
-.port-fund-placeholder {
-  border: 1.5px dashed #d8d2c4; border-radius: 18px; display: flex;
-  align-items: center; justify-content: center; min-height: 80px;
-  font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-  color: #b3ac9d;
+.port-fund-filtering {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--gold-400);
 }
+.port-fund-filtering-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold-400); }
 .port-fund-details {
-  margin-top: 16px; padding-top: 18px; border-top: 1px solid #efece5;
+  margin-top: 16px;
 }
+.port-fund-thesis-box {
+  padding: 14px 16px; border: 1.5px dashed #ffe08a; border-radius: 10px; background: #fffdf5;
+  font-size: 13px; line-height: 1.6; color: var(--gold-text); font-style: italic;
+}
+.port-fund-stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 20px; padding-top: 18px; border-top: 1px solid #efece5;
+}
+.port-fund-stat-col { display: flex; flex-direction: column; gap: 4px; }
 .port-fund-stat {
   font-family: var(--font-display); font-size: 30px; line-height: 1;
   color: var(--ink-900); display: block;
 }
+.port-fund-stat--gold { color: var(--gold-deep); }
 .port-fund-label {
   font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   color: var(--gray-400); margin-top: 4px; display: block;
+}
+.port-fund-hint {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 18px;
+  font-size: 12px; font-weight: 700; color: var(--gold-deep);
+}
+.port-count { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 13px; }
+.port-count-label { font-weight: 700; color: var(--ink-700); }
+.port-count-sep { color: var(--gray-400); }
+.port-count-clear {
+  font-weight: 700; color: var(--gold-deep); background: none; border: none;
+  cursor: pointer; font-family: inherit; font-size: 13px; padding: 0;
 }
 .port-fund-toggle {
   font-size: 24px; font-weight: 300; color: var(--gray-400); line-height: 1;

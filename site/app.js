@@ -318,59 +318,77 @@
     var gridEl = document.getElementById('portGrid');
     var showcaseEl = document.getElementById('portShowcase');
 
-    // fund supertile with Fund Two placeholder
+    // Fund supertile — half-width grid slot so Fund Two can drop in beside it
+    // later. Grammar: the plus toggles expand; the tile body toggles the
+    // Fund I filter (shared state with the "Fund I" chip below).
+    var fundActive = portState.filter === 'Fund I';
     if (fundEl) {
       var fundGrid = document.createElement('div');
       fundGrid.className = 'port-fund-grid';
 
       var fundOne = document.createElement('div');
-      fundOne.className = 'port-fund-tile' + (portState.fundOpen ? ' is-open' : '');
-      fundOne.style.cursor = 'pointer';
-      fundOne.innerHTML = '<div class="port-fund-row">' +
-        '<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;flex:1">' +
+      fundOne.className = 'port-fund-tile' +
+        (portState.fundOpen && !fundActive ? ' is-open' : '') +
+        (fundActive ? ' is-active' : '');
+
+      var fundRight = fundActive
+        ? '<span class="port-fund-filtering"><span class="port-fund-filtering-dot"></span>Filtering</span>'
+        : '<button type="button" class="port-fund-plus" aria-label="Toggle Fund One details" aria-expanded="' + (portState.fundOpen ? 'true' : 'false') + '">+</button>';
+
+      var fundHtml = '<div class="port-fund-row">' +
+        '<div class="port-fund-head">' +
           '<span class="port-fund-name">' + FUND.name + '</span>' +
           '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
         '</div>' +
-        '<span class="port-fund-plus"' + (portState.fundOpen ? '' : ' style="opacity:0"') + '>+</span>' +
+        fundRight +
       '</div>';
 
-      if (portState.fundOpen) {
-        fundOne.innerHTML += '<div class="port-fund-details" style="margin-top:16px;padding-top:18px;border-top:1px solid #efece5">' +
-          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">' +
-            '<div style="display:flex;flex-direction:column;gap:4px">' +
+      if (portState.fundOpen && !fundActive) {
+        fundHtml += '<div class="port-fund-details">' +
+          '<div class="port-fund-thesis-box">Official fund thesis — TBD.</div>' +
+          '<div class="port-fund-stats-grid">' +
+            '<div class="port-fund-stat-col">' +
               '<span class="port-fund-stat">' + FUND.size + '</span>' +
               '<span class="port-fund-label">Fund size</span>' +
             '</div>' +
-            '<div style="display:flex;flex-direction:column;gap:4px">' +
+            '<div class="port-fund-stat-col">' +
               '<span class="port-fund-stat">' + FUND.checkSize + '</span>' +
               '<span class="port-fund-label">Max check</span>' +
             '</div>' +
-            '<div style="display:flex;flex-direction:column;gap:4px">' +
-              '<span class="port-fund-stat">' + FUND.count + '</span>' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.count + '</span>' +
               '<span class="port-fund-label">Portfolio companies</span>' +
             '</div>' +
           '</div>' +
+          '<div class="port-fund-hint">Click tile to filter the portfolio to Fund I ↓</div>' +
         '</div>';
       }
+      fundOne.innerHTML = fundHtml;
 
+      // tile body toggles the shared Fund I filter state
       fundOne.addEventListener('click', function () {
-        portState.fundOpen = !portState.fundOpen;
+        portState.filter = fundActive ? 'All' : 'Fund I';
         portState.expanded = null;
+        portState.fundOpen = false;
         renderPortfolio();
       });
-
-      var fundTwo = document.createElement('div');
-      fundTwo.className = 'port-fund-placeholder';
-      fundTwo.innerHTML = 'Fund Two — future slot';
+      // the plus toggles expand/collapse without touching the filter
+      var fundPlus = fundOne.querySelector('.port-fund-plus');
+      if (fundPlus) {
+        fundPlus.addEventListener('click', function (e) {
+          e.stopPropagation();
+          portState.fundOpen = !portState.fundOpen;
+          renderPortfolio();
+        });
+      }
 
       fundGrid.appendChild(fundOne);
-      fundGrid.appendChild(fundTwo);
-
       fundEl.innerHTML = '';
       fundEl.appendChild(fundGrid);
     }
 
-    // chips
+    // chips — an active chip (other than All) toggles back off, so the
+    // Fund I tag and the supertile deactivate each other symmetrically
     chipsEl.innerHTML = '';
     PORT_FILTERS.forEach(function (f) {
       var b = document.createElement('button');
@@ -378,13 +396,36 @@
       b.className = 'chip' + (f === portState.filter ? ' is-active' : '');
       b.textContent = f;
       b.addEventListener('click', function () {
-        portState.filter = f; portState.expanded = null; portState.fundOpen = false; renderPortfolio();
+        portState.filter = (portState.filter === f && f !== 'All') ? 'All' : f;
+        portState.expanded = null; portState.fundOpen = false; renderPortfolio();
       });
       chipsEl.appendChild(b);
     });
 
     var filtered = PORT.filter(function (p) { return portState.filter === 'All' || portState.filter === 'Fund I' || (p.tags && p.tags.indexOf(portState.filter) !== -1); });
     var active = filtered.filter(function (p) { return p.id === portState.expanded; })[0] || null;
+
+    // result count + clear line confirms the Fund I state near the grid
+    var countEl = document.getElementById('portCount');
+    if (!countEl) {
+      countEl = document.createElement('div');
+      countEl.id = 'portCount';
+      countEl.className = 'port-count';
+      chipsEl.insertAdjacentElement('afterend', countEl);
+    }
+    if (fundActive && !active) {
+      countEl.hidden = false;
+      countEl.innerHTML =
+        '<span class="port-count-label">Showing ' + filtered.length + ' Fund I companies</span>' +
+        '<span class="port-count-sep">·</span>' +
+        '<button type="button" class="port-count-clear">Clear filter ✕</button>';
+      countEl.querySelector('.port-count-clear').addEventListener('click', function () {
+        portState.filter = 'All'; renderPortfolio();
+      });
+    } else {
+      countEl.hidden = true;
+      countEl.innerHTML = '';
+    }
 
     if (active) {
       gridEl.hidden = true; gridEl.innerHTML = '';

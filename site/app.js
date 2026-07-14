@@ -224,8 +224,6 @@
       var card = document.createElement('div');
       card.className = 'team-card';
       card.setAttribute('data-member-id', m.id);
-      card.setAttribute('data-reveal', '');
-      card.setAttribute('data-delay', String(idx * 120));
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
       card.setAttribute('aria-expanded', teamState.openId === m.id ? 'true' : 'false');

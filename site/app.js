@@ -235,18 +235,14 @@
           '<img src="' + m.photo + '" alt="' + m.name + '" class="team-photo">' +
         '</div>' +
         '<h3 class="team-member-name">' + m.name + '</h3>' +
-        '<p class="team-member-title">' + m.title + '</p>' +
-        '<div class="team-teaser" style="opacity:0;transform:translateY(6px);transition:opacity .42s ease,transform .42s cubic-bezier(.22,1,.36,1)">' +
-          '<span class="team-bar"></span>' +
-        '</div>' +
+        '<p class="team-member-tagline">' + m.tagline + '</p>' +
+        '<span class="team-bar"></span>' +
         (isOpen ?
           '<div class="team-expanded" style="opacity:1">' +
-            '<p class="team-tagline">' + m.tagline + '</p>' +
             '<p class="team-bio">' + m.bio + '</p>' +
             '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
           '</div>'
           : '<div class="team-expanded" style="opacity:0">' +
-            '<p class="team-tagline">' + m.tagline + '</p>' +
             '<p class="team-bio">' + m.bio + '</p>' +
             '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
           '</div>'

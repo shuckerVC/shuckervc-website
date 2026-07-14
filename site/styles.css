@@ -412,11 +412,9 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 }
 .team-photo { width: 100%; height: 100%; object-fit: cover; }
 .team-member-name { font-size: 17px; font-weight: 700; margin: 18px 0 6px; color: var(--ink-900); }
-.team-member-title { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold-dark); margin: 0; }
+.team-member-tagline { font-size: 13px; font-weight: 400; color: var(--gray-500); margin: 0; line-height: 1.4; }
 .team-bar { display: block; width: 26px; height: 3px; border-radius: 3px; background: var(--gold-400); margin: 14px auto 0; }
-.team-teaser { min-height: 17px; }
 .team-expanded { transition: opacity .3s ease; }
-.team-tagline { font-size: 13px; color: var(--gray-500); margin: 12px 0 0; }
 .team-bio { font-size: 14px; line-height: 1.65; color: var(--ink-600); margin: 14px 0 0; text-align: left; }
 .team-linkedin { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }
 

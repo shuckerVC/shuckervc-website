@@ -171,7 +171,7 @@
       tagline: 'Operator and investor',
       bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
       photo: 'assets/team/jp-persico-sq.png',
-      linkedin: 'https://linkedin.com',
+      linkedin: 'https://www.linkedin.com/in/jppersico',
       sortOrder: 0
     },
     {
@@ -181,7 +181,7 @@
       tagline: 'Four-time startup founder',
       bio: 'At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.',
       photo: 'assets/team/graham-siegel.jpeg',
-      linkedin: 'https://linkedin.com',
+      linkedin: 'https://www.linkedin.com/in/grahamsiegel',
       sortOrder: 1
     },
     {
@@ -191,7 +191,7 @@
       tagline: 'Investor Relations and Real Estate Professional',
       bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
       photo: 'assets/team/gabe-regalado-sq.png',
-      linkedin: 'https://linkedin.com',
+      linkedin: 'https://www.linkedin.com/in/gabedregalado',
       sortOrder: 2
     }
   ];

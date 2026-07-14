@@ -161,35 +161,136 @@
   }
 
   /* ============================================================
-     TEAM — rotate the two Managing Partners so either JP or
-     Graham leads, swapping every few seconds with a crossfade.
+     TEAM — 3-person expandable grid with scroll teaser
      ============================================================ */
-  function initGpRotation() {
+  var TEAM = [
+    {
+      id: 'jp',
+      name: 'Jean-Philippe "JP" Persico',
+      title: 'Co-founder & Managing Partner',
+      tagline: 'Operator and investor',
+      bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
+      photo: 'assets/team/jp-persico-sq.png',
+      linkedin: 'https://linkedin.com',
+      sortOrder: 0
+    },
+    {
+      id: 'graham',
+      name: 'Graham Siegel',
+      title: 'Co-founder & Managing Partner',
+      tagline: 'Four-time startup founder',
+      bio: 'At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.',
+      photo: 'assets/team/graham-siegel.jpeg',
+      linkedin: 'https://linkedin.com',
+      sortOrder: 1
+    },
+    {
+      id: 'gabe',
+      name: 'Gabe Regalado',
+      title: 'Venture Partner',
+      tagline: 'Investor Relations and Real Estate Professional',
+      bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
+      photo: 'assets/team/gabe-regalado-sq.png',
+      linkedin: 'https://linkedin.com',
+      sortOrder: 2
+    }
+  ];
+
+  var teamState = { openId: null, closeTimeout: null };
+  var teamTeaserIO = null;
+
+  function initTeamTeasers() {
+    if (teamTeaserIO) return; // Only init once
+    teamTeaserIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !e.target.getAttribute('data-teaser-shown')) {
+          e.target.setAttribute('data-teaser-shown', '1');
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          teamTeaserIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    var teasers = [].slice.call(document.querySelectorAll('.team-teaser'));
+    teasers.forEach(function (t) { teamTeaserIO.observe(t); });
+  }
+
+  function renderTeam() {
     var grid = document.getElementById('teamGrid');
     if (!grid) return;
-    var gps = [].slice.call(grid.querySelectorAll('[data-gp]'));
-    if (gps.length < 2 || prefersReduced) return;
+    grid.innerHTML = '';
 
-    var INTERVAL = 4000;   // swap order every 4s
-    var FADE = 350;        // crossfade duration (ms)
-    var onScreen = false;
-    var io = new IntersectionObserver(function (entries) {
-      onScreen = entries[0].isIntersecting;
-    }, { threshold: 0.25 });
-    io.observe(grid);
+    TEAM.forEach(function (m, idx) {
+      var card = document.createElement('div');
+      card.className = 'team-card';
+      card.setAttribute('data-member-id', m.id);
+      card.setAttribute('data-reveal', '');
+      card.setAttribute('data-delay', String(idx * 120));
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-expanded', teamState.openId === m.id ? 'true' : 'false');
 
-    function swap() {
-      if (!onScreen || document.hidden) return;
-      var nodes = [].slice.call(grid.querySelectorAll('[data-gp]'));
-      var first = nodes[0], second = nodes[1];
-      first.style.transition = second.style.transition = 'opacity ' + FADE + 'ms ease';
-      first.style.opacity = second.style.opacity = '0';
-      setTimeout(function () {
-        grid.insertBefore(second, first); // move the trailing GP ahead of the leading one
-        first.style.opacity = second.style.opacity = '1';
-      }, FADE + 10);
-    }
-    setInterval(swap, INTERVAL);
+      var isOpen = teamState.openId === m.id;
+
+      card.innerHTML =
+        '<div class="team-photo-wrap">' +
+          '<img src="' + m.photo + '" alt="' + m.name + '" class="team-photo">' +
+        '</div>' +
+        '<h3 class="team-member-name">' + m.name + '</h3>' +
+        '<p class="team-member-title">' + m.title + '</p>' +
+        '<div class="team-teaser" style="opacity:0;transform:translateY(6px);transition:opacity .42s ease,transform .42s cubic-bezier(.22,1,.36,1)">' +
+          '<span class="team-bar"></span>' +
+        '</div>' +
+        (isOpen ?
+          '<div class="team-expanded" style="opacity:1">' +
+            '<p class="team-tagline">' + m.tagline + '</p>' +
+            '<p class="team-bio">' + m.bio + '</p>' +
+            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
+          '</div>'
+          : '<div class="team-expanded" style="opacity:0">' +
+            '<p class="team-tagline">' + m.tagline + '</p>' +
+            '<p class="team-bio">' + m.bio + '</p>' +
+            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
+          '</div>'
+        );
+
+      function onOpen() {
+        if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
+        if (teamState.openId === m.id) return;
+        teamState.openId = m.id;
+        renderTeam();
+      }
+
+      function onClose() {
+        if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
+        teamState.closeTimeout = setTimeout(function () {
+          if (teamState.openId === m.id) {
+            teamState.openId = null;
+            renderTeam();
+          }
+        }, 120);
+      }
+
+      if (!prefersReduced) {
+        card.addEventListener('mouseenter', onOpen);
+        card.addEventListener('mouseleave', onClose);
+        card.addEventListener('focus', onOpen);
+        card.addEventListener('blur', onClose);
+      }
+      card.addEventListener('click', function () {
+        if (teamState.openId === m.id) {
+          teamState.openId = null;
+        } else {
+          teamState.openId = m.id;
+        }
+        renderTeam();
+      });
+
+      grid.appendChild(card);
+    });
+
+    // Initialize teaser animation (one-time)
+    initTeamTeasers();
   }
 
   /* ============================================================
@@ -204,9 +305,10 @@
     { id: 'runreal', name: 'Runreal', cat: 'Dev Tools', tags: ['Dev Tools'], tint: '#6b7689', coInvestor: 'a16z', site: 'https://runreal.dev', shot: 'assets/portfolio/runreal.jpg', fit: 'contain', desc: 'AI agents and self-serve tooling for studios building on Unreal Engine.', founders: [{ name: 'Marwan Hilmi', note: 'Co-creator of the PS5 title Godfall', url: 'https://www.linkedin.com/in/marwanhilmi' }] },
     { id: 'algorized', name: 'Algorized', cat: 'Robotics Perception', tags: ['Infrastructure', 'Support Partner'], milestone: 'Raised Series A', tint: '#00b49b', coInvestor: 'Amazon', site: 'https://www.algorized.com', shot: 'assets/portfolio/algorized.jpg', desc: 'Edge-AI perception that lets robots sense and anticipate people on the factory floor.', founders: [{ name: 'Natalya Lopareva', note: 'Founder & CEO', url: 'https://www.linkedin.com/in/natalyalopareva' }] }
   ];
-  var PORT_FILTERS = ['All', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
+  var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
+  var FUND = { name: 'Fund One', size: '$8M', checkSize: '$500K', count: PORT.length };
 
-  var portState = { filter: 'All', expanded: null };
+  var portState = { filter: 'All', expanded: null, fundOpen: false };
 
   function founderLine(p) {
     var ns = (p.founders || []).map(function (f) { return f.name; });
@@ -216,9 +318,24 @@
   }
 
   function renderPortfolio() {
+    var fundEl = document.getElementById('portFund');
     var chipsEl = document.getElementById('portChips');
     var gridEl = document.getElementById('portGrid');
     var showcaseEl = document.getElementById('portShowcase');
+
+    // fund supertile (simplified version)
+    if (fundEl) {
+      var tile = document.createElement('div');
+      tile.className = 'port-fund-tile';
+      tile.innerHTML = '<div class="port-fund-row">' +
+        '<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">' +
+          '<span class="port-fund-name">' + FUND.name + '</span>' +
+          '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
+        '</div>' +
+      '</div>';
+      fundEl.innerHTML = '';
+      fundEl.appendChild(tile);
+    }
 
     // chips
     chipsEl.innerHTML = '';
@@ -228,12 +345,12 @@
       b.className = 'chip' + (f === portState.filter ? ' is-active' : '');
       b.textContent = f;
       b.addEventListener('click', function () {
-        portState.filter = f; portState.expanded = null; renderPortfolio();
+        portState.filter = f; portState.expanded = null; portState.fundOpen = false; renderPortfolio();
       });
       chipsEl.appendChild(b);
     });
 
-    var filtered = PORT.filter(function (p) { return portState.filter === 'All' || p.tags.indexOf(portState.filter) !== -1; });
+    var filtered = PORT.filter(function (p) { return portState.filter === 'All' || portState.filter === 'Fund I' || (p.tags && p.tags.indexOf(portState.filter) !== -1); });
     var active = filtered.filter(function (p) { return p.id === portState.expanded; })[0] || null;
 
     if (active) {
@@ -685,7 +802,7 @@
     initCounters();
     initSpotlightAndMagnets();
     initFocusScroll();
-    initGpRotation();
+    renderTeam();
     renderPortfolio();
     renderInsights();
     loadInsights();

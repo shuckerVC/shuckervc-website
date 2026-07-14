@@ -319,8 +319,7 @@
           "text": "With our specialized focus and a vast network that includes relationships with over 400 VC firms and top accelerators, we're continuously seeking the technical founders who will define the next chapter of B2B SaaS, powered by AI."
         }
       ],
-      "sort": 20260515,
-      "cover": "assets/insights/saas-pricing.jpg"
+      "sort": 20260515
     },
     {
       "id": "brev",
@@ -581,8 +580,7 @@
           "text": "Technical founders face a fundamental tension: every hour spent on HR, finance, compliance, and vendor management is an hour not spent on product or customers. Our model resolves that tension completely. For founders, the value proposition is simple: get an experienced operational partner at cost, with no equity dilution, who is fully aligned with your success through fund carry."
         }
       ],
-      "sort": 20260415,
-      "cover": "assets/insights/support-partner.jpg"
+      "sort": 20260415
     },
     {
       "id": "q1-2026-update",
@@ -652,8 +650,7 @@
           "text": "— Graham & JP, Managing Partners, shuckerVC"
         }
       ],
-      "sort": 20260401,
-      "cover": "assets/insights/q1-2026-update.jpg"
+      "sort": 20260401
     },
     {
       "id": "atlas",
@@ -781,8 +778,7 @@
           "text": "— Graham & JP, Managing Partners, shuckerVC"
         }
       ],
-      "sort": 20260105,
-      "cover": "assets/insights/2025-in-review.jpg"
+      "sort": 20260105
     }
   ]
 }

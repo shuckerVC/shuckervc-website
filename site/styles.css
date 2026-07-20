@@ -233,6 +233,36 @@ a { color: inherit; }
 .strat-look-label { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 16px; }
 .strat-look-words { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.75rem); line-height: 1.5; color: #1a1a1a; }
 .strat-look-words .slash { color: var(--gold-500); margin: 0 14px; }
+/* Verb-led "what we look for" signal list (replaces the stage/sector tag row). */
+.strat-signals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 40px;
+}
+.strat-signals li {
+  position: relative;
+  padding-left: 26px;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  line-height: 1.4;
+  color: #1a1a1a;
+}
+.strat-signals li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 14px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--gold-500);
+}
+@media (max-width: 640px) {
+  .strat-signals { grid-template-columns: 1fr; }
+}
 
 /* ============================================================
    FOUNDER FOCUS

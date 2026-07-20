@@ -136,7 +136,7 @@
     var steps = [].slice.call(c.querySelectorAll('[data-f-step]'));
     var fill = c.querySelector('[data-f-fill]');
     var cap = document.querySelector('[data-f-cap]');
-    var titles = ['Time to market', 'A dedicated Support Partner', 'Integrated operations'];
+    var titles = ['Sourcing & hiring', 'Training & management', 'Cost structure'];
     function update() {
       var r = c.getBoundingClientRect();
       var anchor = window.innerHeight * 0.45;

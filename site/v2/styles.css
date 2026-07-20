@@ -681,3 +681,59 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   .showcase-main { padding: 28px; }
   .ins-feat-cover { aspect-ratio: 16 / 10; }
 }
+
+/* ============================================================
+   SUPPORT MODEL v2 — Movement 1 vignette carousel + Movement 2 rings
+   ============================================================ */
+.focus-vignettes { margin-top: 56px; }
+.vignette-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.vignette-hint { font-size: 13px; font-weight: 700; color: var(--gray-400); white-space: nowrap; }
+.vignette-rail {
+  display: flex; gap: 18px; overflow-x: auto; padding: 4px 2px 20px;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; scrollbar-color: var(--gray-300) transparent;
+}
+.vignette-rail::-webkit-scrollbar { height: 8px; }
+.vignette-rail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+.vignette {
+  flex: 0 0 min(340px, 82vw); scroll-snap-align: start;
+  background: var(--gray-50); border: 1px solid var(--border); border-radius: 16px;
+  padding: 24px; box-shadow: var(--shadow-sm);
+}
+.vignette-tag {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold-text); background: var(--gold-100); border-radius: 999px; padding: 5px 12px;
+}
+.vignette-action { font-size: 15px; line-height: 1.6; color: var(--ink-600); margin: 16px 0 0; }
+
+.focus-actors {
+  margin-top: 72px; display: grid; grid-template-columns: 340px 1fr;
+  gap: clamp(32px, 5vw, 64px); align-items: center;
+}
+.rings { position: relative; width: 320px; height: 320px; margin: 0 auto; }
+.rings .ring {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  border-radius: 50%; display: flex; justify-content: center;
+}
+.ring-label { font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+.ring--outer { width: 320px; height: 320px; background: #faf8f2; border: 1px solid var(--border); align-items: flex-start; }
+.ring--outer .ring-label { margin-top: 12px; color: var(--gray-400); }
+.ring--middle { width: 214px; height: 214px; background: var(--gold-100); border: 1px solid #ffe08a; align-items: flex-start; }
+.ring--middle .ring-label { margin-top: 12px; color: var(--gold-text); }
+.ring--core { width: 116px; height: 116px; background: var(--ink-900); align-items: center; }
+.ring--core .ring-label { color: #fff; text-align: center; line-height: 1.25; }
+
+.actor-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; }
+.actor-legend li { display: flex; gap: 14px; }
+.actor-key { flex: none; width: 14px; height: 14px; border-radius: 50%; margin-top: 5px; }
+.actor-key--core { background: var(--ink-900); }
+.actor-key--middle { background: var(--gold-500); }
+.actor-key--outer { background: var(--gray-300); }
+.actor-name { font-size: 15px; font-weight: 700; color: var(--ink-900); }
+.actor-body { font-size: 14px; line-height: 1.6; color: var(--gray-500); margin: 6px 0 0; }
+
+@media (max-width: 760px) {
+  .focus-actors { grid-template-columns: 1fr; gap: 32px; }
+  .rings { margin-bottom: 4px; }
+  .vignette-hint { display: none; }
+}

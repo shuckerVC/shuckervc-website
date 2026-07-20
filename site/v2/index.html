@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>shuckerVC — Fueling founder focus</title>
+  <meta name="description" content="shuckerVC backs B2B software founders with a dedicated, full-time Support Partner embedded in every portfolio company to own everything outside product and engineering—so founders stay focused on building and selling.">
+  <link rel="canonical" href="https://shuckervc.github.io/shuckervc-website/v2/">
+  <link rel="icon" href="../assets/logo/favicon.ico">
+  <link rel="apple-touch-icon" href="../assets/logo/mark-gold.png">
+
+  <!-- Social share (Open Graph + Twitter) — always shows the shuckerVC mark -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="shuckerVC">
+  <meta property="og:title" content="shuckerVC — Fueling founder focus">
+  <meta property="og:description" content="shuckerVC backs B2B software founders with a dedicated, full-time Support Partner embedded in every portfolio company to own everything outside product and engineering—so founders stay focused on building and selling.">
+  <meta property="og:url" content="https://shuckervc.github.io/shuckervc-website/">
+  <meta property="og:image" content="https://shuckervc.github.io/shuckervc-website/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="shuckerVC">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="shuckerVC — Fueling founder focus">
+  <meta name="twitter:description" content="shuckerVC backs B2B software founders with a dedicated, full-time Support Partner embedded in every portfolio company.">
+  <meta name="twitter:image" content="https://shuckervc.github.io/shuckervc-website/assets/og-image.png">
+  <meta name="twitter:image:alt" content="shuckerVC">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- cursor spotlight (desktop only) -->
+  <div class="sv-spot" id="spot" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="#top" aria-label="shuckerVC home">
+      <img data-logo="white" src="../assets/logo/logo-white.png" alt="shuckerVC">
+      <img data-logo="color" src="../assets/logo/logo-color.png" alt="shuckerVC">
+    </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <span data-navicon></span><span data-navicon></span><span data-navicon></span>
+    </button>
+    <div class="nav-links" id="navLinks" data-open="false">
+      <a data-navlink href="#strategy">Strategy</a>
+      <a data-navlink href="#focus">Support model</a>
+      <a data-navlink href="#portfolio">Portfolio</a>
+      <a data-navlink href="#team">Team</a>
+      <a data-navlink href="#insights">Insights</a>
+      <a class="nav-cta" data-magnetic href="#contact">Submit your company</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" class="hero">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-wrap container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--hero">We grind so you can build</span>
+      </div>
+      <h1 data-reveal data-delay="90" class="hero-title">Sweat and risk capital.</h1>
+      <p data-reveal data-delay="180" class="hero-sub">We back early-stage B2B software founders and do the legwork that pulls you off product and customers—bookkeeping, recruiting, vendors, reporting. Your company, your decisions. We carry the operational load.</p>
+      <div data-reveal data-delay="260" class="hero-actions">
+        <a data-magnetic href="#contact" class="btn btn--gold btn--lg">Submit your company</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- STRATEGY -->
+  <section id="strategy" class="sv-sec sec--cream">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Our strategy</span>
+        <h2 class="h2 mw-20">Focused founders build stronger companies.</h2>
+      </div>
+      <p data-reveal data-delay="120" class="lead mw-64">The teams we back learn and ship faster. They know their customer cold, hire strong people early, and make big bets with conviction. We underwrite speed, and we multiply it with our support model.</p>
+      <div data-reveal data-delay="220" class="strat-look">
+        <div class="strat-look-label">What we look for</div>
+        <ul class="strat-signals">
+          <li>Knows exactly who they sell to</li>
+          <li>Ships product fast</li>
+          <li>Learns faster than the market</li>
+          <li>Attracts and closes strong talent</li>
+          <li>Stays obsessed with customers</li>
+          <li>Has real technical depth</li>
+          <li>Sees what others miss in the customer, market, or technology</li>
+          <li>Makes big bets with conviction</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER FOCUS -->
+  <section id="focus" class="sv-sec sec--white">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Our Support Model</span>
+      </div>
+      <div data-reveal data-delay="80" class="focus-intro">
+        <h2 class="h2">Operational drag should never be your bottleneck.</h2>
+        <p class="lead">Every shuckerVC portfolio company gets a full-time operator: the Support Partner. They run finance, hiring, vendors, and reporting—anything that pulls your attention away from your product and customers. At cost, no dilution.</p>
+      </div>
+
+      <div class="focus-grid">
+        <div class="focus-timeline" id="focusTimeline">
+          <div class="focus-rail"><span data-f-fill></span></div>
+
+          <!-- Movement 3 — How the engagement works (mechanics). Copy locked 2026-07-17.
+               NOTE: interim copy pass — the section's full visual redesign (vignette
+               carousel + concentric-ring diagram + reading-order) is a separate task. -->
+          <div data-f-step class="focus-step">
+            <span data-dot class="focus-dot"></span>
+            <span data-num class="focus-num">01</span>
+            <h3 class="focus-step-title">Sourcing &amp; hiring</h3>
+            <p class="focus-step-body">We source and vet talented Support Partner candidates. You pick whoever best meets your stage and needs.</p>
+          </div>
+          <div data-f-step class="focus-step">
+            <span data-dot class="focus-dot"></span>
+            <span data-num class="focus-num">02</span>
+            <h3 class="focus-step-title">Training &amp; management</h3>
+            <p class="focus-step-body">We ramp them on shuckerVC playbooks and manage them against standards set across the portfolio.</p>
+          </div>
+          <div data-f-step class="focus-step">
+            <span data-dot class="focus-dot"></span>
+            <span data-num class="focus-num">03</span>
+            <h3 class="focus-step-title">Cost structure</h3>
+            <p class="focus-step-body">You pay their salary at cost—no markup, no dilution. They earn from our fund carry, not your equity.</p>
+          </div>
+        </div>
+
+        <div class="focus-aside">
+          <div class="video-frame">
+            <video controls playsinline preload="metadata"
+                   poster=""
+                   src="../assets/video/shuckerVC_Support_Partner_Teaser.mp4"></video>
+          </div>
+          <div class="video-cap">
+            <span class="eyebrow eyebrow--gold">Now showing</span>
+            <span class="video-cap-title" data-f-cap>Sourcing &amp; hiring</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal class="focus-hiw">
+        <div class="focus-hiw-grid">
+          <!-- Movement 2 — Who does the work (three actors). Copy locked 2026-07-17.
+               Reads inside-out: Support Partner → GPs → Network. Interim layout —
+               the concentric-ring visual is part of the pending section redesign. -->
+          <div>
+            <span class="eyebrow eyebrow--gold">Core — Support Partner</span>
+            <p class="focus-hiw-body">A full-time operator embedded in your company, running the back-office work day to day.</p>
+          </div>
+          <div>
+            <span class="eyebrow eyebrow--gold">Middle — shuckerVC GPs</span>
+            <p class="focus-hiw-body">The GPs hire and manage the Support Partners, adding oversight and cross-portfolio pattern-matching.</p>
+          </div>
+          <div>
+            <span class="eyebrow eyebrow--gold">Outer — Support Partner Network</span>
+            <p class="focus-hiw-body">On-call specialists in finance, people, growth, and security, accessed at cost when you need depth.</p>
+          </div>
+        </div>
+        <blockquote class="focus-quote">"We don't advise. We do the work."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="sv-sec sec--warm">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Portfolio</span>
+        <h2 class="h2 mw-18">The next interface shift, backed early.</h2>
+        <p class="lead mw-60">Conversational AI is the biggest shift in interfaces in 40 years. The startups moving on it now are the ones that will lead.</p>
+      </div>
+
+      <div data-reveal data-delay="100" id="portFund"></div>
+      <div data-reveal data-delay="120" class="port-chips" id="portChips"></div>
+      <div class="port-grid" id="portGrid"></div>
+      <div class="port-showcase" id="portShowcase" hidden></div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="sv-sec sec--white">
+    <div class="container">
+      <div data-reveal>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Team</span>
+        <h2 class="h2">The people in your corner.</h2>
+      </div>
+      <div class="team-grid" id="teamGrid">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights" class="sv-sec sec--warm">
+    <div class="container">
+      <div data-reveal>
+        <div class="ins-head">
+          <div>
+            <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Insights</span>
+            <h2 class="h2 mw-16">What we're thinking about.</h2>
+          </div>
+          <a class="ins-all" href="../writing.html">All writing →</a>
+        </div>
+      </div>
+      <div data-reveal data-delay="80" class="ins-chips" id="insChips"></div>
+      <div data-reveal data-delay="140" class="ins-grid">
+        <div id="insFeat"></div>
+        <div class="ins-list" id="insList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="sv-sec sec--gold">
+    <div data-reveal class="container cta-inner">
+      <h2 class="h2 cta-title">Tell us about your company.</h2>
+      <p class="cta-sub">We co-invest in oversubscribed rounds alongside top lead investors.</p>
+      <a data-magnetic href="#top" class="btn btn--ink btn--lg">Submit your company</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <img class="footer-logo" src="../assets/logo/lockup-gold-white.png" alt="shuckerVC">
+      <nav class="footer-links">
+        <a href="#strategy">Strategy</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#team">Team</a>
+        <a href="#insights">Insights</a>
+      </nav>
+      <span class="footer-legal">© shuckerVC 2026 · Silicon Valley</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

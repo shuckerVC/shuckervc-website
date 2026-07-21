@@ -307,7 +307,13 @@
   ];
   PORT.forEach(function (p) { if (!p.tags.includes('Fund I')) p.tags.push('Fund I'); });
   var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
-  var FUND = { name: 'Fund One', size: '$8M', checkSize: '$500K', count: PORT.length };
+  var FUND = {
+    name: 'Fund One',
+    size: '$8M',
+    checkSize: '$500K',
+    count: PORT.length,
+    thesis: 'shuckerVC is a $8M Bay Area seed fund that backs AI-powered B2B software companies in the US using our experience investing in seed-stage SaaS companies, resulting in a 3.08 DPI.'
+  };
 
   var portState = { filter: 'All', expanded: null, fundOpen: false };
 
@@ -324,21 +330,75 @@
     var gridEl = document.getElementById('portGrid');
     var showcaseEl = document.getElementById('portShowcase');
 
-    // fund supertile (simplified version)
+    // Fund supertile — full-flow tile capped at 580px (per v2 main file).
+    // Grammar: tile body toggles the Fund I filter (shared with the chip);
+    // the plus pins the details open. The details panel itself also opens
+    // on hover (CSS) and is always open on touch/small screens (CSS).
+    var fundActive = portState.filter === 'Fund I';
     if (fundEl) {
-      var tile = document.createElement('div');
-      tile.className = 'port-fund-tile';
-      tile.innerHTML = '<div class="port-fund-row">' +
-        '<div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">' +
-          '<span class="port-fund-name">' + FUND.name + '</span>' +
-          '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
+      var fundOne = document.createElement('div');
+      fundOne.className = 'port-fund-tile' +
+        (portState.fundOpen && !fundActive ? ' is-open' : '') +
+        (fundActive ? ' is-active' : '');
+
+      var fundRight = fundActive
+        ? '<span class="port-fund-filtering"><span class="port-fund-filtering-dot"></span>Filtering</span>'
+        : '<button type="button" class="port-fund-plus" aria-label="Toggle Fund One details" aria-expanded="' + (portState.fundOpen ? 'true' : 'false') + '">+</button>';
+
+      var fundHint = fundActive
+        ? 'Filtering to Fund I — click tile to clear'
+        : 'Click tile to filter the portfolio to Fund I ↓';
+
+      fundOne.innerHTML =
+        '<div class="port-fund-row">' +
+          '<div class="port-fund-head">' +
+            '<span class="port-fund-name">' + FUND.name + '</span>' +
+            '<span class="port-fund-meta">' + FUND.size + ' · checks up to ' + FUND.checkSize + '</span>' +
+          '</div>' +
+          fundRight +
         '</div>' +
-      '</div>';
+        '<div class="port-fund-details">' +
+          '<p class="port-fund-thesis">' + FUND.thesis + '</p>' +
+          '<div class="port-fund-stats-grid">' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat">' + FUND.size + '</span>' +
+              '<span class="port-fund-label">Fund size</span>' +
+            '</div>' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat">' + FUND.checkSize + '</span>' +
+              '<span class="port-fund-label">Max check</span>' +
+            '</div>' +
+            '<div class="port-fund-stat-col">' +
+              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.count + '</span>' +
+              '<span class="port-fund-label">Portfolio companies</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="port-fund-hint">' + fundHint + '</div>' +
+        '</div>';
+
+      // tile body toggles the shared Fund I filter state
+      fundOne.addEventListener('click', function () {
+        portState.filter = fundActive ? 'All' : 'Fund I';
+        portState.expanded = null;
+        portState.fundOpen = false;
+        renderPortfolio();
+      });
+      // the plus pins the details open without touching the filter
+      var fundPlus = fundOne.querySelector('.port-fund-plus');
+      if (fundPlus) {
+        fundPlus.addEventListener('click', function (e) {
+          e.stopPropagation();
+          portState.fundOpen = !portState.fundOpen;
+          renderPortfolio();
+        });
+      }
+
       fundEl.innerHTML = '';
-      fundEl.appendChild(tile);
+      fundEl.appendChild(fundOne);
     }
 
-    // chips
+    // chips — an active chip (other than All) toggles back off, so the
+    // Fund I tag and the supertile deactivate each other symmetrically
     chipsEl.innerHTML = '';
     PORT_FILTERS.forEach(function (f) {
       var b = document.createElement('button');
@@ -346,13 +406,36 @@
       b.className = 'chip' + (f === portState.filter ? ' is-active' : '');
       b.textContent = f;
       b.addEventListener('click', function () {
-        portState.filter = f; portState.expanded = null; portState.fundOpen = false; renderPortfolio();
+        portState.filter = (portState.filter === f && f !== 'All') ? 'All' : f;
+        portState.expanded = null; portState.fundOpen = false; renderPortfolio();
       });
       chipsEl.appendChild(b);
     });
 
     var filtered = PORT.filter(function (p) { return portState.filter === 'All' || portState.filter === 'Fund I' || (p.tags && p.tags.indexOf(portState.filter) !== -1); });
     var active = filtered.filter(function (p) { return p.id === portState.expanded; })[0] || null;
+
+    // result count + clear line confirms the Fund I state near the grid
+    var countEl = document.getElementById('portCount');
+    if (!countEl) {
+      countEl = document.createElement('div');
+      countEl.id = 'portCount';
+      countEl.className = 'port-count';
+      chipsEl.insertAdjacentElement('afterend', countEl);
+    }
+    if (fundActive && !active) {
+      countEl.hidden = false;
+      countEl.innerHTML =
+        '<span class="port-count-label">Showing ' + filtered.length + ' Fund I companies</span>' +
+        '<span class="port-count-sep">·</span>' +
+        '<button type="button" class="port-count-clear">Clear filter ✕</button>';
+      countEl.querySelector('.port-count-clear').addEventListener('click', function () {
+        portState.filter = 'All'; renderPortfolio();
+      });
+    } else {
+      countEl.hidden = true;
+      countEl.innerHTML = '';
+    }
 
     if (active) {
       gridEl.hidden = true; gridEl.innerHTML = '';

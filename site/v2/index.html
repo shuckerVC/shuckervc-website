@@ -112,61 +112,94 @@
       <!-- Movement 1 — What the model covers (scope): vignette carousel.
            These cards are FORMAT DEMONSTRATIONS from the design doc; final
            numbers pending real, anonymized engagement records. -->
+      <!-- Movement 1 — What the model covers: collapsed vignette grid (hover/tap to open).
+           Cards are FORMAT DEMONSTRATIONS from the design doc; final numbers pending real,
+           anonymized engagement records. -->
       <div data-reveal data-delay="120" class="focus-vignettes">
         <div class="vignette-head">
           <span class="eyebrow eyebrow--gold">What the model covers</span>
-          <span class="vignette-hint" aria-hidden="true">Real work, off the founder's plate&nbsp;→</span>
+          <span class="vignette-hint">Real work, off the founder's plate</span>
         </div>
-        <div class="vignette-rail" role="list">
-          <article class="vignette" role="listitem">
-            <span class="vignette-tag">Finance ops</span>
-            <p class="vignette-action">Met with and reviewed quotes from 7 accounting firms. Set SLAs for month-, quarter-, and year-end closes, investor reports, and management reports.</p>
+        <div class="vignette-grid" id="vignetteGrid">
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">7 firms vetted</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-cat">Finance ops</div>
+            <div class="vignette-body"><p>Set SLAs for month-, quarter-, and year-end closes, investor and management reports.</p></div>
           </article>
-          <article class="vignette" role="listitem">
-            <span class="vignette-tag">Recruiting</span>
-            <p class="vignette-action">Ran the first five engineering hires end to end: sourced 240 candidates, screened 60, ran 34 onsites, closed 4 offers in 9 weeks.</p>
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">4 offers in 9 weeks</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-cat">Recruiting</div>
+            <div class="vignette-body"><p>Ran the first five engineering hires end to end: 240 sourced, 60 screened, 34 onsites.</p></div>
           </article>
-          <article class="vignette" role="listitem">
-            <span class="vignette-tag">Security</span>
-            <p class="vignette-action">Drove SOC 2 Type I from zero — selected the auditor, stood up controls, closed evidence collection in 11 weeks, ahead of the enterprise deal's deadline.</p>
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">SOC 2 in 11 weeks</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-cat">Security</div>
+            <div class="vignette-body"><p>From zero: selected the auditor, stood up controls, closed evidence ahead of the enterprise deal's deadline.</p></div>
           </article>
-          <article class="vignette" role="listitem">
-            <span class="vignette-tag">Fundraise ops</span>
-            <p class="vignette-action">Built the Series A data room: 72 documents, cap table reconciled, live metrics dashboard, so the raise ran on the founders' timeline, not the diligence backlog.</p>
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">72-doc data room</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-cat">Fundraise ops</div>
+            <div class="vignette-body"><p>Cap table reconciled, live metrics dashboard — the raise ran on the founders' timeline.</p></div>
           </article>
         </div>
       </div>
 
-      <!-- Movement 2 — Who does the work (three actors), read inside-out. -->
-      <div data-reveal class="focus-actors">
-        <div class="rings" role="img" aria-label="Concentric model: Support Partner at the core, shuckerVC GPs around them, the Support Partner Network outside.">
-          <div class="ring ring--outer"><span class="ring-label">Network</span></div>
-          <div class="ring ring--middle"><span class="ring-label">GPs</span></div>
-          <div class="ring ring--core"><span class="ring-label">Support<br>Partner</span></div>
+      <!-- Movement 2 — Where the depth comes from: interactive "depth stack".
+           Layers overlap (outer → middle → front); the active layer opens its body.
+           Auto-rotates gently (app.js), pauses on hover/tap, resumes after ~9s. -->
+      <div data-reveal class="focus-depth">
+        <div class="focus-depth-grid">
+          <div class="depth-copy">
+            <span class="eyebrow eyebrow--gold">Where the depth comes from</span>
+            <h3 class="depth-title">One hire. The depth of a firm.</h3>
+            <p class="depth-lead">You make one hire — a Support Partner, salary at cost. Behind them sits the firm: GPs who hire, train, and manage them, and a specialist bench on call when the work needs depth.</p>
+            <span class="depth-hint"><span class="depth-hint-dot" aria-hidden="true"></span>Tap or hover a layer to open it</span>
+          </div>
+          <div class="depth-stack" id="depthStack">
+            <div class="depth-layer depth-layer--outer" data-layer="0" role="button" tabindex="0">
+              <div class="depth-layer-head">
+                <span class="depth-layer-label">Specialist network · on call</span>
+                <span class="depth-layer-chev" aria-hidden="true">+</span>
+              </div>
+              <div class="depth-layer-body">
+                <p>On-call specialists in finance, people, growth, and security — pulled in when the work needs more depth than one operator.</p>
+                <span class="depth-pill">At cost, on call</span>
+              </div>
+            </div>
+            <div class="depth-layer depth-layer--middle" data-layer="1" role="button" tabindex="0">
+              <div class="depth-layer-head">
+                <span class="depth-layer-label">shuckerVC GPs · hire, train &amp; manage</span>
+                <span class="depth-layer-chev" aria-hidden="true">+</span>
+              </div>
+              <div class="depth-layer-body">
+                <p>The GPs hire, train, and manage your Support Partner against standards set across the portfolio — you never manage the manager.</p>
+                <span class="depth-pill">Covered by the fund</span>
+              </div>
+            </div>
+            <div class="depth-layer depth-layer--front is-active" data-layer="2" role="button" tabindex="0">
+              <div class="depth-layer-head">
+                <span class="depth-layer-label">Your Support Partner</span>
+                <span class="depth-layer-chev" aria-hidden="true">+</span>
+              </div>
+              <div class="depth-layer-body">
+                <p>A full-time operator embedded in your company, running finance, hiring, vendors, and reporting day to day.</p>
+                <span class="depth-pill">Salary at cost — no markup, no dilution</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <ol class="actor-legend">
-          <li>
-            <span class="actor-key actor-key--core" aria-hidden="true"></span>
-            <div>
-              <span class="actor-name">Core — Support Partner</span>
-              <p class="actor-body">A full-time operator embedded in your company, running the back-office work day to day.</p>
-            </div>
-          </li>
-          <li>
-            <span class="actor-key actor-key--middle" aria-hidden="true"></span>
-            <div>
-              <span class="actor-name">Middle — shuckerVC GPs</span>
-              <p class="actor-body">The GPs hire and manage the Support Partners, adding oversight and cross-portfolio pattern-matching.</p>
-            </div>
-          </li>
-          <li>
-            <span class="actor-key actor-key--outer" aria-hidden="true"></span>
-            <div>
-              <span class="actor-name">Outer — Support Partner Network</span>
-              <p class="actor-body">On-call specialists in finance, people, growth, and security, accessed at cost when you need depth.</p>
-            </div>
-          </li>
-        </ol>
       </div>
 
       <!-- Movement 3 — How the engagement works (mechanics). -->

@@ -312,6 +312,7 @@
     size: '$8M',
     checkSize: '$500K',
     count: PORT.length,
+    backing: 18, // fund target — companies we'll back (not the current live count)
     thesis: 'shuckerVC is a $8M Bay Area seed fund that backs AI-powered B2B software companies in the US using our experience investing in seed-stage SaaS companies, resulting in a 3.08 DPI.'
   };
 
@@ -369,8 +370,8 @@
               '<span class="port-fund-label">Max check</span>' +
             '</div>' +
             '<div class="port-fund-stat-col">' +
-              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.count + '</span>' +
-              '<span class="port-fund-label">Portfolio companies</span>' +
+              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.backing + '</span>' +
+              '<span class="port-fund-label">Companies we\'ll back</span>' +
             '</div>' +
           '</div>' +
           '<div class="port-fund-hint">' + fundHint + '</div>' +

@@ -797,12 +797,73 @@
   /* ============================================================
      INIT
      ============================================================ */
+  /* Vignette cards: one open at a time. Hover opens (desktop), tap opens (touch),
+     keyboard focus/Enter opens; leaving a card closes it. */
+  function initVignettes() {
+    var cards = [].slice.call(document.querySelectorAll('[data-vignette]'));
+    if (!cards.length) return;
+    function openOnly(card) { cards.forEach(function (c) { c.classList.toggle('is-open', c === card); }); }
+    cards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () { openOnly(card); });
+      card.addEventListener('mouseleave', function () { card.classList.remove('is-open'); });
+      card.addEventListener('click', function () { openOnly(card); });
+      card.addEventListener('focus', function () { openOnly(card); });
+      card.addEventListener('blur', function () { card.classList.remove('is-open'); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-open'); }
+      });
+    });
+  }
+
+  /* Depth stack: one active layer at a time. Auto-rotates inward-out
+     (front → middle → outer) every 4200ms; hover/tap/focus selects a layer and
+     pauses rotation, which resumes after ~9s idle. Skipped under reduced motion. */
+  function initDepthStack() {
+    var stack = document.getElementById('depthStack');
+    if (!stack) return;
+    var layers = [].slice.call(stack.querySelectorAll('.depth-layer'));
+    if (layers.length !== 3) return;
+    var active = 2; // front (Support Partner) is the default
+    var hold = false, resumeT = null;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setActive(i) {
+      active = i;
+      layers.forEach(function (l, idx) { l.classList.toggle('is-active', idx === i); });
+    }
+    function pause() {
+      hold = true;
+      if (resumeT) clearTimeout(resumeT);
+      resumeT = setTimeout(function () { hold = false; }, 9000);
+    }
+    layers.forEach(function (l) {
+      var i = parseInt(l.getAttribute('data-layer'), 10);
+      function select() { setActive(i); pause(); }
+      l.addEventListener('mouseenter', select);
+      l.addEventListener('click', select);
+      l.addEventListener('focus', select);
+      l.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+      });
+    });
+    setActive(active);
+    if (!reduced) {
+      // next = (i + 2) % 3 → front → middle → outer → front …
+      stack._svRotate = setInterval(function () {
+        if (hold) return;
+        setActive((active + 2) % 3);
+      }, 4200);
+    }
+  }
+
   function init() {
     initNav();
     initReveal();
     initCounters();
     initSpotlightAndMagnets();
     initFocusScroll();
+    initVignettes();
+    initDepthStack();
     renderTeam();
     renderPortfolio();
     renderInsights();

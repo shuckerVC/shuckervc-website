@@ -156,74 +156,37 @@
         </div>
       </div>
 
-      <!-- Movement 2 — Where the depth comes from: interactive "depth stack".
-           Layers overlap (outer → middle → front); the active layer opens its body.
-           Auto-rotates gently (app.js), pauses on hover/tap, resumes after ~9s. -->
+      <!-- Where the depth comes from — static copy block. The three actors
+           (Support Partner, GPs, specialist network) are told through the
+           retitled timeline below. -->
       <div data-reveal class="focus-depth">
-        <div class="focus-depth-grid">
-          <div class="depth-copy">
-            <span class="eyebrow eyebrow--gold">Where the depth comes from</span>
-            <h3 class="depth-title">One hire. The depth of a firm.</h3>
-            <p class="depth-lead">You make one hire — a Support Partner, salary at cost. Behind them sits the firm: GPs who hire, train, and manage them, and a specialist bench on call when the work needs depth.</p>
-            <span class="depth-hint"><span class="depth-hint-dot" aria-hidden="true"></span>Tap or hover a layer to open it</span>
-          </div>
-          <div class="depth-stack" id="depthStack">
-            <div class="depth-layer depth-layer--outer" data-layer="0" role="button" tabindex="0">
-              <div class="depth-layer-head">
-                <span class="depth-layer-label">Specialist network · on call</span>
-                <span class="depth-layer-chev" aria-hidden="true">+</span>
-              </div>
-              <div class="depth-layer-body">
-                <p>On-call specialists in finance, people, growth, and security — pulled in when the work needs more depth than one operator.</p>
-                <span class="depth-pill">At cost, on call</span>
-              </div>
-            </div>
-            <div class="depth-layer depth-layer--middle" data-layer="1" role="button" tabindex="0">
-              <div class="depth-layer-head">
-                <span class="depth-layer-label">shuckerVC GPs · hire, train &amp; manage</span>
-                <span class="depth-layer-chev" aria-hidden="true">+</span>
-              </div>
-              <div class="depth-layer-body">
-                <p>The GPs hire, train, and manage your Support Partner against standards set across the portfolio — you never manage the manager.</p>
-                <span class="depth-pill">Covered by the fund</span>
-              </div>
-            </div>
-            <div class="depth-layer depth-layer--front is-active" data-layer="2" role="button" tabindex="0">
-              <div class="depth-layer-head">
-                <span class="depth-layer-label">Your Support Partner</span>
-                <span class="depth-layer-chev" aria-hidden="true">+</span>
-              </div>
-              <div class="depth-layer-body">
-                <p>A full-time operator embedded in your company, running finance, hiring, vendors, and reporting day to day.</p>
-                <span class="depth-pill">Salary at cost — no markup, no dilution</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <span class="eyebrow eyebrow--gold">Where the depth comes from</span>
+        <h3 class="depth-title">One hire. The depth of a firm.</h3>
+        <p class="depth-lead">You make one hire — a Support Partner, salary at cost. Behind them sits the firm: GPs who hire, train, and manage them, and a specialist bench on call when the work needs depth.</p>
       </div>
 
-      <!-- Movement 3 — How the engagement works (mechanics). -->
+      <!-- Timeline — the three actors, told as a scroll-progress timeline. -->
       <div class="focus-grid">
         <div class="focus-timeline" id="focusTimeline">
           <div class="focus-rail"><span data-f-fill></span></div>
 
           <div data-f-step class="focus-step">
             <span data-dot class="focus-dot"></span>
-            <span data-num class="focus-num">01</span>
-            <h3 class="focus-step-title">Sourcing &amp; hiring</h3>
-            <p class="focus-step-body">We source and vet talented Support Partner candidates. You pick whoever best meets your stage and needs.</p>
+            <h3 class="focus-step-title">Your Support Partner</h3>
+            <p class="focus-step-body">We source and vet the candidates — you pick whoever best fits your stage. Your Support Partner is on our W2, embedded full-time in your company, running finance, hiring, vendors, and reporting day to day.</p>
+            <div class="focus-step-pills"><span class="focus-pill focus-pill--gold"><span class="focus-pill-dot" aria-hidden="true"></span>Salary at cost — no markup, no dilution</span></div>
           </div>
           <div data-f-step class="focus-step">
             <span data-dot class="focus-dot"></span>
-            <span data-num class="focus-num">02</span>
-            <h3 class="focus-step-title">Training &amp; management</h3>
-            <p class="focus-step-body">We ramp them on shuckerVC playbooks and manage them against standards set across the portfolio.</p>
+            <h3 class="focus-step-title">shuckerVC GPs</h3>
+            <p class="focus-step-body">Behind every Support Partner sit the fund's GPs — bringing their operating experience and the network of Support Partners across the portfolio. They hire, train, and manage yours — you never manage the manager.</p>
+            <div class="focus-step-pills"><span class="focus-pill focus-pill--neutral">Covered by the fund</span></div>
           </div>
           <div data-f-step class="focus-step">
             <span data-dot class="focus-dot"></span>
-            <span data-num class="focus-num">03</span>
-            <h3 class="focus-step-title">Cost structure</h3>
-            <p class="focus-step-body">You pay their salary at cost—no markup, no dilution. They earn from our fund carry, not your equity.</p>
+            <h3 class="focus-step-title">Specialist network</h3>
+            <p class="focus-step-body">On-call specialists in finance, people, growth, and security — pulled in when the work needs more depth than one operator.</p>
+            <div class="focus-step-pills"><span class="focus-pill focus-pill--neutral">At cost, on call</span></div>
           </div>
         </div>
 
@@ -235,7 +198,7 @@
           </div>
           <div class="video-cap">
             <span class="eyebrow eyebrow--gold">Now showing</span>
-            <span class="video-cap-title" data-f-cap>Sourcing &amp; hiring</span>
+            <span class="video-cap-title" data-f-cap>Your Support Partner</span>
           </div>
         </div>
       </div>

@@ -136,7 +136,7 @@
     var steps = [].slice.call(c.querySelectorAll('[data-f-step]'));
     var fill = c.querySelector('[data-f-fill]');
     var cap = document.querySelector('[data-f-cap]');
-    var titles = ['Sourcing & hiring', 'Training & management', 'Cost structure'];
+    var titles = ['Your Support Partner', 'shuckerVC GPs', 'Specialist network'];
     function update() {
       var r = c.getBoundingClientRect();
       var anchor = window.innerHeight * 0.45;
@@ -170,8 +170,8 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Operator and investor',
       bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
-      photo: '../assets/team/jp-persico-sq.png',
-      linkedin: 'https://linkedin.com',
+      photo: '../assets/team/jp-persico-sq.jpg',
+      linkedin: 'https://www.linkedin.com/in/jppersico',
       sortOrder: 0
     },
     {
@@ -180,8 +180,8 @@
       title: 'Co-founder & Managing Partner',
       tagline: 'Four-time startup founder',
       bio: 'At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.',
-      photo: '../assets/team/graham-siegel.jpeg',
-      linkedin: 'https://linkedin.com',
+      photo: '../assets/team/graham-siegel-sq.jpg',
+      linkedin: 'https://www.linkedin.com/in/grahamsiegel',
       sortOrder: 1
     },
     {
@@ -190,8 +190,8 @@
       title: 'Venture Partner',
       tagline: 'Investor Relations and Real Estate Professional',
       bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
-      photo: '../assets/team/gabe-regalado-sq.png',
-      linkedin: 'https://linkedin.com',
+      photo: '../assets/team/gabe-regalado-sq.jpg',
+      linkedin: 'https://www.linkedin.com/in/gabedregalado',
       sortOrder: 2
     }
   ];
@@ -899,47 +899,6 @@
     });
   }
 
-  /* Depth stack: one active layer at a time. Auto-rotates inward-out
-     (front → middle → outer) every 4200ms; hover/tap/focus selects a layer and
-     pauses rotation, which resumes after ~9s idle. Skipped under reduced motion. */
-  function initDepthStack() {
-    var stack = document.getElementById('depthStack');
-    if (!stack) return;
-    var layers = [].slice.call(stack.querySelectorAll('.depth-layer'));
-    if (layers.length !== 3) return;
-    var active = 2; // front (Support Partner) is the default
-    var hold = false, resumeT = null;
-    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function setActive(i) {
-      active = i;
-      layers.forEach(function (l, idx) { l.classList.toggle('is-active', idx === i); });
-    }
-    function pause() {
-      hold = true;
-      if (resumeT) clearTimeout(resumeT);
-      resumeT = setTimeout(function () { hold = false; }, 9000);
-    }
-    layers.forEach(function (l) {
-      var i = parseInt(l.getAttribute('data-layer'), 10);
-      function select() { setActive(i); pause(); }
-      l.addEventListener('mouseenter', select);
-      l.addEventListener('click', select);
-      l.addEventListener('focus', select);
-      l.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
-      });
-    });
-    setActive(active);
-    if (!reduced) {
-      // next = (i + 2) % 3 → front → middle → outer → front …
-      stack._svRotate = setInterval(function () {
-        if (hold) return;
-        setActive((active + 2) % 3);
-      }, 4200);
-    }
-  }
-
   function init() {
     initNav();
     initReveal();
@@ -947,7 +906,6 @@
     initSpotlightAndMagnets();
     initFocusScroll();
     initVignettes();
-    initDepthStack();
     renderTeam();
     renderPortfolio();
     renderInsights();

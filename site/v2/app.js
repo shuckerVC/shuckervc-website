@@ -196,7 +196,7 @@
     }
   ];
 
-  var teamState = { openId: null, closeTimeout: null };
+  var teamState = { openId: null, closeTimeout: null, wasDesktop: null, resizeBound: false };
   var teamTeaserIO = null;
 
   function initTeamTeasers() {
@@ -228,11 +228,14 @@
       // card-level reveal never gets observed (and renderTeam re-runs on hover),
       // which left the cards stuck at opacity 0. Cards render visible; the gold
       // teaser bar still animates via initTeamTeasers, bios open on hover/tap.
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-expanded', teamState.openId === m.id ? 'true' : 'false');
+      // Desktop (pointer + room) shows every profile expanded by default;
+      // touch/narrow screens collapse and open one card on tap.
+      var isDesktop = window.matchMedia('(min-width: 768px)').matches;
+      var isOpen = isDesktop || teamState.openId === m.id;
 
-      var isOpen = teamState.openId === m.id;
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', isDesktop ? 'group' : 'button');
+      card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
       card.innerHTML =
         '<div class="team-photo-wrap">' +
@@ -256,43 +259,46 @@
           '</div>'
         );
 
-      function onOpen() {
-        if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
-        if (teamState.openId === m.id) return;
-        teamState.openId = m.id;
-        renderTeam();
-      }
-
-      function onClose() {
-        if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
-        teamState.closeTimeout = setTimeout(function () {
-          if (teamState.openId === m.id) {
-            teamState.openId = null;
+      // On touch / narrow screens, tap a card to open its bio (one at a time).
+      // On desktop every card is already expanded, so no toggle is wired up
+      // (the LinkedIn link inside still works normally).
+      if (!isDesktop) {
+        card.addEventListener('click', function () {
+          teamState.openId = teamState.openId === m.id ? null : m.id;
+          renderTeam();
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            teamState.openId = teamState.openId === m.id ? null : m.id;
             renderTeam();
           }
-        }, 120);
+        });
       }
-
-      if (!prefersReduced) {
-        card.addEventListener('mouseenter', onOpen);
-        card.addEventListener('mouseleave', onClose);
-        card.addEventListener('focus', onOpen);
-        card.addEventListener('blur', onClose);
-      }
-      card.addEventListener('click', function () {
-        if (teamState.openId === m.id) {
-          teamState.openId = null;
-        } else {
-          teamState.openId = m.id;
-        }
-        renderTeam();
-      });
 
       grid.appendChild(card);
     });
 
     // Initialize teaser animation (one-time)
     initTeamTeasers();
+
+    // Re-render once when the layout crosses the desktop/mobile breakpoint,
+    // so cards switch between always-expanded and tap-to-open.
+    teamState.wasDesktop = window.matchMedia('(min-width: 768px)').matches;
+    if (!teamState.resizeBound) {
+      teamState.resizeBound = true;
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          var nowDesktop = window.matchMedia('(min-width: 768px)').matches;
+          if (nowDesktop !== teamState.wasDesktop) {
+            teamState.openId = null;
+            renderTeam();
+          }
+        }, 160);
+      });
+    }
   }
 
   /* ============================================================

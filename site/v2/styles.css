@@ -504,7 +504,11 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .team-member-title { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold-dark); margin: 0; }
 .team-bar { display: block; width: 26px; height: 3px; border-radius: 3px; background: var(--gold-400); margin: 14px auto 0; }
 .team-teaser { min-height: 17px; }
-.team-expanded { transition: opacity .3s ease; }
+/* Collapsed cards must not reserve the hidden bio's height (matters on mobile,
+   where one card opens at a time). Height + fade are both driven off aria-expanded. */
+.team-expanded { overflow: hidden; transition: opacity .3s ease, max-height .38s var(--ease-out); }
+.team-card[aria-expanded="false"] .team-expanded { max-height: 0; }
+.team-card[aria-expanded="true"] .team-expanded { max-height: 600px; }
 .team-tagline { font-size: 13px; color: var(--gray-500); margin: 12px 0 0; }
 .team-bio { font-size: 14px; line-height: 1.65; color: var(--ink-600); margin: 14px 0 0; text-align: left; }
 .team-linkedin { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }

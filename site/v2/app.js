@@ -224,8 +224,10 @@
       var card = document.createElement('div');
       card.className = 'team-card';
       card.setAttribute('data-member-id', m.id);
-      card.setAttribute('data-reveal', '');
-      card.setAttribute('data-delay', String(idx * 120));
+      // NOTE: no data-reveal here — initReveal() runs before renderTeam(), so a
+      // card-level reveal never gets observed (and renderTeam re-runs on hover),
+      // which left the cards stuck at opacity 0. Cards render visible; the gold
+      // teaser bar still animates via initTeamTeasers, bios open on hover/tap.
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
       card.setAttribute('aria-expanded', teamState.openId === m.id ? 'true' : 'false');

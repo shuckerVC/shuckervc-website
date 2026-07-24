@@ -111,7 +111,65 @@ and appropriate content are all unknown.
 
 ---
 
-## 5. Required Notion schema additions
+## 5. Presenting performance: a bare TVPI is below every published standard
+
+The template's fund-snapshot block shows three numbers — portfolio count, deployed capital,
+and a single unqualified TVPI. Measured against the published reporting standards, that
+presentation is incomplete, and the gap is worth closing regardless of how the audience
+question in §3 resolves.
+
+**What the standards ask for.** ILPA's Quarterly Reporting Standards specify TVPI, DPI and
+RVPI as a *set*, not individually. ILPA Principles 3.0, in the section specifically on fund
+marketing materials during fundraising, asks for prior-fund performance "on a gross and net
+basis, including IRR, multiple of capital and distributed to paid-in capital metrics," plus
+the derivation, plus unrealized values based on the most recent audited financials. ILPA's
+DDQ 2.0 — which is what a prospective LP will send you — asks for net and gross TVPI, DPI
+and RVPI, vintage year, and figures both with and without any credit facility. The GIPS
+standards require, alongside a since-inception return, the whole set: paid-in capital,
+distributions, committed capital, TVPI, DPI, PIC multiple and RVPI.
+
+**Why it matters more here than usual.** Fund I is a 2024 vintage roughly two years in. Its
+TVPI is almost entirely unrealized markup, and DPI is likely 0.0x. Showing TVPI alone is
+precisely the presentation that conceals that nothing has been returned yet — which is the
+thing a sophisticated LP will ask about first, and the thing that makes an incomplete
+figure look like an attempt to flatter.
+
+**The Marketing Rule point.** SEC staff guidance in March 2025 relaxed some gross-only
+presentation requirements, but that relief **expressly does not extend to IRR, MOIC or
+TVPI** — those remain performance figures requiring accompanying net presentation with equal
+prominence. Whether the Marketing Rule binds shuckerVC directly depends on its adviser
+registration status, which is a question for counsel; but the disclosure norm it encodes is
+also what ILPA and GIPS ask for independently, so the practical answer converges.
+
+**The self-interested argument, which is stronger than the compliance one.** Sophisticated
+LPs already discount early marks, and the research is unkind to the tactic. Studying 761
+CalPERS fund investments, Jenkinson, Sousa and Stucke found NAVs are systematically inflated
+during the follow-on fundraising window — peaking roughly one quarter before first close,
+then reversing — and that interim performance had little power to predict final performance,
+*worst of all for venture*. Harris, Jenkinson, Kaplan and Stucke found that persistence
+largely disappears once you use only the information an LP actually had at fundraising time.
+Cambridge Associates, across 2,100+ funds, found most take about six years to settle into
+their eventual quartile, with 80–90% ranked in three different quartiles along the way.
+
+Most pointed for a GP: Brown, Gredil and Kaplan found that aggressive marks are associated
+with a **lower** probability of raising a follow-on fund — an effect comparable in size to
+being a top-tercile performer. LPs largely see through optimistic marks and penalise them.
+So leading with a lone unrealised TVPI to prospects is not just a disclosure problem; on the
+evidence it is a weak fundraising move. Meanwhile the context makes an early figure
+unremarkable rather than impressive: per Carta, only about a quarter of 2021-vintage venture
+funds had returned *any* capital by late 2025, and top-decile DPI for that vintage was around
+0.12x. Nobody expects distributions from a 2024 fund — which is precisely why the honest
+presentation costs you little.
+
+**Minimum viable change to the template.** If any performance figure ships at all, show
+TVPI, DPI and RVPI together, labelled net or gross explicitly, with the vintage year and a
+plain statement that value is substantially unrealized. That is four short stats instead of
+one — a layout change, not a rebuild — and it is defensible to any LP who asks how the
+number was derived.
+
+---
+
+## 6. Required Notion schema additions
 
 Add to the Contacts DB before the first bulk send:
 
@@ -128,7 +186,7 @@ unsubscribe must survive every future re-import and re-tagging.
 
 ---
 
-## 6. Send pipeline
+## 7. Send pipeline
 
 1. **Resolve the segment** — query Contacts by `Newsletter Segment`, filtering to
    `Newsletter Status = Subscribed` and a non-empty email.
@@ -143,7 +201,7 @@ unsubscribe must survive every future re-import and re-tagging.
 
 ---
 
-## 7. Open questions for JP and Graham
+## 8. Open questions for JP and Graham
 
 1. **Does the `LP Lead` send happen at all before counsel reviews it?** This is the
    blocking decision; everything else is implementation.

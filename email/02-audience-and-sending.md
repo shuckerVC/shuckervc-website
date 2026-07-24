@@ -141,6 +141,28 @@ prominence. Whether the Marketing Rule binds shuckerVC directly depends on its a
 registration status, which is a question for counsel; but the disclosure norm it encodes is
 also what ILPA and GIPS ask for independently, so the practical answer converges.
 
+**Being an Exempt Reporting Adviser is not a shield, and this is the part most often gotten
+wrong.** ERA status does exempt a firm from most substantive Advisers Act rules, plausibly
+including the Marketing Rule. It does **not** exempt anyone from Advisers Act §206 or from
+**Rule 206(4)-8**, which by its terms applies to any adviser to a pooled investment vehicle
+with no registration predicate — and which prohibits materially misleading statements to
+investors *or prospective investors* in the pool. A performance figure sent to prospective
+LPs sits inside that rule's plain language. This is not theoretical for venture: the SEC
+brought several 206(4)-8 actions against ERAs in 2022 alone, most of them VC advisers,
+including Alumni Ventures Group (IA-5975), SparkLabs Global Ventures (IA-6121) and Energy
+Innovation Capital (IA-6104).
+
+The closest precedent to this specific risk is **Oppenheimer / Brian Williamson** (2013–14):
+a private-equity fund-of-funds manager who marked the fund's largest holding above the
+underlying manager's own estimate and circulated marketing materials to prospective
+investors showing an IRR gross of fees and expenses — a reported 12.4% that was as low as
+**−6.3% net**. Outcome: industry bar plus a $100,000 penalty.
+
+To be fair about the limits of the analogy: research turned up **no** SEC action charging a
+PE or VC adviser specifically for inflating portfolio-company marks while raising a
+successor fund. The exposure here is the disclosure framing around the number, not the
+number itself — which is exactly the part that is cheap to fix.
+
 **The self-interested argument, which is stronger than the compliance one.** Sophisticated
 LPs already discount early marks, and the research is unkind to the tactic. Studying 761
 CalPERS fund investments, Jenkinson, Sousa and Stucke found NAVs are systematically inflated

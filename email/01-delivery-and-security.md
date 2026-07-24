@@ -278,6 +278,16 @@ there is nothing to leak, enumerate, or forward.** The sender's own `From:` addr
 identifies them. At LP-list scale, a filtered `unsubscribe@` mailbox reviewed weekly is a
 genuinely adequate mechanism — honor requests promptly and log them.
 
+There is also a concrete security argument for it that I did not appreciate initially.
+Enterprise mail gateways fetch URLs *before* a human ever sees the message: Microsoft
+documents that Safe Links scans URLs prior to delivery unconditionally — holding the message
+until the scan completes — and detonates unknown-reputation URLs in a real headless browser;
+Mimecast enabled pre-delivery URL scanning for all customers in November 2025. A
+per-recipient unsubscribe URL is by definition unknown-reputation, so it gets fetched every
+time. **Safe Links and Barracuda only touch HTTP, HTTPS and FTP** — which means a `mailto:`
+has *zero* prefetch surface. There is no endpoint for a scanner to hit and no token for it
+to burn.
+
 Be clear about what it is and isn't, though. **A mailto does not satisfy RFC 8058
 one-click.** That spec requires an HTTPS URI plus a `List-Unsubscribe-Post` header, and the
 mailbox provider then issues an HTTP POST that something must answer without a human in the
@@ -344,6 +354,22 @@ Needs a real ESP or backend (the static site has neither). Then the token rules 
 
 ## 5. Open decisions
 
+**An honest disagreement on the ESP question.** The research behind §1 did not fully
+converge. The case *for* an ESP rests on governance — suppression, bounce handling, an
+exportable opt-out record, and quota isolation from the account that sends capital calls.
+The case *against* is a deliverability argument: at 500 recipients, a shared IP pool means
+inheriting other tenants' reputation, and a shared click-tracking domain carries real
+blocklist risk, whereas Workspace authenticates natively and cleanly.
+
+Both are right about different things, and the tie-breaker is that the ESP objections are
+avoidable while the Workspace ones are not. Shared-pool risk is managed by choosing a
+provider that vets its senders; click-domain risk disappears entirely if you turn tracking
+off (§7). But Workspace cannot produce an unsubscribe audit trail at all, and cannot stop a
+newsletter mistake from locking the capital-call mailbox for 24 hours. For a regulated
+entity those are structural, so the recommendation stands — with lower confidence than the
+rest of this document, and it is worth revisiting if the list stays small and manually
+managed.
+
 **Sending platform.** Decile Hub can send it but has no list management or suppression.
 A dedicated ESP would bring native suppression and one-click opt-out, at the cost of
 another system holding LP addresses. The mailto design above works either way, so this
@@ -364,3 +390,53 @@ host Mac. That is workable for local scripted use but has no rotation story and 
 with any backup or sync of the Documents folder. If the send pipeline ever moves to a
 server or a shared runner, the key belongs in a secret manager, scoped read-only, and
 should never be echoed into logs, files, or generated output.
+
+---
+
+## 7. Message construction and tracking
+
+**Size.** Gmail clips messages whose HTML payload exceeds roughly 102 KB, hiding the rest
+behind "View entire message" and truncating mid-markup. The current template is **15.5 KB**
+— comfortably clear. It stays clear as long as images are referenced by `https://` URL
+rather than base64-inlined, which is also the right call for load time.
+
+**Add a plain-text alternative.** The template is HTML-only today. Send it as
+`multipart/alternative` with `text/plain` **first** and `text/html` last — RFC 2046 §5.1.4
+makes order significant, and clients render the *last* alternative they support, so
+reversing them shows everyone the plain-text version. Write real prose in the text part; an
+empty one or "this email requires HTML" is worse than none, and it is what an Apple Watch
+preview will show. Any normal mail library builds this nesting correctly; hand-rolling MIME
+is where it goes wrong.
+
+**Links.** The template links only to `shucker.vc` and the `mailto:`, which is exactly
+right. Keep it that way: **no URL shorteners** (Spamhaus maintains a specific blocklist
+category for abused redirector domains, precisely because a shared shortener inherits every
+other user's reputation) and **no shared ESP click-tracking domain** — SURBL maintains a
+dedicated list of click-tracker domains found in unsolicited mail, and the pooling problem
+is identical. If an ESP is adopted, either turn click tracking off or point it at a CNAMEd
+subdomain you control. A tracking redirect also makes every link's visible text differ from
+its real destination, which is the pattern Google's "links should be visible and easy to
+understand" guidance targets.
+
+**Don't report open rates.** They do not measure what the name suggests. Gmail proxies and
+caches images, so repeat opens collapse into one fetch while the initial fetch may happen at
+message-processing time with no human involved. Apple's Mail Privacy Protection prefetches
+everything by default. And the same gateways described above render messages during
+detonation, firing the pixel with no reader present — biased toward your most
+institutional LPs. The honest engagement signals at this size are replies, unsubscribes and
+bounces. The template already invites replies, which is the right instinct.
+
+**Things not worth worrying about.** Several widely repeated rules have no basis in any
+Google documentation: text-to-image ratios, "spam trigger word" lists, link counts, and
+single- versus multi-column layout. Google's only content requirements are about deception —
+don't hide content with CSS, don't fake graphical elements with characters, keep links and
+subject lines honest. Also skip Gmail promotional annotation markup: it only changes
+rendering *inside* the Promotions tab and amounts to declaring yourself promotional. Worth
+knowing too that the Promotions tab is a consumer-Gmail feature — Google states it does not
+apply to Workspace users — so for an LP list on corporate domains it is largely moot.
+
+**If HTTPS one-click is ever added**, two traps beyond the token rules in §3: the
+unsubscribe URI must **never redirect** (RFC 8058 forbids it, because redirected POSTs
+historically degrade to GET — a bare-domain-to-`www` redirect would silently break every
+unsubscribe), and both `List-Unsubscribe` and `List-Unsubscribe-Post` must appear in the
+DKIM `h=` tag or conforming receivers will not offer one-click at all.

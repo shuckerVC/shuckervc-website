@@ -7,10 +7,18 @@
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 <title>shuckerVC — Founder Focus Dispatch</title>
-<!-- BEFORE SENDING: replace the two relative img src paths (../assets/logo/...) with absolute
-     hosted URLs (e.g. https://www.shucker.vc/assets/logo/...) once the new site is deployed —
-     email clients cannot resolve relative paths. Also resolve all {{merge_tags}} and remove the
-     two DECILE API annotation pills next to the "New investment" / "Fund snapshot" eyebrows. -->
+<!-- ============================================================================
+     SEND CONTRACT - see email/README.md before every send.
+
+     1. All {{custom.*}} tags are SUPPLY-ONLY: they are passed in explicitly at
+        send time and never auto-resolve from any connected system. Do not
+        substitute auto-resolving recipient tags here - this template must
+        render identically for every recipient.
+     2. HTML-escape every supplied value before merging.
+     3. Point the two img src paths at absolute hosted URLs.
+     4. Set the List-Unsubscribe header (see README) - the visible footer link
+        is a mailto and carries no per-recipient token by design.
+     ============================================================================ -->
 <!-- GMAIL-OPTIMIZED VERSION: fluid/hybrid layout. Does NOT rely on <style> media rules (Gmail strips them). Stat rows use wrapping inline-block cells so they stack on mobile. -->
 <!--[if mso]>
 <noscript>
@@ -53,7 +61,7 @@ New investment, a Founder Focus resource, and what we're seeing across seed-stag
 <!-- Header -->
 <tr>
 <td class="sv-px" align="center" style="padding: 36px 32px 20px 32px;">
-<img src="../assets/logo/logo-color.png" width="168" alt="shuckerVC" style="display:block; width:168px; max-width:168px; height:auto; border:0;">
+<img src="../site/assets/logo/logo-color.png" width="168" alt="shuckerVC" style="display:block; width:168px; max-width:168px; height:auto; border:0;">
 </td>
 </tr>
 
@@ -102,15 +110,10 @@ This month we closed a new investment, watched a portfolio company hit its Serie
 </tr>
 
 <!-- New investment -->
-<!-- ========================================================= -->
-<!-- ==  DECILE HUB API  ·  investment pipeline endpoint     == -->
-<!-- ==  Fields below are populated from Decile Hub.         == -->
-<!-- ==  Merge tags: {{deal.*}}                              == -->
-<!-- ========================================================= -->
 <tr>
 <td class="sv-px" style="padding: 28px 32px 0 32px;">
 <p style="margin:0 0 10px 0; font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:700; letter-spacing:2.2px; text-transform:uppercase; color:#ffc009;">
-New investment&nbsp; <span style="font-family: Arial, Helvetica, sans-serif; font-size:9px; font-weight:700; letter-spacing:1px; color:#111111; background-color:#ffcd3c; padding:2px 6px; border-radius:999px;">DECILE API</span>
+New investment
 </p>
 </td>
 </tr>
@@ -119,17 +122,17 @@ New investment&nbsp; <span style="font-family: Arial, Helvetica, sans-serif; fon
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#faf8f2; border:1px solid #e6e2d9; border-radius:12px;">
 <tr>
 <td style="padding: 24px 24px 20px 24px;">
-<h2 style="margin:0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-weight:400; font-size:22px; color:#111111;">{{deal.company_name}}</h2>
+<h2 style="margin:0 0 8px 0; font-family: Georgia, 'Times New Roman', serif; font-weight:400; font-size:22px; color:#111111;">{{custom.investment_name}}</h2>
 <p style="margin:0 0 16px 0; font-family: Arial, Helvetica, sans-serif; font-size:14px; line-height:1.7; color:#3d3b37;">
-{{deal.description}}
+{{custom.investment_summary}}
 </p>
 <div style="font-size:0;">
 <div style="display:inline-block; width:150px; max-width:150px; vertical-align:top; padding:0 20px 8px 0;">
-<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:24px; color:#111111;">{{deal.check_size}}</p>
+<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:24px; color:#111111;">{{custom.investment_check}}</p>
 <p style="margin:2px 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; color:#6f6a61;">Check size</p>
 </div>
 <div style="display:inline-block; width:150px; max-width:150px; vertical-align:top; padding:0 0 8px 0;">
-<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:24px; color:#111111;">{{deal.round}}</p>
+<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:24px; color:#111111;">{{custom.investment_round}}</p>
 <p style="margin:2px 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; color:#6f6a61;">Round</p>
 </div>
 </div>
@@ -138,17 +141,12 @@ New investment&nbsp; <span style="font-family: Arial, Helvetica, sans-serif; fon
 </table>
 </td>
 </tr>
-<!-- == END DECILE HUB API block (new investment) == -->
 
 <!-- Fund snapshot -->
-<!-- ========================================================= -->
-<!-- ==  DECILE HUB API  ·  fund performance metrics        == -->
-<!-- ==  Merge tags: {{fund.*}}                              == -->
-<!-- ========================================================= -->
 <tr>
 <td class="sv-px" style="padding: 32px 32px 0 32px;">
 <p style="margin:0 0 10px 0; font-family: Arial, Helvetica, sans-serif; font-size:12px; font-weight:700; letter-spacing:2.2px; text-transform:uppercase; color:#ffc009;">
-Fund snapshot&nbsp; <span style="font-family: Arial, Helvetica, sans-serif; font-size:9px; font-weight:700; letter-spacing:1px; color:#111111; background-color:#ffcd3c; padding:2px 6px; border-radius:999px;">DECILE API</span>
+Fund snapshot
 </p>
 </td>
 </tr>
@@ -158,15 +156,15 @@ Fund snapshot&nbsp; <span style="font-family: Arial, Helvetica, sans-serif; font
 <tr>
 <td align="center" style="padding: 20px 12px 16px 12px; font-size:0;">
 <div style="display:inline-block; width:150px; max-width:150px; vertical-align:top; padding:8px 0;">
-<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:28px; color:#111111;">{{fund.portfolio_count}}</p>
+<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:28px; color:#111111;">{{custom.stat_portfolio}}</p>
 <p style="margin:4px 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; color:#6f6a61;">Portfolio companies</p>
 </div>
 <div style="display:inline-block; width:150px; max-width:150px; vertical-align:top; padding:8px 0;">
-<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:28px; color:#111111;">{{fund.deployed}}</p>
+<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:28px; color:#111111;">{{custom.stat_deployed}}</p>
 <p style="margin:4px 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; color:#6f6a61;">Deployed</p>
 </div>
 <div style="display:inline-block; width:150px; max-width:150px; vertical-align:top; padding:8px 0;">
-<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:28px; color:#111111;">{{fund.tvpi}}</p>
+<p style="margin:0; font-family: Georgia, 'Times New Roman', serif; font-size:28px; color:#111111;">{{custom.stat_tvpi}}</p>
 <p style="margin:4px 0 0 0; font-family: Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:0.6px; text-transform:uppercase; color:#6f6a61;">TVPI</p>
 </div>
 </td>
@@ -174,7 +172,6 @@ Fund snapshot&nbsp; <span style="font-family: Arial, Helvetica, sans-serif; font
 </table>
 </td>
 </tr>
-<!-- == END DECILE HUB API block (fund snapshot) == -->
 
 <!-- Portfolio spotlight -->
 <tr>
@@ -312,7 +309,7 @@ Questions about the portfolio or the fund? Reply to this email &mdash; Graham an
 <!-- Footer -->
 <tr>
 <td class="sv-px" align="center" style="padding: 24px 32px 36px 32px;">
-<img src="../assets/logo/mark-gold.png" width="28" alt="" style="display:block; width:28px; height:auto; border:0; margin:0 auto 14px auto;">
+<img src="../site/assets/logo/mark-gold.png" width="28" alt="" style="display:block; width:28px; height:auto; border:0; margin:0 auto 14px auto;">
 <p style="margin:0 0 8px 0; font-family: Arial, Helvetica, sans-serif; font-size:12px; line-height:1.6; color:#938d82;">
 shuckerVC &middot; Fueling founder focus &middot; Bay Area, CA
 </p>
@@ -322,7 +319,7 @@ shuckerVC &middot; Fueling founder focus &middot; Bay Area, CA
 <p style="margin:0; font-family: Arial, Helvetica, sans-serif; font-size:12px; line-height:1.6; color:#938d82;">
 <a href="https://www.shucker.vc" style="color:#6f6a61; text-decoration:underline;">shucker.vc</a>
 &nbsp;&middot;&nbsp;
-<a href="{{unsubscribe_url}}" style="color:#6f6a61; text-decoration:underline;">Unsubscribe</a>
+<a href="mailto:unsubscribe@shucker.vc?subject=Unsubscribe%20%E2%80%94%20Founder%20Focus%20Dispatch" style="color:#6f6a61; text-decoration:underline;">Unsubscribe</a>
 </p>
 </td>
 </tr>

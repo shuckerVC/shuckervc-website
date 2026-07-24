@@ -426,6 +426,55 @@ detonation, firing the pixel with no reader present — biased toward your most
 institutional LPs. The honest engagement signals at this size are replies, unsubscribes and
 bounces. The template already invites replies, which is the right instinct.
 
+### Tracking is also a consent question, not just an accuracy one
+
+Beyond being unmeasurable, open and click tracking carry a legal obligation that is easy to
+miss. Under the ePrivacy Directive Art. 5(3), storing or accessing information on a
+recipient's device requires **consent** — and EDPB Guidelines 2/2023 (¶47–51) state
+explicitly that this captures **both** tracking pixels in email **and** tracking links,
+because the pixel is cached client-side and the decorated URL instructs the device to return
+an identifier. Legitimate interest is not available here: ePrivacy is *lex specialis* and
+gates the storage step before any GDPR lawful-basis analysis begins.
+
+Two details make this sharper than the usual cookie-banner reasoning. France's CNIL adopted
+a recommendation dedicated specifically to email tracking pixels in March 2026, which treats
+open-rate analysis for campaign optimisation as consent-requiring, states that
+business/professional addresses are **not** excluded, and that anonymising the data does not
+help; its transition window for pre-existing contacts closed on **14 July 2026**. And the
+UK's post-DUAA "statistical purposes" exception does not rescue per-recipient open tracking,
+because the ICO frames that exception as being about how a service is used rather than *who*
+uses it.
+
+Direct exposure here looks small — a scan of the contact list found only about four EU/UK
+addresses by top-level domain — but that is a floor rather than a ceiling, since European
+recipients routinely use `.com` addresses and the obligation attaches to where the person
+is, not what their domain says. It takes one LP.
+
+The useful part: **no pixel and no redirect wrapper puts the newsletter outside Art. 5(3)
+entirely.** Nothing to consent to, no exemption to argue, no consent records to retain, no
+joint-controller question with an ESP. That is the same conclusion the accuracy argument
+reached, arrived at independently — which is a good reason to hold the line on it even if
+someone later asks for "just open rates."
+
+### CAN-SPAM
+
+Don't try to thread the transactional/relationship exemption. It is tempting — an LP has an
+existing commitment, and the rules do cover periodic account statements — but the mixed
+content rule says a message is **commercial** if the transactional content does not appear
+"in whole or in substantial part, at the beginning of the body," and the FTC warns
+explicitly against assuming an ongoing relationship converts messages into relationship
+messages. A narrative newsletter that opens with portfolio news fails that test, the
+classification would vary per recipient on the same send, and any Fund II solicitation makes
+it commercial outright.
+
+Complying fully costs a footer, and the template already largely does: accurate From,
+honest subject, physical postal address, working unsubscribe. Keep all four, honour opt-outs
+within 10 business days, and keep the mechanism live for at least 30 days after each send.
+Maximum civil penalty is $53,088 **per email**, so the arithmetic favours the footer.
+
+> Verify the footer's postal address is the fund's real registered address — it currently
+> carries the placeholder from the design mock.
+
 **Things not worth worrying about.** Several widely repeated rules have no basis in any
 Google documentation: text-to-image ratios, "spam trigger word" lists, link counts, and
 single- versus multi-column layout. Google's only content requirements are about deception —

@@ -37,7 +37,9 @@ should be designed, reviewed, and governed as one.
 **No consent state exists.** The Contacts schema has no subscription, opt-in, opt-out, or
 suppression field anywhere. There is currently no way to record that someone unsubscribed,
 and no way for a send to check. Rebuilding the list from Notion each month would silently
-resurrect every past opt-out. This must be fixed before any bulk send — see §5.
+resurrect every past opt-out — which, if any recipient has ever asked to be removed, is a
+live CAN-SPAM problem under §7704(a)(4)(A)(i) today, entirely independent of the
+securities-law question below. This must be fixed before any bulk send — see §6.
 
 **Prospect relationships are undocumented.** Of 485 `LP Lead` contacts, exactly **1** has a
 linked meeting, **0** have encounter records, and **1** has a named introducer. 444 carry
@@ -65,6 +67,52 @@ this, because the audience and the stated purpose both point at the next fund.
 That combination — unrealized performance figures, sent to bulk-sourced prospects, in
 service of an upcoming offering — is the fact pattern that needs a lawyer's eyes before it
 goes out, not a template change. Treat it as blocking for the `LP Lead` segment.
+
+### Why, specifically (research summary — not legal advice)
+
+The concern is not vague. Under Securities Act §2(a)(3) an "offer" is defined expansively,
+and publicity that conditions the public mind or arouses interest in securities counts as
+one. SEC staff applied this to Reg D in **C&DI 256.25**, which says factual business
+information — the stuff you *can* distribute freely — "generally does not include
+predictions, projections, forecasts or **opinions with respect to valuation of a security**,
+nor for a continuously offered fund would it include **information about past performance of
+the fund**."
+
+A 2024-vintage TVPI is precisely an opinion about the valuation of securities: it is the
+GP's own marks on private companies expressed as a multiple. On the face of 256.25 it sits
+outside the safe harbour. And **Rule 152(c)(2)** provides that a Reg D offering commences on
+the date the issuer first makes an offer — so if the newsletter is an offer of Fund II, it
+*commences that offering by mass email to a bulk-sourced list*, which Rule 502(c) prohibits
+inside a 506(b) raise.
+
+If the exemption fails the consequences are not cosmetic: a §5 violation, **§12(a)(1)
+rescission rights** (LPs can demand their capital back with interest), loss of NSMIA
+preemption reopening state blue-sky authority, and no fallback — **C&DI 260.13** states that
+general solicitation "continues to be incompatible with a claim of exemption under Section
+4(a)(2)."
+
+Two things cut in your favour. The taint is **per-purchaser**, not fund-wide: Rule
+152(a)(1) turns on reasonable belief, as to each purchaser, that they were not solicited
+through general solicitation *or* had a substantive relationship beforehand. Committed Fund I
+LPs and genuinely-known prospects who never received a performance blast are not tainted by
+one. And practitioners treat the taint as fading with time — though the SEC has never
+specified a cooling-off period, so that is genuinely unsettled.
+
+**The newsletter does not help build the relationship that would cure this — it works
+against it.** A pre-existing substantive relationship requires that the issuer has
+sufficient information to evaluate a prospect's financial circumstances and sophistication
+*and does in fact evaluate it* (**C&DI 256.31**; self-certification by checkbox is expressly
+insufficient). A newsletter is unilateral outbound broadcast: no information flows in and
+nothing is evaluated. Worse, it timestamps an offer made *before* any relationship existed.
+**C&DI 256.33**, revised in March 2025, reads almost against this fact pattern — the more
+people without prior relationship contacted through "impersonal, non-selective means of
+communication," the more likely it is general solicitation. A monthly HTML blast to 269
+addresses is definitionally that, and §2 of this document shows the relationship evidence
+is not there to rebut it.
+
+One framing correction worth recording: this is **not** an integration problem. Integration
+doctrine resolves whether two offerings collapse into one. If the newsletter is an offer of
+Fund II there is only one offering, and the issue is direct.
 
 ---
 
@@ -147,7 +195,14 @@ including the Marketing Rule. It does **not** exempt anyone from Advisers Act §
 **Rule 206(4)-8**, which by its terms applies to any adviser to a pooled investment vehicle
 with no registration predicate — and which prohibits materially misleading statements to
 investors *or prospective investors* in the pool. A performance figure sent to prospective
-LPs sits inside that rule's plain language. This is not theoretical for venture: the SEC
+LPs sits inside that rule's plain language. The SEC's adopting release for the rule
+(IA-2628) is unusually direct on all three points that matter here: it states the rule
+"applies to both registered and unregistered investment advisers"; it rejects the argument
+that prospects aren't harmed until they invest, saying misleading statements "are no less
+objectionable when made in an attempt to draw in new investors"; and it names the exact
+subject matter — "the performance of the pool" and "the valuation of the pool," reached
+through "electronic solicitations." Critically, **§206(4) requires no scienter**: negligent
+deception is enough, so good faith is not a defence. This is not theoretical for venture: the SEC
 brought several 206(4)-8 actions against ERAs in 2022 alone, most of them VC advisers,
 including Alumni Ventures Group (IA-5975), SparkLabs Global Ventures (IA-6121) and Energy
 Innovation Capital (IA-6104).
@@ -225,12 +280,25 @@ unsubscribe must survive every future re-import and re-tagging.
 
 ## 8. Open questions for JP and Graham
 
-1. **Does the `LP Lead` send happen at all before counsel reviews it?** This is the
-   blocking decision; everything else is implementation.
-2. **Is the newsletter one template with variants, or separate newsletters?** The founder
+1. **Is Fund II a 506(b) or a 506(c) offering?** This is the fork everything hangs on, and
+   the uncomfortable part is that it gets decided *by* the first solicitation whether or not
+   anyone intends to decide it. 506(c) permits general solicitation outright — the
+   newsletter, the TVPI, the whole demand-gen motion becomes available — but every purchaser
+   must be verified accredited, and the verification shortcut for existing investors does
+   **not** carry over from Fund I (C&DI 260.10). March 2025 staff guidance makes this much
+   cheaper via a $200K individual / $1M entity minimum plus written representations, but that
+   only helps if your minimums actually clear those thresholds; smaller angel cheques need
+   documented third-party verification on every close. Note the door swings one way: you can
+   move 506(b) → 506(c) before any sales, but 506(c) → 506(b) only if you never solicited.
+2. **Does the `LP Lead` send happen at all before counsel reviews it?** Blocking until
+   question 1 is settled.
+3. **Has the offering already commenced?** The partner meeting records informal polling of
+   "high-potential Fund 2 LPs." Worth asking counsel whether that started the clock under
+   Rule 152(c)(2).
+4. **Is the newsletter one template with variants, or separate newsletters?** The founder
    audience in particular wants different content, not a subset.
-3. **Who owns the `unsubscribe@` mailbox** and the weekly write-back into Notion?
-4. **What happens to the 145 untagged contacts** — classify, or exclude permanently?
-5. The 2026-07-21 review also asked for **shorter teasers linking out to the website blog**
+5. **Who owns the `unsubscribe@` mailbox** and the weekly write-back into Notion?
+6. **What happens to the 145 untagged contacts** — classify, or exclude permanently?
+7. The 2026-07-21 review also asked for **shorter teasers linking out to the website blog**
    rather than long inline content. That is a template change not yet made, and it would
    also reduce how much sensitive detail sits in the email body itself.

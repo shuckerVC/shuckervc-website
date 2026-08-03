@@ -771,7 +771,8 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 }
 .vignette-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .vignette-stat { font-family: var(--font-sans); font-weight: 900; font-size: 23px; letter-spacing: -0.02em; color: var(--ink-900); line-height: 1.12; }
-.vignette-per { display: inline-block; margin-left: 5px; font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--gray-400); white-space: nowrap; }
+.vignette-per { font-weight: 700; font-size: 15px; letter-spacing: 0; color: var(--gray-400); }
+.vignette-desc { font-size: 13px; font-weight: 700; color: var(--gray-500); margin-top: 6px; }
 .vignette-chev { font-size: 20px; font-weight: 300; line-height: 1; color: var(--gray-400); flex: none; transition: transform .45s ease; }
 .vignette.is-open .vignette-chev { transform: rotate(45deg); }
 .vignette-cat { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-top: 13px; }

@@ -759,7 +759,7 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 
 /* Collapsed cards; the description opens as a bottom OVERLAY panel that drops
    over the content below — nothing shifts. */
-.vignette-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
+.vignette-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: start; }
 .vignette {
   background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px;
   box-shadow: var(--shadow-sm); cursor: default; position: relative; z-index: 1;

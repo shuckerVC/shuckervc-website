@@ -136,7 +136,7 @@
     var steps = [].slice.call(c.querySelectorAll('[data-f-step]'));
     var fill = c.querySelector('[data-f-fill]');
     var cap = document.querySelector('[data-f-cap]');
-    var titles = ['Time to market', 'A dedicated Support Partner', 'Integrated operations'];
+    var titles = ['Your Support Partner', 'shuckerVC GPs', 'Specialist network'];
     function update() {
       var r = c.getBoundingClientRect();
       var anchor = window.innerHeight * 0.45;
@@ -220,27 +220,22 @@
     if (!grid) return;
     grid.innerHTML = '';
 
-    // Open/close toggles classes on existing DOM (no re-render), so the
-    // expand/collapse CSS transitions actually animate.
-    function setOpen(id) {
-      teamState.openId = id;
-      [].slice.call(grid.querySelectorAll('.team-card')).forEach(function (c) {
-        c.setAttribute('aria-expanded', c.getAttribute('data-member-id') === id ? 'true' : 'false');
-      });
-    }
-
     TEAM.forEach(function (m, idx) {
       var card = document.createElement('div');
       card.className = 'team-card';
       card.setAttribute('data-member-id', m.id);
+      // NOTE: no data-reveal here — initReveal() runs before renderTeam(), so a
+      // card-level reveal never gets observed (and renderTeam re-runs on hover),
+      // which left the cards stuck at opacity 0. Cards render visible; the gold
+      // teaser bar still animates via initTeamTeasers, bios open on hover/tap.
+      // Cards start collapsed and compact; a bio opens on hover (desktop)
+      // or tap (touch), one at a time. The CSS collapses the hidden bio's
+      // height so closed cards don't reserve whitespace.
+      var isOpen = teamState.openId === m.id;
+
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
-      card.setAttribute('aria-expanded', 'false');
-
-      // scroll-teaser: reveal slot fades/slides in once, staggered 120ms/card
-      var teaserStyle = prefersReduced
-        ? ''
-        : ' style="opacity:0;transform:translateY(6px);transition-delay:' + (idx * 120) + 'ms"';
+      card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 
       card.innerHTML =
         '<div class="team-photo-wrap">' +
@@ -248,53 +243,56 @@
         '</div>' +
         '<h3 class="team-member-name">' + m.name + '</h3>' +
         '<p class="team-member-title">' + m.title + '</p>' +
-        '<div class="team-teaser"' + teaserStyle + '>' +
+        '<div class="team-teaser" style="opacity:0;transform:translateY(6px);transition:opacity .42s ease,transform .42s cubic-bezier(.22,1,.36,1)">' +
           '<span class="team-bar"></span>' +
-          '<div class="team-expanded">' +
-            '<p class="team-member-tagline">' + m.tagline + '</p>' +
+        '</div>' +
+        (isOpen ?
+          '<div class="team-expanded" style="opacity:1">' +
+            '<p class="team-tagline">' + m.tagline + '</p>' +
             '<p class="team-bio">' + m.bio + '</p>' +
-            (m.linkedin ? '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' : '') +
-          '</div>' +
-        '</div>';
+            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
+          '</div>'
+          : '<div class="team-expanded" style="opacity:0">' +
+            '<p class="team-tagline">' + m.tagline + '</p>' +
+            '<p class="team-bio">' + m.bio + '</p>' +
+            '<a href="' + m.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn ↗</a>' +
+          '</div>'
+        );
 
       function onOpen() {
         if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
-        if (teamState.openId !== m.id) {
-          setOpen(m.id);
-          teamState.openedAt = Date.now();
-        }
+        if (teamState.openId === m.id) return;
+        teamState.openId = m.id;
+        renderTeam();
       }
-
-      // 120ms close delay so crossing the gap between cards doesn't flicker
       function onClose() {
         if (teamState.closeTimeout) clearTimeout(teamState.closeTimeout);
         teamState.closeTimeout = setTimeout(function () {
-          if (teamState.openId === m.id) setOpen(null);
+          if (teamState.openId === m.id) {
+            teamState.openId = null;
+            renderTeam();
+          }
         }, 120);
       }
 
-      function onToggle() {
-        if (teamState.openId === m.id) {
-          // a tap fires mouseenter/focus (open) then click — don't let that
-          // same tap immediately toggle the card closed again
-          if (Date.now() - (teamState.openedAt || 0) < 350) return;
-          setOpen(null);
-        } else {
-          setOpen(m.id);
-          teamState.openedAt = Date.now();
-        }
+      // Hover/focus opens on desktop; tap toggles on touch. One card at a time.
+      if (!prefersReduced) {
+        card.addEventListener('mouseenter', onOpen);
+        card.addEventListener('mouseleave', onClose);
+        card.addEventListener('focus', onOpen);
+        card.addEventListener('blur', onClose);
       }
-
-      card.addEventListener('mouseenter', onOpen);
-      card.addEventListener('mouseleave', onClose);
-      card.addEventListener('focus', onOpen);
-      card.addEventListener('blur', onClose);
-      card.addEventListener('click', onToggle);
-      card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); }
+      card.addEventListener('click', function () {
+        teamState.openId = teamState.openId === m.id ? null : m.id;
+        renderTeam();
       });
-      var lnk = card.querySelector('.team-linkedin');
-      if (lnk) lnk.addEventListener('click', function (e) { e.stopPropagation(); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          teamState.openId = teamState.openId === m.id ? null : m.id;
+          renderTeam();
+        }
+      });
 
       grid.appendChild(card);
     });
@@ -316,12 +314,56 @@
     { id: 'algorized', name: 'Algorized', cat: 'Robotics Perception', tags: ['Infrastructure', 'Support Partner'], milestone: 'Raised Series A', tint: '#00b49b', coInvestor: 'Amazon', site: 'https://www.algorized.com', shot: 'assets/portfolio/algorized.jpg', desc: 'Edge-AI perception that lets robots sense and anticipate people on the factory floor.', founders: [{ name: 'Natalya Lopareva', note: 'Founder & CEO', url: 'https://www.linkedin.com/in/natalyalopareva' }] }
   ];
   PORT.forEach(function (p) { if (!p.tags.includes('Fund I')) p.tags.push('Fund I'); });
+
+  // Per-company extras shown in the expanded showcase: a link to our post on the
+  // company (writing.html#<post>) and press mentions. Each mention renders the
+  // outlet logo at assets/press/<slug>.png when that file exists, otherwise a
+  // text wordmark of the outlet name. Drop <slug>.png files in to upgrade.
+  var PRESS = {
+    lodg: { post: 'lodg', items: [] },
+    cascade: {
+      post: 'cascade',
+      items: [
+        { name: 'Forbes', slug: 'forbes', url: 'https://www.forbes.com/sites/davidprosser/2026/07/20/how-cascade-plans-to-help-constructors-win-new-business-worth-millions/' },
+        { name: 'TechCrunch', slug: 'techcrunch', url: 'https://techcrunch.com/2026/07/22/cascade-raises-3-5m-to-help-construction-firms-find-and-win-projects/' },
+        { name: 'GlobeNewswire', slug: 'globenewswire', url: 'https://www.globenewswire.com/news-release/2026/07/21/3330581/0/en/cascade-raises-3-5m-to-help-construction-firms-predict-the-future-and-win-more-projects.html' },
+        { name: 'New York Business Journal', slug: 'bizjournals', url: 'https://www.bizjournals.com/newyork/news/2026/07/22/startup-cascade-raises-35m-construction.html' },
+        { name: 'Seedtable', slug: 'seedtable', url: 'https://seedtable.com/companies/usecascade/funding-rounds/seed-2026-07' },
+        { name: 'Proptech Connect', slug: 'proptechconnect', url: 'https://proptechconnect.com/cascade-raises-35m-to-help-construction-firms/' },
+        { name: 'Informed Infrastructure', slug: 'informedinfrastructure', url: 'https://informedinfrastructure.com/post/cascade-raises-35m-to-help-construction-firms-predict-the-future-and-win-more-projects' }
+      ]
+    },
+    brev: {
+      post: 'brev',
+      items: [
+        { name: 'VentureBeat', slug: 'venturebeat', url: 'https://venturebeat.com/business/brev-raises-33-million-to-build-the-ai-native-layer-between-business-goals-and-work' },
+        { name: 'Business Wire', slug: 'businesswire', url: 'https://www.businesswire.com/news/home/20260422680272/en/Brev-Raises-%243.3-Million-to-Build-the-AI-Native-Layer-Between-Business-Goals-and-Work' },
+        { name: 'citybiz', slug: 'citybiz', url: 'https://www.citybiz.co/article/836147/brev-raises-3-3-million-pre-seed-to-connect-ai-with-business-execution/' },
+        { name: 'Crunchbase', slug: 'crunchbase', url: 'https://www.crunchbase.com/organization/brev-io' },
+        { name: 'VC News Daily', slug: 'vcnewsdaily', url: 'https://vcnewsdaily.com/brev/venture-capital-funding/pkmqdrgtzg' }
+      ]
+    },
+    algorized: {
+      post: 'algorized',
+      items: [
+        { name: 'Algorized', slug: 'algorized', url: 'https://www.algorized.com/news/algorized-secures-%2413-million-to-build-the-edge-native-nervous-system-for-physical-ai-' },
+        { name: 'GGBA Switzerland', slug: 'ggba', url: 'https://ggba.swiss/en/algorized-raises-usd-13-million-to-advance-physical-ai-for-industrial-robotics/' },
+        { name: 'FinSMEs', slug: 'finsmes', url: 'https://www.finsmes.com/2026/02/algorized-raises-13m-in-series-a-funding.html' },
+        { name: 'Pulse 2.0', slug: 'pulse2', url: 'https://pulse2.com/algorized-13-million-series-a-raised-for-physical-ai-perception-and-predictive-safety-platform/' },
+        { name: 'Yahoo Finance', slug: 'yahoo-finance', url: 'https://finance.yahoo.com/news/algorized-kuka-redefine-robot-safety-231000181.html' },
+        { name: 'Dealroom', slug: 'dealroom', url: 'https://app.dealroom.co/news/feed/algorized-raises-13m-series-a-to-scale-edge-ai-safety-engine-for-industrial-robots' },
+        { name: 'Qorvo', slug: 'qorvo', url: 'https://www.qorvo.com/about/news-events/success-stories/algorized' }
+      ]
+    }
+  };
+
   var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
   var FUND = {
     name: 'Fund One',
     size: '$8M',
     checkSize: '$500K',
     count: PORT.length,
+    backing: 18, // fund target — companies we'll back (not the current live count)
     thesis: 'shuckerVC is a $8M Bay Area seed fund that backs AI-powered B2B software companies in the US using our experience investing in seed-stage SaaS companies, resulting in a 3.08 DPI.'
   };
 
@@ -379,8 +421,8 @@
               '<span class="port-fund-label">Max check</span>' +
             '</div>' +
             '<div class="port-fund-stat-col">' +
-              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.count + '</span>' +
-              '<span class="port-fund-label">Portfolio companies</span>' +
+              '<span class="port-fund-stat port-fund-stat--gold">' + FUND.backing + '</span>' +
+              '<span class="port-fund-label">Companies we\'ll back</span>' +
             '</div>' +
           '</div>' +
           '<div class="port-fund-hint">' + fundHint + '</div>' +
@@ -469,7 +511,7 @@
         if (p.coInvestor) {
           info += '<div class="port-coinv"><span class="port-coinv-label">Co-investing with</span><span class="port-coinv-pill">' + p.coInvestor + '</span></div>';
         }
-        info += '<div class="port-hint" style="color:' + p.tint + '">Click to expand ↗</div>';
+        info += '<div class="port-hint" style="color:' + p.tint + '">Click to see the product ↗</div>';
         info += '</div>';
       }
 
@@ -478,6 +520,7 @@
         '<div class="port-cat">' + p.cat + '</div>' +
         (p.milestone ? '<div class="port-milestone"><span class="port-milestone-dot"></span>' + p.milestone + ' ↗</div>' : '') +
         '<p class="port-desc">' + p.desc + '</p>' +
+        '<p class="port-founder">' + founderLine(p) + '</p>' +
         info;
 
       card.addEventListener('mouseenter', function () {
@@ -513,6 +556,23 @@
         '>' + q.name + '</button>';
     }).join('');
 
+    // Welcome-post link + press mentions (per-company, from PRESS)
+    var extra = PRESS[p.id] || {};
+    var postHtml = extra.post
+      ? '<a class="showcase-post" href="writing.html#' + extra.post + '">Read our post on ' + p.name + ' ↗</a>'
+      : '';
+    var pressHtml = (extra.items && extra.items.length)
+      ? '<div class="showcase-press">' +
+          '<div class="showcase-press-label">In the news</div>' +
+          '<div class="showcase-press-chips">' +
+            extra.items.map(function (m) {
+              return '<a class="press-chip" href="' + m.url + '" target="_blank" rel="noopener">' + m.name + ' ↗</a>';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      : '';
+    var moreHtml = (postHtml || pressHtml) ? '<div class="showcase-more">' + postHtml + pressHtml + '</div>' : '';
+
     root.innerHTML =
       '<div class="showcase" style="border:1px solid ' + p.tint + '">' +
         '<div class="showcase-top">' +
@@ -541,6 +601,7 @@
             (p.coInvestor ? '<div class="showcase-coinv"><span class="port-coinv-label">Co-investing with</span><span class="port-coinv-pill">' + p.coInvestor + '</span></div>' : '') +
           '</div>' +
         '</div>' +
+        moreHtml +
         '<div class="showcase-pills">' + pillsHtml + '</div>' +
       '</div>';
 
@@ -618,11 +679,15 @@
       .filter(function (p) { return insState.filter === 'All' || p.tag === insState.filter; })
       .sort(function (a, b) { return b.sort - a.sort; });
 
+    // insights.json + fallback both store root-relative "assets/..." paths, which
+    // are correct at the site root. Leave absolute/remote URLs untouched.
+    function insCover(c) { return c || ''; }
+
     var feat = sorted[0];
     featEl.innerHTML = feat ?
       '<a class="ins-feat" href="writing.html#' + encodeURIComponent(feat.id) + '">' +
         '<div class="ins-feat-cover">' +
-          (feat.cover ? '<img src="' + feat.cover + '" alt="" loading="lazy">' : '') +
+          (feat.cover ? '<img src="' + insCover(feat.cover) + '" alt="" loading="lazy">' : '') +
           '<span class="ins-feat-badge-wrap">' + insSolidBadge(feat.tag) + '</span>' +
           '<span class="ins-feat-read">' + feat.read + '</span>' +
         '</div>' +
@@ -889,16 +954,59 @@
   /* ============================================================
      INIT
      ============================================================ */
+  /* Vignette cards: one open at a time. Hover opens (desktop), tap opens (touch),
+     keyboard focus/Enter opens; leaving a card closes it. */
+  function initVignettes() {
+    var cards = [].slice.call(document.querySelectorAll('[data-vignette]'));
+    if (!cards.length) return;
+    function openOnly(card) { cards.forEach(function (c) { c.classList.toggle('is-open', c === card); }); }
+    cards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () { openOnly(card); });
+      card.addEventListener('mouseleave', function () { card.classList.remove('is-open'); });
+      card.addEventListener('click', function () { openOnly(card); });
+      card.addEventListener('focus', function () { openOnly(card); });
+      card.addEventListener('blur', function () { card.classList.remove('is-open'); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-open'); }
+      });
+    });
+  }
+
+  /* Submit-your-company form. NOT WIRED YET — on submit it validates and shows
+     a notice. When hosting is chosen, replace the marked stub with a fetch() to
+     the serverless endpoint that relays to the Decile API (pipeline
+     "Deals - shuckerVC Fund I, LP"). */
+  function initApplyForm() {
+    var form = document.getElementById('applyForm');
+    if (!form) return;
+    var note = form.querySelector('.apply-note');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      // TODO(wire-up): POST new FormData(form) to the Decile relay endpoint here.
+      // var body = Object.fromEntries(new FormData(form).entries());
+      // fetch(RELAY_URL, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) })...
+
+      if (note) {
+        note.textContent = 'Thanks — submissions aren’t connected yet. We’re wiring this to our pipeline; check back shortly.';
+        note.classList.add('is-msg');
+      }
+    });
+  }
+
   function init() {
     initNav();
     initReveal();
     initCounters();
     initSpotlightAndMagnets();
     initFocusScroll();
+    initVignettes();
     renderTeam();
     renderPortfolio();
     renderInsights();
     loadInsights();
+    initApplyForm();
     startCanvas();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

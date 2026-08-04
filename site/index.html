@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
   <!-- cursor spotlight (desktop only) -->
@@ -47,7 +47,7 @@
     </button>
     <div class="nav-links" id="navLinks" data-open="false">
       <a data-navlink href="#strategy">Strategy</a>
-      <a data-navlink href="#focus">Founder focus</a>
+      <a data-navlink href="#focus">Support model</a>
       <a data-navlink href="#portfolio">Portfolio</a>
       <a data-navlink href="#team">Team</a>
       <a data-navlink href="#insights">Insights</a>
@@ -61,10 +61,11 @@
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-wrap container">
       <div data-reveal>
-        <span class="eyebrow eyebrow--hero">Fueling founder focus</span>
+        <span class="eyebrow eyebrow--hero">More than a check</span>
       </div>
-      <h1 data-reveal data-delay="90" class="hero-title">Focused founders build stronger companies</h1>
-      <p data-reveal data-delay="180" class="hero-sub">Every portfolio company gets a dedicated, full-time Support Partner who owns everything outside product and engineering—so founders stay focused on building and selling.</p>
+      <h1 data-reveal data-delay="90" class="hero-title hero-title--quote">“I can finally focus on actually building the true company.”</h1>
+      <p data-reveal data-delay="150" class="hero-cite">— Natalya Lopareva, Founder &amp; CEO, Algorized</p>
+      <p data-reveal data-delay="220" class="hero-sub">We back early-stage B2B software founders and embed a full-time operator to run everything but product and engineering — finance, hiring, marketing, ops. You keep building. We keep pace.</p>
       <div data-reveal data-delay="260" class="hero-actions">
         <a data-magnetic href="#contact" class="btn btn--gold btn--lg">Submit your company</a>
       </div>
@@ -80,14 +81,31 @@
     <div class="container">
       <div data-reveal>
         <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Our strategy</span>
-        <h2 class="h2 mw-20">We believe focused founders build the strongest companies.</h2>
+        <h2 class="h2 mw-20">Focused founders build stronger companies.</h2>
       </div>
-      <p data-reveal data-delay="120" class="lead mw-64">We invest in early-stage, U.S.-based B2B software companies — industry and technology agnostic, with a bias toward technical founders chasing markets ripe for digital transformation. Our operating model earns us a seat in oversubscribed rounds alongside top lead investors.</p>
+      <p data-reveal data-delay="120" class="lead mw-64">The teams we back learn and ship faster. They know their customer cold, hire strong people early, and make big bets with conviction. We underwrite speed, and we multiply it with our support model.</p>
       <div data-reveal data-delay="220" class="strat-look">
-        <div class="strat-look-label">What we look for</div>
-        <div class="strat-look-words">
-          Pre-seed<span class="slash">/</span>Seed<span class="slash">/</span>B2B software<span class="slash">/</span>AI-native<span class="slash">/</span>Co-invest<span class="slash">/</span>US-based
-        </div>
+        <div class="strat-look-label">Teams we work with</div>
+        <ul class="strat-signals">
+          <li>Know exactly who they sell to</li>
+          <li>Ship product fast</li>
+          <li>Learn faster than the market</li>
+          <li>Attract and close strong talent</li>
+          <li>Stay obsessed with customers</li>
+          <li>Have real technical depth</li>
+          <li>See what others miss in the customer, market, or technology</li>
+          <li>Make big bets with conviction</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BAND — black block floating on the strategy(cream)/operations(white) seam -->
+  <section class="quoteband-sec">
+    <div class="quoteband-wrap">
+      <div data-reveal class="sv-quoteband">
+        <span class="sv-quoteband-eyebrow">Natalya Lopareva — Founder &amp; CEO, Algorized</span>
+        <blockquote class="sv-quoteband-quote">“It's the fund that can run as fast as the founders.”</blockquote>
       </div>
     </div>
   </section>
@@ -96,37 +114,102 @@
   <section id="focus" class="sv-sec sec--white">
     <div class="container">
       <div data-reveal>
-        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>The Support Partner Model</span>
+        <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Our Support Model</span>
       </div>
       <div data-reveal data-delay="80" class="focus-intro">
-        <h2 class="h2">The biggest bottleneck isn't capital — it's operational drag.</h2>
-        <p class="lead">We built a different kind of fund. We embed a dedicated, full-time operator in every portfolio company to handle everything outside product and engineering—at cost, with zero equity dilution. It's why founders choose us, even when competing term sheets are on the table.</p>
+        <h2 class="h2">Operational drag should never be your bottleneck.</h2>
+        <p class="lead">Every shuckerVC portfolio company gets a full-time operator: the Support Partner. They run finance, hiring, vendors, and reporting—anything that pulls your attention away from your product and customers.</p>
       </div>
 
+      <!-- Movement 1 — What the model covers: collapsed vignette grid (hover/tap to open).
+           Stat-first cards: the outcome metric is the headline (founder time is
+           the key metric), the category labels it, and the body gives the detail.
+           SECURITY card is parked below until it has a real outcome. -->
+      <div data-reveal data-delay="120" class="focus-vignettes">
+        <div class="vignette-head">
+          <span class="eyebrow eyebrow--gold">What the model covers</span>
+        </div>
+        <div class="vignette-grid" id="vignetteGrid">
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">2h<span class="vignette-per">/week</span></span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-desc">of founder time</div>
+            <div class="vignette-cat">Finance ops</div>
+            <div class="vignette-body"><p>Books closed by the second week of the month — start to finish, on just two hours of your time a week.</p></div>
+          </article>
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">8h<span class="vignette-per">/week</span></span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-desc">of founder time</div>
+            <div class="vignette-cat">Recruiting</div>
+            <div class="vignette-body"><p>Four engineers hired end to end — sourced, screened, and closed — on eight hours of your time a week.</p></div>
+          </article>
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">100% qualified</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-desc">no wasted meetings</div>
+            <div class="vignette-cat">GTM</div>
+            <div class="vignette-body"><p>Every sales call you take is a qualified lead — pipeline built and screened before it reaches you.</p></div>
+          </article>
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">12h on podcasts</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-desc">earned media</div>
+            <div class="vignette-cat">PR</div>
+            <div class="vignette-body"><p>Your Support Partner handles the media — right shows, right audiences — so you just show up, and your reach with customers and investors keeps compounding.</p></div>
+          </article>
+          <!-- SECURITY — parked pending a real outcome metric:
+          <article class="vignette" data-vignette role="listitem" tabindex="0">
+            <div class="vignette-top">
+              <span class="vignette-stat">[outcome]</span>
+              <span class="vignette-chev" aria-hidden="true">+</span>
+            </div>
+            <div class="vignette-cat">Security</div>
+            <div class="vignette-body"><p>[detail]</p></div>
+          </article>
+          -->
+        </div>
+      </div>
+
+      <!-- Where the depth comes from — static copy block. The three actors
+           (Support Partner, GPs, specialist network) are told through the
+           retitled timeline below. -->
+      <div data-reveal class="focus-depth">
+        <span class="eyebrow eyebrow--gold">Where the depth comes from</span>
+        <h3 class="depth-title">One hire. The depth of a firm.</h3>
+        <p class="depth-lead">You make one hire — a Support Partner, salary at cost. Behind them sits the firm: GPs who hire, train, and manage them, and a specialist bench on call when the work needs depth.</p>
+      </div>
+
+      <!-- Timeline — the three actors, told as a scroll-progress timeline. -->
       <div class="focus-grid">
         <div class="focus-timeline" id="focusTimeline">
           <div class="focus-rail"><span data-f-fill></span></div>
 
           <div data-f-step class="focus-step">
             <span data-dot class="focus-dot"></span>
-            <span data-num class="focus-num">01</span>
-            <h3 class="focus-step-title">Time to market</h3>
-            <p class="focus-step-body">Shipping fast matters—but bookkeeping, hiring, and admin pull founders off product and customers. We handle that so you don't have to.</p>
-            <div class="focus-tag-wrap"><span class="focus-tag"><span class="focus-tag-dot"></span>Faster to milestones</span></div>
+            <h3 class="focus-step-title">Your Support Partner</h3>
+            <p class="focus-step-body">We source and vet the candidates — you pick whoever best fits your stage. Your Support Partner is on our W2, embedded full-time in your company, running finance, hiring, vendors, and reporting day to day.</p>
+            <div class="focus-step-pills"><span class="focus-pill focus-pill--gold"><span class="focus-pill-dot" aria-hidden="true"></span>Salary at cost — no markup, no dilution</span></div>
           </div>
           <div data-f-step class="focus-step">
             <span data-dot class="focus-dot"></span>
-            <span data-num class="focus-num">02</span>
-            <h3 class="focus-step-title">A dedicated Support Partner</h3>
-            <p class="focus-step-body">A full-time Support Partner embeds with your team to own back-office work—finance ops, hiring, vendors, and reporting.</p>
-            <div class="focus-tag-wrap"><span class="focus-tag"><span class="focus-tag-dot"></span>1,000s of hours saved</span></div>
+            <h3 class="focus-step-title">shuckerVC GPs</h3>
+            <p class="focus-step-body">Behind every Support Partner sit the fund's GPs — bringing their operating experience and the network of Support Partners across the portfolio. They hire, train, and manage yours — you never manage the manager.</p>
+            <div class="focus-step-pills"><span class="focus-pill focus-pill--neutral">Covered by the fund</span></div>
           </div>
           <div data-f-step class="focus-step">
             <span data-dot class="focus-dot"></span>
-            <span data-num class="focus-num">03</span>
-            <h3 class="focus-step-title">Integrated operations</h3>
-            <p class="focus-step-body">Beyond the Support Partner: playbooks, software, and at-cost access to finance, people, and growth experts.</p>
-            <div class="focus-tag-wrap"><span class="focus-tag"><span class="focus-tag-dot"></span>At-cost embedded support</span></div>
+            <h3 class="focus-step-title">Specialist network</h3>
+            <p class="focus-step-body">On-call specialists in finance, people, growth, and security — pulled in when the work needs more depth than one operator.</p>
+            <div class="focus-step-pills"><span class="focus-pill focus-pill--neutral">At cost, on call</span></div>
           </div>
         </div>
 
@@ -138,28 +221,11 @@
           </div>
           <div class="video-cap">
             <span class="eyebrow eyebrow--gold">Now showing</span>
-            <span class="video-cap-title" data-f-cap>Time to market</span>
+            <span class="video-cap-title" data-f-cap>Your Support Partner</span>
           </div>
         </div>
       </div>
 
-      <div data-reveal class="focus-hiw">
-        <div class="focus-hiw-grid">
-          <div>
-            <span class="eyebrow eyebrow--gold">How it works</span>
-            <p class="focus-hiw-body">When a company joins the portfolio, we deploy a full-time W2 Support Partner hired through shuckerVC's LLC. The company pays their salary at cost—zero markup, zero dilution—and they embed with the leadership team through its highest-growth phase.</p>
-          </div>
-          <div>
-            <span class="eyebrow eyebrow--gold">What they own</span>
-            <p class="focus-hiw-body">Everything that isn't product or engineering: recruiting and HR, monthly book closing and forecasting, growth and marketing, office ops, SOC 2, and Series A prep.</p>
-          </div>
-          <div>
-            <span class="eyebrow eyebrow--gold">Why it aligns</span>
-            <p class="focus-hiw-body">Support Partners earn from our GP carry pool, not portfolio equity—so they're aligned with the fund's success, not the fate of any single company.</p>
-          </div>
-        </div>
-        <blockquote class="focus-quote">"Founders choose shuckerVC over other term sheets specifically for the Support Partner offering."</blockquote>
-      </div>
     </div>
   </section>
 
@@ -169,7 +235,7 @@
       <div data-reveal>
         <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Portfolio</span>
         <h2 class="h2 mw-18">The next interface shift, backed early.</h2>
-        <p class="lead mw-60">We believe conversational AI is the biggest leap in interfaces in 40 years. The startups capitalizing today become tomorrow's leaders.</p>
+        <p class="lead mw-60">Conversational AI is the biggest shift in interfaces in 40 years. The startups moving on it now are the ones that will lead.</p>
       </div>
 
       <div data-reveal data-delay="100" id="portFund"></div>
@@ -185,9 +251,55 @@
       <div data-reveal>
         <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Team</span>
         <h2 class="h2">The people in your corner.</h2>
+        <p class="lead mw-60"><strong style="color: var(--ink-900)">Operators first.</strong> JP and Graham are operators, not just investors — decades spent building, scaling, and running the back office we now run for you.</p>
       </div>
       <div class="team-grid" id="teamGrid">
         <!-- Rendered by app.js -->
+      </div>
+
+      <!-- SUPPORT PARTNERS — subtitle block under the team -->
+      <div class="sp-block" data-reveal>
+        <div class="sp-head">
+          <span class="eyebrow eyebrow--mark"><span class="eyebrow-dash"></span>Support Partners</span>
+          <h3 class="sp-title">Exceptional operators, embedded in your company.</h3>
+          <p class="lead mw-60">The exceptional talent behind every portfolio company — full-time operators we recruit, train, and embed to run the work that keeps founders on product and customers.</p>
+        </div>
+
+        <div class="sp-grid">
+          <!-- Megan Liu — graduated to Algorized -->
+          <article class="sp-card">
+            <div class="sp-photo-wrap">
+              <img class="sp-photo" src="assets/team/megan-liu-sq.jpg" alt="Megan Liu">
+              <span class="sp-flag sp-flag--grad">Graduated</span>
+            </div>
+            <h4 class="sp-name">Megan Liu</h4>
+            <p class="sp-role">Remained with Algorized</p>
+          </article>
+
+          <!-- Open role — Brev.io -->
+          <a class="sp-card sp-card--open" href="https://shuckervc.notion.site/" target="_blank" rel="noopener">
+            <div class="sp-photo-wrap">
+              <span class="sp-photo sp-photo--open" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>
+              </span>
+              <span class="sp-flag sp-flag--hiring"><span class="sp-flag-dot"></span>Now hiring</span>
+            </div>
+            <h4 class="sp-name">Support Partner</h4>
+            <p class="sp-role">Open role — Brev.io</p>
+          </a>
+
+          <!-- Open role — Lodg -->
+          <a class="sp-card sp-card--open" href="https://shuckervc.notion.site/" target="_blank" rel="noopener">
+            <div class="sp-photo-wrap">
+              <span class="sp-photo sp-photo--open" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>
+              </span>
+              <span class="sp-flag sp-flag--hiring"><span class="sp-flag-dot"></span>Now hiring</span>
+            </div>
+            <h4 class="sp-name">Support Partner</h4>
+            <p class="sp-role">Open role — Lodg</p>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -214,10 +326,76 @@
 
   <!-- CTA -->
   <section id="contact" class="sv-sec sec--gold">
-    <div data-reveal class="container cta-inner">
-      <h2 class="h2 cta-title">Tell us about your company.</h2>
-      <p class="cta-sub">We co-invest in oversubscribed rounds alongside top lead investors.</p>
-      <a data-magnetic href="#top" class="btn btn--ink btn--lg">Submit your company</a>
+    <div class="container">
+      <div data-reveal class="cta-inner">
+        <h2 class="h2 cta-title">Tell us about your company.</h2>
+        <p class="cta-sub">Founders pick us over competing term sheets — for the operating muscle behind every check.</p>
+      </div>
+
+      <!-- SUBMIT-YOUR-COMPANY FORM — branded intake. Fields mirror the Decile
+           deal-submission form. NOT WIRED YET: on submit it only shows a notice.
+           When hosting is chosen, replace the stub in initApplyForm() (app.js)
+           with a fetch() to the serverless endpoint that relays to the Decile
+           API (pipeline "Deals - shuckerVC Fund I, LP"). -->
+      <form id="applyForm" class="apply-form" data-reveal novalidate>
+        <div class="apply-grid">
+          <label class="field">
+            <span class="field-label">Company name <i>*</i></span>
+            <input class="field-input" type="text" name="company" required autocomplete="organization">
+          </label>
+          <label class="field">
+            <span class="field-label">Company website <i>*</i></span>
+            <input class="field-input" type="url" name="website" placeholder="https://" required>
+          </label>
+          <label class="field">
+            <span class="field-label">Your name <i>*</i></span>
+            <input class="field-input" type="text" name="name" required autocomplete="name">
+          </label>
+          <label class="field">
+            <span class="field-label">Email <i>*</i></span>
+            <input class="field-input" type="email" name="email" required autocomplete="email">
+          </label>
+          <label class="field">
+            <span class="field-label">Your role</span>
+            <input class="field-input" type="text" name="role" placeholder="e.g. Co-founder &amp; CEO">
+          </label>
+          <label class="field">
+            <span class="field-label">Location</span>
+            <input class="field-input" type="text" name="location" placeholder="City, Country">
+          </label>
+          <label class="field">
+            <span class="field-label">Round <i>*</i></span>
+            <select class="field-input" name="round" required>
+              <option value="" selected disabled>Select a stage</option>
+              <option>Pre-seed</option>
+              <option>Seed</option>
+              <option>Series A</option>
+              <option>Series B+</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Raising</span>
+            <input class="field-input" type="text" name="amount" placeholder="e.g. $2M">
+          </label>
+          <label class="field">
+            <span class="field-label">Pitch deck link</span>
+            <input class="field-input" type="url" name="deck" placeholder="https://">
+          </label>
+          <label class="field">
+            <span class="field-label">How did you hear about us?</span>
+            <input class="field-input" type="text" name="referral">
+          </label>
+          <label class="field field--full">
+            <span class="field-label">What are you building? <i>*</i></span>
+            <textarea class="field-input" name="pitch" rows="4" required placeholder="A sentence or two on the product, the customer, and any traction."></textarea>
+          </label>
+        </div>
+        <div class="apply-actions">
+          <button type="submit" class="btn btn--ink btn--lg">Submit your company</button>
+          <p class="apply-note" role="status">We read every submission — your details go straight to the partners.</p>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -235,6 +413,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>

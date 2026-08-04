@@ -1,0 +1,28 @@
+{
+  "_comment": "Press mentions per portfolio company (keyed by the company/post id). Rendered as a preview carousel at the bottom of the matching Writing article (writing.html#<id>). Titles derived from the article URLs; add/refine 'desc' and 'image' as available. 'image' is optional — cards fall back to a branded thumbnail.",
+  "cascade": [
+    { "outlet": "TechCrunch", "title": "Cascade raises $3.5M to help construction firms find and win projects", "desc": "a16z Speedrun, Ada Ventures, and Snowball VC have invested in Cascade's $3.5 million seed round.", "url": "https://techcrunch.com/2026/07/22/cascade-raises-3-5m-to-help-construction-firms-find-and-win-projects/" },
+    { "outlet": "Forbes", "title": "How Cascade Plans To Help Constructors Win New Business Worth Millions", "url": "https://www.forbes.com/sites/davidprosser/2026/07/20/how-cascade-plans-to-help-constructors-win-new-business-worth-millions/" },
+    { "outlet": "GlobeNewswire", "title": "Cascade raises $3.5M to help construction firms predict the future and win more projects", "url": "https://www.globenewswire.com/news-release/2026/07/21/3330581/0/en/cascade-raises-3-5m-to-help-construction-firms-predict-the-future-and-win-more-projects.html" },
+    { "outlet": "New York Business Journal", "title": "Startup Cascade raises $3.5M for construction", "url": "https://www.bizjournals.com/newyork/news/2026/07/22/startup-cascade-raises-35m-construction.html" },
+    { "outlet": "Proptech Connect", "title": "Cascade raises $3.5M to help construction firms", "url": "https://proptechconnect.com/cascade-raises-35m-to-help-construction-firms/" },
+    { "outlet": "Informed Infrastructure", "title": "Cascade raises $3.5M to help construction firms predict the future and win more projects", "url": "https://informedinfrastructure.com/post/cascade-raises-35m-to-help-construction-firms-predict-the-future-and-win-more-projects" },
+    { "outlet": "Seedtable", "title": "Cascade — seed round, July 2026", "url": "https://seedtable.com/companies/usecascade/funding-rounds/seed-2026-07" }
+  ],
+  "brev": [
+    { "outlet": "VentureBeat", "title": "Brev raises $3.3 million to build the AI-native layer between business goals and work", "desc": "The round was led by Resolute Ventures, with backing from shuckerVC, Duro VC, Gaingels, and FOG Ventures.", "url": "https://venturebeat.com/business/brev-raises-33-million-to-build-the-ai-native-layer-between-business-goals-and-work" },
+    { "outlet": "Business Wire", "title": "Brev Raises $3.3 Million to Build the AI-Native Layer Between Business Goals and Work", "url": "https://www.businesswire.com/news/home/20260422680272/en/Brev-Raises-%243.3-Million-to-Build-the-AI-Native-Layer-Between-Business-Goals-and-Work" },
+    { "outlet": "citybiz", "title": "Brev Raises $3.3 Million Pre-Seed to Connect AI With Business Execution", "url": "https://www.citybiz.co/article/836147/brev-raises-3-3-million-pre-seed-to-connect-ai-with-business-execution/" },
+    { "outlet": "Crunchbase", "title": "Brev.io — company profile", "url": "https://www.crunchbase.com/organization/brev-io" },
+    { "outlet": "VC News Daily", "title": "Brev — venture capital funding", "url": "https://vcnewsdaily.com/brev/venture-capital-funding/pkmqdrgtzg" }
+  ],
+  "algorized": [
+    { "outlet": "GGBA Switzerland", "title": "Algorized raises USD 13 million to advance physical AI for industrial robotics", "desc": "The Series A was led by Run Ventures, with participation from the Amazon Industrial Innovation Fund and Acrobator Ventures.", "url": "https://ggba.swiss/en/algorized-raises-usd-13-million-to-advance-physical-ai-for-industrial-robotics/" },
+    { "outlet": "Algorized", "title": "Algorized secures $13 million to build the edge-native nervous system for physical AI", "url": "https://www.algorized.com/news/algorized-secures-%2413-million-to-build-the-edge-native-nervous-system-for-physical-ai-" },
+    { "outlet": "FinSMEs", "title": "Algorized Raises $13M in Series A Funding", "url": "https://www.finsmes.com/2026/02/algorized-raises-13m-in-series-a-funding.html" },
+    { "outlet": "Pulse 2.0", "title": "Algorized: $13 Million Series A raised for physical AI perception and predictive safety", "url": "https://pulse2.com/algorized-13-million-series-a-raised-for-physical-ai-perception-and-predictive-safety-platform/" },
+    { "outlet": "Yahoo Finance", "title": "Algorized and KUKA redefine robot safety", "url": "https://finance.yahoo.com/news/algorized-kuka-redefine-robot-safety-231000181.html" },
+    { "outlet": "Dealroom", "title": "Algorized raises $13M Series A to scale edge-AI safety engine for industrial robots", "url": "https://app.dealroom.co/news/feed/algorized-raises-13m-series-a-to-scale-edge-ai-safety-engine-for-industrial-robots" },
+    { "outlet": "Qorvo", "title": "Algorized — Qorvo success story", "url": "https://www.qorvo.com/about/news-events/success-stories/algorized" }
+  ]
+}

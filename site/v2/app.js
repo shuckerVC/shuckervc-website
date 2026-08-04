@@ -564,14 +564,9 @@
     var pressHtml = (extra.items && extra.items.length)
       ? '<div class="showcase-press">' +
           '<div class="showcase-press-label">In the news</div>' +
-          '<div class="showcase-press-grid">' +
+          '<div class="showcase-press-chips">' +
             extra.items.map(function (m) {
-              return '<a class="press-card" href="' + m.url + '" target="_blank" rel="noopener" title="' + m.name + '" style="--pc:' + p.tint + '">' +
-                '<span class="press-card-badge">In the news</span>' +
-                '<span class="press-card-outlet">' + m.name + '</span>' +
-                '<span class="press-card-foot">shuckerVC</span>' +
-                '<span class="press-card-arrow" aria-hidden="true">↗</span>' +
-              '</a>';
+              return '<a class="press-chip" href="' + m.url + '" target="_blank" rel="noopener">' + m.name + ' ↗</a>';
             }).join('') +
           '</div>' +
         '</div>'

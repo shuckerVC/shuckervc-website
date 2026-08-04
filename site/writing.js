@@ -14,6 +14,7 @@
   };
 
   var POSTS = [];
+  var PRESS = {};
   var state = { filter: 'All', sortDir: 'desc', openId: null };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -125,6 +126,9 @@
       bodyHTML(post.body) +
       '<div class="wr-article-foot"><span class="ins-initials">' + esc(post.initials) + '</span><span class="meta">' + authorMeta + ' · ' + esc(post.read) + '</span></div>';
 
+    // "In the news" preview carousel for this company (if any press exists)
+    renderNews(post);
+
     // carousel of other posts
     var others = POSTS.filter(function (p) { return p.id !== post.id; });
     var rail = $('wrRail');
@@ -138,6 +142,35 @@
     [].slice.call(rail.querySelectorAll('[data-open]')).forEach(function (el) {
       el.addEventListener('click', function () { open(el.getAttribute('data-open')); });
     });
+  }
+
+  function renderNews(post) {
+    var sec = $('wrNews'), rail = $('wrNewsRail');
+    if (!sec || !rail) return;
+    var items = PRESS[post.id] || [];
+    if (!items.length) { sec.hidden = true; rail.innerHTML = ''; return; }
+    sec.hidden = false;
+    rail.innerHTML = items.map(function (m) {
+      var host = (m.url.split('/')[2] || '').replace(/^www\./, '');
+      var rest = m.url.replace(/^https?:\/\/[^/]+/, '');
+      var disp = host + rest; if (disp.length > 46) disp = disp.slice(0, 46) + '…';
+      var thumb = m.image
+        ? '<div class="wr-news-thumb" style="background-image:url(\'' + esc(m.image) + '\')"></div>'
+        : '<div class="wr-news-thumb wr-news-thumb--ph">' +
+            '<span class="wr-news-thumb-eyebrow">In the news</span>' +
+            '<span class="wr-news-thumb-outlet">' + esc(m.outlet) + '</span>' +
+            '<span class="wr-news-thumb-foot">shuckerVC</span>' +
+          '</div>';
+      return '<a class="wr-news-card" href="' + esc(m.url) + '" target="_blank" rel="noopener">' +
+          thumb +
+          '<div class="wr-news-info">' +
+            '<span class="wr-news-outlet">' + esc(m.outlet) + '</span>' +
+            '<h4 class="wr-news-title">' + esc(m.title) + '</h4>' +
+            (m.desc ? '<p class="wr-news-desc">' + esc(m.desc) + '</p>' : '') +
+            '<span class="wr-news-url">' + esc(disp) + '</span>' +
+          '</div>' +
+        '</a>';
+    }).join('');
   }
 
   /* ---------- view control + deep-linking ---------- */
@@ -169,8 +202,19 @@
   function init() {
     $('wrPrev').addEventListener('click', function () { var r = $('wrRail'); if (r) r.scrollBy({ left: -320, behavior: 'smooth' }); });
     $('wrNext').addEventListener('click', function () { var r = $('wrRail'); if (r) r.scrollBy({ left: 320, behavior: 'smooth' }); });
+    $('wrNewsPrev').addEventListener('click', function () { var r = $('wrNewsRail'); if (r) r.scrollBy({ left: -360, behavior: 'smooth' }); });
+    $('wrNewsNext').addEventListener('click', function () { var r = $('wrNewsRail'); if (r) r.scrollBy({ left: 360, behavior: 'smooth' }); });
     [].slice.call(document.querySelectorAll('[data-close]')).forEach(function (b) { b.addEventListener('click', close); });
     window.addEventListener('hashchange', syncFromHash);
+
+    // Press mentions (rendered into the reader's "In the news" carousel).
+    fetch('press.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (d) { Object.keys(d).forEach(function (k) { if (k.charAt(0) !== '_') PRESS[k] = d[k]; }); }
+        if (state.openId) { var p = POSTS.filter(function (x) { return x.id === state.openId; })[0]; if (p) renderNews(p); }
+      })
+      .catch(function () { /* no press */ });
 
     fetch('insights.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })

@@ -10,6 +10,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { buildFeed } from './build-feed.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const NOTION_IDS = new Set(['lodg', 'cascade', 'brev']); // live Notion-synced posts
@@ -34,3 +35,5 @@ merged.sort((a, b) => b.sort - a.sort);
 const out = { _generated: 'from Notion 🥁 shuckerVC Blog + scripts/essays.json', posts: merged };
 await writeFile(join(ROOT, 'site/insights.json'), JSON.stringify(out, null, 2) + '\n');
 console.log(`Wrote site/insights.json with ${merged.length} posts (${notionPosts.length} Notion + ${merged.length - notionPosts.length} essays).`);
+const feedCount = await buildFeed();
+console.log(`Wrote site/feed.xml with ${feedCount} items.`);

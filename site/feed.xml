@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>shuckerVC — Writing</title>
+    <link>https://shuckervc.github.io/shuckervc-website/writing.html</link>
+    <atom:link href="https://shuckervc.github.io/shuckervc-website/feed.xml" rel="self" type="application/rss+xml" />
+    <description>White papers, perspectives, and portfolio news from the shuckerVC team.</description>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Aug 2026 01:42:28 GMT</lastBuildDate>
+    <item>
+      <title>Welcome Lodg</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#lodg</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#lodg</guid>
+      <category>News</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 12:00:00 GMT</pubDate>
+      <description>AI workforce automates property management tasks, boosting efficiency across mid‑market.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/lodg.jpg" length="200920" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Welcome Cascade</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#cascade</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#cascade</guid>
+      <category>News</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Wed, 20 May 2026 12:00:00 GMT</pubDate>
+      <description>Cascade builds AI construction graph, unlocking capital flow for builders.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/cascade.png" length="210315" type="image/png" />
+    </item>
+    <item>
+      <title>AI is Eating Software</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#saas-pricing</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#saas-pricing</guid>
+      <category>White paper</category>
+      <dc:creator>JP Persico</dc:creator>
+      <pubDate>Fri, 15 May 2026 12:00:00 GMT</pubDate>
+      <description>Just as cloud and mobile once disrupted enterprise software, AI is now poised to be the next transformative force in the B2B SaaS landscape. With 60% of Y-Combinator&apos;s recent startups focused on AI, the potential for disruption is evident.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/saas-pricing.jpg" length="29361" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Welcome Brev.io</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#brev</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#brev</guid>
+      <category>News</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 12:00:00 GMT</pubDate>
+      <description>Brev uses autonomous AI agents to execute goals, replacing traditional tracking dashboards.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/brev.png" length="531023" type="image/png" />
+    </item>
+    <item>
+      <title>Our Support Partner Model</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#support-partner</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#support-partner</guid>
+      <category>Perspective</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:00:00 GMT</pubDate>
+      <description>The bottleneck for early founders isn&apos;t capital — it&apos;s operational drag. How we embed a full-time operator in every portfolio company, at cost and with zero dilution.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/support-partner.jpg" length="32413" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Q1 2026 update</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#q1-2026-update</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#q1-2026-update</guid>
+      <category>Newsletter</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Wed, 01 Apr 2026 12:00:00 GMT</pubDate>
+      <description>A landmark quarter — we closed Fund I, welcomed Brev to the portfolio, Algorized closed its Series A, and the team was out across the Bay Area AI ecosystem.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/q1-2026-update.jpg" length="26496" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Why we backed Atlas: monetizing impact, not tokens</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#atlas</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#atlas</guid>
+      <category>Perspective</category>
+      <dc:creator>Graham Siegel</dc:creator>
+      <pubDate>Sun, 15 Mar 2026 12:00:00 GMT</pubDate>
+      <description>As compute costs collapse, durable SaaS won&apos;t meter tokens — it&apos;ll price the outcomes it delivers. The thesis behind our investment in Atlas.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/atlas.jpg" length="78463" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Algorized raises its Series A</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#algorized</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#algorized</guid>
+      <category>News</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Sun, 15 Feb 2026 12:00:00 GMT</pubDate>
+      <description>Our edge-AI perception company closes its Series A alongside Amazon — bringing robots that sense and anticipate people to the factory floor.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/algorized.jpg" length="127556" type="image/jpeg" />
+    </item>
+    <item>
+      <title>2025 in review</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#2025-in-review</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#2025-in-review</guid>
+      <category>Newsletter</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Mon, 05 Jan 2026 12:00:00 GMT</pubDate>
+      <description>A look back at 2025 — how we invested, what we&apos;re prioritizing in 2026, the Algorized × KUKA partnership at CES, and qualitative progress across the portfolio.</description>
+      <enclosure url="https://shuckervc.github.io/shuckervc-website/assets/insights/2025-in-review.jpg" length="25747" type="image/jpeg" />
+    </item>
+  </channel>
+</rss>

@@ -10,6 +10,7 @@
       "author": "JP Persico",
       "initials": "JP",
       "read": "5 min read",
+      "cover": "assets/insights/saas-pricing.jpg",
       "url": "https://shuckervc.notion.site/shuckervc-news",
       "body": [
         { "t": "p", "text": "The introduction of the Macintosh computer was a watershed moment in personal computing, setting new standards and reshaping user experiences. Similarly, the enterprise B2B software landscape was profoundly disrupted by the cloud and mobile revolutions, giving birth to the B2B SaaS industry we recognize today. Now, as we stand on the cusp of an AI-driven transformation, it feels reminiscent of that Macintosh moment. AI is poised to be the next significant disruptor, promising to redefine the B2B SaaS space. This isn't just another technological wave; it's a foundational shift that redefines business models, value propositions, and the very essence of enterprise solutions." },
@@ -40,6 +41,7 @@
       "author": "shuckerVC",
       "initials": "sV",
       "read": "6 min read",
+      "cover": "assets/insights/support-partner.jpg",
       "url": "https://shuckervc.notion.site/our-support-partner-model",
       "body": [
         { "t": "p", "text": "At shuckerVC, we believe the biggest bottleneck for technical founders isn't capital — it's operational drag. That's why we built the Support Partner Model: a dedicated, full-time operational partner embedded in each portfolio company to handle everything outside of product and engineering." },
@@ -109,6 +111,7 @@
       "author": "shuckerVC",
       "initials": "sV",
       "read": "5 min read",
+      "cover": "assets/insights/q1-2026-update.jpg",
       "url": "https://shuckervc.notion.site/shuckervc-news",
       "body": [
         { "t": "p", "text": "Q1 was a landmark quarter for shuckerVC. We held the final close of Fund I, welcomed Brev as a new portfolio company, and Algorized closed its Series A — twelve months after our seed entry. We're now fully focused on deployment and portfolio support." },
@@ -136,6 +139,7 @@
       "author": "shuckerVC",
       "initials": "sV",
       "read": "5 min read",
+      "cover": "assets/insights/2025-in-review.jpg",
       "url": "https://shuckervc.notion.site/shuckervc-news",
       "body": [
         { "t": "p", "text": "Heading into 2026, our conviction is unchanged: we back deep domain-expert founders building AI-native software. That expertise may be in building AI-native systems — as with Algorized and Sindarin — or in deep product and market understanding, as with Atlas and Runreal. As we invest alongside top-tier venture firms, we continue to build our own independent conviction about where durable value is created." },

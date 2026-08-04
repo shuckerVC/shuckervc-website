@@ -626,6 +626,9 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .wr-sort { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer; font-size: 13px; font-weight: 700; font-family: var(--font-sans); border: 1px solid var(--border); background: #fff; color: var(--ink-700); transition: all .22s ease; }
 .wr-sort:hover { box-shadow: var(--shadow-sm); }
 .wr-sort .wr-sort-arrow { color: var(--gold-deep); font-size: 15px; }
+.wr-rss { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 15px; border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .02em; border: 1px solid var(--border); background: #fff; color: var(--gold-deep); transition: all .22s ease; }
+.wr-rss:hover { box-shadow: var(--shadow-sm); border-color: var(--gold-400); }
+.wr-rss svg { color: var(--gold-500); }
 
 /* featured */
 .wr-feat { display: block; margin-top: 36px; border-radius: 20px; background: #fff; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 8px 30px rgba(17,17,17,0.06); cursor: pointer; transition: transform .3s var(--ease-out), box-shadow .3s ease; }

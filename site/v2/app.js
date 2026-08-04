@@ -618,11 +618,15 @@
       .filter(function (p) { return insState.filter === 'All' || p.tag === insState.filter; })
       .sort(function (a, b) { return b.sort - a.sort; });
 
+    // insights.json stores covers root-relative ("assets/..."); the fallback data
+    // uses "../assets/...". This page lives at /v2/, so normalize to "../".
+    function insCover(c) { return c ? (/^(\.\.\/|https?:|\/)/.test(c) ? c : '../' + c) : ''; }
+
     var feat = sorted[0];
     featEl.innerHTML = feat ?
       '<a class="ins-feat" href="../writing.html#' + encodeURIComponent(feat.id) + '">' +
         '<div class="ins-feat-cover">' +
-          (feat.cover ? '<img src="' + feat.cover + '" alt="" loading="lazy">' : '') +
+          (feat.cover ? '<img src="' + insCover(feat.cover) + '" alt="" loading="lazy">' : '') +
           '<span class="ins-feat-badge-wrap">' + insSolidBadge(feat.tag) + '</span>' +
           '<span class="ins-feat-read">' + feat.read + '</span>' +
         '</div>' +

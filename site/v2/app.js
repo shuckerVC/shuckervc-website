@@ -5,6 +5,24 @@
 (function () {
   'use strict';
 
+  /* ------------------------------------------------------------
+     Canonical data — portfolio, team, and the fund card — is embedded in the
+     page as <script type="application/json"> by scripts/build-agent-surfaces.mjs,
+     from site/data/*.json. Reading it here rather than keeping literals in this
+     file means one source of truth for the site, llms.txt, the .md twins, and
+     anything that fetches the page without running it. Edit site/data/*.json,
+     then run `npm run agents`.
+     ------------------------------------------------------------ */
+  var ASSET_PREFIX = '../';   // this page's path back to site/assets/
+  function svData(id, fallback) {
+    var el = document.getElementById(id);
+    if (!el) return fallback;
+    try { return JSON.parse(el.textContent); } catch (e) { return fallback; }
+  }
+  function svAsset(p) {
+    return p && !/^(https?:|\/|\.\.\/)/.test(p) ? ASSET_PREFIX + p : p;
+  }
+
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ACCENT = '#ffcd3c';
 
@@ -163,38 +181,7 @@
   /* ============================================================
      TEAM — 3-person expandable grid with scroll teaser
      ============================================================ */
-  var TEAM = [
-    {
-      id: 'jp',
-      name: 'Jean-Philippe "JP" Persico',
-      title: 'Co-founder & Managing Partner',
-      tagline: 'Operator and investor',
-      bio: 'At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.',
-      photo: '../assets/team/jp-persico-sq.jpg',
-      linkedin: 'https://www.linkedin.com/in/jppersico',
-      sortOrder: 0
-    },
-    {
-      id: 'graham',
-      name: 'Graham Siegel',
-      title: 'Co-founder & Managing Partner',
-      tagline: 'Four-time startup founder',
-      bio: 'At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.',
-      photo: '../assets/team/graham-siegel-sq.jpg',
-      linkedin: 'https://www.linkedin.com/in/grahamsiegel',
-      sortOrder: 1
-    },
-    {
-      id: 'gabe',
-      name: 'Gabe Regalado',
-      title: 'Venture Partner',
-      tagline: 'Investor Relations and Real Estate Professional',
-      bio: 'A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.',
-      photo: '../assets/team/gabe-regalado-sq.jpg',
-      linkedin: 'https://www.linkedin.com/in/gabedregalado',
-      sortOrder: 2
-    }
-  ];
+  var TEAM = svData('sv-data-team', []).map(function (m) { m.photo = svAsset(m.photo); return m; });
 
   var teamState = { openId: null, closeTimeout: null };
   var teamTeaserIO = null;
@@ -304,15 +291,7 @@
   /* ============================================================
      PORTFOLIO
      ============================================================ */
-  var PORT = [
-    { id: 'lodg', name: 'Lodg', cat: 'Property Operations AI', tags: ['Applied AI', 'Support Partner'], tint: '#e0653a', site: 'https://www.lodg.ai', shot: '../assets/portfolio/lodg.jpg', desc: 'Lodg runs the full lead-to-lease workflow for property managers — qualification, scheduling, follow-up, and tenant operations.', founders: [{ name: 'Jake Drutchas', note: 'Co-founder & CEO', url: 'https://linkedin.com/in/drutchas' }, { name: 'Amitav Chakravartty', note: 'Co-founder & CTO', url: 'https://linkedin.com/in/amitavchakravartty' }] },
-    { id: 'cascade', name: 'Cascade', cat: 'Construction AI', tags: ['Applied AI', 'Support Partner'], tint: '#1f9d6b', coInvestor: 'a16z Speedrun', site: 'https://usecascade.ai', shot: '../assets/portfolio/cascade.jpg', desc: 'Building the first AI-traversable graph of US construction — matching firms to the projects they can actually win.', founders: [{ name: 'Hannia Zia', note: 'CEO, ex–Google Pay', url: 'https://www.linkedin.com/in/hanniazia' }, { name: 'Joana Ferreira', note: 'CTO, ex–Google ML', url: 'https://www.linkedin.com/in/joanaferreira0011' }] },
-    { id: 'brev', name: 'Brev.io', cat: 'Workflow AI', tags: ['Applied AI', 'Support Partner'], tint: '#2f7de0', site: 'https://brev.io', shot: '../assets/portfolio/brev.jpg', desc: 'Turns meetings, tools, and goals into an automatic system of record — capturing commitments and tracking whether they are met.', founders: [{ name: 'Chris Pitchford', note: 'CEO, ex-Microsoft / Ally.io', url: 'https://www.linkedin.com/in/chrispitchford' }, { name: 'Vic Hu', note: 'CTO, ex-Meta', url: 'https://www.linkedin.com/in/cvichu' }] },
-    { id: 'sindarin', name: 'Sindarin', cat: 'Voice AI', tags: ['Voice', 'Infrastructure'], tint: '#7c5cff', site: 'https://www.sindarin.tech', shot: '../assets/portfolio/sindarin.jpg', desc: 'Enterprise voice-AI with ~95% call success and speaker isolation that cuts interruptions by 90%.', founders: [{ name: 'Brian Atwood', note: 'Technical founder & CEO', url: 'https://www.linkedin.com/in/batwood011' }] },
-    { id: 'atlas', name: 'Atlas', cat: 'AI Monetization', tags: ['Applied AI'], tint: '#e0653a', coInvestor: '500 Global', site: 'https://runonatlas.com', shot: '../assets/portfolio/atlas.jpg', desc: 'The dynamic, outcome-based pricing and monetization layer for AI-native SaaS.', founders: [{ name: 'Michael Hoy', note: '3x founder & CEO', url: 'https://www.linkedin.com/in/michaelthoy' }] },
-    { id: 'runreal', name: 'Runreal', cat: 'Dev Tools', tags: ['Dev Tools'], tint: '#6b7689', coInvestor: 'a16z', site: 'https://runreal.dev', shot: '../assets/portfolio/runreal.jpg', fit: 'contain', desc: 'AI agents and self-serve tooling for studios building on Unreal Engine.', founders: [{ name: 'Marwan Hilmi', note: 'Co-creator of the PS5 title Godfall', url: 'https://www.linkedin.com/in/marwanhilmi' }] },
-    { id: 'algorized', name: 'Algorized', cat: 'Robotics Perception', tags: ['Infrastructure', 'Support Partner'], milestone: 'Raised Series A', tint: '#00b49b', coInvestor: 'Amazon', site: 'https://www.algorized.com', shot: '../assets/portfolio/algorized.jpg', desc: 'Edge-AI perception that lets robots sense and anticipate people on the factory floor.', founders: [{ name: 'Natalya Lopareva', note: 'Founder & CEO', url: 'https://www.linkedin.com/in/natalyalopareva' }] }
-  ];
+  var PORT = svData('sv-data-portfolio', []).map(function (c) { c.shot = svAsset(c.shot); return c; });
   PORT.forEach(function (p) { if (!p.tags.includes('Fund I')) p.tags.push('Fund I'); });
 
   // Per-company extras shown in the expanded showcase: a link to our post on the
@@ -358,12 +337,17 @@
   };
 
   var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
+  /* Display copy for the fund supertile. The numbers are read from the canonical
+     fund card (site/data/fund.json) so this tile, llms.txt and the .md twins can
+     never disagree; `name` and `thesis` stay here because they are page copy
+     rather than facts. */
+  var FUND_CARD = (svData('sv-data-fund', {}) || {}).fund || {};
   var FUND = {
     name: 'Fund One',
-    size: '$8M',
-    checkSize: '$500K',
+    size: '$' + ((FUND_CARD.size_usd || 8000000) / 1e6) + 'M',
+    checkSize: '$' + ((FUND_CARD.check_size_usd_max || 500000) / 1e3) + 'K',
     count: PORT.length,
-    backing: 18, // fund target — companies we'll back (not the current live count)
+    backing: FUND_CARD.target_companies || 18, // fund target — companies we'll back (not the current live count)
     thesis: 'shuckerVC is a $8M Bay Area seed fund that backs AI-powered B2B software companies in the US using our experience investing in seed-stage SaaS companies, resulting in a 3.08 DPI.'
   };
 

@@ -1,0 +1,165 @@
+{
+  "_comment": "Canonical portfolio data. Edited here; consumed by both site/app.js and site/v2/app.js via the generated <script type=\"application/json\"> block in each index.html, and by scripts/build-agent-surfaces.mjs. Run `npm run agents` after editing.",
+  "updated": "2026-08-04",
+  "companies": [
+    {
+      "id": "lodg",
+      "name": "Lodg",
+      "cat": "Property Operations AI",
+      "tags": [
+        "Applied AI",
+        "Support Partner"
+      ],
+      "tint": "#e0653a",
+      "site": "https://www.lodg.ai",
+      "shot": "assets/portfolio/lodg.jpg",
+      "desc": "Lodg runs the full lead-to-lease workflow for property managers — qualification, scheduling, follow-up, and tenant operations.",
+      "founders": [
+        {
+          "name": "Jake Drutchas",
+          "note": "Co-founder & CEO",
+          "url": "https://linkedin.com/in/drutchas"
+        },
+        {
+          "name": "Amitav Chakravartty",
+          "note": "Co-founder & CTO",
+          "url": "https://linkedin.com/in/amitavchakravartty"
+        }
+      ]
+    },
+    {
+      "id": "cascade",
+      "name": "Cascade",
+      "cat": "Construction AI",
+      "tags": [
+        "Applied AI",
+        "Support Partner"
+      ],
+      "tint": "#1f9d6b",
+      "coInvestor": "a16z Speedrun",
+      "site": "https://usecascade.ai",
+      "shot": "assets/portfolio/cascade.jpg",
+      "desc": "Building the first AI-traversable graph of US construction — matching firms to the projects they can actually win.",
+      "founders": [
+        {
+          "name": "Hannia Zia",
+          "note": "CEO, ex–Google Pay",
+          "url": "https://www.linkedin.com/in/hanniazia"
+        },
+        {
+          "name": "Joana Ferreira",
+          "note": "CTO, ex–Google ML",
+          "url": "https://www.linkedin.com/in/joanaferreira0011"
+        }
+      ]
+    },
+    {
+      "id": "brev",
+      "name": "Brev.io",
+      "cat": "Workflow AI",
+      "tags": [
+        "Applied AI",
+        "Support Partner"
+      ],
+      "tint": "#2f7de0",
+      "site": "https://brev.io",
+      "shot": "assets/portfolio/brev.jpg",
+      "desc": "Turns meetings, tools, and goals into an automatic system of record — capturing commitments and tracking whether they are met.",
+      "founders": [
+        {
+          "name": "Chris Pitchford",
+          "note": "CEO, ex-Microsoft / Ally.io",
+          "url": "https://www.linkedin.com/in/chrispitchford"
+        },
+        {
+          "name": "Vic Hu",
+          "note": "CTO, ex-Meta",
+          "url": "https://www.linkedin.com/in/cvichu"
+        }
+      ]
+    },
+    {
+      "id": "sindarin",
+      "name": "Sindarin",
+      "cat": "Voice AI",
+      "tags": [
+        "Voice",
+        "Infrastructure"
+      ],
+      "tint": "#7c5cff",
+      "site": "https://www.sindarin.tech",
+      "shot": "assets/portfolio/sindarin.jpg",
+      "desc": "Enterprise voice-AI with ~95% call success and speaker isolation that cuts interruptions by 90%.",
+      "founders": [
+        {
+          "name": "Brian Atwood",
+          "note": "Technical founder & CEO",
+          "url": "https://www.linkedin.com/in/batwood011"
+        }
+      ]
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "cat": "AI Monetization",
+      "tags": [
+        "Applied AI"
+      ],
+      "tint": "#e0653a",
+      "coInvestor": "500 Global",
+      "site": "https://runonatlas.com",
+      "shot": "assets/portfolio/atlas.jpg",
+      "desc": "The dynamic, outcome-based pricing and monetization layer for AI-native SaaS.",
+      "founders": [
+        {
+          "name": "Michael Hoy",
+          "note": "3x founder & CEO",
+          "url": "https://www.linkedin.com/in/michaelthoy"
+        }
+      ]
+    },
+    {
+      "id": "runreal",
+      "name": "Runreal",
+      "cat": "Dev Tools",
+      "tags": [
+        "Dev Tools"
+      ],
+      "tint": "#6b7689",
+      "coInvestor": "a16z",
+      "site": "https://runreal.dev",
+      "shot": "assets/portfolio/runreal.jpg",
+      "fit": "contain",
+      "desc": "AI agents and self-serve tooling for studios building on Unreal Engine.",
+      "founders": [
+        {
+          "name": "Marwan Hilmi",
+          "note": "Co-creator of the PS5 title Godfall",
+          "url": "https://www.linkedin.com/in/marwanhilmi"
+        }
+      ]
+    },
+    {
+      "id": "algorized",
+      "name": "Algorized",
+      "cat": "Robotics Perception",
+      "tags": [
+        "Infrastructure",
+        "Support Partner"
+      ],
+      "milestone": "Raised Series A",
+      "tint": "#00b49b",
+      "coInvestor": "Amazon",
+      "site": "https://www.algorized.com",
+      "shot": "assets/portfolio/algorized.jpg",
+      "desc": "Edge-AI perception that lets robots sense and anticipate people on the factory floor.",
+      "founders": [
+        {
+          "name": "Natalya Lopareva",
+          "note": "Founder & CEO",
+          "url": "https://www.linkedin.com/in/natalyalopareva"
+        }
+      ]
+    }
+  ]
+}

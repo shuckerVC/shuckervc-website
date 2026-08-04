@@ -40,6 +40,43 @@ and **page cover**) and merged with the evergreen essays in `scripts/essays.json
   To make one fully Notion-driven, add it as a Blog post (Category set) and remove it
   from that file — the sync dedupes by id/title so Notion wins.
 
+## Canonical data + agent-readable surfaces
+
+Portfolio, team, and the fund card now live in **`site/data/*.json`**, not in
+`app.js`. `scripts/build-agent-surfaces.mjs` (`npm run agents`) reads them and
+writes everything a non-JS reader needs — a research agent, a crawler, reader
+mode, `curl`:
+
+- **`llms.txt`** — the index: fund facts, what exists, where the canonical copy is.
+- **`llms-full.txt`** — thesis, support model, portfolio, team, and every article
+  in full. One fetch instead of a crawl.
+- **`thesis.md` · `portfolio.md` · `team.md` · `writing.md`** — prose twins.
+  `thesis.md` is extracted from the live `#strategy` / `#focus` markup, so the copy
+  can't drift from the page.
+- **`robots.txt`** (explicitly allows the agent crawlers) and **`sitemap.xml`**.
+- Injected between markers into `index.html`, `v2/index.html`, `writing.html`:
+  JSON-LD (`Organization`, `Person`, portfolio `ItemList`, per-article
+  `Article`/`NewsArticle`) plus `<script type="application/json">` data blocks.
+
+**Both `app.js` files read those data blocks** (`svData()`), so the JSON is the
+single source of truth for the rendered site *and* the machine-readable copies —
+they cannot disagree. It's embedded in the HTML rather than fetched, so `file://`
+still works.
+
+**After editing `site/data/*.json`, run `npm run agents`.** The deploy workflow
+runs it too, so a forgotten rebuild can't ship stale data, and the Notion sync
+re-runs it whenever new writing lands.
+
+`site/data/fund.json` carries a `_needs_confirmation` list — fields a partner
+still has to confirm (whether we lead, the explicit "not a fit" list, response
+SLA). They're deliberately `null` rather than guessed: anything published here
+gets quoted back as fact.
+
+Roles live in `site/data/roles.json`. A role only becomes `JobPosting` structured
+data — the thing that makes it findable by a candidate's agent or Google Jobs —
+when its `published` flag is `true`; the Support Partner role is scaffolded but
+off pending real dates and an application URL.
+
 ## Portfolio — links + screenshots
 Tiles are intentionally text-only (no logos). Opening a company shows a **feature
 screenshot of its own website** (`assets/portfolio/<id>.jpg`) plus a "Visit ↗"

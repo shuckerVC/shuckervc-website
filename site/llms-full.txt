@@ -1,0 +1,640 @@
+# shuckerVC — complete corpus
+
+Generated 2026-08-04. Everything shuckerVC publishes, in one file, so you do not
+have to crawl. Canonical HTML: https://shuckervc.github.io/shuckervc-website/ · Index: https://shuckervc.github.io/shuckervc-website/llms.txt
+
+# shuckerVC — thesis and support model
+
+## Fund facts
+
+- **Fund:** Fund I (shuckerVC Fund I, LP)
+- **Fund size:** $8M
+- **Check size:** up to $500K
+- **Target portfolio:** 18 companies (7 backed so far)
+- **Stage:** pre-seed, seed
+- **Sectors:** B2B software, applied AI, AI infrastructure, voice AI, developer tools
+- **Geography:** United States — US-focused; the portfolio includes European-founded companies (Cascade in the UK, Algorized in Switzerland).
+- **HQ:** Silicon Valley, California, USA
+- **Prior track record:** 3.08 DPI from the partners' prior seed-stage SaaS investing — not a Fund I return.
+- **What makes us different:** A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.
+- **Submit a company:** https://shuckervc.github.io/shuckervc-website/v2/#contact
+- **Last updated:** 2026-08-04
+
+# Strategy
+
+## Focused founders build stronger companies.
+
+The teams we back learn and ship faster. They know their customer cold, hire strong people early, and make big bets with conviction. We underwrite speed, and we multiply it with our support model.
+
+### Teams we work with
+
+- Know exactly who they sell to
+- Ship product fast
+- Learn faster than the market
+- Attract and close strong talent
+- Stay obsessed with customers
+- Have real technical depth
+- See what others miss in the customer, market, or technology
+- Make big bets with conviction
+
+# The Support Partner model
+
+## Operational drag should never be your bottleneck.
+
+Every shuckerVC portfolio company gets a full-time operator: the Support Partner. They run finance, hiring, vendors, and reporting—anything that pulls your attention away from your product and customers.
+
+Finance ops — 2h /week of founder time. Books closed by the second week of the month — start to finish, on just two hours of your time a week.
+
+Recruiting — 8h /week of founder time. Four engineers hired end to end — sourced, screened, and closed — on eight hours of your time a week.
+
+GTM — 100% qualified no wasted meetings. Every sales call you take is a qualified lead — pipeline built and screened before it reaches you.
+
+PR — 12h on podcasts earned media. Your Support Partner handles the media — right shows, right audiences — so you just show up, and your reach with customers and investors keeps compounding.
+
+### One hire. The depth of a firm.
+
+You make one hire — a Support Partner, salary at cost. Behind them sits the firm: GPs who hire, train, and manage them, and a specialist bench on call when the work needs depth.
+
+### Your Support Partner
+
+We source and vet the candidates — you pick whoever best fits your stage. Your Support Partner is on our W2, embedded full-time in your company, running finance, hiring, vendors, and reporting day to day.
+
+### shuckerVC GPs
+
+Behind every Support Partner sit the fund's GPs — bringing their operating experience and the network of Support Partners across the portfolio. They hire, train, and manage yours — you never manage the manager.
+
+### Specialist network
+
+On-call specialists in finance, people, growth, and security — pulled in when the work needs more depth than one operator.
+
+
+# shuckerVC portfolio
+
+7 companies in Fund I. Updated 2026-08-04.
+
+### Lodg
+Lodg runs the full lead-to-lease workflow for property managers — qualification, scheduling, follow-up, and tenant operations.
+- **Category:** Property Operations AI
+- **Tags:** Applied AI, Support Partner
+- **Website:** https://www.lodg.ai
+- **Founders:** Jake Drutchas (Co-founder & CEO) — https://linkedin.com/in/drutchas; Amitav Chakravartty (Co-founder & CTO) — https://linkedin.com/in/amitavchakravartty
+### Cascade
+Building the first AI-traversable graph of US construction — matching firms to the projects they can actually win.
+- **Category:** Construction AI
+- **Tags:** Applied AI, Support Partner
+- **Website:** https://usecascade.ai
+- **Co-investors:** a16z Speedrun
+- **Founders:** Hannia Zia (CEO, ex–Google Pay) — https://www.linkedin.com/in/hanniazia; Joana Ferreira (CTO, ex–Google ML) — https://www.linkedin.com/in/joanaferreira0011
+- **Press:**
+  - TechCrunch: Cascade raises $3.5M to help construction firms find and win projects — https://techcrunch.com/2026/07/22/cascade-raises-3-5m-to-help-construction-firms-find-and-win-projects/
+  - Forbes: How Cascade Plans To Help Constructors Win New Business Worth Millions — https://www.forbes.com/sites/davidprosser/2026/07/20/how-cascade-plans-to-help-constructors-win-new-business-worth-millions/
+  - GlobeNewswire: Cascade raises $3.5M to help construction firms predict the future and win more projects — https://www.globenewswire.com/news-release/2026/07/21/3330581/0/en/cascade-raises-3-5m-to-help-construction-firms-predict-the-future-and-win-more-projects.html
+  - New York Business Journal: Startup Cascade raises $3.5M for construction — https://www.bizjournals.com/newyork/news/2026/07/22/startup-cascade-raises-35m-construction.html
+  - Proptech Connect: Cascade raises $3.5M to help construction firms — https://proptechconnect.com/cascade-raises-35m-to-help-construction-firms/
+  - Informed Infrastructure: Cascade raises $3.5M to help construction firms predict the future and win more projects — https://informedinfrastructure.com/post/cascade-raises-35m-to-help-construction-firms-predict-the-future-and-win-more-projects
+  - Seedtable: Cascade — seed round, July 2026 — https://seedtable.com/companies/usecascade/funding-rounds/seed-2026-07
+### Brev.io
+Turns meetings, tools, and goals into an automatic system of record — capturing commitments and tracking whether they are met.
+- **Category:** Workflow AI
+- **Tags:** Applied AI, Support Partner
+- **Website:** https://brev.io
+- **Founders:** Chris Pitchford (CEO, ex-Microsoft / Ally.io) — https://www.linkedin.com/in/chrispitchford; Vic Hu (CTO, ex-Meta) — https://www.linkedin.com/in/cvichu
+- **Press:**
+  - VentureBeat: Brev raises $3.3 million to build the AI-native layer between business goals and work — https://venturebeat.com/business/brev-raises-33-million-to-build-the-ai-native-layer-between-business-goals-and-work
+  - Business Wire: Brev Raises $3.3 Million to Build the AI-Native Layer Between Business Goals and Work — https://www.businesswire.com/news/home/20260422680272/en/Brev-Raises-%243.3-Million-to-Build-the-AI-Native-Layer-Between-Business-Goals-and-Work
+  - citybiz: Brev Raises $3.3 Million Pre-Seed to Connect AI With Business Execution — https://www.citybiz.co/article/836147/brev-raises-3-3-million-pre-seed-to-connect-ai-with-business-execution/
+  - Crunchbase: Brev.io — company profile — https://www.crunchbase.com/organization/brev-io
+  - VC News Daily: Brev — venture capital funding — https://vcnewsdaily.com/brev/venture-capital-funding/pkmqdrgtzg
+### Sindarin
+Enterprise voice-AI with ~95% call success and speaker isolation that cuts interruptions by 90%.
+- **Category:** Voice AI
+- **Tags:** Voice, Infrastructure
+- **Website:** https://www.sindarin.tech
+- **Founders:** Brian Atwood (Technical founder & CEO) — https://www.linkedin.com/in/batwood011
+### Atlas
+The dynamic, outcome-based pricing and monetization layer for AI-native SaaS.
+- **Category:** AI Monetization
+- **Tags:** Applied AI
+- **Website:** https://runonatlas.com
+- **Co-investors:** 500 Global
+- **Founders:** Michael Hoy (3x founder & CEO) — https://www.linkedin.com/in/michaelthoy
+### Runreal
+AI agents and self-serve tooling for studios building on Unreal Engine.
+- **Category:** Dev Tools
+- **Tags:** Dev Tools
+- **Website:** https://runreal.dev
+- **Co-investors:** a16z
+- **Founders:** Marwan Hilmi (Co-creator of the PS5 title Godfall) — https://www.linkedin.com/in/marwanhilmi
+### Algorized
+Edge-AI perception that lets robots sense and anticipate people on the factory floor.
+- **Category:** Robotics Perception
+- **Tags:** Infrastructure, Support Partner
+- **Website:** https://www.algorized.com
+- **Co-investors:** Amazon
+- **Milestone:** Raised Series A
+- **Founders:** Natalya Lopareva (Founder & CEO) — https://www.linkedin.com/in/natalyalopareva
+- **Press:**
+  - GGBA Switzerland: Algorized raises USD 13 million to advance physical AI for industrial robotics — https://ggba.swiss/en/algorized-raises-usd-13-million-to-advance-physical-ai-for-industrial-robotics/
+  - Algorized: Algorized secures $13 million to build the edge-native nervous system for physical AI — https://www.algorized.com/news/algorized-secures-%2413-million-to-build-the-edge-native-nervous-system-for-physical-ai-
+  - FinSMEs: Algorized Raises $13M in Series A Funding — https://www.finsmes.com/2026/02/algorized-raises-13m-in-series-a-funding.html
+  - Pulse 2.0: Algorized: $13 Million Series A raised for physical AI perception and predictive safety — https://pulse2.com/algorized-13-million-series-a-raised-for-physical-ai-perception-and-predictive-safety-platform/
+  - Yahoo Finance: Algorized and KUKA redefine robot safety — https://finance.yahoo.com/news/algorized-kuka-redefine-robot-safety-231000181.html
+  - Dealroom: Algorized raises $13M Series A to scale edge-AI safety engine for industrial robots — https://app.dealroom.co/news/feed/algorized-raises-13m-series-a-to-scale-edge-ai-safety-engine-for-industrial-robots
+  - Qorvo: Algorized — Qorvo success story — https://www.qorvo.com/about/news-events/success-stories/algorized
+
+
+# shuckerVC team
+
+### Jean-Philippe "JP" Persico — Co-founder & Managing Partner
+Operator and investor. At shuckerVC, JP leverages his extensive experience in corporate strategy, venture capital, and startup operations to create real value add for their portfolio.
+
+- **LinkedIn:** https://www.linkedin.com/in/jppersico
+### Graham Siegel — Co-founder & Managing Partner
+Four-time startup founder. At shuckerVC, Graham draws on four ventures of founder experience — most recently as co-founder and COO of Unlearn, where he led finance, people, legal, and operations from pre-seed through Series B.
+
+- **LinkedIn:** https://www.linkedin.com/in/grahamsiegel
+### Gabe Regalado — Venture Partner
+Investor Relations and Real Estate Professional. A Silicon Valley native, Gabe is a capital allocator who has spent the past decade investing in startups.
+
+- **LinkedIn:** https://www.linkedin.com/in/gabedregalado
+
+
+# shuckerVC writing
+
+9 pieces. Full text below; canonical HTML at https://shuckervc.github.io/shuckervc-website/writing.html — RSS at https://shuckervc.github.io/shuckervc-website/feed.xml.
+
+---
+## Welcome Lodg
+*News · shuckerVC · Jun 2026 · 5 min read*
+AI workforce automates property management tasks, boosting efficiency across mid‑market.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#lodg
+
+
+## AI Workforce for Property Management
+
+
+Property management at the mid-market and long tail — some 60,000 U.S. property managers running 100–5,000 units — is structurally labor-bound: 40–200 units per full-time employee, at roughly 10% EBITDA margins. The labor model is breaking under wage inflation at the precise moment LLMs crossed the reliability threshold to execute multi-step workflows across the legacy stack — without a rip-and-replace.
+
+The incumbents, meanwhile, just peaked. On May 28, 2026, Entrata filed for its IPO with the strongest numbers property management software has ever produced: 2.5 million units on platform — roughly 10% of U.S. multifamily — and $143.5M in revenue in the first quarter of 2026 alone. Entrata and AppFolio both ship AI offerings today, but their AI answers questions about the work; the work itself still routes to a human. Lodg's customers operate at 500+ units per FTE — with core workflows at 95%+ automation — on a book of business assembled in three months, entirely inbound.
+
+
+> The incumbents' AI talks. Lodg's works.
+
+
+The system-of-record era just peaked with an IPO filing. The next $100B in property management doesn't go to whoever stores the data — it goes to whoever executes.
+
+
+## The Problem No Property Management Platform Ever Solved
+
+
+The software era's answer to the labor problem was the system of record. AppFolio, Yardi, and Entrata built billion-dollar platforms that store the data — the leases, the ledgers, the work orders — and the industry pays $24B a year for them. But every new door under management still means more leasing calls, more application screens, more maintenance dispatches, more delinquency follow-ups. Labor scales linearly with the portfolio, and there is no operating leverage anywhere in the model.
+
+The systems of record made the work more visible. They never made it smaller.
+
+
+## What Lodg Actually Does
+
+
+Lodg is an AI workforce for property managers — agents that execute end-to-end workflows across the systems managers already run on. No rip-and-replace, no migration project, no new system to learn. The agents plug into the existing stack and start taking work off the team's plate.
+
+
+> Leasing and applications. From the first inquiry to a screened, decision-ready application — inbound calls and texts answered, showings coordinated, applicants screened and packaged. The workflows that consume entire teams run at 95%+ automation in production.
+
+
+
+> Maintenance. Requests come in at all hours; the agents answer, triage, resolve what can be resolved remotely, and dispatch what can't. One customer's first night live: a 2 a.m. maintenance call answered and resolved before anyone woke up — no work order ever created.
+
+
+
+> Renewals, payments, and delinquency. The most complex workflows in the business — multi-party negotiations between owners and tenants, comps, payment plans, collections conversations — handled end-to-end with a human stepping in only where judgment is required.
+
+
+This isn't a copilot suggesting replies inside a system of record. The workforce is the product.
+
+
+## Why Now
+
+
+Three forces are converging to make this company fundable right now.
+
+
+## The Numbers That Earned Our Conviction
+
+
+We don't invest on narrative alone. Here's what the data showed:
+
+The book of business compounded — without a dollar of outbound. In three months, Lodg went from first deployments to an exponentially growing customer base: every operator arrived inbound or by referral, and unsolicited interest is coming from category-adjacent CEOs. More telling is where the growth comes from — operators who already run on the incumbents' platforms. Lodg is winning the work layer on top of the systems of record, before the incumbents' own AI gets there.
+
+The labor math is already validated — in production. The 500+ units per FTE isn't a projection; it's how Lodg's paying customers operate today, across their real portfolios. And the pricing matches the promise: Lodg charges for work completed — not for seats, not for licenses. The operator's cost scales with outcomes, and an agent that doesn't do the work doesn't get paid. For the operator, that's not just an efficiency gain — it's a different business model on both sides of the transaction.
+
+The founding team matches the moment. CEO Jake Drutchas combines MIT engineering and business training with operating scar tissue: on the founding team at Wurthy, he scaled SMB finance-agent sales from zero to $1M+ ARR while running ops, finance, and customer success. CTO Amitav Chakravartty is a YC alum, former Director of Engineering at Cohesity, and co-founder/CTO of VaycayHero — he has built both venture-scale infrastructure and proptech specifically.
+
+
+## Our Thesis
+
+
+At shuckerVC, we invest in AI-native B2B software that transforms traditional industries through outcome-based models and genuine technical moats. Lodg hits all three pillars: the product is agentic from the ground up rather than bolted onto a legacy system, it's priced on work completed rather than seats, and the moat compounds — every workflow the agents execute feeds back into how the next one runs, across every property and every market Lodg operates in. A competitor can copy the feature list in a quarter. They can't copy years of accumulated execution.
+
+Lodg sells against the $100B property management labor market, not the $24B software market — and reaches the long tail of operators that enterprise platforms will never serve.
+
+We're glad to be backing Jake, Amitav, and the Lodg team as they put property management on autopilot. We're hiring Lodg's Support Partner now — the role is open here.
+---
+## Welcome Cascade
+*News · shuckerVC · May 2026 · 4 min read*
+Cascade builds AI construction graph, unlocking capital flow for builders.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#cascade
+
+
+## Why We Invested in Cascade: Creating Value Through the First Construction Graph
+
+
+In February 2026, the U.S. government allocated $2.1 billion to the Intel Ohio fab. Months later, $180 million of that landed with the Georgia DOT. Then Fulton County cut RFP 24-B-3891. Then a single subcontractor — one of thousands who could have qualified — won the work.
+
+That chain happens thousands of times a year across the $2 trillion American construction economy. Until Cascade, no one had a structured map of it.
+
+shuckerVC invested $400K at a $25M post-money cap. Cascade isn't replacing an incumbent — it's building the first construction graph. A structured, AI-traversable model of how American capital becomes American construction, with intelligent agents that traverse it on behalf of the firms that build.
+
+
+## The Problem No Database Ever Solved
+
+
+Here's a number that should bother every AEC operator: 30 to 50 percent of capability-matched bid opportunities never reach the firms that should win them.
+
+The American construction market is roughly $2 trillion in annual spend across 1.45 million firms, fragmented across hundreds of state and local jurisdictions with no federal equivalent of Deltek GovWin. The incumbents that own this layer — Dodge, ConstructConnect, BidNet, IMS — sell what they sold in 2019: a list of RFPs and a keyword search box. They digitized the database. They never digitized the intelligence.
+
+The pain is existential, not operational. Cascade CEO Hannia Zia grew up watching her father's construction business fail because he couldn't find enough projects to bid on.
+
+
+## What Cascade Actually Does
+
+
+Cascade is built on a single architectural insight: before you ship intelligent agents into a vertical, you build the structured semantic model of the vertical itself.
+
+The construction graph. A machine-readable model of how American capital becomes American construction — federal programs, agencies, counties, owners, permits, jurisdictions, and the firms that build. The incumbents have spent two decades selling lists. Cascade is selling intelligence.
+
+Frictionless onboarding. Cascade stands up a new AEC firm in minutes, not months. The platform learns what the firm does, where it works, what it's qualified for, and what it has won before — then matches the firm to opportunities it should be bidding on.
+
+An agent fleet built for the work. Intelligent agents run on top of the graph — surfacing opportunities, drafting proposals, scoring win probability, structuring teaming arrangements, navigating compliance. The agents don't just observe the work. They do it.
+
+This isn't AI bolted onto an RFP database. The structured model of the industry is the product.
+
+
+## Why Now
+
+
+AEC AI adoption doubled year-over-year. BuiltWorlds tracks forty AI-native AEC solutions in 2026, up from a handful the year before. Cascade's customer roster already spans firms across architecture, data center development, and energy manufacturing.
+
+Federal capital is reshaping where construction happens. CHIPS and IIJA have committed over a trillion dollars through 2028. AEC firms that can't trace capital flow from program to RFP at speed will lose work to firms that can.
+
+The category has no entrenched competitor — yet. Dodge and ConstructConnect have not shipped production AI as of February 2026. The April 2026 Autodesk Construction Cloud roadmap shows no public AI-bid-matching signal. The window for the first construction graph is open today.
+
+
+## The Signals That Earned Our Conviction
+
+
+Inbound pull, no outbound. Cascade has reached its first cohort of customers without paid marketing and without an SDR-led sales motion. Demand is finding the product, not the other way around. That is what category creation looks like before the category has a name.
+
+Outcome-aligned economics. Cascade's revenue model grows with customer wins — when their customers win contracts through the platform, Cascade benefits. That replaces the per-seat SaaS pricing the AI era is rendering obsolete and matches our outcome-based-pricing thesis.
+
+Two founders, working platform. Cascade is two co-founders plus a small team of interns and contractors. They have shipped a working agent platform on top of a structured industry graph in three months. That kind of velocity is what vertical AI demands and what traditional engineering org charts cannot produce.
+
+The founding team matches the moment. CEO Hannia Zia scaled Google Pay from zero to 100 million users. CTO Joana Ferreira is ex-Google ML and was a founding engineer at trading apps — the most articulate technical founder we encountered at a16z Speedrun SR006.
+
+
+## Our Thesis
+
+
+At shuckerVC, we invest in AI-native B2B software that transforms traditional industries through outcome-based pricing and genuine technical moats. Cascade hits every dimension.
+
+The moats are stacked and self-reinforcing. The construction graph is a methodology moat — building it requires industry depth, not just prompt engineering. Every customer interaction labels the dataset, so the moat deepens with each cohort. Like Palantir's Foundry, the value compounds with use.
+
+We're glad to be backing Hannia, Joana, and the Cascade team as they build the structured map of how America gets built. We're hiring Cascade's Support Partner now — the role is open here.
+---
+## AI is Eating Software
+*White paper · JP Persico · May 2026 · 5 min read*
+Just as cloud and mobile once disrupted enterprise software, AI is now poised to be the next transformative force in the B2B SaaS landscape. With 60% of Y-Combinator's recent startups focused on AI, the potential for disruption is evident.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#saas-pricing
+
+The introduction of the Macintosh computer was a watershed moment in personal computing, setting new standards and reshaping user experiences. Similarly, the enterprise B2B software landscape was profoundly disrupted by the cloud and mobile revolutions, giving birth to the B2B SaaS industry we recognize today. Now, as we stand on the cusp of an AI-driven transformation, it feels reminiscent of that Macintosh moment. AI is poised to be the next significant disruptor, promising to redefine the B2B SaaS space. This isn't just another technological wave; it's a foundational shift that redefines business models, value propositions, and the very essence of enterprise solutions.
+
+
+## The Data Speaks: Y-Combinator's AI Surge
+
+
+A telling sign of this AI-driven transformation is evident in the composition of Y-Combinator's recent batch. An impressive 60% of the startups from YC's S23 batch are rooted in AI and machine learning. This isn't a fleeting trend; it's a testament to the industry's recognition of AI's potential and the entrepreneurial drive to harness it.
+
+
+## Disruption of the Disruptors
+
+
+The B2B SaaS landscape, which itself emerged from the disruption of traditional enterprise software by cloud and mobile technologies, is now witnessing another wave of disruption from AI-first startups. These new entrants, backed by powerful algorithms and deep learning models, are challenging even the most established SaaS giants. The message is clear: adapt to the AI era or risk obsolescence.
+
+
+## Reimagining Enterprise Solutions
+
+
+AI's potential isn't limited to enhancing existing solutions. It's about re-envisioning entire enterprise workflows. For instance, Postscript's AI-driven approach to SMS marketing is not just an enhancement; it's a paradigm shift in how businesses engage with customers. Another compelling example is Ironclad, a company that's revolutionizing contract life cycle management through AI. Ironclad's AI capabilities automatically analyze contracts, flag areas that require a thorough review, and provide suggestions on how to negotiate based on legal-approved guidelines. What once involved countless meetings and document revisions is now streamlined by AI.
+
+
+## AI Co-Pilots: The New Norm
+
+
+In sectors like finance, insurance, and brokerage, AI is transitioning from being a backend tool to a frontline co-pilot. It's not just about automation; it's about enhancing human capabilities, offering insights, and driving decision-making.
+
+
+## A Strategic Imperative
+
+
+For established B2B SaaS players, the rise of AI is both a challenge and an opportunity. It's not just about integrating AI modules into existing platforms; it's about a strategic realignment. Companies need to rethink their core value propositions, workflows, and customer engagement strategies in the context of AI.
+
+
+## Beyond the Hype: AI's Tangible Value
+
+
+While AI often finds itself surrounded by hype, its tangible impact in the B2B SaaS space is undeniable. Whether it's predictive analytics, intelligent automation, or deep personalization, AI is not just a feature; it's becoming the core of value creation.
+
+
+## Harness the moment with shuckerVC
+
+
+In this transformative era, where AI is reshaping the B2B SaaS landscape, there lies a pivotal moment for visionary startups. At shuckerVC, we're not just observers of this shift; we're active participants. As a Bay Area seed fund, our focus is laser-sharp: backing AI-powered B2B software companies in the US. We believe in the power of AI and are deeply committed to supporting the founders leading this revolution.
+
+The journey of innovation is demanding. Founders, in their drive to innovate and solve hard problems with scarce resources, often find themselves wearing multiple hats and juggling myriad roles. This multitasking, while commendable, can slow their momentum, diverting attention from core objectives and diluting their focus. shuckerVC understands this challenge and is here to help. Our Ops Team allows founders to delegate whole back-office tasks to our team, offering these services at cost, ensuring they can maintain their focus and accelerate their vision.
+
+With our specialized focus and a vast network that includes relationships with over 400 VC firms and top accelerators, we're continuously seeking the technical founders who will define the next chapter of B2B SaaS, powered by AI.
+---
+## Welcome Brev.io
+*News · shuckerVC · Apr 2026 · 7 min read*
+Brev uses autonomous AI agents to execute goals, replacing traditional tracking dashboards.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#brev
+
+
+## Why We Invested in Brev.io: The End of Goal Tracking, The Start of Goal Execution
+
+
+On December 31, 2025, Microsoft quietly retired Viva Goals. A few months earlier, WorkBoard acquired Quantive. In a single year, the enterprise goal management market lost its two largest platforms — displacing thousands of companies and leaving a once-in-a-decade vacuum.
+
+That vacuum is exactly where Brev stepped in.
+
+But this isn't a solution about replacing one OKR tracker with another. It's a story about why tracking was never enough — and what happens when AI agents stop observing your goals and start executing on them.
+
+
+## The Problem No Dashboard Ever Solved
+
+
+Here's a number that should bother every operator: 90% of business goals fail. Not because the goals were wrong. Not because the teams were lazy. Because the coordination infrastructure to execute them is fundamentally broken.
+
+A typical 500-person company employs a double-digit number of coordination FTEs — each at $150–500K loaded cost — whose entire job is chasing status updates, compiling reports, following up on meeting action items, and toggling between nine or more disconnected tools. In some extreme cases, management spends half its time on this manual coordination work, instead of executing on the goals it’s trying to achieve while keeping up with reporting. And that cost scales linearly. Every new team, every new initiative, every new quarter — different tactics, more overhead, same failure rate.
+
+The legacy OKR platforms — Lattice, Culture Amp, 15Five, the now-retired Viva Goals — addressed this by adding dashboards. More reporting. More check-ins. More process. They tracked goals without ever executing on them. They made the problem more visible without making it smaller.
+
+
+## What Brev Actually Does
+
+
+Brev is an AI-native execution platform built on what the team calls the Agent Triad — three specialized AI agents that work together to close the gap between setting a goal and achieving it.
+
+The Observer Agent monitors meetings, Slack threads, project management tools, CRM updates, engineering commits — 22+ integrations feeding into what Brev calls the Sensor Mesh. It captures what's actually happening across the organization, including the qualitative signal from real conversations that no dashboard can surface.
+
+The Alignment Agent maps all of that activity back to strategic goals. It detects drift, identifies off-track initiatives, and generates cross-source signals that don't exist in any competing product — metrics like off-goal meeting percentage, velocity drain, noise ratio, and organizational drift.
+
+The Execution Agent takes autonomous action. It assigns tasks, follows up on commitments, generates artifacts, and drives accountability without a human in the loop.
+
+This isn't a feature bolted onto a tracking tool. The AI is the product.
+
+
+## Why Now: A Perfect Storm
+
+
+Three forces are converging to make this problem solvable — and this company fundable — right now.
+
+Market displacement. The Viva Goals retirement and the WorkBoard/Quantive consolidation removed the incumbent platforms that enterprises relied on. Thousands of companies are actively searching for alternatives. That migration demand is time-limited and favors whoever moves fastest.
+
+AI agent maturity. For the first time, AI agent technology has advanced enough to autonomously execute on operational workflows — not just prompt or summarize them. The shift from passive intelligence to active execution is the architectural leap that makes Brev possible.
+
+Headcount pressure. Enterprises are under relentless pressure to reduce ops headcount through automation. Brev doesn't sell against a $20–50K SaaS budget. It sells against the $1.5–2M annual ops payroll at a 200–2,000 person company.
+
+
+## The Numbers That Earned Our Conviction
+
+
+We don't invest on narrative alone. Here's what the data showed:
+
+Expansion economics are working. Customers are meaningfully expanding their ACV after adoption. The adoption rate of the agents and the week-over-week execution expansion are early proof points, and demonstrate real value derived by customers.
+
+Sales velocity is real. Founder-led sales have generated tremendous early growth that created a clear pathway to replicate this with the right mix of technology and headcount. Their SOC 2 Type II certification enables them to have actual conversations about product adoption and not just pilots.
+
+Capital efficiency is exceptional. Today’s founders have to embrace the fast moving pace of technology to create products that enterprises want. Seeing the team use tools to augment their velocity, has produced feature outputs that typically require 2 to 3 times the size of the current engineering team.
+
+The founding team matches the moment. CEO Chris Pitchford was VP of Sales at Ally.io, acquired by Microsoft, where he closed six-figure enterprise deals with Fortune 100 companies. He has deep relationships with the exact VP Ops / Chief of Staff buyer persona Brev targets. CTO Vic Hu brings AI/ML engineering credentials from Meta and Indeed, and has built the kind of lean, high-output engineering culture that seed-stage companies need to thrive.
+
+
+## The Market Is Moving Our Direction — Fast
+
+
+Since we committed to this investment, the macro environment has only reinforced our thesis. Several converging signals tell us we're not early to the agentic enterprise — we're right on time.
+
+OpenClaw proved that AI agents are no longer theoretical. In early 2026, OpenClaw — an open-source autonomous AI agent framework — went from obscurity to 250,000+ GitHub stars in under 60 days, surpassing React's decade-long record. Its creator was hired by OpenAI. Jensen Huang called it "probably the single most important release of software, probably ever" at GTC 2026, and said every company now needs an agent strategy. OpenClaw didn't just go viral with developers — it triggered enterprise security responses (Nvidia released NemoClaw with sandboxing within weeks) and government-level policy debates. The signal is clear:
+
+
+> Autonomous agents that execute tasks — not chatbots that generate text — are the next computing paradigm. That's exactly the shift Brev was built for.
+
+
+The enterprise stack is being rebuilt around agents. Salesforce reported 114% growth in AI platform ARR and rebranded its entire product suite around Agentforce. Microsoft is moving beyond Copilot toward autonomous agents in Agent 365. Salesforce's own CTO declared that "single AI agents will become digital dead-end islands" and that the multi-agent enterprise is arriving in 2026. When the two largest enterprise software companies on earth are restructuring their platforms around agentic architectures, that's not a feature trend — it's an infrastructure shift.
+
+The "SaaSpocalypse" narrative is reshaping buyer behavior. Enterprise buyers are increasingly aware that AI will challenge seat-based SaaS.
+
+
+> Procurement teams are shifting evaluation criteria from feature checklists to measurable business outcomes — revenue expansion, margin improvement, headcount displacement.
+
+
+This is precisely the conversation Brev wins. Selling against $1.5–2M in ops payroll rather than a $20–50K SaaS line item puts Brev in a fundamentally different budget conversation than legacy tools.
+
+CIO adoption data confirms the tipping point. A recent Salesforce study found that CIO AI adoption has surged 282%. Gartner projects that more than 40% of agentic AI projects will fail by 2027 — but the failures will cluster around companies that treat agents to serve information not autonomous execution layers. The enterprises that move first and build governance frameworks now will compound their advantage. Brev's SOC 2 Type II certification and enterprise-grade architecture position it to capture exactly these early movers.
+
+The displacement window is real and closing. Thousands of companies lost their goal management platform when Viva Goals shut down in December 2025. Viva Goals was a tracking tool, highly replaceable and therefore not generating the outcomes modern organizations are looking for. Brev is execution-first. The market will decide in the next 12–18 months which paradigm wins — and every macro signal points toward autonomous execution.
+
+
+## Our Thesis
+
+
+At shuckerVC, we invest in AI-native B2B software that transforms traditional industries through outcome-based models and genuine technical moats. Brev fits squarely within that thesis on every dimension.
+
+The compound data integration — meetings, tools, goals, and execution outcomes synthesized into a unified management information system — creates switching costs that deepen with every quarter of usage. Each customer's accumulated institutional knowledge becomes irreplaceable. This is the architecture of an enterprise MIS, and like Palantir's Foundry, the moat is self-reinforcing.
+
+We're glad to be backing Chris, Vic, and the Brev team as they build the future of enterprise execution. We look forward to introducing their new Support Partner in the coming weeks.
+---
+## Our Support Partner Model
+*Perspective · shuckerVC · Apr 2026 · 6 min read*
+The bottleneck for early founders isn't capital — it's operational drag. How we embed a full-time operator in every portfolio company, at cost and with zero dilution.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#support-partner
+
+At shuckerVC, we believe the biggest bottleneck for technical founders isn't capital — it's operational drag. That's why we built the Support Partner Model: a dedicated, full-time operational partner embedded in each portfolio company to handle everything outside of product and engineering.
+
+This is our core differentiator as a fund, and it's the reason founders choose us — even when they have competing term sheets on the table.
+
+
+## How It Works
+
+
+When a company joins the shuckerVC portfolio, we deploy a Support Partner — a full-time W2 employee hired through shuckerVC's separate LLC. The portfolio company pays their salary at cost, with zero markup from shuckerVC and zero equity dilution for the founder.
+
+Support Partners are embedded within each portfolio company, working directly with the leadership team through its highest-growth phase. From day one, they implement systems and processes that prevent organizational terminal velocity, ensuring no single person becomes the constraint to growth. As the company scales, these systems enable a smooth transition to functional leads who sustain and extend that velocity.
+
+
+> We help companies break through terminal velocity by building the system that prevents it.
+
+
+
+## What Support Partners Do
+
+
+Support Partners handle everything that isn't product or engineering. People Operations: recruiting, hiring, HR, payroll, benefits administration, onboarding, and performance reviews — at Algorized, a single Support Partner hired 12 people in 9 months. Financial Operations: monthly book closing, expense management, financial forecasting, accounting coordination, vendor payments, and revenue collection, serving as the interface between the company and its bookkeeping vendor. Growth & Marketing: LinkedIn management, website management, event coordination, PR support, and investor update preparation. Administrative & Compliance: office operations, vendor management, SOC2 compliance coordination, legal document collection, and Series A prep support.
+
+
+## Compensation & Alignment
+
+
+Rather than taking equity from portfolio companies, Support Partners receive an allocation from shuckerVC's GP carry pool. This structure is deliberate. For founders: no equity dilution — you get experienced operational talent at cost, not at the $240K+ market rate for a chief of staff. For Support Partners: alignment with overall fund performance rather than the fate of a single company — they succeed when the entire portfolio succeeds. For LPs: direct value creation in portfolio companies that accelerates returns across the fund.
+
+
+## Talent Pipeline
+
+
+We recruit Support Partners who are natural problem solvers — specifically those transitioning out of consulting who want hands-on startup experience but lack access to early-stage companies. We source candidates through non-public job platforms and present a bench of 4–5 vetted candidates to each founder for interviews and selection. What we look for: 2 to 3 years of consulting experience; an AI-native mindset (we can teach enterprise skills, but it's harder to teach AI orchestration); career pivoters with strong operational instincts; and people who thrive as problem solvers and orchestrators, not just executors.
+
+
+## Two Career Paths for Support Partners
+
+
+Company Hire: the portfolio company hires them directly as a permanent W2 employee — we do not block or restrict this natural transition. Redeploy: they stay with shuckerVC and move to the next portfolio company, building deep cross-company operational expertise. This creates a talent recycling system across our target portfolio of 20 companies, where operational knowledge compounds across the fund.
+
+
+## Proven Results: Algorized
+
+
+Before: 4 people, early-stage revenue. After: 15 people, substantially higher revenue, raising a strong up-round from its seed valuation. Impact: the Support Partner hired 12 people in 9 months and managed all HR, office operations, and marketing — freeing the CEO to focus exclusively on technology and fundraising. Outcome: Algorized chose shuckerVC over 3 other term sheets specifically because of the Support Partner offering.
+
+
+## Why Founders Choose Us
+
+
+
+> Founders choose shuckerVC over other term sheets specifically for the Support Partner offering.
+
+
+Technical founders face a fundamental tension: every hour spent on HR, finance, compliance, and vendor management is an hour not spent on product or customers. Our model resolves that tension completely. For founders, the value proposition is simple: get an experienced operational partner at cost, with no equity dilution, who is fully aligned with your success through fund carry.
+---
+## Q1 2026 update
+*Newsletter · shuckerVC · Apr 2026 · 5 min read*
+A landmark quarter — we closed Fund I, welcomed Brev to the portfolio, Algorized closed its Series A, and the team was out across the Bay Area AI ecosystem.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#q1-2026-update
+
+Q1 was a landmark quarter for shuckerVC. We held the final close of Fund I, welcomed Brev as a new portfolio company, and Algorized closed its Series A — twelve months after our seed entry. We're now fully focused on deployment and portfolio support.
+
+
+## New portfolio company: Brev
+
+
+We're pleased to introduce the newest member of the shuckerVC portfolio: Brev, founded by Chris Pitchford (CEO) and Vic Hu (CTO). Chris co-founded Shyft (Techstars Seattle '16) and then ran go-to-market as VP of Sales at Ally.io — the OKR platform Microsoft acquired in 2021 to anchor Viva Goals. Vic was an ML platform tech lead at Iterative Health, with earlier engineering roles at Meta and Panopto.
+
+Brev builds AI-native agents that run goal cadences, meeting workflows, and routine operating decisions — converting the OKR and business-review stack Chris sold at Ally from a system that tracks execution into one that executes. What caught our attention: the team operates as a handful of engineers augmented by AI agents running around the clock, and ranks among the top Bay Area companies for engineering output. Brev is a clean expression of the thesis we underwrite — small, AI-leveraged teams compounding output faster than their headcount-rich competitors.
+
+
+## Algorized — Series A
+
+
+The headline of Q1 was Algorized's Series A, closed twelve months after our seed entry. The team scaled meaningfully over the year, continued hiring across engineering, and brought on a Head of Commercial who previously ran commercial at Field AI. Our embedded Support Partner was integral to the rapid scaling and will remain in place for the foreseeable future.
+
+
+## Across the existing portfolio
+
+
+Atlas opened Q1 with expanded customer contracts and cleanly navigated a co-founder transition, with Michael Hoy continuing to lead as CEO. The team is intensifying its focus on outcome-based pricing, which has become a cornerstone go-to-market motion for companies shipping agentic software. Sindarin moved out of POC into commercial launch, working through a substantial backlog of inbound demand built up during its waitlist period.
+
+
+## Out across the ecosystem
+
+
+Q1 was one of our most active quarters — closing Fund I, deploying into new investments, and showing up across the Bay Area. Our presence in San Francisco and Silicon Valley, at a moment when the AI cycle is concentrated here more than anywhere else, is a structural advantage we're leaning into hard.
+
+Highlights included the Sutton Capital PE & VC Investor Summit; an ACG panel JP moderated with Amy Yin (Defy VC), Tejal Shah (US Capital), and Karen Sheffield (Pachamama VC); and a six-hour VC conference featuring David Cohen (Techstars) and Peter Walker (Carta). We supported Algorized at CES, where the company demoed a KUKA robot arm with live human-machine interaction, won multiple press awards, and was featured on the main stage — with JP moderating a conversation between the CEOs of KUKA and Algorized on the future of robotics and physical AI. We also hosted our second SkyDeck Investor Brunch in Uptown Oakland ahead of Berkeley SkyDeck Demo Day, and joined venture panels across the emerging-manager community.
+
+
+## Looking ahead
+
+
+Q2 is shaping up to be packed with demo days and high-signal gatherings across the Bay Area — from StrictlyVC San Francisco and a16z Speedrun Demo Day to the Silicon Valley Economic Forum and our own founder-and-investor evenings. If you'd like an introduction around any of these, reach out anytime.
+
+— Graham & JP, Managing Partners, shuckerVC
+---
+## Why we backed Atlas: monetizing impact, not tokens
+*Perspective · Graham Siegel · Mar 2026 · 5 min read*
+As compute costs collapse, durable SaaS won't meter tokens — it'll price the outcomes it delivers. The thesis behind our investment in Atlas.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#atlas
+
+
+## The end of token metering
+
+
+As compute costs collapse, pricing software by tokens consumed becomes a race to the bottom. Durable companies won't meter the cost of the work — they'll price the value of the outcome it produces.
+
+Atlas builds the layer that makes that possible: dynamic, outcome-based pricing and monetization for AI-native SaaS.
+
+
+## Why we invested
+
+
+Michael is a three-time founder who has lived the pricing problem from the inside. The team is building exactly where we believe the market is heading, and they're doing it with the operating discipline we look for.
+
+It's a classic shuckerVC investment: a technical founder, a market ripe for change, and an oversubscribed round alongside a top lead investor.
+---
+## Algorized raises its Series A
+*News · shuckerVC · Feb 2026 · 3 min read*
+Our edge-AI perception company closes its Series A alongside Amazon — bringing robots that sense and anticipate people to the factory floor.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#algorized
+
+Algorized, our edge-AI perception company, has closed its Series A alongside Amazon.
+
+The company builds perception that lets robots sense and anticipate people on the factory floor — making industrial automation safer and more adaptive.
+
+We backed Algorized at seed and embedded a Support Partner to handle finance ops and Series A prep, so founder Natalya Lopareva could stay focused on the technology. We could not be happier to see the milestone.
+---
+## 2025 in review
+*Newsletter · shuckerVC · Jan 2026 · 5 min read*
+A look back at 2025 — how we invested, what we're prioritizing in 2026, the Algorized × KUKA partnership at CES, and qualitative progress across the portfolio.
+Read: https://shuckervc.github.io/shuckervc-website/writing.html#2025-in-review
+
+Heading into 2026, our conviction is unchanged: we back deep domain-expert founders building AI-native software. That expertise may be in building AI-native systems — as with Algorized and Sindarin — or in deep product and market understanding, as with Atlas and Runreal. As we invest alongside top-tier venture firms, we continue to build our own independent conviction about where durable value is created.
+
+
+> AI changes how software is built — but business models determine how value is captured.
+
+
+
+## How we invested in 2025
+
+
+Over the year we evaluated a large volume of inbound opportunities, alongside outbound prospects sourced through accelerator partnerships and the broader AI-native ecosystem. Technical quality across the market keeps improving, but we stayed cautious in an environment crowded with opportunism and fragile business models. We declined many opportunities for the same recurring reasons: business models overly dependent on usage, tokens, or infrastructure arbitrage; AI bolted on as a feature rather than the cornerstone; and go-to-market strategies that were unclear or untested.
+
+
+## What we're prioritizing in 2026
+
+
+We're prioritizing companies where AI enablement supports outcome- or value-based business models rather than seats or tokens; significant, measurable economic impact — value created or costs removed; and software embedded in decision-making and execution, not just workflows. Areas of particular interest include recruiting and sourcing platforms where agentic systems replace manual coordination and outreach; lead management and 'SDR-light' systems focused on results rather than activity; and 'picks-and-shovels' infrastructure for AI-native SaaS — pricing, monetization, and control layers, with Atlas as a clear example. We'll maintain our concentrated, hands-on approach.
+
+
+## Algorized × KUKA at CES
+
+
+At CES 2026 we hosted a fireside chat with Natalya Lopareva (CEO, Algorized) and Christoph Schell (CEO, KUKA Group) on AI-driven robotics, safety, and human collaboration at the SwissTech Stage in Eureka Park. The conversation centered on a fundamental shift underway in robotics: moving from reactive safety systems — cages, light curtains, emergency stops — to perception-driven collaboration, where robots understand and anticipate human presence and behavior in real time.
+
+Algorized's perception and edge-AI technology, combined with KUKA's industrial robotics platform, points to a future where robots are no longer isolated from people but can safely operate alongside them — unlocking higher productivity, more flexible automation, and entirely new deployment environments. For shuckerVC, it underscores a core thesis: the next generation of robotics won't be defined by autonomy alone, but by awareness. Perception is becoming foundational infrastructure for safer, more adaptive, more human-centric machines across manufacturing, logistics, healthcare, and beyond.
+
+
+## Across the portfolio
+
+
+Runreal closed the year with strong momentum, securing pilot studios and bringing on an ex-Amazon AWS engineer as a founding engineer, with its self-serve platform and AI agents heading into pilot testing with a major studio in early 2026. Atlas demonstrated strong product-market fit and deal velocity in its core vertical-AI segment, validating our thesis that AI-native companies recognize the strategic value of dynamic, outcome-based pricing. Sindarin (FetchDesk) opened beta testing with strong early results and rolled out a new speaker-isolation and noise-suppression model — foundational for enterprise voice — while using its own AI agents to accelerate development.
+
+— Graham & JP, Managing Partners, shuckerVC

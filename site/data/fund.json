@@ -1,0 +1,64 @@
+{
+  "_comment": "The shuckerVC fund card — the single most-requested object for anyone (human or agent) researching the fund. Every value here is published verbatim into llms.txt, the .md twins, and the JSON-LD, so it must be true and current. Fields under _needs_confirmation are deliberately null: do not guess them, fill them once a partner confirms. Run `npm run agents` after editing.",
+  "updated": "2026-08-04",
+
+  "name": "shuckerVC",
+  "url": "https://shuckervc.github.io/shuckervc-website/",
+  "tagline": "Fueling founder focus",
+  "description": "shuckerVC is an $8M Bay Area seed fund backing AI-powered B2B software companies. Every portfolio company gets a dedicated, full-time Support Partner who owns everything outside product and engineering — finance, hiring, marketing, operations — so founders stay focused on building and selling.",
+  "hq": "Silicon Valley, California, USA",
+  "founded": 2025,
+
+  "fund": {
+    "name": "Fund I",
+    "legal_name": "shuckerVC Fund I, LP",
+    "size_usd": 8000000,
+    "check_size_usd_max": 500000,
+    "target_companies": 18,
+    "companies_backed": 7,
+    "prior_track_record": {
+      "dpi": 3.08,
+      "note": "3.08 DPI from the partners' prior seed-stage SaaS investing — not a Fund I return."
+    }
+  },
+
+  "investing": {
+    "stage": ["pre-seed", "seed"],
+    "leads_rounds": null,
+    "sectors": [
+      "B2B software",
+      "applied AI",
+      "AI infrastructure",
+      "voice AI",
+      "developer tools"
+    ],
+    "geography_focus": "United States",
+    "geography_note": "US-focused; the portfolio includes European-founded companies (Cascade in the UK, Algorized in Switzerland).",
+    "not_a_fit": null
+  },
+
+  "differentiator": {
+    "name": "Support Partner",
+    "summary": "A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.",
+    "url": "https://shuckervc.github.io/shuckervc-website/v2/#focus"
+  },
+
+  "contact": {
+    "submit_company": "https://shuckervc.github.io/shuckervc-website/v2/#contact",
+    "writing": "https://shuckervc.github.io/shuckervc-website/writing.html",
+    "rss": "https://shuckervc.github.io/shuckervc-website/feed.xml"
+  },
+
+  "sameAs": [
+    "https://www.linkedin.com/company/shuckervc",
+    "https://shuckervc.notion.site/"
+  ],
+
+  "_needs_confirmation": [
+    "investing.leads_rounds — do we lead, co-lead, or follow?",
+    "investing.not_a_fit — the explicit exclusion list (this is the single highest-value field for a research agent: it is what lets it stop). Suggested shape: [\"consumer\", \"biotech\", \"hardware-only\", \"pre-product\", \"crypto\"] — confirm before publishing.",
+    "process — first-response SLA and typical decision timeline, if we want to commit to one publicly",
+    "sameAs — confirm the LinkedIn company URL and add Crunchbase / X if we want agents cross-checking us there",
+    "fund.vintage — first close date"
+  ]
+}

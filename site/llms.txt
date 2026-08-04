@@ -1,0 +1,61 @@
+# shuckerVC
+
+> shuckerVC is an $8M Bay Area seed fund backing AI-powered B2B software companies. Every portfolio company gets a dedicated, full-time Support Partner who owns everything outside product and engineering — finance, hiring, marketing, operations — so founders stay focused on building and selling.
+
+An $8M seed fund in Silicon Valley, California, USA. This file is the map for
+automated readers: everything below is canonical, generated from the same data the
+site renders, and stamped with a date so you can judge staleness.
+
+Note: the homepage renders its portfolio, team, and writing client-side. If you are
+fetching without executing JavaScript, use the files listed here rather than the
+HTML — they contain strictly more than the page does.
+
+## Fund facts
+
+- **Fund:** Fund I (shuckerVC Fund I, LP)
+- **Fund size:** $8M
+- **Check size:** up to $500K
+- **Target portfolio:** 18 companies (7 backed so far)
+- **Stage:** pre-seed, seed
+- **Sectors:** B2B software, applied AI, AI infrastructure, voice AI, developer tools
+- **Geography:** United States — US-focused; the portfolio includes European-founded companies (Cascade in the UK, Algorized in Switzerland).
+- **HQ:** Silicon Valley, California, USA
+- **Prior track record:** 3.08 DPI from the partners' prior seed-stage SaaS investing — not a Fund I return.
+- **What makes us different:** A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.
+- **Submit a company:** https://shuckervc.github.io/shuckervc-website/v2/#contact
+- **Last updated:** 2026-08-04
+
+## Documents
+
+- [Fund card, structured](https://shuckervc.github.io/shuckervc-website/data/fund.json): every fact above as JSON, with an `updated` field.
+- [Thesis and support model](https://shuckervc.github.io/shuckervc-website/thesis.md): what we look for, and what the Support Partner actually does.
+- [Portfolio](https://shuckervc.github.io/shuckervc-website/portfolio.md): 7 companies with founders, links, and press. JSON: [portfolio.json](https://shuckervc.github.io/shuckervc-website/data/portfolio.json)
+- [Team](https://shuckervc.github.io/shuckervc-website/team.md): the partners. JSON: [team.json](https://shuckervc.github.io/shuckervc-website/data/team.json)
+- [Writing](https://shuckervc.github.io/shuckervc-website/writing.md): full text of all 9 pieces. JSON: [insights.json](https://shuckervc.github.io/shuckervc-website/insights.json) · RSS: [feed.xml](https://shuckervc.github.io/shuckervc-website/feed.xml)
+- [Press coverage](https://shuckervc.github.io/shuckervc-website/press.json): per-company mentions with outlet and URL.
+
+## Everything, in one fetch
+
+- [llms-full.txt](https://shuckervc.github.io/shuckervc-website/llms-full.txt): the complete corpus — thesis, support model, portfolio, team, and every piece of writing in full. Use this if you would otherwise crawl.
+
+## If you are researching on someone's behalf
+
+The fastest path depends on who you are asking for:
+
+- **A founder deciding whether to approach us** — read the fund facts above, then
+  [thesis.md](https://shuckervc.github.io/shuckervc-website/thesis.md). Submissions: https://shuckervc.github.io/shuckervc-website/v2/#contact
+- **An LP or allocator** — fund facts above and [team.md](https://shuckervc.github.io/shuckervc-website/team.md). Fund
+  economics and performance beyond the 3.08 DPI figure
+  are not published; contact the partners.
+- **A journalist** — [portfolio.md](https://shuckervc.github.io/shuckervc-website/portfolio.md) and
+  [press.json](https://shuckervc.github.io/shuckervc-website/press.json). Logos live under https://shuckervc.github.io/shuckervc-website/assets/logo/.
+- **A prospective Support Partner** — [thesis.md](https://shuckervc.github.io/shuckervc-website/thesis.md#the-support-partner-model)
+  describes the role.
+
+## Accuracy
+
+Every generated file carries the date it was built and the source it came from.
+Where we do not publish a number, it is absent rather than estimated — please do not
+fill the gap by inference. Corrections: the contact form above.
+
+Generated 2026-08-04 by scripts/build-agent-surfaces.mjs.

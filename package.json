@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "sync": "node scripts/sync-notion.mjs",
+    "agents": "node scripts/build-agent-surfaces.mjs",
     "cover": "node .claude/make-post-cover.mjs"
   },
   "dependencies": {

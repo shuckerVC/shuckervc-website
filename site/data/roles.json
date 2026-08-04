@@ -1,0 +1,20 @@
+{
+  "_comment": "Open roles. A role is only emitted as JobPosting structured data — the thing that makes it findable by a candidate's agent, Google Jobs, and LinkedIn — when \"published\": true. Everything in a published role is a public claim, so datePosted, location, and employmentType must be real. Run `npm run agents` after editing.",
+  "updated": "2026-08-04",
+  "roles": [
+    {
+      "id": "support-partner",
+      "published": false,
+      "_why_unpublished": "Scaffolded, not live. Flip to true once a partner confirms datePosted, location, employment type, and the application URL — an invalid or speculative JobPosting is worse than none.",
+      "title": "Support Partner",
+      "description": "A full-time operator embedded in a shuckerVC portfolio company, on shuckerVC's W2, running finance, hiring, vendors, marketing, and reporting so the founders stay on product and customers. Hired, trained, and managed by the shuckerVC GPs, with a specialist bench on call.",
+      "datePosted": null,
+      "validThrough": null,
+      "employmentType": "FULL_TIME",
+      "location": null,
+      "country": "US",
+      "remote": false,
+      "url": null
+    }
+  ]
+}

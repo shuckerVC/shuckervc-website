@@ -29,6 +29,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Regenerate llms.txt, the .md twins, robots/sitemap, and the JSON-LD +
+      # data blocks in the HTML from site/data/*.json. Deterministic and driven
+      # entirely by committed data, so running it here just guarantees the
+      # deployed copy is current even if someone forgot `npm run agents`.
+      - name: Build agent surfaces
+        run: node scripts/build-agent-surfaces.mjs
       - name: Upload site/ artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -340,14 +340,20 @@
       <div data-reveal class="cta-inner">
         <h2 class="h2 cta-title">Tell us about your company.</h2>
         <p class="cta-sub">Founders pick us over competing term sheets — for the operating muscle behind every check.</p>
+        <div class="cta-actions">
+          <button type="button" class="btn btn--ink btn--lg" id="applyReveal" aria-expanded="false" aria-controls="applyPanel">Submit your company</button>
+        </div>
       </div>
 
       <!-- SUBMIT-YOUR-COMPANY FORM — branded intake. Fields mirror the Decile
-           deal-submission form. NOT WIRED YET: on submit it only shows a notice.
-           When hosting is chosen, replace the stub in initApplyForm() (app.js)
-           with a fetch() to the serverless endpoint that relays to the Decile
-           API (pipeline "Deals - shuckerVC Fund I, LP"). -->
-      <form id="applyForm" class="apply-form" data-reveal novalidate>
+           deal-submission form. Collapsed by default; expands when a visitor
+           presses "Submit your company" (here or in the hero). NOT WIRED YET:
+           on submit it only shows a notice. When hosting is chosen, replace the
+           stub in initApplyForm() (home.js) with a fetch() to the serverless
+           endpoint that relays to the Decile API (pipeline "Deals - shuckerVC
+           Fund I, LP"). -->
+      <div class="apply-panel" id="applyPanel" hidden>
+      <form id="applyForm" class="apply-form" novalidate>
         <div class="apply-grid">
           <label class="field">
             <span class="field-label">Company name <i>*</i></span>
@@ -406,6 +412,7 @@
           <p class="apply-note" role="status">We read every submission — your details go straight to the partners.</p>
         </div>
       </form>
+      </div>
     </div>
   </section>
 

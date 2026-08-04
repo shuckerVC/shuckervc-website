@@ -980,6 +980,29 @@
     var form = document.getElementById('applyForm');
     if (!form) return;
     var note = form.querySelector('.apply-note');
+
+    // Collapsed by default; expands when a visitor presses "Submit your company"
+    // (the CTA reveal button, the hero button, or a #contact link).
+    var panel = document.getElementById('applyPanel');
+    var reveal = document.getElementById('applyReveal');
+    var opened = false;
+    function openForm(focus) {
+      if (panel) panel.hidden = false;
+      if (reveal) { reveal.setAttribute('aria-expanded', 'true'); reveal.hidden = true; }
+      opened = true;
+      if (focus) {
+        var first = form.querySelector('input, select, textarea');
+        if (first) { try { first.focus({ preventScroll: true }); } catch (e) { first.focus(); } }
+      }
+    }
+    if (reveal) reveal.addEventListener('click', function () { openForm(true); });
+    // Any link pointing at the CTA opens the form (hero button, nav, etc.).
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="#contact"]'), function (a) {
+      a.addEventListener('click', function () { openForm(false); });
+    });
+    // Deep link straight to #contact should arrive with the form already open.
+    if (location.hash === '#contact') openForm(false);
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }

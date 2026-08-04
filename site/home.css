@@ -605,6 +605,17 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .cta-inner { text-align: center; padding-top: 0; padding-bottom: 0; }
 .cta-title { color: var(--ink-900); margin: 0 0 12px; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; }
 .cta-sub { font-size: 1.15rem; color: var(--ink-700); margin: 0 0 30px; }
+.cta-actions { display: flex; justify-content: center; }
+.cta-actions .btn { min-width: 260px; }
+/* .btn sets display:inline-flex, which would override the [hidden] attribute's
+   default display:none — this rule restores hide-on-open for the reveal button. */
+#applyReveal[hidden] { display: none; }
+
+/* Collapsible form panel — hidden until "Submit your company" is pressed. */
+.apply-panel[hidden] { display: none; }
+.apply-panel { animation: applyReveal .42s ease both; }
+@keyframes applyReveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .apply-panel { animation: none; } }
 
 /* SUBMIT-YOUR-COMPANY FORM — branded intake card on the gold section */
 .apply-form {
@@ -635,7 +646,10 @@ select.field-input {
 .apply-actions .btn { width: 100%; max-width: 340px; }
 .apply-note { font-size: 13px; color: var(--gray-500); text-align: center; margin: 0; max-width: 46ch; }
 .apply-note.is-msg { color: var(--gold-deep); font-weight: 700; }
-@media (max-width: 620px) { .apply-grid { grid-template-columns: 1fr; } }
+@media (max-width: 620px) {
+  .apply-grid { grid-template-columns: 1fr; }
+  .cta-actions .btn { width: 100%; min-width: 0; max-width: 340px; }
+}
 
 /* ============================================================
    FOOTER

@@ -555,7 +555,7 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   box-shadow: var(--shadow-lg);
   background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
-.ins-feat-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ins-feat-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left center; }
 .ins-feat-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,0.55)); pointer-events: none; }
 .ins-feat-badge-wrap { position: absolute; left: 22px; top: 22px; z-index: 1; }
 .ins-feat-read { position: absolute; left: 24px; bottom: 20px; z-index: 1; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.92); }
@@ -663,7 +663,10 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 
 /* cover image + no-cover gradient fallback (shared by feat/card/reader/mini) */
 .wr-cover { position: absolute; inset: 0; background: #f1eee7; }
-.wr-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+/* Anchor left: generated covers carry a left-aligned title, so a centre crop
+   clips the first characters. Left-anchoring preserves the title (their right
+   side is empty), and reads fine for photo covers too. */
+.wr-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left center; }
 .wr-cover--empty { background: radial-gradient(120% 120% at 75% 15%, #2a2a2a 0%, #141414 60%, #0c0c0b 100%); }
 .wr-cover--empty::after { content: attr(data-mark); position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-family: var(--font-display); font-size: 40px; color: rgba(255,205,60,0.18); letter-spacing: .02em; }
 .wr-badge-pos { position: absolute; left: 22px; top: 22px; z-index: 1; }

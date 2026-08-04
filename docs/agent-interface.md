@@ -142,6 +142,10 @@ Layers 0 and 1 are a very good brochure. This is the part that makes the site
 
 ### An MCP server: `mcp.shucker.vc`
 
+> Designed in detail in **[mcp-server.md](./mcp-server.md)** — the founder
+> pre-screen and its scheduling link, the LP disclosure tiers, and the
+> qualify-in-both-directions inversion. The sketch below is the summary.
+
 ```
 get_fund_facts()                        → the fund card, current
 search_portfolio(query|sector|stage)    → companies, founders, press, our writing

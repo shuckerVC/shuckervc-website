@@ -314,6 +314,49 @@
     { id: 'algorized', name: 'Algorized', cat: 'Robotics Perception', tags: ['Infrastructure', 'Support Partner'], milestone: 'Raised Series A', tint: '#00b49b', coInvestor: 'Amazon', site: 'https://www.algorized.com', shot: '../assets/portfolio/algorized.jpg', desc: 'Edge-AI perception that lets robots sense and anticipate people on the factory floor.', founders: [{ name: 'Natalya Lopareva', note: 'Founder & CEO', url: 'https://www.linkedin.com/in/natalyalopareva' }] }
   ];
   PORT.forEach(function (p) { if (!p.tags.includes('Fund I')) p.tags.push('Fund I'); });
+
+  // Per-company extras shown in the expanded showcase: a link to our post on the
+  // company (writing.html#<post>) and press mentions. Each mention renders the
+  // outlet logo at assets/press/<slug>.png when that file exists, otherwise a
+  // text wordmark of the outlet name. Drop <slug>.png files in to upgrade.
+  var PRESS = {
+    lodg: { post: 'lodg', items: [] },
+    cascade: {
+      post: 'cascade',
+      items: [
+        { name: 'Forbes', slug: 'forbes', url: 'https://www.forbes.com/sites/davidprosser/2026/07/20/how-cascade-plans-to-help-constructors-win-new-business-worth-millions/' },
+        { name: 'TechCrunch', slug: 'techcrunch', url: 'https://techcrunch.com/2026/07/22/cascade-raises-3-5m-to-help-construction-firms-find-and-win-projects/' },
+        { name: 'GlobeNewswire', slug: 'globenewswire', url: 'https://www.globenewswire.com/news-release/2026/07/21/3330581/0/en/cascade-raises-3-5m-to-help-construction-firms-predict-the-future-and-win-more-projects.html' },
+        { name: 'New York Business Journal', slug: 'bizjournals', url: 'https://www.bizjournals.com/newyork/news/2026/07/22/startup-cascade-raises-35m-construction.html' },
+        { name: 'Seedtable', slug: 'seedtable', url: 'https://seedtable.com/companies/usecascade/funding-rounds/seed-2026-07' },
+        { name: 'Proptech Connect', slug: 'proptechconnect', url: 'https://proptechconnect.com/cascade-raises-35m-to-help-construction-firms/' },
+        { name: 'Informed Infrastructure', slug: 'informedinfrastructure', url: 'https://informedinfrastructure.com/post/cascade-raises-35m-to-help-construction-firms-predict-the-future-and-win-more-projects' }
+      ]
+    },
+    brev: {
+      post: 'brev',
+      items: [
+        { name: 'VentureBeat', slug: 'venturebeat', url: 'https://venturebeat.com/business/brev-raises-33-million-to-build-the-ai-native-layer-between-business-goals-and-work' },
+        { name: 'Business Wire', slug: 'businesswire', url: 'https://www.businesswire.com/news/home/20260422680272/en/Brev-Raises-%243.3-Million-to-Build-the-AI-Native-Layer-Between-Business-Goals-and-Work' },
+        { name: 'citybiz', slug: 'citybiz', url: 'https://www.citybiz.co/article/836147/brev-raises-3-3-million-pre-seed-to-connect-ai-with-business-execution/' },
+        { name: 'Crunchbase', slug: 'crunchbase', url: 'https://www.crunchbase.com/organization/brev-io' },
+        { name: 'VC News Daily', slug: 'vcnewsdaily', url: 'https://vcnewsdaily.com/brev/venture-capital-funding/pkmqdrgtzg' }
+      ]
+    },
+    algorized: {
+      post: 'algorized',
+      items: [
+        { name: 'Algorized', slug: 'algorized', url: 'https://www.algorized.com/news/algorized-secures-%2413-million-to-build-the-edge-native-nervous-system-for-physical-ai-' },
+        { name: 'GGBA Switzerland', slug: 'ggba', url: 'https://ggba.swiss/en/algorized-raises-usd-13-million-to-advance-physical-ai-for-industrial-robotics/' },
+        { name: 'FinSMEs', slug: 'finsmes', url: 'https://www.finsmes.com/2026/02/algorized-raises-13m-in-series-a-funding.html' },
+        { name: 'Pulse 2.0', slug: 'pulse2', url: 'https://pulse2.com/algorized-13-million-series-a-raised-for-physical-ai-perception-and-predictive-safety-platform/' },
+        { name: 'Yahoo Finance', slug: 'yahoo-finance', url: 'https://finance.yahoo.com/news/algorized-kuka-redefine-robot-safety-231000181.html' },
+        { name: 'Dealroom', slug: 'dealroom', url: 'https://app.dealroom.co/news/feed/algorized-raises-13m-series-a-to-scale-edge-ai-safety-engine-for-industrial-robots' },
+        { name: 'Qorvo', slug: 'qorvo', url: 'https://www.qorvo.com/about/news-events/success-stories/algorized' }
+      ]
+    }
+  };
+
   var PORT_FILTERS = ['All', 'Fund I', 'Support Partner', 'Infrastructure', 'Applied AI', 'Voice', 'Dev Tools'];
   var FUND = {
     name: 'Fund One',
@@ -513,6 +556,28 @@
         '>' + q.name + '</button>';
     }).join('');
 
+    // Welcome-post link + press mentions (per-company, from PRESS)
+    var extra = PRESS[p.id] || {};
+    var postHtml = extra.post
+      ? '<a class="showcase-post" href="../writing.html#' + extra.post + '">Read our post on ' + p.name + ' ↗</a>'
+      : '';
+    var pressHtml = (extra.items && extra.items.length)
+      ? '<div class="showcase-press">' +
+          '<div class="showcase-press-label">In the news</div>' +
+          '<div class="showcase-press-grid">' +
+            extra.items.map(function (m) {
+              return '<a class="press-item" href="' + m.url + '" target="_blank" rel="noopener" title="' + m.name + '">' +
+                '<img class="press-img" src="../assets/press/' + m.slug + '.png" alt="' + m.name + '" loading="lazy" style="display:none"' +
+                  ' onload="this.style.display=\'\';this.closest(\'.press-item\').classList.add(\'has-logo\')"' +
+                  ' onerror="this.remove()">' +
+                '<span class="press-wordmark">' + m.name + '</span>' +
+              '</a>';
+            }).join('') +
+          '</div>' +
+        '</div>'
+      : '';
+    var moreHtml = (postHtml || pressHtml) ? '<div class="showcase-more">' + postHtml + pressHtml + '</div>' : '';
+
     root.innerHTML =
       '<div class="showcase" style="border:1px solid ' + p.tint + '">' +
         '<div class="showcase-top">' +
@@ -541,6 +606,7 @@
             (p.coInvestor ? '<div class="showcase-coinv"><span class="port-coinv-label">Co-investing with</span><span class="port-coinv-pill">' + p.coInvestor + '</span></div>' : '') +
           '</div>' +
         '</div>' +
+        moreHtml +
         '<div class="showcase-pills">' + pillsHtml + '</div>' +
       '</div>';
 

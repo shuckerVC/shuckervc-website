@@ -500,6 +500,19 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .showcase-founders-list .fnote { color: var(--gray-400); }
 .showcase-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
 .showcase-coinv { display: flex; align-items: center; gap: 10px; margin-top: 26px; padding-top: 22px; border-top: 1px solid #efece5; }
+/* Welcome-post link + press mentions in the expanded showcase */
+.showcase-more { padding: 22px 24px; border-top: 1px solid #efece5; }
+.showcase-post { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--gold-deep); text-decoration: none; }
+.showcase-post:hover { text-decoration: underline; }
+.showcase-press { margin-top: 20px; }
+.showcase-press-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px; }
+.showcase-press-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.press-item { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 16px; border: 1px solid var(--border); border-radius: 10px; background: #fff; text-decoration: none; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.press-item:hover { border-color: var(--gold-400); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+.press-img { max-height: 22px; max-width: 118px; object-fit: contain; }
+.press-wordmark { font-family: var(--font-display); font-size: 15px; line-height: 1; color: var(--ink-700); white-space: nowrap; }
+.press-item.has-logo .press-wordmark { display: none; }
+
 .showcase-pills { display: flex; gap: 10px; flex-wrap: wrap; padding: 18px 24px; border-top: 1px solid #efece5; background: var(--gray-50); }
 .showcase-pill {
   display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px;

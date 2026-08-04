@@ -24,7 +24,8 @@
     'GGBA Switzerland': '#D8232A', 'New York Business Journal': '#10508C',
     'citybiz': '#111111', 'Algorized': '#00b49b'
   };
-  var state = { filter: 'All', sortDir: 'desc', openId: null };
+  var CO_NAME = { cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg' };
+  var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };
 
   var $ = function (id) { return document.getElementById(id); };
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -57,9 +58,26 @@
       b.type = 'button';
       b.className = 'chip' + (t === state.filter ? ' is-active' : '');
       b.textContent = t;
-      b.addEventListener('click', function () { state.filter = t; renderArchive(); });
+      b.addEventListener('click', function () { state.filter = t; state.press = false; renderArchive(); });
       chips.appendChild(b);
     });
+
+    // "In the news" mode: show portfolio press mentions instead of the archive.
+    var pt = $('wrPressToggle');
+    if (pt) { pt.classList.toggle('is-active', state.press); pt.setAttribute('aria-pressed', state.press ? 'true' : 'false'); }
+    if (state.press) {
+      $('wrFeat').innerHTML = '';
+      $('wrGrid').innerHTML = '';
+      $('wrEmpty').hidden = true;
+      $('wrPress').hidden = false;
+      renderPress();
+      var tot = pressTotal();
+      $('wrCount').textContent = tot + (tot === 1 ? ' mention' : ' mentions');
+      $('wrSort').style.display = 'none';
+      return;
+    }
+    $('wrPress').hidden = true;
+    $('wrSort').style.display = '';
 
     var list = sorted();
     var n = list.length;
@@ -153,36 +171,62 @@
     });
   }
 
+  function pressCardHTML(m) {
+    var host = (m.url.split('/')[2] || '').replace(/^www\./, '');
+    var rest = m.url.replace(/^https?:\/\/[^/]+/, '');
+    var disp = host + rest; if (disp.length > 46) disp = disp.slice(0, 46) + '…';
+    var brand = BRAND[m.outlet] || 'var(--gold-500)';
+    var thumb = m.image
+      ? '<div class="wr-news-thumb" style="background-image:url(\'' + esc(m.image) + '\')">' +
+          '<span class="wr-news-badge" style="background:' + brand + '">' + esc(m.outlet) + '</span>' +
+          (m.credit ? '<span class="wr-news-credit">© ' + esc(m.credit) + '</span>' : '') +
+        '</div>'
+      : '<div class="wr-news-thumb wr-news-thumb--ph" style="border-right-color:' + brand + '">' +
+          '<span class="wr-news-thumb-eyebrow">In the news</span>' +
+          '<span class="wr-news-thumb-outlet">' + esc(m.outlet) + '</span>' +
+          '<span class="wr-news-thumb-foot">shuckerVC</span>' +
+        '</div>';
+    return '<a class="wr-news-card" href="' + esc(m.url) + '" target="_blank" rel="noopener">' +
+        thumb +
+        '<div class="wr-news-info">' +
+          '<span class="wr-news-outlet">' + esc(m.outlet) + '</span>' +
+          '<h4 class="wr-news-title">' + esc(m.title) + '</h4>' +
+          (m.desc ? '<p class="wr-news-desc">' + esc(m.desc) + '</p>' : '') +
+          '<span class="wr-news-url">' + esc(disp) + (m.credit ? ' · Photo: ' + esc(m.credit) : '') + '</span>' +
+        '</div>' +
+      '</a>';
+  }
+
   function renderNews(post) {
     var sec = $('wrNews'), rail = $('wrNewsRail');
     if (!sec || !rail) return;
     var items = PRESS[post.id] || [];
     if (!items.length) { sec.hidden = true; rail.innerHTML = ''; return; }
     sec.hidden = false;
-    rail.innerHTML = items.map(function (m) {
-      var host = (m.url.split('/')[2] || '').replace(/^www\./, '');
-      var rest = m.url.replace(/^https?:\/\/[^/]+/, '');
-      var disp = host + rest; if (disp.length > 46) disp = disp.slice(0, 46) + '…';
-      var brand = BRAND[m.outlet] || 'var(--gold-500)';
-      var thumb = m.image
-        ? '<div class="wr-news-thumb" style="background-image:url(\'' + esc(m.image) + '\')">' +
-            '<span class="wr-news-badge" style="background:' + brand + '">' + esc(m.outlet) + '</span>' +
-            (m.credit ? '<span class="wr-news-credit">© ' + esc(m.credit) + '</span>' : '') +
-          '</div>'
-        : '<div class="wr-news-thumb wr-news-thumb--ph" style="border-right-color:' + brand + '">' +
-            '<span class="wr-news-thumb-eyebrow">In the news</span>' +
-            '<span class="wr-news-thumb-outlet">' + esc(m.outlet) + '</span>' +
-            '<span class="wr-news-thumb-foot">shuckerVC</span>' +
-          '</div>';
-      return '<a class="wr-news-card" href="' + esc(m.url) + '" target="_blank" rel="noopener">' +
-          thumb +
-          '<div class="wr-news-info">' +
-            '<span class="wr-news-outlet">' + esc(m.outlet) + '</span>' +
-            '<h4 class="wr-news-title">' + esc(m.title) + '</h4>' +
-            (m.desc ? '<p class="wr-news-desc">' + esc(m.desc) + '</p>' : '') +
-            '<span class="wr-news-url">' + esc(disp) + (m.credit ? ' · Photo: ' + esc(m.credit) : '') + '</span>' +
-          '</div>' +
-        '</a>';
+    rail.innerHTML = items.map(pressCardHTML).join('');
+  }
+
+  function pressTotal() {
+    return Object.keys(PRESS).reduce(function (n, k) { return n + (PRESS[k] ? PRESS[k].length : 0); }, 0);
+  }
+
+  // "In the news" list view — all portfolio press mentions, grouped by company.
+  function renderPress() {
+    var host = $('wrPress');
+    var order = Object.keys(PRESS).sort(function (a, b) {
+      var pa = POSTS.filter(function (p) { return p.id === a; })[0];
+      var pb = POSTS.filter(function (p) { return p.id === b; })[0];
+      return (pb ? pb.sort : 0) - (pa ? pa.sort : 0);
+    });
+    host.innerHTML = order.map(function (cid) {
+      var items = PRESS[cid] || [];
+      if (!items.length) return '';
+      var label = CO_NAME[cid] || (cid.charAt(0).toUpperCase() + cid.slice(1));
+      return '<div class="wr-press-group">' +
+          '<div class="wr-press-head"><h3 class="wr-press-co">' + esc(label) + '</h3>' +
+            '<span class="wr-press-n">' + items.length + ' ' + (items.length === 1 ? 'mention' : 'mentions') + '</span></div>' +
+          '<div class="wr-press-grid">' + items.map(pressCardHTML).join('') + '</div>' +
+        '</div>';
     }).join('');
   }
 
@@ -218,14 +262,18 @@
     $('wrNewsPrev').addEventListener('click', function () { var r = $('wrNewsRail'); if (r) r.scrollBy({ left: -360, behavior: 'smooth' }); });
     $('wrNewsNext').addEventListener('click', function () { var r = $('wrNewsRail'); if (r) r.scrollBy({ left: 360, behavior: 'smooth' }); });
     [].slice.call(document.querySelectorAll('[data-close]')).forEach(function (b) { b.addEventListener('click', close); });
+    var pt = $('wrPressToggle');
+    if (pt) pt.addEventListener('click', function () { state.press = !state.press; renderArchive(); });
     window.addEventListener('hashchange', syncFromHash);
 
-    // Press mentions (rendered into the reader's "In the news" carousel).
+    // Press mentions (reader "In the news" carousel + the "In the news" list view).
     fetch('press.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (d) { Object.keys(d).forEach(function (k) { if (k.charAt(0) !== '_') PRESS[k] = d[k]; }); }
+        if (pt && pressTotal() > 0) pt.hidden = false;
         if (state.openId) { var p = POSTS.filter(function (x) { return x.id === state.openId; })[0]; if (p) renderNews(p); }
+        else if (state.press) renderArchive();
       })
       .catch(function () { /* no press */ });
 

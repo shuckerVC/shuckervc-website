@@ -629,6 +629,22 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .wr-rss { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 15px; border-radius: 999px; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .02em; border: 1px solid var(--border); background: #fff; color: var(--gold-deep); transition: all .22s ease; }
 .wr-rss:hover { box-shadow: var(--shadow-sm); border-color: var(--gold-400); }
 .wr-rss svg { color: var(--gold-500); }
+.wr-press-toggle { display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 15px; border-radius: 999px; cursor: pointer; font-family: var(--font-sans); font-size: 13px; font-weight: 700; letter-spacing: .02em; border: 1px solid var(--border); background: #fff; color: var(--ink-700); transition: all .22s ease; }
+.wr-press-toggle svg { color: var(--gold-deep); }
+.wr-press-toggle:hover { box-shadow: var(--shadow-sm); border-color: var(--gold-400); }
+.wr-press-toggle.is-active { background: var(--ink-900); color: #fff; border-color: var(--ink-900); }
+.wr-press-toggle.is-active svg { color: var(--gold-400); }
+
+/* "In the news" list view — press mentions grouped by company */
+.wr-press { padding-top: 6px; }
+.wr-press-group { margin-top: 30px; }
+.wr-press-group:first-child { margin-top: 8px; }
+.wr-press-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.wr-press-co { font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; color: var(--ink-900); margin: 0; }
+.wr-press-n { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--gray-400); }
+.wr-press-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; }
+.wr-press-grid .wr-news-card { flex: initial; width: 100%; }
+@media (max-width: 480px) { .wr-press-grid { grid-template-columns: 1fr; } }
 
 /* featured */
 .wr-feat { display: block; margin-top: 36px; border-radius: 20px; background: #fff; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 8px 30px rgba(17,17,17,0.06); cursor: pointer; transition: transform .3s var(--ease-out), box-shadow .3s ease; }

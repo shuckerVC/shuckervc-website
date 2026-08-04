@@ -66,6 +66,10 @@
         <div class="wr-tools">
           <span class="wr-count" id="wrCount"></span>
           <button type="button" class="wr-sort" id="wrSort"></button>
+          <button type="button" class="wr-press-toggle" id="wrPressToggle" aria-pressed="false" hidden>
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h13v13a2 2 0 0 1-2 2H5a2 2 0 0 1-1-1.7V5z"/><path d="M17 8h2.5A1.5 1.5 0 0 1 21 9.5V18a2 2 0 0 1-2 2" stroke-linecap="round"/><path d="M7 9h7M7 12.5h7M7 16h4" stroke-linecap="round"/></svg>
+            <span>In the news</span>
+          </button>
           <a class="wr-rss" href="feed.xml" title="Subscribe via RSS" aria-label="Subscribe via RSS">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83C19.56 11.4 12.6 4.44 4 4.44zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83C13.9 14.4 9.6 10.1 4 10.1z"/></svg>
             <span>RSS</span>
@@ -74,6 +78,7 @@
       </div>
       <div id="wrFeat"></div>
       <div class="wr-grid" id="wrGrid"></div>
+      <div class="wr-press" id="wrPress" hidden></div>
       <div class="wr-empty" id="wrEmpty" hidden>No writing in this category yet.</div>
     </div>
   </section>

@@ -707,6 +707,7 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .wr-news-thumb { flex: 0 0 138px; background-size: cover; background-position: center; position: relative; }
 .wr-news-thumb--ph { display: flex; flex-direction: column; justify-content: center; padding: 14px; background: radial-gradient(130% 150% at 0% 0%, #201e1b 0%, #111 62%); border-right: 3px solid var(--gold-400); }
 .wr-news-badge { position: absolute; bottom: 10px; left: 10px; display: inline-flex; align-items: center; height: 21px; max-width: calc(100% - 20px); padding: 0 9px; border-radius: 5px; font-size: 10px; font-weight: 700; letter-spacing: .02em; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 2px 6px rgba(0,0,0,.28); }
+.wr-news-credit { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.92); font-size: 9px; font-weight: 600; letter-spacing: .02em; }
 .wr-news-thumb-eyebrow { position: absolute; top: 12px; left: 14px; font-size: 8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,205,60,.7); }
 .wr-news-thumb-outlet { font-family: var(--font-display); font-size: 17px; line-height: 1.12; color: #fff; }
 .wr-news-thumb-foot { position: absolute; bottom: 11px; left: 14px; font-size: 9px; font-weight: 700; color: var(--gold-400); }

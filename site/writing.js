@@ -167,6 +167,7 @@
       var thumb = m.image
         ? '<div class="wr-news-thumb" style="background-image:url(\'' + esc(m.image) + '\')">' +
             '<span class="wr-news-badge" style="background:' + brand + '">' + esc(m.outlet) + '</span>' +
+            (m.credit ? '<span class="wr-news-credit">© ' + esc(m.credit) + '</span>' : '') +
           '</div>'
         : '<div class="wr-news-thumb wr-news-thumb--ph" style="border-right-color:' + brand + '">' +
             '<span class="wr-news-thumb-eyebrow">In the news</span>' +
@@ -179,7 +180,7 @@
             '<span class="wr-news-outlet">' + esc(m.outlet) + '</span>' +
             '<h4 class="wr-news-title">' + esc(m.title) + '</h4>' +
             (m.desc ? '<p class="wr-news-desc">' + esc(m.desc) + '</p>' : '') +
-            '<span class="wr-news-url">' + esc(disp) + '</span>' +
+            '<span class="wr-news-url">' + esc(disp) + (m.credit ? ' · Photo: ' + esc(m.credit) : '') + '</span>' +
           '</div>' +
         '</a>';
     }).join('');

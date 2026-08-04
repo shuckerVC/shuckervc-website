@@ -3,6 +3,7 @@
   "shuckervc": [
     { "outlet": "Liftoff with Keith Newman", "title": "Liftoff with Keith Newman — inside shuckerVC's Support Partner model", "desc": "A studio conversation with host Keith Newman on shuckerVC's origin, its AI-native B2B SaaS focus, and how the embedded Support Partner framework works.", "image": "https://img.youtube.com/vi/yY3-1YrPMmw/mqdefault.jpg", "url": "https://youtu.be/yY3-1YrPMmw" },
     { "outlet": "Silicon Valley Impact", "title": "Silicon Valley Impact podcast — the embedded Support Partner model", "desc": "A podcast conversation on shuckerVC's origin, its AI-native B2B SaaS focus, and how the embedded Support Partner framework works.", "image": "https://img.youtube.com/vi/QmH6SYYXBpY/mqdefault.jpg", "url": "https://youtu.be/QmH6SYYXBpY" },
+    { "outlet": "Silicon Valley Impact", "title": "Silicon Valley Impact podcast — Michael Hoy of Atlas", "desc": "A podcast conversation with Michael Hoy of Atlas, a shuckerVC portfolio company, on building the company and what they're setting out to solve.", "image": "https://img.youtube.com/vi/XjF4WWTMnMc/mqdefault.jpg", "url": "https://youtu.be/XjF4WWTMnMc" },
     { "outlet": "1Mby1M", "title": "1Mby1M Entrepreneurship Podcast, Ep. 697 — JP Persico, shuckerVC", "desc": "JP Persico outlines shuckerVC's investment thesis and how the operational model unburdens early-stage technical founders by handling the back office.", "url": "https://www.sramanamitra.com/2025/08/08/697th-1mby1m-entrepreneurship-podcast-with-jp-persico-shuckervc/" },
     { "outlet": "F4 Fund", "title": "shuckerVC — investor index profile", "desc": "Ecosystem database profile mapping shuckerVC's embedded-support metrics and co-investments across Runreal, Atlas, and Sindarin.", "url": "https://f4.fund/firms/shuckervc" },
     { "outlet": "Llama Lounge", "title": "Llama Lounge 24 — AI startup showcase", "desc": "On the investor guest list for the AI ecosystem showcase series.", "url": "https://luma.com/llamalounge24" }
@@ -34,6 +35,6 @@
     { "outlet": "Qorvo", "title": "Algorized — Qorvo success story", "desc": "Algorized and Qorvo combine AI and UWB radar to deliver precise, privacy-preserving people sensing that enables truly human-centric responsive environments.", "image": "assets/press/algorized-qorvo.jpg", "url": "https://www.qorvo.com/about/news-events/success-stories/algorized" }
   ],
   "atlas": [
-    { "outlet": "Silicon Valley Impact", "title": "Silicon Valley Impact podcast — the founders of Atlas", "desc": "A podcast conversation with the founders of Atlas on building the company and what they're setting out to solve.", "image": "https://img.youtube.com/vi/XjF4WWTMnMc/mqdefault.jpg", "url": "https://youtu.be/XjF4WWTMnMc" }
+    { "outlet": "Silicon Valley Impact", "title": "Silicon Valley Impact podcast — Michael Hoy of Atlas", "desc": "A podcast conversation with Michael Hoy of Atlas on building the company and what they're setting out to solve.", "image": "https://img.youtube.com/vi/XjF4WWTMnMc/mqdefault.jpg", "url": "https://youtu.be/XjF4WWTMnMc" }
   ]
 }

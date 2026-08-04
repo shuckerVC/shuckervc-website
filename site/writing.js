@@ -22,9 +22,10 @@
     'Crunchbase': '#146AFF', 'Business Wire': '#0B5CAB', 'GlobeNewswire': '#0A66C2',
     'Yahoo Finance': '#5F01D1', 'Dealroom': '#E6005C', 'Qorvo': '#0091DA',
     'GGBA Switzerland': '#D8232A', 'New York Business Journal': '#10508C',
-    'citybiz': '#111111', 'Algorized': '#00b49b'
+    'citybiz': '#111111', 'Algorized': '#00b49b', 'The Next Web': '#ff5c35',
+    'Silicon Valley Impact': '#c8102e', '1Mby1M': '#0b5cab'
   };
-  var CO_NAME = { cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg' };
+  var CO_NAME = { shuckervc: 'shuckerVC', cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg' };
   var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -213,11 +214,13 @@
   // "In the news" list view — all portfolio press mentions, grouped by company.
   function renderPress() {
     var host = $('wrPress');
-    var order = Object.keys(PRESS).sort(function (a, b) {
-      var pa = POSTS.filter(function (p) { return p.id === a; })[0];
-      var pb = POSTS.filter(function (p) { return p.id === b; })[0];
-      return (pb ? pb.sort : 0) - (pa ? pa.sort : 0);
-    });
+    // shuckerVC's own mentions pin to the top; portfolio groups follow newest-first.
+    function grpSort(id) {
+      if (id === 'shuckervc') return Infinity;
+      var p = POSTS.filter(function (x) { return x.id === id; })[0];
+      return p ? p.sort : 0;
+    }
+    var order = Object.keys(PRESS).sort(function (a, b) { return grpSort(b) - grpSort(a); });
     host.innerHTML = order.map(function (cid) {
       var items = PRESS[cid] || [];
       if (!items.length) return '';

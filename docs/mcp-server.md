@@ -23,6 +23,14 @@ so is how it gets a better answer. That's the whole trick.
 
 ## Tools
 
+> The full contract — input/output JSON Schema, worked examples, and per-tool
+> readiness — is **[mcp-schema.json](./mcp-schema.json)**. `npm run mcp:preview`
+> runs the ready tools against this repo's real data and validates every response
+> against its own schema, so the spec is demonstrated rather than asserted.
+>
+> As it stands: **4 ready, 2 partial, 3 blocked** — and the blocked three are
+> blocked on decisions, not engineering.
+
 ```
 get_fund_facts()                     → the fund card (site/data/fund.json)
 search_portfolio(query|sector|stage) → companies, founders, press, our writing

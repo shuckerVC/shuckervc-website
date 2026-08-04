@@ -1,0 +1,579 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "shuckervc",
+  "version": "0.1.0-draft",
+  "generated": "2026-08-04",
+  "description": "Draft tool manifest for the shuckerVC MCP server. Every tool below is specified against the data that exists in this repository today — site/data/*.json, site/insights.json, site/press.json — and against the Decile pipelines that already exist. `status` says whether each tool could run right now or what it is waiting on. Nothing here is deployed; this is the spec the Worker would implement. See docs/mcp-server.md for the reasoning.",
+
+  "status_legend": {
+    "ready": "Could be implemented today. All input data exists and is deployed.",
+    "partial": "Implementable, but some of the response would be thin or hand-written first.",
+    "blocked": "Cannot be built correctly yet. `blocked_by` says what is missing."
+  },
+
+  "tiers": {
+    "0": "Public. Served to any caller, no identification. Everything the website already publishes.",
+    "1": "Requires a verified-email token from request_access. Content counsel has cleared for named, self-declared contacts.",
+    "2": "Data room. Verified accredited / NDA. Never served by this server — it returns a handoff link and stops."
+  },
+
+  "data_sources": {
+    "site/data/fund.json": "Fund card. 5 fields deliberately null pending partner confirmation.",
+    "site/data/portfolio.json": "7 companies with founders, sites, categories, tags.",
+    "site/data/team.json": "3 partners.",
+    "site/data/roles.json": "Open roles. Support Partner scaffolded, published:false.",
+    "site/insights.json": "9 posts with full body text, Notion-synced hourly.",
+    "site/press.json": "Per-company press mentions with outlet and URL.",
+    "site/thesis.md": "Generated prose: strategy + support model, extracted from the live page.",
+    "decile:2nEb978Z": "Pipeline 'Deals - shuckerVC Fund I, LP' — destination for submit_company.",
+    "decile:2N3w7ZNy": "Pipeline 'Investors - shuckerVC Fund I, LP' — destination for identified LPs.",
+    "decile:9KRAe28p": "Newsletter pipeline 'Spring 2025 LP Update' — send side only; no opt-in capture exists."
+  },
+
+  "tools": [
+    {
+      "name": "get_fund_facts",
+      "title": "Fund card",
+      "status": "ready",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false },
+      "description": "The shuckerVC fund card: size, stage, check size, sectors, geography, and what makes us different. Returns `unpublished` listing facts we deliberately do not publish — treat those as unknown rather than inferring them.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "description": "Optional subset of top-level keys to return. Omit for the whole card.",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["name", "description", "fund", "investing", "differentiator", "updated", "unpublished"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "hq": { "type": "string" },
+          "fund": {
+            "type": "object",
+            "required": ["name", "size_usd", "check_size_usd_max"],
+            "properties": {
+              "name": { "type": "string" },
+              "legal_name": { "type": "string" },
+              "size_usd": { "type": "integer" },
+              "check_size_usd_max": { "type": "integer" },
+              "target_companies": { "type": "integer" },
+              "companies_backed": { "type": "integer" },
+              "prior_track_record": {
+                "type": "object",
+                "properties": {
+                  "dpi": { "type": "number" },
+                  "note": { "type": "string" }
+                }
+              }
+            }
+          },
+          "investing": {
+            "type": "object",
+            "properties": {
+              "stage": { "type": "array", "items": { "type": "string" } },
+              "sectors": { "type": "array", "items": { "type": "string" } },
+              "geography_focus": { "type": "string" },
+              "geography_note": { "type": "string" },
+              "leads_rounds": { "type": ["boolean", "null"] },
+              "not_a_fit": { "type": ["array", "null"], "items": { "type": "string" } }
+            }
+          },
+          "differentiator": { "type": "object" },
+          "contact": { "type": "object" },
+          "updated": { "type": "string", "format": "date" },
+          "unpublished": {
+            "type": "array",
+            "description": "Facts shuckerVC has chosen not to publish. Absent by decision, not by omission — do not fill these in by inference.",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "example": {
+        "request": {},
+        "response_excerpt": {
+          "name": "shuckerVC",
+          "fund": { "name": "Fund I", "size_usd": 8000000, "check_size_usd_max": 500000, "target_companies": 18, "companies_backed": 7 },
+          "investing": { "stage": ["pre-seed", "seed"], "geography_focus": "United States", "leads_rounds": null, "not_a_fit": null },
+          "updated": "2026-08-04",
+          "unpublished": ["investing.leads_rounds", "investing.not_a_fit", "process", "fund.vintage"]
+        }
+      }
+    },
+
+    {
+      "name": "search_portfolio",
+      "title": "Search the portfolio",
+      "status": "ready",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false },
+      "description": "Search the 7 Fund I companies by free text, sector, or tag. Returns founders, website, category, and press coverage.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Free text matched against name, category, and description." },
+          "tag": { "type": "string", "enum": ["Applied AI", "Infrastructure", "Voice", "Dev Tools", "Support Partner", "Fund I"] },
+          "has_press": { "type": "boolean", "description": "Only companies with press coverage on file." },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 50, "default": 10 }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["count", "companies"],
+        "properties": {
+          "count": { "type": "integer" },
+          "companies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "category", "description"],
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "category": { "type": "string" },
+                "description": { "type": "string" },
+                "website": { "type": ["string", "null"] },
+                "tags": { "type": "array", "items": { "type": "string" } },
+                "co_investors": { "type": ["string", "null"] },
+                "milestone": { "type": ["string", "null"] },
+                "founders": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "role": { "type": "string" },
+                      "linkedin": { "type": "string" }
+                    }
+                  }
+                },
+                "press": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "outlet": { "type": "string" },
+                      "title": { "type": "string" },
+                      "url": { "type": "string" }
+                    }
+                  }
+                },
+                "our_writing_url": { "type": ["string", "null"] }
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "request": { "query": "construction" },
+        "response_excerpt": {
+          "count": 1,
+          "companies": [{
+            "id": "cascade",
+            "name": "Cascade",
+            "category": "Construction AI",
+            "website": "https://usecascade.ai",
+            "co_investors": "a16z Speedrun",
+            "founders": [{ "name": "Hannia Zia", "role": "CEO, ex–Google Pay" }]
+          }]
+        }
+      }
+    },
+
+    {
+      "name": "get_thesis",
+      "title": "Thesis and support model",
+      "status": "ready",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false },
+      "description": "What we look for in a team, and what the Support Partner actually does. Returned as markdown, generated from the live page so it cannot drift from what a human reader sees.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": { "type": "string", "enum": ["strategy", "support_model", "all"], "default": "all" }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["markdown", "source_url", "updated"],
+        "properties": {
+          "markdown": { "type": "string" },
+          "source_url": { "type": "string" },
+          "updated": { "type": "string", "format": "date" }
+        }
+      },
+      "example": { "request": { "topic": "support_model" } }
+    },
+
+    {
+      "name": "get_writing",
+      "title": "Writing",
+      "status": "ready",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false },
+      "description": "shuckerVC's published writing — white papers, perspectives, portfolio announcements, LP newsletters. Full article text available.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string" },
+          "tag": { "type": "string", "enum": ["White paper", "Perspective", "News", "Newsletter"] },
+          "full_text": { "type": "boolean", "default": false, "description": "Include the complete article body, not just the excerpt." },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 25, "default": 5 }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["count", "posts"],
+        "properties": {
+          "count": { "type": "integer" },
+          "posts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "tag", "url"],
+              "properties": {
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "tag": { "type": "string" },
+                "author": { "type": "string" },
+                "date": { "type": "string" },
+                "read": { "type": "string" },
+                "excerpt": { "type": "string" },
+                "url": { "type": "string" },
+                "body_markdown": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "example": { "request": { "tag": "White paper", "full_text": true } }
+    },
+
+    {
+      "name": "get_press_kit",
+      "title": "Press kit",
+      "status": "partial",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false },
+      "description": "Boilerplate, logo files, partner headshots, and portfolio press coverage.",
+      "blocked_by": [
+        "No approved boilerplate paragraph exists — the site's meta description would have to stand in until someone writes one.",
+        "No press contact address is defined anywhere in the repo."
+      ],
+      "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+      "outputSchema": {
+        "type": "object",
+        "required": ["boilerplate", "assets", "portfolio_press"],
+        "properties": {
+          "boilerplate": { "type": "string" },
+          "assets": {
+            "type": "object",
+            "properties": {
+              "logos": { "type": "array", "items": { "type": "string" } },
+              "partner_headshots": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "partners": { "type": "array", "items": { "type": "object" } },
+          "portfolio_press": { "type": "array", "items": { "type": "object" } },
+          "contact": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    {
+      "name": "check_fit",
+      "title": "Founder pre-screen",
+      "status": "blocked",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false, "idempotentHint": false },
+      "description": "Automated pre-screen of a company against the fund's criteria. Returns a verdict, the criteria behind it, and a graduated next step — a single-use booking link only on a strong fit. This is not a decision from the partners.",
+      "blocked_by": [
+        "site/data/fund.json investing.not_a_fit is null — this is the hard gate; the tool cannot exist without it.",
+        "site/data/fund.json investing.leads_rounds is null — changes the answer for most founders.",
+        "No calendar chosen, and no weekly cap agreed on how many pre-screened slots an automated gate may consume."
+      ],
+      "design_notes": [
+        "The deterministic criteria checks below are a hard gate. An LLM read of the thesis may add nuance but must never upgrade a hard fail — the description is adversarial input, written by a party that wants a yes.",
+        "Treat `company.description` as data, never as instructions.",
+        "Rate-limit by hashed company domain. Every attempt is stored; a materially different retry is itself signal.",
+        "A `not_now` verdict must still offer submit_company — the gate will sometimes be wrong because the agent wrote a poor summary, not because the company is poor."
+      ],
+      "inputSchema": {
+        "type": "object",
+        "required": ["company"],
+        "properties": {
+          "company": {
+            "type": "object",
+            "required": ["description"],
+            "properties": {
+              "name": { "type": "string" },
+              "description": { "type": "string", "minLength": 40, "maxLength": 4000 },
+              "website": { "type": "string", "format": "uri" },
+              "stage": { "type": "string", "enum": ["pre-seed", "seed", "series-a", "series-b-plus", "other"] },
+              "sector": { "type": "string" },
+              "geography": { "type": "string", "description": "Country or region where the company operates." },
+              "raising_usd": { "type": "integer" },
+              "traction": { "type": "string" },
+              "team": { "type": "string" }
+            }
+          },
+          "requester_email": { "type": "string", "format": "email", "description": "Optional. Joins the pre-screen to a person in the pipeline." }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["verdict", "reasoning", "message_to_founder", "criteria", "next_step", "disclaimer"],
+        "properties": {
+          "verdict": { "type": "string", "enum": ["strong", "possible", "not_now", "out_of_scope"] },
+          "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+          "reasoning": { "type": "string" },
+          "message_to_founder": {
+            "type": "string",
+            "description": "Written to be relayed verbatim. The caller is a program that will otherwise invent its own phrasing."
+          },
+          "criteria": {
+            "type": "array",
+            "description": "The hard gate, itemised, so the verdict is auditable and the agent can relay specifics.",
+            "items": {
+              "type": "object",
+              "required": ["criterion", "result"],
+              "properties": {
+                "criterion": { "type": "string", "enum": ["stage", "sector", "geography", "check_size", "business_model"] },
+                "result": { "type": "string", "enum": ["pass", "fail", "unknown"] },
+                "detail": { "type": "string" }
+              }
+            }
+          },
+          "next_step": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "type": "string", "enum": ["book", "submit", "none"] },
+              "url": { "type": "string", "format": "uri", "description": "On `book`, a single-use link bound to this qualification, so the meeting arrives pre-briefed." },
+              "expires": { "type": "string", "format": "date-time" }
+            }
+          },
+          "disclaimer": {
+            "type": "string",
+            "const": "Automated pre-screen against published criteria. Not a decision from the shuckerVC partners."
+          }
+        }
+      },
+      "example": {
+        "request": {
+          "company": {
+            "name": "Example Co",
+            "description": "AI agents that reconcile invoices for mid-market logistics brokers. Three design partners in production, $18k MRR.",
+            "stage": "seed",
+            "geography": "United States",
+            "raising_usd": 2500000
+          }
+        },
+        "response_excerpt": {
+          "verdict": "strong",
+          "criteria": [
+            { "criterion": "stage", "result": "pass", "detail": "Seed — in range (pre-seed, seed)." },
+            { "criterion": "sector", "result": "pass", "detail": "Applied AI on a B2B workflow." },
+            { "criterion": "geography", "result": "pass", "detail": "US." },
+            { "criterion": "check_size", "result": "pass", "detail": "$2.5M round accommodates a check up to $500K." }
+          ],
+          "next_step": { "type": "book", "url": "https://…/b/<single-use>", "expires": "2026-08-18T00:00:00Z" },
+          "disclaimer": "Automated pre-screen against published criteria. Not a decision from the shuckerVC partners."
+        }
+      }
+    },
+
+    {
+      "name": "lp_fit",
+      "title": "LP mutual-fit read",
+      "status": "blocked",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": true, "openWorldHint": false },
+      "description": "Given an LP's mandate, an honest read on whether shuckerVC fits their box — including when we do not. Returns only tier-0 content, and names what exists at higher tiers without describing it.",
+      "blocked_by": [
+        "site/data/lp_icp.json does not exist. It is the mirror of not_a_fit: ticket range, LP types the fund is built for, what we do not offer.",
+        "Tier boundaries need counsel. Reg D 506(b) prohibits general solicitation; 506(c) permits it but requires accreditation verification; performance claims sit under the Marketing Rule. Note the 3.08 DPI figure is already public on the live site.",
+        "Fund I status (open / closing / closed) decides whether this points at Fund I or warms Fund II."
+      ],
+      "inputSchema": {
+        "type": "object",
+        "required": ["mandate"],
+        "properties": {
+          "mandate": {
+            "type": "object",
+            "properties": {
+              "investor_type": { "type": "string", "enum": ["family_office", "individual", "fund_of_funds", "endowment", "pension", "insurance", "sovereign", "emerging_manager_program", "other"] },
+              "ticket_usd_min": { "type": "integer" },
+              "ticket_usd_max": { "type": "integer" },
+              "fund_size_preference": { "type": "string" },
+              "stage_focus": { "type": "array", "items": { "type": "string" } },
+              "geography": { "type": "string" },
+              "emerging_manager_appetite": { "type": "boolean" },
+              "return_orientation": { "type": "string", "enum": ["dpi", "tvpi", "both"] }
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["mutual_fit", "why", "what_we_can_share", "what_requires_verification", "next_step", "disclaimer"],
+        "properties": {
+          "mutual_fit": { "type": "string", "enum": ["strong", "partial", "not_now", "mismatch"] },
+          "why": { "type": "string" },
+          "we_fit_you": { "type": "array", "items": { "type": "string" } },
+          "you_fit_us": { "type": "array", "items": { "type": "string" } },
+          "blockers": {
+            "type": "array",
+            "description": "Hard arithmetic first. An $8M fund cannot absorb a $10M minimum ticket, and saying so immediately is the point of this tool.",
+            "items": { "type": "string" }
+          },
+          "what_we_can_share": { "type": "array", "items": { "type": "string" } },
+          "what_requires_verification": {
+            "type": "array",
+            "description": "Higher-tier material named, never described. No ranges, no hints, no approximations.",
+            "items": { "type": "string" }
+          },
+          "next_step": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["book", "contact", "request_access", "none"] },
+              "url": { "type": "string", "format": "uri" }
+            }
+          },
+          "disclaimer": { "type": "string" }
+        }
+      },
+      "example": {
+        "request": { "mandate": { "investor_type": "pension", "ticket_usd_min": 10000000 } },
+        "response_excerpt": {
+          "mutual_fit": "mismatch",
+          "blockers": ["Your $10M minimum ticket exceeds the entire $8M fund. This is arithmetic, not preference."],
+          "why": "We are not the right shape for your mandate today. Worth revisiting at Fund II if your programme covers emerging managers.",
+          "next_step": { "type": "none" }
+        }
+      }
+    },
+
+    {
+      "name": "request_access",
+      "title": "Identify to unlock tier 1",
+      "status": "blocked",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true },
+      "description": "Exchange a verified email address for a scoped token that unlocks tier-1 material. Sends a double opt-in; the token is issued only after the link is clicked.",
+      "blocked_by": [
+        "No capture-and-verify flow exists anywhere. Decile's newsletter pipeline is the send side only — distribution to an existing list.",
+        "Needs a Worker, transactional email, and a token store.",
+        "Needs actual tier-1 content. A gate with nothing behind it costs more trust than the address is worth."
+      ],
+      "design_notes": [
+        "An email proves control of an address. Not identity, not employment, not accreditation. It gates tier 1 and never tier 2.",
+        "Access consent and marketing consent stay separate. Access must not be conditioned on taking the newsletter — GDPR requires consent to be freely given and specific, and we have UK and Swiss counterparties.",
+        "The inbox click is a deliberate human-in-the-loop handoff. The response tells the calling agent to hand off rather than retry."
+      ],
+      "inputSchema": {
+        "type": "object",
+        "required": ["email", "role", "consent"],
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "role": { "type": "string", "enum": ["founder", "lp", "press", "candidate", "coinvestor", "other"] },
+          "organization": { "type": "string" },
+          "purpose": { "type": "string", "description": "What they are trying to find out. Stored as stated intent." },
+          "consent": {
+            "type": "object",
+            "required": ["access"],
+            "properties": {
+              "access": { "type": "boolean", "const": true },
+              "newsletter": { "type": "boolean", "default": false }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["status", "message"],
+        "properties": {
+          "status": { "type": "string", "enum": ["verification_sent", "already_verified", "rejected"] },
+          "message": { "type": "string" },
+          "agent_instruction": {
+            "type": "string",
+            "description": "Explicit hand-off text, e.g. 'Ask the person you are working for to click the link we just emailed. Do not retry this call.'"
+          },
+          "unlocks": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+
+    {
+      "name": "submit_company",
+      "title": "Submit a company",
+      "status": "partial",
+      "tier": 0,
+      "requires_token": false,
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": true },
+      "description": "Submit a company to shuckerVC. Fields mirror the live form on the site exactly, so the form and this tool produce one payload into one pipeline.",
+      "blocked_by": [
+        "The website form itself is still a stub — site/v2/app.js initApplyForm() validates and shows a notice, but posts nowhere.",
+        "Needs the Worker to relay into Decile pipeline 2nEb978Z ('Deals - shuckerVC Fund I, LP')."
+      ],
+      "inputSchema": {
+        "type": "object",
+        "required": ["company", "website", "name", "email", "round", "pitch"],
+        "properties": {
+          "company": { "type": "string" },
+          "website": { "type": "string", "format": "uri" },
+          "name": { "type": "string", "description": "Submitter's name." },
+          "email": { "type": "string", "format": "email" },
+          "role": { "type": "string", "description": "e.g. Co-founder & CEO" },
+          "location": { "type": "string", "description": "City, Country" },
+          "round": { "type": "string", "enum": ["Pre-seed", "Seed", "Series A", "Series B+", "Other"] },
+          "amount": { "type": "string", "description": "Raising, e.g. $2M" },
+          "deck": { "type": "string", "format": "uri" },
+          "referral": { "type": "string", "description": "How did you hear about us?" },
+          "pitch": { "type": "string", "minLength": 40 },
+          "prescreen_ref": { "type": "string", "description": "Reference from a prior check_fit call, so the submission arrives with its qualification attached." }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "required": ["status", "reference"],
+        "properties": {
+          "status": { "type": "string", "enum": ["received", "duplicate", "rejected"] },
+          "reference": { "type": "string" },
+          "message_to_founder": { "type": "string" },
+          "expected_response": { "type": ["string", "null"], "description": "Null until we commit publicly to a response SLA." }
+        }
+      }
+    }
+  ],
+
+  "readiness_summary": {
+    "ready_today": ["get_fund_facts", "search_portfolio", "get_thesis", "get_writing"],
+    "partial": ["get_press_kit", "submit_company"],
+    "blocked": ["check_fit", "lp_fit", "request_access"],
+    "note": "The four ready tools need no infrastructure beyond the Worker itself — they serve files already deployed. The three blocked tools are blocked on decisions, not on engineering."
+  }
+}

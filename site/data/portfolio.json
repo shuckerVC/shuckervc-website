@@ -8,7 +8,8 @@
       "cat": "Property Operations AI",
       "tags": [
         "Applied AI",
-        "Support Partner"
+        "Support Partner",
+        "Fund I"
       ],
       "tint": "#e0653a",
       "site": "https://www.lodg.ai",
@@ -33,7 +34,8 @@
       "cat": "Construction AI",
       "tags": [
         "Applied AI",
-        "Support Partner"
+        "Support Partner",
+        "Fund I"
       ],
       "tint": "#1f9d6b",
       "coInvestor": "a16z Speedrun",
@@ -59,7 +61,8 @@
       "cat": "Workflow AI",
       "tags": [
         "Applied AI",
-        "Support Partner"
+        "Support Partner",
+        "Fund I"
       ],
       "tint": "#2f7de0",
       "site": "https://brev.io",
@@ -84,7 +87,8 @@
       "cat": "Voice AI",
       "tags": [
         "Voice",
-        "Infrastructure"
+        "Infrastructure",
+        "Fund I"
       ],
       "tint": "#7c5cff",
       "site": "https://www.sindarin.tech",
@@ -103,7 +107,8 @@
       "name": "Atlas",
       "cat": "AI Monetization",
       "tags": [
-        "Applied AI"
+        "Applied AI",
+        "Fund I"
       ],
       "tint": "#e0653a",
       "coInvestor": "500 Global",
@@ -123,7 +128,8 @@
       "name": "Runreal",
       "cat": "Dev Tools",
       "tags": [
-        "Dev Tools"
+        "Dev Tools",
+        "Fund I"
       ],
       "tint": "#6b7689",
       "coInvestor": "a16z",
@@ -145,7 +151,8 @@
       "cat": "Robotics Perception",
       "tags": [
         "Infrastructure",
-        "Support Partner"
+        "Support Partner",
+        "Fund I"
       ],
       "milestone": "Raised Series A",
       "tint": "#00b49b",

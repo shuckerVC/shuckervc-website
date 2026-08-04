@@ -75,13 +75,13 @@ On-call specialists in finance, people, growth, and security — pulled in when 
 ### Lodg
 Lodg runs the full lead-to-lease workflow for property managers — qualification, scheduling, follow-up, and tenant operations.
 - **Category:** Property Operations AI
-- **Tags:** Applied AI, Support Partner
+- **Tags:** Applied AI, Support Partner, Fund I
 - **Website:** https://www.lodg.ai
 - **Founders:** Jake Drutchas (Co-founder & CEO) — https://linkedin.com/in/drutchas; Amitav Chakravartty (Co-founder & CTO) — https://linkedin.com/in/amitavchakravartty
 ### Cascade
 Building the first AI-traversable graph of US construction — matching firms to the projects they can actually win.
 - **Category:** Construction AI
-- **Tags:** Applied AI, Support Partner
+- **Tags:** Applied AI, Support Partner, Fund I
 - **Website:** https://usecascade.ai
 - **Co-investors:** a16z Speedrun
 - **Founders:** Hannia Zia (CEO, ex–Google Pay) — https://www.linkedin.com/in/hanniazia; Joana Ferreira (CTO, ex–Google ML) — https://www.linkedin.com/in/joanaferreira0011
@@ -96,7 +96,7 @@ Building the first AI-traversable graph of US construction — matching firms to
 ### Brev.io
 Turns meetings, tools, and goals into an automatic system of record — capturing commitments and tracking whether they are met.
 - **Category:** Workflow AI
-- **Tags:** Applied AI, Support Partner
+- **Tags:** Applied AI, Support Partner, Fund I
 - **Website:** https://brev.io
 - **Founders:** Chris Pitchford (CEO, ex-Microsoft / Ally.io) — https://www.linkedin.com/in/chrispitchford; Vic Hu (CTO, ex-Meta) — https://www.linkedin.com/in/cvichu
 - **Press:**
@@ -108,27 +108,27 @@ Turns meetings, tools, and goals into an automatic system of record — capturin
 ### Sindarin
 Enterprise voice-AI with ~95% call success and speaker isolation that cuts interruptions by 90%.
 - **Category:** Voice AI
-- **Tags:** Voice, Infrastructure
+- **Tags:** Voice, Infrastructure, Fund I
 - **Website:** https://www.sindarin.tech
 - **Founders:** Brian Atwood (Technical founder & CEO) — https://www.linkedin.com/in/batwood011
 ### Atlas
 The dynamic, outcome-based pricing and monetization layer for AI-native SaaS.
 - **Category:** AI Monetization
-- **Tags:** Applied AI
+- **Tags:** Applied AI, Fund I
 - **Website:** https://runonatlas.com
 - **Co-investors:** 500 Global
 - **Founders:** Michael Hoy (3x founder & CEO) — https://www.linkedin.com/in/michaelthoy
 ### Runreal
 AI agents and self-serve tooling for studios building on Unreal Engine.
 - **Category:** Dev Tools
-- **Tags:** Dev Tools
+- **Tags:** Dev Tools, Fund I
 - **Website:** https://runreal.dev
 - **Co-investors:** a16z
 - **Founders:** Marwan Hilmi (Co-creator of the PS5 title Godfall) — https://www.linkedin.com/in/marwanhilmi
 ### Algorized
 Edge-AI perception that lets robots sense and anticipate people on the factory floor.
 - **Category:** Robotics Perception
-- **Tags:** Infrastructure, Support Partner
+- **Tags:** Infrastructure, Support Partner, Fund I
 - **Website:** https://www.algorized.com
 - **Co-investors:** Amazon
 - **Milestone:** Raised Series A

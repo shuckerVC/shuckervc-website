@@ -6,6 +6,7 @@
   "scripts": {
     "sync": "node scripts/sync-notion.mjs",
     "agents": "node scripts/build-agent-surfaces.mjs",
+    "mcp:preview": "node scripts/mcp-preview.mjs",
     "cover": "node .claude/make-post-cover.mjs"
   },
   "dependencies": {

@@ -506,12 +506,22 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .showcase-post:hover { text-decoration: underline; }
 .showcase-press { margin-top: 20px; }
 .showcase-press-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px; }
-.showcase-press-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-.press-item { display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 16px; border: 1px solid var(--border); border-radius: 10px; background: #fff; text-decoration: none; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
-.press-item:hover { border-color: var(--gold-400); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
-.press-img { max-height: 22px; max-width: 118px; object-fit: contain; }
-.press-wordmark { font-family: var(--font-display); font-size: 15px; line-height: 1; color: var(--ink-700); white-space: nowrap; }
-.press-item.has-logo .press-wordmark { display: none; }
+.showcase-press-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+/* Branded preview tiles — mirror our own post-cover look (dark, gold edge,
+   Alice masthead, shuckerVC mark). Accent edge uses the company's brand tint. */
+.press-card {
+  position: relative; display: flex; flex-direction: column; justify-content: center;
+  aspect-ratio: 16 / 9; padding: 16px; border-radius: 12px; overflow: hidden; text-decoration: none;
+  background: radial-gradient(130% 150% at 0% 0%, #201e1b 0%, #111111 62%);
+  border-left: 3px solid var(--pc, var(--gold-400)); box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.press-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.press-card-badge { position: absolute; top: 13px; left: 16px; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,205,60,.72); }
+.press-card-outlet { font-family: var(--font-display); font-size: 19px; line-height: 1.12; color: #fff; text-wrap: balance; }
+.press-card-foot { position: absolute; bottom: 12px; left: 16px; font-size: 10px; font-weight: 700; letter-spacing: .03em; color: var(--gold-400); }
+.press-card-arrow { position: absolute; bottom: 10px; right: 14px; font-size: 13px; color: rgba(255,255,255,.42); transition: color .2s ease, transform .2s ease; }
+.press-card:hover .press-card-arrow { color: var(--gold-400); transform: translate(2px,-2px); }
 
 .showcase-pills { display: flex; gap: 10px; flex-wrap: wrap; padding: 18px 24px; border-top: 1px solid #efece5; background: var(--gray-50); }
 .showcase-pill {

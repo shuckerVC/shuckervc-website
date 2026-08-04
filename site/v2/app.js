@@ -566,11 +566,11 @@
           '<div class="showcase-press-label">In the news</div>' +
           '<div class="showcase-press-grid">' +
             extra.items.map(function (m) {
-              return '<a class="press-item" href="' + m.url + '" target="_blank" rel="noopener" title="' + m.name + '">' +
-                '<img class="press-img" src="../assets/press/' + m.slug + '.png" alt="' + m.name + '" loading="lazy" style="display:none"' +
-                  ' onload="this.style.display=\'\';this.closest(\'.press-item\').classList.add(\'has-logo\')"' +
-                  ' onerror="this.remove()">' +
-                '<span class="press-wordmark">' + m.name + '</span>' +
+              return '<a class="press-card" href="' + m.url + '" target="_blank" rel="noopener" title="' + m.name + '" style="--pc:' + p.tint + '">' +
+                '<span class="press-card-badge">In the news</span>' +
+                '<span class="press-card-outlet">' + m.name + '</span>' +
+                '<span class="press-card-foot">shuckerVC</span>' +
+                '<span class="press-card-arrow" aria-hidden="true">↗</span>' +
               '</a>';
             }).join('') +
           '</div>' +

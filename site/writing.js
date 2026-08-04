@@ -23,7 +23,7 @@
     'Yahoo Finance': '#5F01D1', 'Dealroom': '#E6005C', 'Qorvo': '#0091DA',
     'GGBA Switzerland': '#D8232A', 'New York Business Journal': '#10508C',
     'citybiz': '#111111', 'Algorized': '#00b49b', 'The Next Web': '#ff5c35',
-    'Silicon Valley Impact': '#c8102e', '1Mby1M': '#0b5cab'
+    'Liftoff with Keith Newman': '#c8102e', '1Mby1M': '#0b5cab'
   };
   var CO_NAME = { shuckervc: 'shuckerVC', cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg' };
   var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };

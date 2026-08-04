@@ -33,6 +33,7 @@ get_press_kit()                      → boilerplate, assets, contact
 check_fit(company)                   → founder pre-screen  ─┐  the two that
 lp_fit(mandate)                      → LP mutual-fit read  ─┘  earn their keep
 
+request_access({email, role, …})     → double opt-in; unlocks tier 1
 submit_company(company)              → into the Deals pipeline, returns a ref
 ```
 
@@ -171,6 +172,92 @@ thing we can give a research agent, because it's the only thing that lets it sto
 
 ---
 
+---
+
+## Identify to unlock — one consent flow, three uses
+
+The reciprocal move: *tell us who you are and we'll tell you more.* It's the right
+instinct, and it's the only mechanism that turns an anonymous fetch into a contact.
+
+**First, what actually exists.** There is no newsletter opt-in to reuse yet. On the
+site, "Newsletter" is a content *tag* on writing posts — there is no signup control
+anywhere. In Decile the machinery is real but it's the **send** side: a `newsletter`
+pipeline type, used for "Spring 2025 LP Update", which distributes to a list you
+already have. No `lp_consent` pipeline is configured. So the *capture, verify, and
+consent* half — the part we'd be gating on — is a build, not a reuse.
+
+Which is fine, because it's one endpoint that pays for itself three times over:
+
+```
+request_access({ email, role, org?, purpose?,
+                 consent: { access: true, newsletter: false } })
+    → sends double opt-in
+    → { status: "verification_sent", note: "ask your human to click" }
+
+verify link clicked
+    → mint a scoped, expiring token
+    → write the contact to Decile, with stated role + purpose
+    → add to the newsletter pipeline ONLY if consent.newsletter
+
+later calls pass the token
+    → tier-1 content
+    → identity attached to check_fit / lp_fit
+    → pre-fills the booking link: the pre-briefed meeting, now with a name
+```
+
+One flow, and it simultaneously gives us the newsletter subscribe path the site
+currently lacks, the tier-1 gate, and identity on the qualification tools.
+
+### Five things it has to get right
+
+**1. Know what an email proves.** Control of an address. Not identity, not
+employment, not accreditation. It's a fair gate for tier 1 — self-declared,
+counsel-cleared — and never for tier 2. A `@sequoiacap.com` domain is a *signal*
+worth tailoring on; it is not *proof* of anything, and the moment we let it carry
+regulatory weight we've built a compliance problem out of a convenience.
+
+**2. The human-in-the-loop is the point.** An agent usually can't click a link in
+someone's inbox, so the loop pauses and hands back to the person. That's a feature:
+it's what converts an automated fetch into a named human who took a deliberate
+action. Design the response so the agent knows to hand off rather than retry. (Some
+agents *can* read the inbox — this repo's own tooling has a Gmail connector. That's
+fine, consent still came from whoever granted that access. Both paths are legitimate;
+just don't assume either.)
+
+**3. Never bundle the consents.** Access consent and marketing consent are separate,
+and access must not be conditioned on taking the newsletter. Good practice
+everywhere, and for European counterparties a GDPR requirement — consent has to be
+freely given and specific. Not hypothetical for us: Cascade is UK, Algorized is
+Swiss.
+
+**4. Nothing that is public today may move behind the gate.** All of Phase 0 stays
+open — llms.txt, the portfolio, the thesis, the writing. Gating any of it would undo
+the legibility work and send agents straight back to synthesising us from Crunchbase.
+The gate covers *incremental* material only, and tier 0 has to remain a complete,
+satisfying answer on its own.
+
+**5. Put something real behind it.** A gate with nothing behind it is a
+bait-and-switch that costs more trust than the address is worth. So this only ships
+with content that doesn't exist publicly today:
+
+| Who | What they'd actually trade an email for |
+|---|---|
+| Founder | The Support Partner playbook, a sample SP scope of work, our process and timeline, portfolio-founder references |
+| LP | Whatever counsel clears for tier 1 |
+| Candidate | Full role detail and comp band |
+| Anyone | The newsletter — which currently has no way to subscribe |
+
+### Why it's worth the infrastructure
+
+Today an agent researching shuckerVC leaves **no trace at all**. We don't know it
+came, what it asked, or who sent it. This converts some fraction of those into named,
+consented, re-contactable people with their stated role and purpose already attached
+— a source of founder and LP relationships that does not currently exist in any form.
+
+It is, though, the first thing here that genuinely needs infrastructure: a Worker,
+transactional email, and a token store. The send side is already Decile's, so the
+Worker stays thin.
+
 ## Cross-cutting
 
 **Discovery.** `llms.txt`, `/.well-known/mcp.json`, a `<link>` in `<head>`, the
@@ -207,3 +294,6 @@ the partners use. Roughly a week, and the data layer is done.
    published DPI figure survive review?
 5. **Fund I status** — open, closing, or closed? It changes whether `lp_fit` is
    pointing at Fund I or warming Fund II.
+6. **What sits behind the email gate?** The mechanism is easy; the content is the
+   hard part, and without it the gate shouldn't ship. The Support Partner playbook
+   is the most obvious candidate — does it exist in a shareable form?

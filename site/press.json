@@ -32,5 +32,8 @@
     { "outlet": "Yahoo Finance", "title": "Algorized and KUKA redefine robot safety", "desc": "Algorized and KUKA are introducing the industry’s first Predictive Safety Engine, powered entirely by real-time Edge AI, redefining human–robot collaboration.", "image": "assets/press/algorized-yahoo.jpg", "credit": "PR Newswire", "url": "https://finance.yahoo.com/news/algorized-kuka-redefine-robot-safety-231000181.html" },
     { "outlet": "Dealroom", "title": "Algorized raises $13M Series A to scale edge-AI safety engine for industrial robots", "desc": "Algorized closed a $13 million Series A led by Run Ventures, with participation from the Amazon Industrial Innovation Fund and Acrobator Ventures, for its edge-AI Predictive Safety Engine.", "url": "https://app.dealroom.co/news/feed/algorized-raises-13m-series-a-to-scale-edge-ai-safety-engine-for-industrial-robots" },
     { "outlet": "Qorvo", "title": "Algorized — Qorvo success story", "desc": "Algorized and Qorvo combine AI and UWB radar to deliver precise, privacy-preserving people sensing that enables truly human-centric responsive environments.", "image": "assets/press/algorized-qorvo.jpg", "url": "https://www.qorvo.com/about/news-events/success-stories/algorized" }
+  ],
+  "atlas": [
+    { "outlet": "Silicon Valley Impact", "title": "Silicon Valley Impact podcast — the founders of Atlas", "desc": "A podcast conversation with the founders of Atlas on building the company and what they're setting out to solve.", "image": "https://img.youtube.com/vi/XjF4WWTMnMc/mqdefault.jpg", "url": "https://youtu.be/XjF4WWTMnMc" }
   ]
 }

@@ -25,7 +25,7 @@
     'citybiz': '#111111', 'Algorized': '#00b49b', 'The Next Web': '#ff5c35',
     'Liftoff with Keith Newman': '#c8102e', 'Silicon Valley Impact': '#1a7f5a', '1Mby1M': '#0b5cab'
   };
-  var CO_NAME = { shuckervc: 'shuckerVC', cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg' };
+  var CO_NAME = { shuckervc: 'shuckerVC', cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg', atlas: 'Atlas' };
   var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };
 
   var $ = function (id) { return document.getElementById(id); };

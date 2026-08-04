@@ -30,7 +30,11 @@ const rfc822 = (sort) => {
 export async function buildFeed() {
   const data = JSON.parse(await readFile(join(ROOT, 'site/insights.json'), 'utf8'));
   const posts = (data.posts || []).slice().sort((a, b) => b.sort - a.sort);
-  const now = new Date().toUTCString();
+  // Derive lastBuildDate from the newest post (not the wall clock) so the feed
+  // only changes when content changes — otherwise the hourly sync would commit
+  // and redeploy every run just because the timestamp moved.
+  const newest = posts[0];
+  const lastBuild = newest ? rfc822(newest.sort) : new Date(0).toUTCString();
 
   const items = posts.map((p) => {
     const link = BASE + 'writing.html#' + encodeURIComponent(p.id);
@@ -64,7 +68,7 @@ export async function buildFeed() {
     <atom:link href="${BASE}feed.xml" rel="self" type="application/rss+xml" />
     <description>White papers, perspectives, and portfolio news from the shuckerVC team.</description>
     <language>en-us</language>
-    <lastBuildDate>${now}</lastBuildDate>
+    <lastBuildDate>${lastBuild}</lastBuildDate>
 ${items}
   </channel>
 </rss>

@@ -15,6 +15,15 @@
 
   var POSTS = [];
   var PRESS = {};
+  // A light brand tint per outlet — used for the thumbnail accent + badge so each
+  // mention nods to the source's brand. Falls back to shuckerVC gold.
+  var BRAND = {
+    'TechCrunch': '#00A550', 'VentureBeat': '#C8102E', 'Forbes': '#141414',
+    'Crunchbase': '#146AFF', 'Business Wire': '#0B5CAB', 'GlobeNewswire': '#0A66C2',
+    'Yahoo Finance': '#5F01D1', 'Dealroom': '#E6005C', 'Qorvo': '#0091DA',
+    'GGBA Switzerland': '#D8232A', 'New York Business Journal': '#10508C',
+    'citybiz': '#111111', 'Algorized': '#00b49b'
+  };
   var state = { filter: 'All', sortDir: 'desc', openId: null };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -154,9 +163,12 @@
       var host = (m.url.split('/')[2] || '').replace(/^www\./, '');
       var rest = m.url.replace(/^https?:\/\/[^/]+/, '');
       var disp = host + rest; if (disp.length > 46) disp = disp.slice(0, 46) + '…';
+      var brand = BRAND[m.outlet] || 'var(--gold-500)';
       var thumb = m.image
-        ? '<div class="wr-news-thumb" style="background-image:url(\'' + esc(m.image) + '\')"></div>'
-        : '<div class="wr-news-thumb wr-news-thumb--ph">' +
+        ? '<div class="wr-news-thumb" style="background-image:url(\'' + esc(m.image) + '\')">' +
+            '<span class="wr-news-badge" style="background:' + brand + '">' + esc(m.outlet) + '</span>' +
+          '</div>'
+        : '<div class="wr-news-thumb wr-news-thumb--ph" style="border-right-color:' + brand + '">' +
             '<span class="wr-news-thumb-eyebrow">In the news</span>' +
             '<span class="wr-news-thumb-outlet">' + esc(m.outlet) + '</span>' +
             '<span class="wr-news-thumb-foot">shuckerVC</span>' +

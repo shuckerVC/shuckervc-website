@@ -126,6 +126,7 @@ a { color: inherit; }
 /* QUOTE BAND — black block straddling the strategy(cream)/operations(white) seam.
    The half/half gradient stops must match the sections above and below. */
 .quoteband-sec { background: linear-gradient(180deg, #faf8f2 0 50%, #ffffff 50% 100%); padding: 0; }
+.quoteband-sec--warm { background: linear-gradient(180deg, #ffffff 0 50%, #f4f1ea 50% 100%); }
 .quoteband-wrap { max-width: 940px; margin: 0 auto; padding: 0 32px; }
 .sv-quoteband {
   background: #111111; border: 1px solid rgba(255,205,60,0.28);

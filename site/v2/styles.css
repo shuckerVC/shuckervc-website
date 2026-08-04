@@ -605,6 +605,37 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .cta-title { color: var(--ink-900); margin: 0 0 12px; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; }
 .cta-sub { font-size: 1.15rem; color: var(--ink-700); margin: 0 0 30px; }
 
+/* SUBMIT-YOUR-COMPANY FORM — branded intake card on the gold section */
+.apply-form {
+  max-width: 760px; margin: 8px auto 0; text-align: left;
+  background: #fff; border-radius: 22px; padding: clamp(26px, 4vw, 44px);
+  box-shadow: 0 30px 70px rgba(17,17,17,0.16);
+}
+.apply-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field--full { grid-column: 1 / -1; }
+.field-label { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--gray-500); }
+.field-label i { color: var(--gold-deep); font-style: normal; }
+.field-input {
+  font-family: var(--font-sans); font-size: 15px; color: var(--ink-900);
+  background: var(--gray-50); border: 1px solid var(--border); border-radius: 11px;
+  padding: 12px 14px; width: 100%;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.field-input::placeholder { color: var(--gray-400); }
+.field-input:focus { outline: none; border-color: var(--gold-500); background: #fff; box-shadow: 0 0 0 3px rgba(255,192,9,0.18); }
+textarea.field-input { resize: vertical; min-height: 100px; line-height: 1.5; }
+select.field-input {
+  appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23938d82' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+}
+.apply-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 26px; }
+.apply-actions .btn { width: 100%; max-width: 340px; }
+.apply-note { font-size: 13px; color: var(--gray-500); text-align: center; margin: 0; max-width: 46ch; }
+.apply-note.is-msg { color: var(--gold-deep); font-weight: 700; }
+@media (max-width: 620px) { .apply-grid { grid-template-columns: 1fr; } }
+
 /* ============================================================
    FOOTER
    ============================================================ */

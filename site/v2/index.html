@@ -326,10 +326,76 @@
 
   <!-- CTA -->
   <section id="contact" class="sv-sec sec--gold">
-    <div data-reveal class="container cta-inner">
-      <h2 class="h2 cta-title">Tell us about your company.</h2>
-      <p class="cta-sub">Founders pick us over competing term sheets — for the operating muscle behind every check.</p>
-      <a data-magnetic href="#top" class="btn btn--ink btn--lg">Submit your company</a>
+    <div class="container">
+      <div data-reveal class="cta-inner">
+        <h2 class="h2 cta-title">Tell us about your company.</h2>
+        <p class="cta-sub">Founders pick us over competing term sheets — for the operating muscle behind every check.</p>
+      </div>
+
+      <!-- SUBMIT-YOUR-COMPANY FORM — branded intake. Fields mirror the Decile
+           deal-submission form. NOT WIRED YET: on submit it only shows a notice.
+           When hosting is chosen, replace the stub in initApplyForm() (app.js)
+           with a fetch() to the serverless endpoint that relays to the Decile
+           API (pipeline "Deals - shuckerVC Fund I, LP"). -->
+      <form id="applyForm" class="apply-form" data-reveal novalidate>
+        <div class="apply-grid">
+          <label class="field">
+            <span class="field-label">Company name <i>*</i></span>
+            <input class="field-input" type="text" name="company" required autocomplete="organization">
+          </label>
+          <label class="field">
+            <span class="field-label">Company website <i>*</i></span>
+            <input class="field-input" type="url" name="website" placeholder="https://" required>
+          </label>
+          <label class="field">
+            <span class="field-label">Your name <i>*</i></span>
+            <input class="field-input" type="text" name="name" required autocomplete="name">
+          </label>
+          <label class="field">
+            <span class="field-label">Email <i>*</i></span>
+            <input class="field-input" type="email" name="email" required autocomplete="email">
+          </label>
+          <label class="field">
+            <span class="field-label">Your role</span>
+            <input class="field-input" type="text" name="role" placeholder="e.g. Co-founder &amp; CEO">
+          </label>
+          <label class="field">
+            <span class="field-label">Location</span>
+            <input class="field-input" type="text" name="location" placeholder="City, Country">
+          </label>
+          <label class="field">
+            <span class="field-label">Round <i>*</i></span>
+            <select class="field-input" name="round" required>
+              <option value="" selected disabled>Select a stage</option>
+              <option>Pre-seed</option>
+              <option>Seed</option>
+              <option>Series A</option>
+              <option>Series B+</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Raising</span>
+            <input class="field-input" type="text" name="amount" placeholder="e.g. $2M">
+          </label>
+          <label class="field">
+            <span class="field-label">Pitch deck link</span>
+            <input class="field-input" type="url" name="deck" placeholder="https://">
+          </label>
+          <label class="field">
+            <span class="field-label">How did you hear about us?</span>
+            <input class="field-input" type="text" name="referral">
+          </label>
+          <label class="field field--full">
+            <span class="field-label">What are you building? <i>*</i></span>
+            <textarea class="field-input" name="pitch" rows="4" required placeholder="A sentence or two on the product, the customer, and any traction."></textarea>
+          </label>
+        </div>
+        <div class="apply-actions">
+          <button type="submit" class="btn btn--ink btn--lg">Submit your company</button>
+          <p class="apply-note" role="status">We read every submission — your details go straight to the partners.</p>
+        </div>
+      </form>
     </div>
   </section>
 

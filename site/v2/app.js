@@ -972,6 +972,29 @@
     });
   }
 
+  /* Submit-your-company form. NOT WIRED YET — on submit it validates and shows
+     a notice. When hosting is chosen, replace the marked stub with a fetch() to
+     the serverless endpoint that relays to the Decile API (pipeline
+     "Deals - shuckerVC Fund I, LP"). */
+  function initApplyForm() {
+    var form = document.getElementById('applyForm');
+    if (!form) return;
+    var note = form.querySelector('.apply-note');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      // TODO(wire-up): POST new FormData(form) to the Decile relay endpoint here.
+      // var body = Object.fromEntries(new FormData(form).entries());
+      // fetch(RELAY_URL, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) })...
+
+      if (note) {
+        note.textContent = 'Thanks — submissions aren’t connected yet. We’re wiring this to our pipeline; check back shortly.';
+        note.classList.add('is-msg');
+      }
+    });
+  }
+
   function init() {
     initNav();
     initReveal();
@@ -983,6 +1006,7 @@
     renderPortfolio();
     renderInsights();
     loadInsights();
+    initApplyForm();
     startCanvas();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

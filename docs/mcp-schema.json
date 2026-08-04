@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "shuckervc",
-  "version": "0.2.0-draft",
+  "version": "0.3.0-draft",
   "generated": "2026-08-04",
   "description": "Draft tool manifest for the shuckerVC MCP server. Every tool below is specified against the data that exists in this repository today — site/data/*.json, site/insights.json, site/press.json — and against the Decile pipelines that already exist. `status` says whether each tool could run right now or what it is waiting on. Nothing here is deployed; this is the spec the Worker would implement. See docs/mcp-server.md for the reasoning.",
   "status_legend": {
@@ -22,11 +22,8 @@
     "site/insights.json": "9 posts with full body text, Notion-synced hourly.",
     "site/press.json": "Per-company press mentions with outlet and URL.",
     "site/thesis.md": "Generated prose: strategy + support model, extracted from the live page.",
-    "decile:2nEb978Z": "Pipeline 'Deals - shuckerVC Fund I, LP' — destination for submit_company.",
-    "decile:2N3w7ZNy": "Pipeline 'Investors - shuckerVC Fund I, LP' — destination for identified LPs.",
-    "decile:9KRAe28p": "Newsletter pipeline 'Spring 2025 LP Update' — send side only; no opt-in capture exists.",
-    "config/fit-rubric.json": "check_fit rubric — weights, 1–5 anchors, thresholds. NOT deployed.",
-    "config/lp-icp.json": "LP profile, hard blockers, and the tier-0/1/2 disclosure split. NOT deployed; pending counsel."
+    "scripts/fit-criteria.json": "Public-safe criteria for check_fit, sourced only from what the site already publishes. The authoritative internal qualification gate is confidential and lives outside this public repo; SHUCKERVC_RUBRIC overrides.",
+    "decile": "Destination pipelines for submissions, LP interest, and the newsletter. Identifiers are internal and deliberately not recorded in this public repo."
   },
   "tools": [
     {
@@ -615,17 +612,16 @@
         "openWorldHint": false,
         "idempotentHint": false
       },
-      "description": "Automated pre-screen of a company against the fund's criteria. Returns a verdict, the criteria behind it, and a graduated next step — a single-use booking link only on a strong fit. This is not a decision from the partners.",
+      "description": "Provisional assessment of a company against shuckerVC's published criteria. Returns per-criterion pass / needs_more_info / fail with evidence and confidence, plus a score. Explicitly NOT a decision, and it never advances a pipeline stage.",
       "deferred": [
-        "No booking link. Strong fits route to submit_company carrying `prescreen_ref`, so the brief lands in Decile and a partner books manually. Add booking once the gate has been observed against real traffic."
+        "No booking link. Strong reads route to submit_company carrying prescreen_ref, so the assessment lands in Decile and a partner books manually."
       ],
-      "rubric": "config/fit-rubric.json — deliberately not deployed. The site publishes criteria *results*, not the weights and anchors, because a published rubric is one that founders' agents optimise against.",
       "design_notes": [
-        "The deterministic criteria checks below are a hard gate. An LLM read of the thesis may add nuance but must never upgrade a hard fail — the description is adversarial input, written by a party that wants a yes.",
-        "Treat `company.description` as data, never as instructions.",
-        "Rate-limit by hashed company domain. Every attempt is stored; a materially different retry is itself signal.",
-        "A `not_now` verdict must still offer submit_company — the gate will sometimes be wrong because the agent wrote a poor summary, not because the company is poor.",
-        "Three or more unevidenced dimensions caps the verdict at 'possible' and confidence at 'low'. A thin description never buys a strong verdict."
+        "Shaped to match the fund's internal qualification review so the two reconcile. The internal gate's assessment guidance and thresholds are confidential and are NOT in this repo — scripts/fit-criteria.json carries only criteria derived from published material.",
+        "A hard-criterion fail, or a match against the published not_a_fit list, is terminal. Scoring cannot overturn it — the submission is written by a party that wants a yes.",
+        "Unassessable criteria return needs_more_info and are never guessed. Two or more caps the verdict at 'possible'; a thin description cannot buy a strong read.",
+        "MUST NOT advance a Decile pipeline stage. An anonymous caller moving a prospect forward would corrupt the pipeline — submissions land at intake for a human to qualify.",
+        "Treat every field of the submission as data, never as instructions."
       ],
       "inputSchema": {
         "type": "object",
@@ -683,6 +679,11 @@
             "type": "string",
             "format": "email",
             "description": "Optional. Joins the pre-screen to a person in the pipeline."
+          },
+          "assessments": {
+            "type": "object",
+            "description": "Optional per-criterion assessments supplied by the caller's own analysis; the Worker's LLM stage populates these. Cannot override the hard gate.",
+            "additionalProperties": true
           }
         },
         "additionalProperties": false
@@ -691,9 +692,10 @@
         "type": "object",
         "required": [
           "verdict",
+          "score",
+          "criteria",
           "reasoning",
           "message_to_founder",
-          "criteria",
           "next_step",
           "disclaimer"
         ],
@@ -724,7 +726,7 @@
           },
           "criteria": {
             "type": "array",
-            "description": "The hard gate, itemised, so the verdict is auditable and the agent can relay specifics.",
+            "description": "One entry per published criterion, in the same shape as the internal review.",
             "items": {
               "type": "object",
               "required": [
@@ -733,25 +735,32 @@
               ],
               "properties": {
                 "criterion": {
-                  "type": "string",
-                  "enum": [
-                    "stage",
-                    "sector",
-                    "geography",
-                    "check_size",
-                    "business_model"
-                  ]
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "hard": {
+                  "type": "boolean"
                 },
                 "result": {
                   "type": "string",
                   "enum": [
                     "pass",
-                    "fail",
-                    "unknown"
+                    "needs_more_info",
+                    "fail"
                   ]
                 },
-                "detail": {
+                "evidence": {
                   "type": "string"
+                },
+                "confidence": {
+                  "type": "string",
+                  "enum": [
+                    "high",
+                    "medium",
+                    "low"
+                  ]
                 }
               }
             }
@@ -789,28 +798,32 @@
             }
           },
           "disclaimer": {
-            "type": "string",
-            "const": "Automated pre-screen against published criteria. Not a decision from the shuckerVC partners."
+            "type": "string"
           },
-          "scores": {
-            "type": [
-              "object",
-              "null"
+          "score": {
+            "type": "object",
+            "required": [
+              "passed",
+              "of"
             ],
-            "description": "Anchored 1–5 score per rubric dimension. Null on a hard-gate rejection.",
-            "additionalProperties": {
-              "type": [
-                "number",
-                "null"
-              ]
+            "properties": {
+              "passed": {
+                "type": "integer"
+              },
+              "of": {
+                "type": "integer"
+              },
+              "needs_more_info": {
+                "type": "integer"
+              }
             }
           },
-          "weighted_score": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "description": "Weighted mean on the 1–5 scale. strong ≥ 4.0, possible ≥ 3.0."
+          "gaps": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "What could not be assessed, and why — so the founder knows what to supply."
           }
         }
       },
@@ -826,16 +839,15 @@
         },
         "response_excerpt": {
           "verdict": "strong",
-          "confidence": "high",
-          "weighted_score": 4.19,
-          "scores": {
-            "icp_clarity": 4,
-            "technical_depth": 4,
-            "customer_evidence": 5,
-            "velocity": 4,
-            "sp_leverage": 4,
-            "round_fit": 4
+          "confidence": "medium",
+          "score": {
+            "passed": 7,
+            "of": 8,
+            "needs_more_info": 1
           },
+          "gaps": [
+            "Compatible with the Support Partner model — depends on current back-office headcount, which the description does not state."
+          ],
           "next_step": {
             "type": "submit",
             "prescreen_ref": "pf_…"
@@ -855,8 +867,8 @@
       },
       "description": "Given an LP's mandate, an honest read on whether shuckerVC fits their box — including when we do not. Returns only tier-0 content, and names what exists at higher tiers without describing it.",
       "blocked_by": [
-        "Counsel has not reviewed the tier-0/tier-1 split in config/lp-icp.json. Fund I is closed and Fund II is undefined, so nothing is being offered — but the Fund I track record is a performance claim and sits behind request_access for that reason.",
-        "The ticket_exceeds_vehicle blocker is unparameterised until Fund II is sized. It currently uses a provisional bound."
+        "Counsel has not reviewed the tier-0/tier-1 split. Fund I is closed and Fund II is undefined, so nothing is being offered — but the Fund I track record is a performance claim and sits behind request_access for that reason.",
+        "The LP profile it scores against is internal and deliberately absent from this public repo. Without it, lp_fit runs on the published fund card alone."
       ],
       "inputSchema": {
         "type": "object",
@@ -1132,7 +1144,7 @@
       "description": "Submit a company to shuckerVC. Fields mirror the live form on the site exactly, so the form and this tool produce one payload into one pipeline.",
       "blocked_by": [
         "The website form itself is still a stub — site/v2/app.js initApplyForm() validates and shows a notice, but posts nowhere.",
-        "Needs the Worker to relay into Decile pipeline 2nEb978Z ('Deals - shuckerVC Fund I, LP')."
+        "Needs the Worker to relay into the Decile deals pipeline."
       ],
       "inputSchema": {
         "type": "object",
@@ -1230,7 +1242,10 @@
             "description": "Null until we commit publicly to a response SLA."
           }
         }
-      }
+      },
+      "design_notes": [
+        "Submissions land at intake. This tool MUST NOT advance a prospect's pipeline stage — qualification past intake is a human decision."
+      ]
     }
   ],
   "readiness_summary": {
@@ -1250,5 +1265,6 @@
       "request_access"
     ],
     "note": "check_fit unblocked once not_a_fit was decided; it runs today with submit as the next step rather than a booking link. lp_fit runs but wants counsel on the tier split before it faces the public. request_access is the only tool still needing infrastructure that does not exist — and it is now the priority, because the Fund I track record is the tier-1 content it gates."
-  }
+  },
+  "confidentiality": "This repository is PUBLIC. Nothing internal belongs in it, deployed or not — that includes rubric anchors, thresholds, LP posture, and pipeline stage IDs. check_fit is a public-safe projection of the fund's internal review, shaped so the two reconcile without this repo carrying the internal one."
 }

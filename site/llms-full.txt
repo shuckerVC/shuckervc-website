@@ -7,11 +7,12 @@ have to crawl. Canonical HTML: https://shuckervc.github.io/shuckervc-website/ ·
 
 ## Fund facts
 
-- **Fund:** Fund I (shuckerVC Fund I, LP)
+- **Fund:** Fund I (shuckerVC Fund I, LP) — closed to new commitments
 - **Fund size:** $8M
 - **Check size:** up to $500K
 - **Target portfolio:** 18 companies (7 backed so far)
 - **Stage:** pre-seed, seed
+- **Leads rounds:** case by case — We have most often co-invested alongside a lead (a16z Speedrun, 500 Global, Amazon), but leading is not ruled out.
 - **Sectors:** B2B software, applied AI, AI infrastructure, voice AI, developer tools
 - **Geography:** United States — US-focused; the portfolio includes European-founded companies (Cascade in the UK, Algorized in Switzerland).
 - **HQ:** Silicon Valley, California, USA
@@ -19,6 +20,13 @@ have to crawl. Canonical HTML: https://shuckervc.github.io/shuckervc-website/ ·
 - **What makes us different:** A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.
 - **Submit a company:** https://shuckervc.github.io/shuckervc-website/v2/#contact
 - **Last updated:** 2026-08-04
+- **Not a fit** (we do not invest in these, so please don't pitch them):
+  - consumer / B2C
+  - biotech, therapeutics, medical devices
+  - crypto / web3
+  - hardware-only (no software margin)
+  - services, agencies, consultancies
+  - pre-product (no working product or design partner)
 
 # Strategy
 

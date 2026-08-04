@@ -141,7 +141,7 @@ function fundFacts() {
   const f = fund.fund, inv = fund.investing;
   const usd = (n) => '$' + (n >= 1e6 ? (n / 1e6) + 'M' : (n / 1e3) + 'K');
   const lines = [
-    `- **Fund:** ${f.name} (${f.legal_name})`,
+    `- **Fund:** ${f.name} (${f.legal_name})${f.status === 'closed' ? ' — closed to new commitments' : f.status ? ' — ' + f.status : ''}`,
     `- **Fund size:** ${usd(f.size_usd)}`,
     `- **Check size:** up to ${usd(f.check_size_usd_max)}`,
     `- **Target portfolio:** ${f.target_companies} companies (${f.companies_backed} backed so far)`,
@@ -154,8 +154,15 @@ function fundFacts() {
     `- **Submit a company:** ${fund.contact.submit_company}`,
     `- **Last updated:** ${fund.updated}`
   ];
-  if (inv.leads_rounds !== null) lines.splice(5, 0, `- **Leads rounds:** ${inv.leads_rounds ? 'yes' : 'no — we co-invest'}`);
-  if (inv.not_a_fit) lines.push(`- **Not a fit:** ${inv.not_a_fit.join(', ')}`);
+  if (inv.leads_rounds) {
+    const lead = { yes: 'yes', no: 'no — we co-invest alongside a lead', case_by_case: 'case by case' }[inv.leads_rounds] || inv.leads_rounds;
+    lines.splice(5, 0, `- **Leads rounds:** ${lead}${inv.leads_rounds_note ? ' — ' + inv.leads_rounds_note : ''}`);
+  }
+  // Semicolons, not commas: several exclusions contain commas of their own.
+  if (inv.not_a_fit && inv.not_a_fit.length) {
+    lines.push(`- **Not a fit** (we do not invest in these, so please don't pitch them):\n` +
+      inv.not_a_fit.map((x) => `  - ${x}`).join('\n'));
+  }
   return lines.join('\n');
 }
 

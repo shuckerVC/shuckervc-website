@@ -31,6 +31,12 @@ const posts = read('insights.json').posts || [];
 const press = read('press.json');
 const team = read('data/team.json').members;
 
+/* Not under site/ — the rubric and the LP profile are deliberately undeployed.
+   See the _comment in each file. */
+const readConfig = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, 'config', p), 'utf8'));
+const rubric = readConfig('fit-rubric.json');
+const lpIcp = readConfig('lp-icp.json');
+
 const BASE = 'https://shuckervc.github.io/shuckervc-website';
 
 /* ------------------------------------------------------------
@@ -39,13 +45,10 @@ const BASE = 'https://shuckervc.github.io/shuckervc-website';
 
 const TOOLS = {
   get_fund_facts({ fields } = {}) {
-    const { _comment, _needs_confirmation, ...card } = fund;
+    const { _comment, ...card } = fund;
     // Publish the gaps explicitly. An agent told "we don't publish this" will
     // say so; an agent told nothing will estimate.
-    const out = {
-      ...card,
-      unpublished: (_needs_confirmation || []).map((s) => s.split(' — ')[0])
-    };
+    const out = { ...card, unpublished: (fund.unpublished || []).map((s) => s.split(' — ')[0]) };
     if (!fields) return out;
     return Object.fromEntries(Object.entries(out).filter(([k]) => fields.includes(k) || k === 'updated' || k === 'unpublished'));
   },
@@ -113,6 +116,136 @@ const TOOLS = {
         }
         return o;
       })
+    };
+  },
+
+  /* ----------------------------------------------------------
+     check_fit — hard gate, then an anchored 1–5 weighted rubric with a
+     threshold. Same shape as the support-partner-screener already in use.
+
+     In the Worker, step 2 (scoring) is an LLM pass constrained to the anchors
+     in config/fit-rubric.json. Here it's a transparent keyword heuristic so the
+     gate, the arithmetic, and the thresholds are all demonstrable offline —
+     and so the LLM's job is narrowed to exactly one step that cannot reach
+     the gate.
+     ---------------------------------------------------------- */
+  check_fit({ company = {}, scores: given } = {}) {
+    const text = [company.description, company.traction, company.team, company.sector]
+      .filter(Boolean).join(' ').toLowerCase();
+    const has = (...w) => w.some((s) => text.includes(s));
+
+    // 1. Hard gate. Terminal, and deliberately not persuadable.
+    const exclusions = fund.investing.not_a_fit || [];
+    const gateHits = [];
+    if (has('consumer app', 'b2c', 'direct-to-consumer')) gateHits.push('consumer / B2C');
+    if (has('therapeutic', 'biotech', 'drug discovery', 'medical device')) gateHits.push('biotech, therapeutics, medical devices');
+    if (has('crypto', 'web3', 'blockchain', 'token')) gateHits.push('crypto / web3');
+    if (has('agency', 'consultancy', 'consulting services')) gateHits.push('services, agencies, consultancies');
+    if (has('pre-product', 'no product yet', 'idea stage')) gateHits.push('pre-product (no working product or design partner)');
+    if (company.stage === 'series-a' || company.stage === 'series-b-plus') gateHits.push('stage beyond seed');
+
+    const criteria = [
+      { criterion: 'stage', result: !company.stage ? 'unknown' : gateHits.includes('stage beyond seed') ? 'fail' : 'pass',
+        detail: company.stage ? `${company.stage} against pre-seed, seed.` : 'Stage not stated.' },
+      { criterion: 'sector', result: gateHits.length && !gateHits.includes('stage beyond seed') ? 'fail' : 'pass',
+        detail: gateHits.filter((g) => g !== 'stage beyond seed').join('; ') || 'B2B software, within scope.' },
+      { criterion: 'geography', result: company.geography ? 'pass' : 'unknown',
+        detail: company.geography ? `${company.geography}. US-focused, European-founded companies in portfolio.` : 'Not stated — not disqualifying.' },
+      { criterion: 'check_size', result: company.raising_usd ? (company.raising_usd >= 750000 ? 'pass' : 'unknown') : 'unknown',
+        detail: company.raising_usd ? `$${(company.raising_usd / 1e6).toFixed(1)}M round; a cheque up to $500K fits.` : 'Round size not stated.' }
+    ];
+
+    const disclaimer = 'Automated pre-screen against published criteria. Not a decision from the shuckerVC partners.';
+
+    if (gateHits.length) {
+      return {
+        verdict: 'out_of_scope', confidence: 'high',
+        reasoning: `Excluded by published criteria: ${gateHits.join('; ')}.`,
+        message_to_founder: `shuckerVC publishes an explicit list of what they don't invest in, and this falls inside it (${gateHits.join('; ')}). That's a firm no rather than a maybe, so it's not worth the pitch — better to spend the time on funds whose stated scope covers you.`,
+        criteria, scores: null, weighted_score: null,
+        next_step: { type: 'none' }, disclaimer
+      };
+    }
+
+    // 2. Anchored scoring. Callers (or the Worker's LLM stage) may supply scores.
+    const heuristic = {
+      icp_clarity: has('mid-market', 'brokers', 'managers', 'teams at', 'sell to', 'buyer') ? 4 : has('smb', 'enterprise') ? 3 : null,
+      technical_depth: has('ex-google', 'ex-meta', 'ex-microsoft', 'phd', 'cto', 'technical founder') ? 4 : null,
+      customer_evidence: has('mrr', 'arr', 'paying') ? 5 : has('design partner', 'in production', 'pilot') ? 4 : has('waitlist', 'loi') ? 2 : null,
+      velocity: has('shipping', 'iterating', 'weekly release', 'in production') ? 4 : null,
+      sp_leverage: has('two founders', 'small team', 'no ops', 'wearing every hat') ? 4 : 3,
+      round_fit: company.raising_usd ? (company.raising_usd >= 1e6 ? 4 : 3) : null
+    };
+    const scores = { ...heuristic, ...(given || {}) };
+
+    const dims = rubric.dimensions.filter((d) => scores[d.id] != null);
+    const unknown = rubric.dimensions.length - dims.length;
+    const weighted = dims.reduce((a, d) => a + scores[d.id] * d.weight, 0) / (dims.reduce((a, d) => a + d.weight, 0) || 1);
+
+    let verdict = weighted >= rubric.thresholds.strong ? 'strong'
+      : weighted >= rubric.thresholds.possible ? 'possible' : 'not_now';
+
+    // Thin descriptions never buy a strong verdict.
+    const confidence = unknown >= 3 ? 'low' : unknown >= 1 ? 'medium' : 'high';
+    if (unknown >= 3 && verdict === 'strong') verdict = 'possible';
+
+    const msg = {
+      strong: 'This looks like a real fit against shuckerVC\'s published criteria — stage, sector, and round all line up. Worth submitting; the pre-screen goes with it so the partners see the reasoning.',
+      possible: 'This is plausibly a fit, but the description didn\'t evidence everything the criteria look for. Submitting is the right next step — a partner reads it directly.',
+      not_now: 'On what was described this doesn\'t clear the bar today. That is a read on the description, not a verdict on the company — you can still submit, and a partner will look.'
+    }[verdict];
+
+    return {
+      verdict, confidence,
+      reasoning: `Weighted ${weighted.toFixed(2)}/5 across ${dims.length} scored dimension(s)` +
+        (unknown ? `, ${unknown} not evidenced` : '') +
+        `. Thresholds: strong ≥ ${rubric.thresholds.strong}, possible ≥ ${rubric.thresholds.possible}.`,
+      message_to_founder: msg,
+      criteria,
+      scores,
+      weighted_score: Number(weighted.toFixed(2)),
+      // Booking is not wired: strong fits route to submit_company carrying the
+      // qualification, so the brief lands in Decile and a partner books.
+      next_step: verdict === 'not_now'
+        ? { type: 'submit', note: 'Optional — the gate can be wrong when the summary is thin.' }
+        : { type: 'submit', prescreen_ref: 'pf_preview_' + (company.name || 'unnamed').toLowerCase().replace(/\W+/g, '') },
+      disclaimer
+    };
+  },
+
+  /* ----------------------------------------------------------
+     lp_fit — Fund I is closed and Fund II is undefined, so this offers
+     nothing. It reads mutual fit at the manager level and routes interest.
+     ---------------------------------------------------------- */
+  lp_fit({ mandate = {} } = {}) {
+    const blockers = [];
+    if (mandate.emerging_manager_appetite === false) {
+      blockers.push(lpIcp.hard_blockers.find((b) => b.id === 'no_emerging_manager_appetite').message);
+    }
+    const badType = lpIcp.lp_types_we_do_not_fit.find((t) => t.type === mandate.investor_type);
+    if (badType) blockers.push(`${mandate.investor_type}: ${badType.why}`);
+    if (mandate.ticket_usd_min && mandate.ticket_usd_min > 2000000) {
+      blockers.push(`A $${(mandate.ticket_usd_min / 1e6).toFixed(1)}M minimum ticket is out of range for a vehicle of this scale — Fund I was $8M in total. This is arithmetic, not preference.`);
+    }
+
+    const goodType = lpIcp.lp_types_we_fit.includes(
+      ({ family_office: 'family offices', individual: 'individuals and angels', fund_of_funds: 'small funds-of-funds', emerging_manager_program: 'emerging-manager programmes' })[mandate.investor_type]
+    );
+
+    const mutual_fit = blockers.length ? 'mismatch' : goodType ? 'strong' : 'partial';
+
+    return {
+      mutual_fit,
+      why: blockers.length
+        ? 'We are not the right shape for this mandate. Fund I is closed and Fund II is not yet defined, so there is nothing being offered either way.'
+        : 'Fund I is closed to new commitments and Fund II is not yet defined — there is no offering here. On mandate shape you look like the kind of LP this manager is built for, so the useful next step is to see the Fund I track record and be told when Fund II is defined.',
+      we_fit_you: blockers.length ? [] : lpIcp.what_we_are,
+      you_fit_us: goodType ? [`${mandate.investor_type} is within the LP profile this fund is built for.`] : [],
+      blockers,
+      what_we_can_share: lpIcp.disclosure.tier_0,
+      what_requires_verification: lpIcp.disclosure.tier_1_behind_request_access,
+      next_step: blockers.length ? { type: 'none' } : { type: 'request_access' },
+      disclaimer: 'shuckerVC Fund I is closed to new commitments. Fund II is not defined and nothing is being offered. This is an informational mutual-fit read, not a solicitation.'
     };
   },
 

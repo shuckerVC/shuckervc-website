@@ -13,3 +13,7 @@ node_modules/
 
 # local Claude settings (per-machine)
 .claude/settings.local.json
+
+# Internal, non-public config (rubrics, LP posture, decision log).
+# This repo is PUBLIC — nothing internal belongs in it, deployed or not.
+config/

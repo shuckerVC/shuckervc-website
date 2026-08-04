@@ -94,72 +94,66 @@ grad.addColorStop(1, 'rgba(0, 0, 0, 0.1)');      // Subtle dark bottom-right
 ctx.fillStyle = grad;
 ctx.fillRect(0, 0, width, height);
 
-// Tag badge (top-left, after the accent bar)
-const tagBg = colors.tagBg[tag] || '#f0f4f9';
-const tagText = colors.tagText[tag] || '#35507a';
-const tagPadding = 12;
-const tagX = 40;
-const tagY = 60;
-const tagWidth = 140;
-const tagHeight = 40;
+// No baked category badge — the site cards + article reader overlay the
+// category, so the title gets the whole frame.
 
-ctx.fillStyle = tagBg;
-ctx.fillRect(tagX, tagY, tagWidth, tagHeight);
-ctx.fillStyle = tagText;
-ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-ctx.textAlign = 'center';
-ctx.textBaseline = 'middle';
-ctx.fillText(tag.toUpperCase(), tagX + tagWidth / 2, tagY + tagHeight / 2);
-
-// Title (centered, with word wrapping) — white text on dark ink
-const titleMaxWidth = width - 100;
-const titleFontSize = 56;
-const lineHeight = 72;
-
-ctx.fillStyle = colors.white;
-ctx.font = `bold ${titleFontSize}px -apple-system, BlinkMacSystemFont, "Segoe UI", serif`;
-ctx.textAlign = 'left';
-ctx.textBaseline = 'top';
-
-const words = title.split(' ');
-let lines = [];
-let currentLine = '';
-
-for (const word of words) {
-  const testLine = currentLine ? `${currentLine} ${word}` : word;
-  const metrics = ctx.measureText(testLine);
-  if (metrics.width > titleMaxWidth) {
-    if (currentLine) lines.push(currentLine);
-    currentLine = word;
-  } else {
-    currentLine = testLine;
-  }
+// Subtle concentric ring motif (lower-right) for balance
+for (let i = 0; i < 5; i++) {
+  ctx.beginPath();
+  ctx.strokeStyle = `rgba(255, 205, 60, ${Math.max(0.03, 0.12 - i * 0.016)})`;
+  ctx.lineWidth = 2;
+  ctx.arc(1090, 250, 70 + i * 46, 0, Math.PI * 2);
+  ctx.stroke();
 }
-if (currentLine) lines.push(currentLine);
 
-// Clamp to 3 lines max
+// Title — auto-size to fill the frame; left aligned, block vertically centred
+const titleMaxWidth = 950;
+let titleFontSize = 100;
+let lines = [];
+for (let s = 100; s >= 54; s -= 2) {
+  ctx.font = `bold ${s}px "Liberation Serif", Georgia, "Times New Roman", serif`;
+  const words = title.split(' ');
+  lines = [];
+  let cur = '';
+  for (const word of words) {
+    const test = cur ? `${cur} ${word}` : word;
+    if (ctx.measureText(test).width > titleMaxWidth) {
+      if (cur) lines.push(cur);
+      cur = word;
+    } else {
+      cur = test;
+    }
+  }
+  if (cur) lines.push(cur);
+  if (lines.length <= 3) { titleFontSize = s; break; }
+}
 lines = lines.slice(0, 3);
 
-const titleStartY = height / 2 - (lines.length * lineHeight) / 2;
-lines.forEach((line, i) => {
-  ctx.fillText(line, 50, titleStartY + i * lineHeight);
-});
-
-// Author byline (bottom-right) — gold accent
-if (author) {
-  ctx.fillStyle = colors.goldLight;
-  ctx.font = '14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'bottom';
-  ctx.fillText(`— ${author}`, width - 50, height - 40);
-}
-
-// shuckerVC mark (bottom-left corner, small) — gold accent
-ctx.fillStyle = colors.goldLight;
-ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+ctx.fillStyle = colors.white;
+ctx.font = `bold ${titleFontSize}px "Liberation Serif", Georgia, "Times New Roman", serif`;
 ctx.textAlign = 'left';
-ctx.textBaseline = 'bottom';
-ctx.fillText('shuckerVC', 50, height - 40);
+ctx.textBaseline = 'top';
+const lineHeight = Math.round(titleFontSize * 1.12);
+const blockH = lineHeight * lines.length;
+const titleStartY = Math.round(height * 0.48 - blockH / 2);
+lines.forEach((line, i) => ctx.fillText(line, 64, titleStartY + i * lineHeight));
+
+// Gold rule under the title
+ctx.fillStyle = colors.gold;
+ctx.fillRect(66, titleStartY + blockH + 26, 84, 5);
+
+// Footer: shuckerVC mark (left); byline (right) for a named author only
+ctx.fillStyle = colors.gold;
+ctx.font = 'bold 23px "Liberation Sans", Arial, sans-serif';
+ctx.textAlign = 'left';
+ctx.textBaseline = 'alphabetic';
+ctx.fillText('shuckerVC', 64, height - 40);
+if (author && author.trim().toLowerCase() !== 'shuckervc') {
+  ctx.fillStyle = colors.goldLight;
+  ctx.font = '19px "Liberation Sans", Arial, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(`— ${author}`, width - 56, height - 40);
+}
 
 // Save as JPEG
 const outDir = path.join(ROOT, 'site/assets/insights');

@@ -809,9 +809,11 @@ select.field-input {
   /* Banners: on mobile, wide screenshots/covers become landscape banners
      instead of tall over-cropped boxes. */
   .showcase-body { grid-template-columns: 1fr; }
-  .showcase-shot { min-height: 0; aspect-ratio: 16 / 10; }
+  /* min-height floors: iOS Safari can collapse aspect-ratio on grid descendants
+     to 0, dropping these covers. The floors keep them visible. */
+  .showcase-shot { min-height: 200px; aspect-ratio: 16 / 10; }
   .showcase-main { padding: 28px; }
-  .ins-feat-cover { aspect-ratio: 16 / 10; }
+  .ins-feat-cover { aspect-ratio: 16 / 10; min-height: 210px; }
 }
 
 /* ============================================================

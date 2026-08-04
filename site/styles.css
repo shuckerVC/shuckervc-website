@@ -768,7 +768,9 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   .wr-archive .container, .wr-more, .wr-cta-inner { padding-left: 20px; padding-right: 20px; }
   .wr-grid { grid-template-columns: 1fr; }
   .wr-feat-inner { grid-template-columns: 1fr; }
-  .wr-feat-media { min-height: 0; aspect-ratio: 16 / 10; }
+  /* min-height floor: iOS Safari can collapse aspect-ratio on a grid child to 0,
+     which dropped the featured cover. The floor keeps it visible regardless. */
+  .wr-feat-media { min-height: 210px; aspect-ratio: 16 / 10; }
   .wr-railbtn { display: none; }
 }
 

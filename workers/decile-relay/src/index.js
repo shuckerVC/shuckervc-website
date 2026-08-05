@@ -61,13 +61,12 @@ function clean(v, key) {
   return v.trim().slice(0, max);
 }
 
-async function decile(env, method, path, body) {
+async function decileWith(env, method, path, body, authValue) {
   const base = (env.DECILE_API_BASE || 'https://decilehub.com/api/v1').replace(/\/$/, '');
   return fetch(base + path, {
     method,
     headers: {
-      // Verified live: Decile's REST API authenticates with Bearer tokens.
-      'Authorization': 'Bearer ' + env.DECILE_API_KEY,
+      'Authorization': authValue,
       'Content-Type': 'application/json',
       // Worker fetches have no default UA; WAF/bot rules commonly 403 that.
       'User-Agent': 'shuckerVC-relay/1.0 (+https://shucker.vc)',
@@ -75,6 +74,14 @@ async function decile(env, method, path, body) {
     },
     body: body ? JSON.stringify(body) : undefined,
   });
+}
+
+async function decile(env, method, path, body) {
+  // Swagger securitySchemes: apiKey in the Authorization header, RAW (no
+  // Bearer prefix). Some read endpoints tolerated Bearer, so fall back once.
+  let r = await decileWith(env, method, path, body, env.DECILE_API_KEY);
+  if (r.status === 401) r = await decileWith(env, method, path, body, 'Bearer ' + env.DECILE_API_KEY);
+  return r;
 }
 
 export default {
@@ -128,15 +135,21 @@ export default {
     if (!EMAIL_RE.test(data.email)) return json(422, { ok: false, error: 'invalid email' }, cors);
     if (!/^https?:\/\//i.test(data.website)) data.website = 'https://' + data.website;
 
-    // Exact payload shape validated against the live pipeline.
+    // Payload per swagger op upsert_pipeline_prospect (POST /pipeline_prospect):
+    // org fields are company_url / short_description; extras ride along as a
+    // note + prospect-level custom_data_points and tag_list.
+    const noteLines = [
+      'Website submission — ' + data.name + (data.role ? ' (' + data.role + ')' : '') + ', ' + data.email,
+      data.location ? 'Location: ' + data.location : '',
+      'Round: ' + data.round + (data.amount ? ' — raising ' + data.amount : ''),
+      data.deck ? 'Deck: ' + data.deck : '',
+      data.referral ? 'Heard about us via: ' + data.referral : '',
+      '',
+      data.pitch,
+    ].filter(function (l, i) { return l !== '' || i === 5; });
     const body = {
       pipeline_id: env.PIPELINE_ID || '2nEb978Z',
       prospect: {
-        organization: {
-          name: data.company,
-          url: data.website,
-          description: data.pitch,
-        },
         tag_list: 'website-inbound',
         custom_data_points: {
           submitter_name: data.name,
@@ -147,35 +160,28 @@ export default {
           raising: data.amount,
           deck_url: data.deck,
           referral: data.referral,
-          pitch: data.pitch,
-          source: 'shuckervc.com submit form',
+          source: 'shucker.vc submit form',
+        },
+        organization: {
+          name: data.company,
+          company_url: data.website,
+          short_description: data.pitch,
+          note: noteLines.join('\n'),
         },
       },
     };
 
     // The REST route for upsert isn't published; try known candidates in
     // order and accept the first the API recognizes (anything but 404).
-    // Per the API docs (docs/api#op-post-api-v1-pipeline-prospect) the create
-    // endpoint is SINGULAR /pipeline_prospect. Plural was admin-scoped (401).
-    const candidates = [
-      ['POST', `/pipeline_prospect`],
-      ['POST', `/pipeline_prospects`],
-    ];
-    const attempts = [];
-    let r = null;
-    for (const [method, p] of candidates) {
-      r = await decile(env, method, p, body);
-      attempts.push(method + ' ' + p + ' -> ' + r.status);
-      if (r.status !== 404) { console.log('Decile upsert path used:', method, p, r.status); break; }
-    }
-    if (!r || !r.ok) {
-      const detail = r ? await r.text().catch(() => '') : '';
-      console.error('Decile upsert failed', r && r.status, detail.slice(0, 500));
-      // Diagnostic payload (no secrets) — TODO strip once the route is pinned.
+    // Documented op: upsert_pipeline_prospect — POST /api/v1/pipeline_prospect.
+    const r = await decile(env, 'POST', '/pipeline_prospect', body);
+    if (!r.ok) {
+      const detail = await r.text().catch(() => '');
+      console.error('Decile upsert failed', r.status, detail.slice(0, 500));
+      // Diagnostic payload (no secrets) — TODO strip once stable in prod.
       return json(502, {
         ok: false, error: 'upstream error',
-        attempts,
-        upstream_status: r ? r.status : null,
+        upstream_status: r.status,
         upstream_body_first_300: detail.slice(0, 300),
       }, cors);
     }

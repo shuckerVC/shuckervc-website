@@ -130,7 +130,8 @@ export default {
       const mcpUrl = 'https://decilehub.com/mcp';
       async function mcpPost(payload, sessionId) {
         const headers = {
-          'Authorization': env.DECILE_API_KEY,
+          // Per Decile's MCP docs: /mcp authenticates with X-Decile-API-Key.
+          'X-Decile-API-Key': env.DECILE_API_KEY,
           'Content-Type': 'application/json',
           'Accept': 'application/json, text/event-stream',
           'User-Agent': 'shuckerVC-relay/1.0 (+https://shucker.vc)',

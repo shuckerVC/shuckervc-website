@@ -100,6 +100,40 @@ async function decile(env, method, path, body, trace) {
   return r;
 }
 
+/**
+ * Call a Decile MCP tool (https://decilehub.com/mcp, Streamable HTTP).
+ * The MCP path accepts Worker-originated POSTs (verified live) while the
+ * REST /api/v1 write routes 401 them — so writes go through MCP.
+ * The server answers statelessly (no session needed for tools/call).
+ */
+async function mcpCall(env, toolName, args) {
+  const r = await fetch('https://decilehub.com/mcp', {
+    method: 'POST',
+    headers: {
+      'X-Decile-API-Key': env.DECILE_API_KEY,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json, text/event-stream',
+      'User-Agent': 'shuckerVC-relay/1.0 (+https://shucker.vc)',
+    },
+    body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: toolName, arguments: args } }),
+    redirect: 'manual',
+  });
+  const raw = await r.text().catch(() => '');
+  let payload = null;
+  try { payload = JSON.parse(raw); } catch (e) {
+    // Streamable HTTP may answer as SSE — pull the JSON out of a data: line.
+    const m = raw.match(/^data:\s*(\{.*\})\s*$/m);
+    if (m) { try { payload = JSON.parse(m[1]); } catch (e2) { /* fall through */ } }
+  }
+  const result = payload && payload.result;
+  const ok = r.status === 200 && result && !result.isError && !payload.error;
+  let inner = null;
+  if (result && result.content && result.content[0] && result.content[0].type === 'text') {
+    try { inner = JSON.parse(result.content[0].text); } catch (e) { inner = result.content[0].text; }
+  }
+  return { ok, http: r.status, inner, raw_first_400: raw.slice(0, 400) };
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -204,7 +238,10 @@ export default {
       '',
       data.pitch,
     ].filter(function (l, i) { return l !== '' || i === 5; });
-    const body = {
+    // Upsert via the MCP tool — Decile's edge 401s Worker POSTs on the REST
+    // write routes but accepts /mcp (verified live). Argument shape proven
+    // against this account.
+    const upsert = await mcpCall(env, 'upsert_pipeline_prospect', {
       pipeline_id: env.PIPELINE_ID || '2nEb978Z',
       // Stage "Added by Investment Inquiries Form" — where inbound deal
       // submissions land in this pipeline.
@@ -224,27 +261,33 @@ export default {
         },
         organization: {
           name: data.company,
-          company_url: data.website,
-          short_description: data.pitch,
-          note: noteLines.join('\n'),
+          url: data.website,
+          description: data.pitch,
         },
       },
-    };
+    });
 
-    // The REST route for upsert isn't published; try known candidates in
-    // order and accept the first the API recognizes (anything but 404).
-    // Documented op: upsert_pipeline_prospect — POST /api/v1/pipeline_prospect.
-    const r = await decile(env, 'POST', '/pipeline_prospect', body);
-    if (!r.ok) {
-      const detail = await r.text().catch(() => '');
-      console.error('Decile upsert failed', r.status, detail.slice(0, 500));
+    if (!upsert.ok) {
+      console.error('Decile MCP upsert failed', upsert.http, upsert.raw_first_400);
       // Diagnostic payload (no secrets) — TODO strip once stable in prod.
       return json(502, {
         ok: false, error: 'upstream error',
-        upstream_status: r.status,
-        upstream_body_first_300: detail.slice(0, 300),
+        upstream_status: upsert.http,
+        upstream_body_first_300: upsert.raw_first_400.slice(0, 300),
       }, cors);
     }
+
+    // Best-effort: attach the human-readable submission note to the prospect.
+    const prospectId = upsert.inner && (upsert.inner.pipeline_prospect_id ||
+      (upsert.inner.changes && upsert.inner.changes.id && upsert.inner.changes.id[1]));
+    if (prospectId) {
+      const note = await mcpCall(env, 'add_pipeline_prospect_note', {
+        pipeline_prospect_id: prospectId,
+        note: { body: noteLines.join('\n'), context: 'shucker.vc submit form' },
+      });
+      if (!note.ok) console.error('Decile note attach failed (non-fatal)', note.http, note.raw_first_400);
+    }
+
     return json(200, { ok: true }, cors);
   },
 };

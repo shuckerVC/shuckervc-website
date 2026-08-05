@@ -85,7 +85,7 @@ state, what's needed to go live, and who owns it.
 
 | # | Item | Unblocks |
 |---|------|----------|
-| 1 | Production domain confirmation (`shuckervc.com`?) | DNS, canonical URLs, CORS origin |
+| 1 | Production domain confirmation (`shucker.vc`?) | DNS, canonical URLs, CORS origin |
 | 2 | Registrar/DNS access (or willingness to paste 5 records) | HTTPS on the domain |
 | 3 | Decile API key (prospect-create scope) | Form relay |
 | 4 | Choice of relay host (default: Cloudflare Worker — needs a free CF account) | Form relay |

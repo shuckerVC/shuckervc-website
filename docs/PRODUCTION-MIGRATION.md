@@ -2,7 +2,7 @@
 
 Moving the site from the GitHub Pages **project URL**
 (`https://shuckervc.github.io/shuckervc-website/`) to a **production custom
-domain** (assumed `shuckervc.com`, redirecting `www`).
+domain** (assumed `shucker.vc`, redirecting `www`).
 
 This is a low-risk migration: the site is static, CI already builds and deploys
 it, and all asset paths are already relative (so nothing breaks when the base
@@ -18,8 +18,8 @@ Three decisions unblock everything else:
 
 | # | Decision | Default assumption | Owner |
 |---|----------|--------------------|-------|
-| 1 | **Production domain** | `shuckervc.com` (apex) + `www.shuckervc.com` → apex | JP |
-| 2 | **DNS provider / registrar** | (where `shuckervc.com` is registered — Namecheap/GoDaddy/Cloudflare/etc.) | JP |
+| 1 | **Production domain** | `shucker.vc` (apex) + `www.shucker.vc` → apex | JP |
+| 2 | **DNS provider / registrar** | (where `shucker.vc` is registered — Namecheap/GoDaddy/Cloudflare/etc.) | JP |
 | 3 | **Form backend host** | Cloudflare Worker (free, same-day) relaying to the Decile API | Eng |
 
 Everything below is written against those defaults; swap in the real values
@@ -61,7 +61,7 @@ Do this first so the cutover is a one-line change, not a scavenger hunt.
 1. **Introduce one canonical origin constant.**
    - `scripts/build-feed.mjs` already centralizes it: change
      `const BASE = 'https://shuckervc.github.io/shuckervc-website/';`
-     → `const BASE = 'https://shuckervc.com/';` and re-run the feed build so
+     → `const BASE = 'https://shucker.vc/';` and re-run the feed build so
      `site/feed.xml` regenerates with production URLs.
    - The HTML `<head>` origins are hardcoded per file. Replace them (see the
      file-change table in §7). There are exactly **4 per page** in
@@ -73,7 +73,7 @@ Do this first so the cutover is a one-line change, not a scavenger hunt.
      ```
      User-agent: *
      Allow: /
-     Sitemap: https://shuckervc.com/sitemap.xml
+     Sitemap: https://shucker.vc/sitemap.xml
      ```
    - `site/sitemap.xml` — list the two real pages (`/` and `/writing.html`).
      Keep it simple, or generate it in the same script that builds the feed.
@@ -99,13 +99,13 @@ until DNS is live to avoid pointing crawlers at a domain that 404s.
 GitHub Pages custom-domain setup:
 
 1. **Add the domain in the repo.** Settings → Pages → *Custom domain* →
-   `shuckervc.com` → Save. This commits a `site/CNAME` file containing
-   `shuckervc.com` (or add the `CNAME` file yourself — it must sit at the
+   `shucker.vc` → Save. This commits a `site/CNAME` file containing
+   `shucker.vc` (or add the `CNAME` file yourself — it must sit at the
    **published root**, i.e. inside `site/`, since that's our Pages artifact
    directory).
 
 2. **DNS records at the registrar:**
-   - **Apex** `shuckervc.com` → four `A` records to GitHub Pages:
+   - **Apex** `shucker.vc` → four `A` records to GitHub Pages:
      `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
      `185.199.111.153` (and the matching `AAAA` records if you want IPv6).
    - **`www`** → `CNAME` → `shuckervc.github.io`.
@@ -135,7 +135,7 @@ notice. To go live:
      **"Deals - shuckerVC Fund I, LP"**. Keep the Decile API key in a Worker
      **secret**, never in client JS.
    - Returns `200 {ok:true}` on success; sets a permissive CORS header for the
-     site origin (`Access-Control-Allow-Origin: https://shuckervc.com`) and
+     site origin (`Access-Control-Allow-Origin: https://shucker.vc`) and
      handles the `OPTIONS` preflight.
    - Add basic anti-abuse: a honeypot field, an origin check, and light rate
      limiting.
@@ -163,16 +163,16 @@ notice. To go live:
 - **Social preview:** re-scrape OG tags (LinkedIn Post Inspector, Twitter Card
   validator) so the new-domain preview image caches.
 - **Feed:** confirm `feed.xml` `<link>`/`<guid>`/`<enclosure>` URLs all point
-  at `shuckervc.com` after the rebuild.
+  at `shucker.vc` after the rebuild.
 
 ---
 
 ## 6. Phase 5 — Launch checklist (smoke test on the live domain)
 
-Run through this on `https://shuckervc.com` after HTTPS is enforced:
+Run through this on `https://shucker.vc` after HTTPS is enforced:
 
 - [ ] `/` loads over HTTPS, no mixed-content or console errors.
-- [ ] `www.shuckervc.com` redirects to the canonical host.
+- [ ] `www.shucker.vc` redirects to the canonical host.
 - [ ] All images render (portfolio, insights, press thumbnails, team).
 - [ ] The 27 MB teaser video streams (`preload="metadata"`, plays inline).
 - [ ] `/writing.html` + the "In the news" view render; press thumbnails and
@@ -180,7 +180,7 @@ Run through this on `https://shuckervc.com` after HTTPS is enforced:
 - [ ] Submit form: collapsed by default → opens → validates → **posts to
       Decile** → shows success; a test row appears in the pipeline.
 - [ ] `feed.xml`, `robots.txt`, `sitemap.xml` all serve and use the new origin.
-- [ ] Canonical/OG/Twitter tags all show `shuckervc.com`.
+- [ ] Canonical/OG/Twitter tags all show `shucker.vc`.
 - [ ] Mobile (iPhone) + tablet (iPad) spot-check: nav, hero, form, video.
 - [ ] Lighthouse pass (perf/SEO/a11y) — no regressions.
 
@@ -192,9 +192,9 @@ Run through this on `https://shuckervc.com` after HTTPS is enforced:
 |------|--------|
 | `site/index.html` | 4 `<head>` tags → new origin (canonical, og:url, og:image, twitter:image) |
 | `site/writing.html` | same 4 tags → new origin |
-| `scripts/build-feed.mjs` | `BASE` const → `https://shuckervc.com/`, then rebuild `feed.xml` |
+| `scripts/build-feed.mjs` | `BASE` const → `https://shucker.vc/`, then rebuild `feed.xml` |
 | `site/feed.xml` | regenerated output (don't hand-edit) |
-| `site/CNAME` | **new** — `shuckervc.com` (added by Pages settings or by hand) |
+| `site/CNAME` | **new** — `shucker.vc` (added by Pages settings or by hand) |
 | `site/robots.txt` | **new** |
 | `site/sitemap.xml` | **new** |
 | `site/home.js` | `initApplyForm()` stub → real `fetch()` to the relay |

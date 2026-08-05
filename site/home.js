@@ -134,14 +134,12 @@
     var c = document.getElementById('focusTimeline');
     if (!c) return;
     var steps = [].slice.call(c.querySelectorAll('[data-f-step]'));
-    var fill = c.querySelector('[data-f-fill]');
     var cap = document.querySelector('[data-f-cap]');
     var titles = ['Your Support Partner', 'shuckerVC GPs', 'Specialist network'];
     function update() {
       var r = c.getBoundingClientRect();
       var anchor = window.innerHeight * 0.45;
       var f = Math.min(1, Math.max(0, (anchor - r.top) / Math.max(1, r.height)));
-      if (fill) fill.style.height = (f * 100) + '%';
       var pos = f * (steps.length - 1);
       var active = Math.round(pos);
       steps.forEach(function (s, i) {
@@ -151,6 +149,8 @@
         var dot = s.querySelector('[data-dot]');
         if (num) num.style.color = on ? '#d99e00' : '#c9c3b6';
         if (dot) { dot.style.background = on ? '#ffcd3c' : '#ffffff'; dot.style.borderColor = on ? '#ffcd3c' : '#e6e0d3'; }
+        var seg = s.querySelector('[data-f-seg]');
+        if (seg) seg.style.background = (i + 1) <= pos + 0.15 ? '#ffcd3c' : '#e6e0d3';
       });
       if (cap) cap.textContent = titles[active];
     }

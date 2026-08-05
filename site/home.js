@@ -683,10 +683,14 @@
     // are correct at the site root. Leave absolute/remote URLs untouched.
     function insCover(c) { return c || ''; }
 
+    // Branded full-frame text covers (headline + watermark) must letterbox,
+    // never crop — same set as CONTAIN_COVERS in writing.js.
+    var INS_CONTAIN = { 'saas-pricing': 1, 'support-partner': 1, 'q1-2026-update': 1, '2025-in-review': 1, 'test-post': 1 };
+
     var feat = sorted[0];
     featEl.innerHTML = feat ?
       '<a class="ins-feat" href="writing.html#' + encodeURIComponent(feat.id) + '">' +
-        '<div class="ins-feat-cover">' +
+        '<div class="ins-feat-cover' + (INS_CONTAIN[feat.id] ? ' ins-feat-cover--contain' : '') + '">' +
           (feat.cover ? '<img src="' + insCover(feat.cover) + '" alt="" loading="lazy">' : '') +
           '<span class="ins-feat-badge-wrap">' + insSolidBadge(feat.tag) + '</span>' +
           '<span class="ins-feat-read">' + feat.read + '</span>' +

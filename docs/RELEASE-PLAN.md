@@ -8,16 +8,19 @@ state, what's needed to go live, and who owns it.
 
 ## 1. Connector inventory
 
-### 1.1 GitHub Pages (hosting + deploy) — ✅ live
-- **What it does:** `deploy-pages.yml` publishes `site/` on every push to
-  `main` (with retry/backoff for flaky Pages deployments).
-- **State:** working; serves `https://shuckervc.github.io/shuckervc-website/`.
+### 1.1 Hosting — ✅ Cloudflare (decided 2026-08-05); GitHub Pages in parallel
+- **What it does:** a Git-connected Cloudflare Workers build deploys `site/`
+  as static assets (repo-root `wrangler.toml`) on every push to `main`. No
+  Vercel anywhere — deliberately (see PRODUCTION-MIGRATION §1 decision).
+- **State:** building green after the video re-encode (25 MiB asset cap).
+  GitHub Pages (`deploy-pages.yml`) still serves
+  `https://shuckervc.github.io/shuckervc-website/` in parallel; retire it only
+  after shucker.vc is live + verified on Cloudflare.
 - **Needed for release:**
-  - Custom domain added in repo Settings → Pages (`CNAME` file lands in `site/`).
-  - DNS records at the registrar (4 apex `A` records + `www` CNAME → see
-    PRODUCTION-MIGRATION §3).
-  - "Enforce HTTPS" ticked once GitHub validates the domain.
-- **Owner:** JP (domain/registrar access) + eng (repo settings).
+  - shucker.vc zone on Cloudflare + nameserver switch (Graham's card —
+    **verify MX records survive before switching**; email rides on them).
+  - Attach shucker.vc + www to the Cloudflare project (Custom domains).
+- **Owner:** JP (Cloudflare account) + Graham (DNS/registrar).
 
 ### 1.2 Notion → site content sync — ✅ live, keep healthy
 - **What it does:** `sync-notion.yml` runs hourly (`:17`) + on dispatch. Pulls
@@ -39,23 +42,21 @@ state, what's needed to go live, and who owns it.
   Notion connector in chat tools. Publishing works even when chat-side Notion
   is disconnected.
 
-### 1.3 Decile (submit-your-company form) — ❌ the release blocker
-- **What it should do:** relay form submissions into the Decile pipeline
-  **"Deals - shuckerVC Fund I, LP"**.
-- **State:** the form renders and validates, but `initApplyForm()` in
-  `site/home.js` is a stub — it shows a "not connected yet" notice. No
-  submission reaches Decile today.
-- **Needed for release:**
-  1. **Decision:** serverless host for the relay — recommended: Cloudflare
-     Worker (free tier is plenty; Lambda or a Vercel/Netlify function work too).
-  2. **Decile API key** with permission to create pipeline prospects — stored
-     as a secret on the relay host, never in client JS.
-  3. Relay implementation: `POST` JSON → create prospect; CORS locked to the
-     production origin; honeypot + origin check + light rate limiting.
-  4. Swap the stub for a real `fetch(RELAY_URL, …)` and success/error states.
-  5. End-to-end test against a test pipeline, then point at the live one and
-     confirm a submission lands.
-- **Owner:** JP (Decile API key + host account), eng (build).
+### 1.3 Decile (submit-your-company form) — ✅ LIVE (2026-08-05)
+- **What it does:** the site form posts to the Cloudflare Worker
+  `shuckervc-decile-relay` (`workers/decile-relay/`), which creates an
+  organization prospect in **"Deals - shuckerVC Fund I, LP"**, stage
+  **"Added by Investment Inquiries Form"**, tag `website-inbound`, with a
+  submission note attached.
+- **How:** writes go through **Decile's MCP endpoint** (`decilehub.com/mcp`,
+  `X-Decile-API-Key`) because Decile's edge 401s Worker-originated POSTs on
+  the REST write routes (verified; identical requests succeed from curl).
+  Full detail in `workers/decile-relay/README.md`.
+- **Protections:** CORS origin allowlist, honeypot, validation, 5/min/IP rate
+  limit; key stored only as a Worker secret.
+- **Remaining:** final key rotation (earlier keys exposed during setup) and a
+  browser end-to-end test from the live site; delete ZZZ TEST pipeline rows.
+- **Owner:** JP (key rotation), eng (maintenance).
 
 ### 1.4 YouTube thumbnails (press mentions) — ✅ live, no key
 - **What it does:** video mentions in `site/press.json` hotlink

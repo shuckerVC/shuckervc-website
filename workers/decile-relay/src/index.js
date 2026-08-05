@@ -92,6 +92,20 @@ export default {
 
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
+    // TEMP diagnostic: same minimal upsert the direct curl proved (201),
+    // but sent from inside the worker. Distinguishes transport-level
+    // blocking from payload-triggered rejection. Remove once diagnosed.
+    if (url.pathname === '/debug-upsert') {
+      const minimal = {
+        pipeline_id: env.PIPELINE_ID || '2nEb978Z',
+        stage_id: env.STAGE_ID || '315550',
+        prospect: { organization: { name: 'ZZZ TEST worker-debug', company_url: 'https://test.invalid', short_description: 'worker debug probe — delete me' } },
+      };
+      const r = await decile(env, 'POST', '/pipeline_prospect', minimal);
+      const t = await r.text().catch(() => '');
+      return json(200, { decile_status: r.status, body_first_300: t.slice(0, 300) });
+    }
+
     if (url.pathname === '/health') {
       const r = await decile(env, 'GET', '/accounts');
       const out = { ok: r.ok, decile_status: r.status };

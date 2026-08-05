@@ -69,6 +69,9 @@ async function decile(env, method, path, body) {
       // Verified live: Decile's REST API authenticates with Bearer tokens.
       'Authorization': 'Bearer ' + env.DECILE_API_KEY,
       'Content-Type': 'application/json',
+      // Worker fetches have no default UA; WAF/bot rules commonly 403 that.
+      'User-Agent': 'shuckerVC-relay/1.0 (+https://shucker.vc)',
+      'Accept': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
   });
@@ -84,7 +87,17 @@ export default {
 
     if (url.pathname === '/health') {
       const r = await decile(env, 'GET', '/accounts');
-      return json(r.ok ? 200 : 502, { ok: r.ok, decile_status: r.status });
+      const out = { ok: r.ok, decile_status: r.status };
+      if (!r.ok) {
+        // Surface enough to tell a WAF/edge block (HTML challenge page,
+        // cf-ray, server header) from an app-level auth rejection (JSON).
+        out.content_type = r.headers.get('Content-Type') || '';
+        out.server = r.headers.get('Server') || '';
+        out.cf_ray = r.headers.get('CF-Ray') || '';
+        const t = await r.text().catch(() => '');
+        out.body_first_200 = t.slice(0, 200);
+      }
+      return json(r.ok ? 200 : 502, out);
     }
 
     if (url.pathname !== '/submit' || request.method !== 'POST') {

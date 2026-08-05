@@ -149,6 +149,9 @@ export default {
     ].filter(function (l, i) { return l !== '' || i === 5; });
     const body = {
       pipeline_id: env.PIPELINE_ID || '2nEb978Z',
+      // Stage "Added by Investment Inquiries Form" — where inbound deal
+      // submissions land in this pipeline.
+      stage_id: env.STAGE_ID || '315550',
       prospect: {
         tag_list: 'website-inbound',
         custom_data_points: {

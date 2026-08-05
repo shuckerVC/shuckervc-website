@@ -123,6 +123,31 @@ export default {
       return json(200, { decile_status: r.status, trace, body_first_300: t.slice(0, 300) });
     }
 
+    // TEMP diagnostic: can the Worker reach Decile's MCP endpoint (different
+    // path than /api/v1/*, which 401s Worker POSTs)? Probes initialize and a
+    // stateless tools/list. Remove once diagnosed.
+    if (url.pathname === '/debug-mcp') {
+      const mcpUrl = 'https://decilehub.com/mcp';
+      async function mcpPost(payload, sessionId) {
+        const headers = {
+          'Authorization': env.DECILE_API_KEY,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json, text/event-stream',
+          'User-Agent': 'shuckerVC-relay/1.0 (+https://shucker.vc)',
+        };
+        if (sessionId) headers['Mcp-Session-Id'] = sessionId;
+        const r = await fetch(mcpUrl, { method: 'POST', headers, body: JSON.stringify(payload), redirect: 'manual' });
+        const t = await r.text().catch(() => '');
+        return { status: r.status, session: r.headers.get('Mcp-Session-Id') || '', body_first_300: t.slice(0, 300) };
+      }
+      const init = await mcpPost({
+        jsonrpc: '2.0', id: 1, method: 'initialize',
+        params: { protocolVersion: '2025-03-26', capabilities: {}, clientInfo: { name: 'shuckervc-relay-probe', version: '1.0' } },
+      });
+      const list = await mcpPost({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} }, init.session || undefined);
+      return json(200, { initialize: init, tools_list: list });
+    }
+
     if (url.pathname === '/health') {
       const r = await decile(env, 'GET', '/accounts');
       const out = { ok: r.ok, decile_status: r.status };

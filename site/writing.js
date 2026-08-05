@@ -26,6 +26,11 @@
     'Liftoff with Keith Newman': '#c8102e', 'Silicon Valley Impact': '#1a7f5a', '1Mby1M': '#0b5cab'
   };
   var CO_NAME = { shuckervc: 'shuckerVC', cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg', atlas: 'Atlas' };
+  // Posts whose cover is a branded full-frame text layout (headline + watermark)
+  // rather than art/screenshot — these must be letterboxed (contain), never
+  // cover-cropped, or the title clips. Keyed by post id (insights.json is
+  // Notion-generated, so this lives here where the sync can't overwrite it).
+  var CONTAIN_COVERS = { 'saas-pricing': 1, 'support-partner': 1, 'q1-2026-update': 1, '2025-in-review': 1, 'test-post': 1 };
   var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -37,7 +42,13 @@
     return '<span style="display:inline-flex;align-items:center;height:' + h + 'px;padding:0 ' + pad + 'px;border-radius:999px;background:' + c.solidBg + ';color:' + c.solidFg + ';font-size:' + fs + 'px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">' + esc(tag) + '</span>';
   }
   function cover(p, posClass) {
-    if (p.cover) return '<div class="wr-cover"><img src="' + esc(p.cover) + '" alt="" loading="lazy"></div>';
+    // Branded text covers (title + watermark filling the frame) must never be
+    // cropped, or the headline clips. Flag them coverFit:"contain" in the data
+    // and letterbox them on a matching dark background instead of cover-cropping.
+    if (p.cover) {
+      var fit = (p.coverFit === 'contain' || CONTAIN_COVERS[p.id]) ? ' wr-cover--contain' : '';
+      return '<div class="wr-cover' + fit + '"><img src="' + esc(p.cover) + '" alt="" loading="lazy"></div>';
+    }
     return '<div class="wr-cover wr-cover--empty" data-mark="sV"></div>';
   }
 

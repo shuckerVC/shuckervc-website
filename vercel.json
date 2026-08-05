@@ -1,7 +1,0 @@
-{
-  "outputDirectory": "site",
-  "functions": {
-    "api/submit.js": { "maxDuration": 15 },
-    "api/health.js": { "maxDuration": 10 }
-  }
-}

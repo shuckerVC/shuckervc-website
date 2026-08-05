@@ -1003,9 +1003,9 @@
     // Deep link straight to #contact should arrive with the form already open.
     if (location.hash === '#contact') openForm(false);
 
-    // Decile relay endpoint (workers/decile-relay). Empty string keeps the
-    // stub notice, so the site and the worker can deploy in either order.
-    var RELAY_URL = '';
+    // Decile relay endpoint (workers/decile-relay) — submissions land in the
+    // "Deals - shuckerVC Fund I, LP" pipeline, Investment Inquiries Form stage.
+    var RELAY_URL = 'https://shuckervc-decile-relay.shuckervcwebsite.workers.dev/submit';
 
     function setNote(msg) {
       if (note) { note.textContent = msg; note.classList.add('is-msg'); }

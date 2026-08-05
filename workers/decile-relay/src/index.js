@@ -142,60 +142,9 @@ export default {
 
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
-    // TEMP diagnostic: same minimal upsert the direct curl proved (201),
-    // but sent from inside the worker. Distinguishes transport-level
-    // blocking from payload-triggered rejection. Remove once diagnosed.
-    if (url.pathname === '/debug-upsert') {
-      const minimal = {
-        pipeline_id: env.PIPELINE_ID || '2nEb978Z',
-        stage_id: env.STAGE_ID || '315550',
-        prospect: { organization: { name: 'ZZZ TEST worker-debug', company_url: 'https://test.invalid', short_description: 'worker debug probe — delete me' } },
-      };
-      const trace = [];
-      const r = await decile(env, 'POST', '/pipeline_prospect', minimal, trace);
-      const t = await r.text().catch(() => '');
-      return json(200, { decile_status: r.status, trace, body_first_300: t.slice(0, 300) });
-    }
-
-    // TEMP diagnostic: can the Worker reach Decile's MCP endpoint (different
-    // path than /api/v1/*, which 401s Worker POSTs)? Probes initialize and a
-    // stateless tools/list. Remove once diagnosed.
-    if (url.pathname === '/debug-mcp') {
-      const mcpUrl = 'https://decilehub.com/mcp';
-      async function mcpPost(payload, sessionId) {
-        const headers = {
-          // Per Decile's MCP docs: /mcp authenticates with X-Decile-API-Key.
-          'X-Decile-API-Key': env.DECILE_API_KEY,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json, text/event-stream',
-          'User-Agent': 'shuckerVC-relay/1.0 (+https://shucker.vc)',
-        };
-        if (sessionId) headers['Mcp-Session-Id'] = sessionId;
-        const r = await fetch(mcpUrl, { method: 'POST', headers, body: JSON.stringify(payload), redirect: 'manual' });
-        const t = await r.text().catch(() => '');
-        return { status: r.status, session: r.headers.get('Mcp-Session-Id') || '', body_first_300: t.slice(0, 300) };
-      }
-      const init = await mcpPost({
-        jsonrpc: '2.0', id: 1, method: 'initialize',
-        params: { protocolVersion: '2025-03-26', capabilities: {}, clientInfo: { name: 'shuckervc-relay-probe', version: '1.0' } },
-      });
-      const list = await mcpPost({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} }, init.session || undefined);
-      return json(200, { initialize: init, tools_list: list });
-    }
-
     if (url.pathname === '/health') {
       const r = await decile(env, 'GET', '/accounts');
-      const out = { ok: r.ok, decile_status: r.status };
-      if (!r.ok) {
-        // Surface enough to tell a WAF/edge block (HTML challenge page,
-        // cf-ray, server header) from an app-level auth rejection (JSON).
-        out.content_type = r.headers.get('Content-Type') || '';
-        out.server = r.headers.get('Server') || '';
-        out.cf_ray = r.headers.get('CF-Ray') || '';
-        const t = await r.text().catch(() => '');
-        out.body_first_200 = t.slice(0, 200);
-      }
-      return json(r.ok ? 200 : 502, out);
+      return json(r.ok ? 200 : 502, { ok: r.ok, decile_status: r.status });
     }
 
     if (url.pathname !== '/submit' || request.method !== 'POST') {
@@ -269,12 +218,7 @@ export default {
 
     if (!upsert.ok) {
       console.error('Decile MCP upsert failed', upsert.http, upsert.raw_first_400);
-      // Diagnostic payload (no secrets) — TODO strip once stable in prod.
-      return json(502, {
-        ok: false, error: 'upstream error',
-        upstream_status: upsert.http,
-        upstream_body_first_300: upsert.raw_first_400.slice(0, 300),
-      }, cors);
+      return json(502, { ok: false, error: 'upstream error' }, cors);
     }
 
     // Best-effort: attach the human-readable submission note to the prospect.

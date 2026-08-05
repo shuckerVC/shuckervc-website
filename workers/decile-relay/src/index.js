@@ -155,13 +155,13 @@ export default {
 
     // The REST route for upsert isn't published; try known candidates in
     // order and accept the first the API recognizes (anything but 404).
+    // Probed live: GET /pipeline_prospects -> 403 (route exists, index
+    // forbidden), so POST /pipeline_prospects is the likely create endpoint.
     const candidates = [
+      ['POST', `/pipeline_prospects`],
       ['POST', `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`],
       ['POST', `/pipeline_prospects/upsert`],
-      ['POST', `/upsert_pipeline_prospect`],
-      ['PUT', `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`],
       ['POST', `/pipelines/${body.pipeline_id}/pipeline_prospects`],
-      ['POST', `/pipelines/${body.pipeline_id}/prospects/upsert`],
     ];
     const attempts = [];
     let r = null;

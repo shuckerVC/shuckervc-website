@@ -7,9 +7,6 @@
     "sync": "node scripts/sync-notion.mjs",
     "cover": "node .claude/make-post-cover.mjs"
   },
-  "dependencies": {
-    "canvas": "^2.11.2"
-  },
   "engines": {
     "node": ">=22"
   }

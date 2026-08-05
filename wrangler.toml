@@ -1,0 +1,12 @@
+# Cloudflare Workers static-assets config for the SITE itself.
+# The Git-connected Workers build ("shuckervc-website") runs `npx wrangler
+# deploy` from the repo root; this tells it to serve site/ as static assets
+# (no worker script — assets-only). site/_redirects and site/_headers are
+# honored by Workers assets.
+#
+# The form relay is a SEPARATE worker: workers/decile-relay/wrangler.toml.
+name = "shuckervc-website"
+compatibility_date = "2026-08-05"
+
+[assets]
+directory = "./site"

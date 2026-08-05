@@ -7,8 +7,9 @@ creates an organization prospect in the Decile pipeline
 The prospect **payload shape is already validated against the live pipeline**
 (a test prospect was created and removed): organization `{name, url,
 description}`, `tag_list: "website-inbound"`, and all form fields as
-`custom_data_points` (they land in the prospect's `data`). Auth is the
-`X-Decile-API-Key` header.
+`custom_data_points` (they land in the prospect's `data`). Auth is
+`Authorization: Bearer <key>` against base `https://decilehub.com/api/v1`
+(both verified live 2026-08-05: GET /accounts → 200).
 
 ## 1. Deploy (one-time, ~10 min)
 
@@ -24,9 +25,9 @@ Deploy prints the worker URL, e.g.
 
 ## 2. Verify the Decile REST endpoint (one-time)
 
-The MCP-validated payload is exact; the one assumption left is the REST path.
-`wrangler.toml` defaults to base `https://api.decilehub.com/v1` and path
-`POST /pipelines/{id}/pipeline_prospects/upsert`. Check both:
+Base URL and Bearer auth are verified. For the upsert route the worker tries
+known path candidates in order and uses the first the API recognizes (check
+`npx wrangler tail` for "Decile upsert path used"). Verify health first:
 
 ```bash
 curl https://<worker-url>/health

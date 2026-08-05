@@ -62,11 +62,12 @@ function clean(v, key) {
 }
 
 async function decile(env, method, path, body) {
-  const base = (env.DECILE_API_BASE || 'https://api.decilehub.com/v1').replace(/\/$/, '');
+  const base = (env.DECILE_API_BASE || 'https://decilehub.com/api/v1').replace(/\/$/, '');
   return fetch(base + path, {
     method,
     headers: {
-      'X-Decile-API-Key': env.DECILE_API_KEY,
+      // Verified live: Decile's REST API authenticates with Bearer tokens.
+      'Authorization': 'Bearer ' + env.DECILE_API_KEY,
       'Content-Type': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
@@ -139,10 +140,21 @@ export default {
       },
     };
 
-    const r = await decile(env, 'POST', `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`, body);
-    if (!r.ok) {
-      const detail = await r.text().catch(() => '');
-      console.error('Decile upsert failed', r.status, detail.slice(0, 500));
+    // The REST route for upsert isn't published; try known candidates in
+    // order and accept the first the API recognizes (anything but 404).
+    const paths = [
+      `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`,
+      `/pipeline_prospects/upsert`,
+      `/pipelines/${body.pipeline_id}/prospects/upsert`,
+    ];
+    let r = null;
+    for (const p of paths) {
+      r = await decile(env, 'POST', p, body);
+      if (r.status !== 404) { console.log('Decile upsert path used:', p, r.status); break; }
+    }
+    if (!r || !r.ok) {
+      const detail = r ? await r.text().catch(() => '') : '';
+      console.error('Decile upsert failed', r && r.status, detail.slice(0, 500));
       return json(502, { ok: false, error: 'upstream error' }, cors);
     }
     return json(200, { ok: true }, cors);

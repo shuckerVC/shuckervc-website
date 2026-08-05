@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects (ignored by GitHub Pages, where v2/index.html's
+# meta-refresh covers the same path).
+/v2/* / 301
+/v2 / 301

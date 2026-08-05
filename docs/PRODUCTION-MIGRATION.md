@@ -48,9 +48,18 @@ talk to the Decile API with a secret key — that can't live in client JS).
 - Pros: consolidates everything; better edge caching for the 27 MB video.
 - Cons: re-plumbing CI and the Notion-sync trigger; more to validate.
 
-**Recommendation: Option A.** It gets us to production fastest with the least
-risk. We can revisit Option B later if we want functions/CDN consolidation.
-The rest of this plan assumes Option A.
+**Decision (2026-08-05): Option B — Cloudflare Pages.** JP opted to
+consolidate on Cloudflare (the Decile relay Worker already lives there).
+GitHub stays the source of truth + CI; Cloudflare Pages connects to the repo
+and deploys `site/` on every push to `main`, replacing the GitHub Pages
+deploy. GitHub Pages keeps serving during the transition — retire it only
+after shucker.vc is live and verified on Cloudflare.
+
+**DNS consequence:** attaching shucker.vc to Cloudflare Pages means moving the
+zone's nameservers to Cloudflare (apex CNAME needs CF's flattening). Cloudflare
+auto-imports existing records when the zone is added — verify **MX records**
+(email for @shucker.vc) survive the trip *before* switching nameservers at the
+registrar. The §3 GitHub-Pages A-record instructions below are superseded.
 
 ---
 

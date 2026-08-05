@@ -155,20 +155,31 @@ export default {
 
     // The REST route for upsert isn't published; try known candidates in
     // order and accept the first the API recognizes (anything but 404).
-    const paths = [
-      `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`,
-      `/pipeline_prospects/upsert`,
-      `/pipelines/${body.pipeline_id}/prospects/upsert`,
+    const candidates = [
+      ['POST', `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`],
+      ['POST', `/pipeline_prospects/upsert`],
+      ['POST', `/upsert_pipeline_prospect`],
+      ['PUT', `/pipelines/${body.pipeline_id}/pipeline_prospects/upsert`],
+      ['POST', `/pipelines/${body.pipeline_id}/pipeline_prospects`],
+      ['POST', `/pipelines/${body.pipeline_id}/prospects/upsert`],
     ];
+    const attempts = [];
     let r = null;
-    for (const p of paths) {
-      r = await decile(env, 'POST', p, body);
-      if (r.status !== 404) { console.log('Decile upsert path used:', p, r.status); break; }
+    for (const [method, p] of candidates) {
+      r = await decile(env, method, p, body);
+      attempts.push(method + ' ' + p + ' -> ' + r.status);
+      if (r.status !== 404) { console.log('Decile upsert path used:', method, p, r.status); break; }
     }
     if (!r || !r.ok) {
       const detail = r ? await r.text().catch(() => '') : '';
       console.error('Decile upsert failed', r && r.status, detail.slice(0, 500));
-      return json(502, { ok: false, error: 'upstream error' }, cors);
+      // Diagnostic payload (no secrets) — TODO strip once the route is pinned.
+      return json(502, {
+        ok: false, error: 'upstream error',
+        attempts,
+        upstream_status: r ? r.status : null,
+        upstream_body_first_300: detail.slice(0, 300),
+      }, cors);
     }
     return json(200, { ok: true }, cors);
   },

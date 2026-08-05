@@ -11,6 +11,7 @@ PIPELINE_ID = "2nEb978Z"
 # Origins allowed to call the relay. Production domain is shucker.vc;
 # keep the github.io origin while it still serves.
 ALLOWED_ORIGINS = "https://shuckervc.github.io,https://shucker.vc,https://www.shucker.vc"
-# Decile REST base — verified live 2026-08-05: GET {base}/accounts returns 200
-# with Authorization: Bearer <key>.
-DECILE_API_BASE = "https://decilehub.com/api/v1"
+# Decile REST base — per Decile's agent docs, the account-subdomain host is
+# the documented REST base (bare decilehub.com worked for GETs but 401s
+# Worker-originated POSTs).
+DECILE_API_BASE = "https://shuckervc.decilehub.com/api/v1"

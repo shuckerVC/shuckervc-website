@@ -61,9 +61,8 @@ function clean(v, key) {
   return v.trim().slice(0, max);
 }
 
-async function decileWith(env, method, path, body, authValue) {
-  const base = (env.DECILE_API_BASE || 'https://decilehub.com/api/v1').replace(/\/$/, '');
-  return fetch(base + path, {
+function decileOnce(url, method, body, authValue) {
+  return fetch(url, {
     method,
     headers: {
       'Authorization': authValue,
@@ -73,14 +72,31 @@ async function decileWith(env, method, path, body, authValue) {
       'Accept': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
+    // Follow redirects OURSELVES: fetch strips Authorization on cross-origin
+    // redirects, which turns an authenticated POST into a 401.
+    redirect: 'manual',
   });
 }
 
-async function decile(env, method, path, body) {
+async function followFetch(url, method, body, authValue, trace) {
+  let r = null;
+  for (let i = 0; i < 4; i++) {
+    r = await decileOnce(url, method, body, authValue);
+    const loc = r.headers.get('Location');
+    if (trace) trace.push(method + ' ' + url + ' -> ' + r.status + (loc ? ' loc=' + loc : ''));
+    if (![301, 302, 307, 308].includes(r.status) || !loc) return r;
+    // Re-issue the SAME method+body+auth at the redirect target.
+    url = new URL(loc, url).toString();
+  }
+  return r;
+}
+
+async function decile(env, method, path, body, trace) {
+  const base = (env.DECILE_API_BASE || 'https://decilehub.com/api/v1').replace(/\/$/, '');
   // Swagger securitySchemes: apiKey in the Authorization header, RAW (no
   // Bearer prefix). Some read endpoints tolerated Bearer, so fall back once.
-  let r = await decileWith(env, method, path, body, env.DECILE_API_KEY);
-  if (r.status === 401) r = await decileWith(env, method, path, body, 'Bearer ' + env.DECILE_API_KEY);
+  let r = await followFetch(base + path, method, body, env.DECILE_API_KEY, trace);
+  if (r && r.status === 401) r = await followFetch(base + path, method, body, 'Bearer ' + env.DECILE_API_KEY, trace);
   return r;
 }
 
@@ -101,9 +117,10 @@ export default {
         stage_id: env.STAGE_ID || '315550',
         prospect: { organization: { name: 'ZZZ TEST worker-debug', company_url: 'https://test.invalid', short_description: 'worker debug probe — delete me' } },
       };
-      const r = await decile(env, 'POST', '/pipeline_prospect', minimal);
+      const trace = [];
+      const r = await decile(env, 'POST', '/pipeline_prospect', minimal, trace);
       const t = await r.text().catch(() => '');
-      return json(200, { decile_status: r.status, body_first_300: t.slice(0, 300) });
+      return json(200, { decile_status: r.status, trace, body_first_300: t.slice(0, 300) });
     }
 
     if (url.pathname === '/health') {

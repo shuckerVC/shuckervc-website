@@ -1003,18 +1003,42 @@
     // Deep link straight to #contact should arrive with the form already open.
     if (location.hash === '#contact') openForm(false);
 
+    // Decile relay endpoint (workers/decile-relay). Empty string keeps the
+    // stub notice, so the site and the worker can deploy in either order.
+    var RELAY_URL = '';
+
+    function setNote(msg) {
+      if (note) { note.textContent = msg; note.classList.add('is-msg'); }
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
 
-      // TODO(wire-up): POST new FormData(form) to the Decile relay endpoint here.
-      // var body = Object.fromEntries(new FormData(form).entries());
-      // fetch(RELAY_URL, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) })...
-
-      if (note) {
-        note.textContent = 'Thanks — submissions aren’t connected yet. We’re wiring this to our pipeline; check back shortly.';
-        note.classList.add('is-msg');
+      if (!RELAY_URL) {
+        setNote('Thanks — submissions aren’t connected yet. We’re wiring this to our pipeline; check back shortly.');
+        return;
       }
+
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
+      var body = {};
+      new FormData(form).forEach(function (v, k) { body[k] = v; });
+
+      fetch(RELAY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('relay ' + r.status);
+        form.reset();
+        setNote('Thanks — your company is in front of the partners. We read every submission.');
+        if (btn) { btn.textContent = 'Submitted ✓'; }
+        // Analytics: count the conversion if GA4 is installed (no-op otherwise).
+        if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'submit_form' });
+      }).catch(function () {
+        setNote('Something went wrong sending your submission — email us instead at jp@shucker.vc.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Submit your company'; }
+      });
     });
   }
 

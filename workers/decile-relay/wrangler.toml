@@ -1,0 +1,17 @@
+name = "shuckervc-decile-relay"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Secrets (set via CLI, never committed):
+#   npx wrangler secret put DECILE_API_KEY
+
+[vars]
+# Pipeline "Deals - shuckerVC Fund I, LP" (validated live).
+PIPELINE_ID = "2nEb978Z"
+# Origins allowed to call the relay. Add the production domain at cutover;
+# keep the github.io origin while it still serves.
+ALLOWED_ORIGINS = "https://shuckervc.github.io,https://shuckervc.com"
+# Decile REST base. VERIFY the exact base + upsert path against Decile's API
+# docs before first deploy (see README §2) — the payload shape is validated,
+# the REST path is the one assumption left.
+DECILE_API_BASE = "https://api.decilehub.com/v1"

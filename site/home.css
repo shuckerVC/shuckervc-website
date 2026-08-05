@@ -651,6 +651,8 @@ select.field-input {
 }
 .apply-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 26px; }
 .apply-actions .btn { width: 100%; max-width: 340px; }
+/* Honeypot field — visually removed but present in the DOM for bots. */
+.apply-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .apply-note { font-size: 13px; color: var(--gray-500); text-align: center; margin: 0; max-width: 46ch; }
 .apply-note.is-msg { color: var(--gold-deep); font-weight: 700; }
 @media (max-width: 620px) {

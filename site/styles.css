@@ -683,6 +683,11 @@ a.showcase-shot:hover img { transform: scale(1.03); }
    clips the first characters. Left-anchoring preserves the title (their right
    side is empty), and reads fine for photo covers too. */
 .wr-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left center; }
+/* Branded text covers: show the whole cover (no crop) letterboxed on a tone
+   that matches the cover's dark field, so the title/watermark never clip at
+   any container ratio and the letterbox reads as part of the artwork. */
+.wr-cover--contain { background: #141110; }
+.wr-cover--contain img { object-fit: contain; object-position: center; }
 .wr-cover--empty { background: radial-gradient(120% 120% at 75% 15%, #2a2a2a 0%, #141414 60%, #0c0c0b 100%); }
 .wr-cover--empty::after { content: attr(data-mark); position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-family: var(--font-display); font-size: 40px; color: rgba(255,205,60,0.18); letter-spacing: .02em; }
 .wr-badge-pos { position: absolute; left: 22px; top: 22px; z-index: 1; }
@@ -768,7 +773,9 @@ a.showcase-shot:hover img { transform: scale(1.03); }
   .wr-archive .container, .wr-more, .wr-cta-inner { padding-left: 20px; padding-right: 20px; }
   .wr-grid { grid-template-columns: 1fr; }
   .wr-feat-inner { grid-template-columns: 1fr; }
-  .wr-feat-media { min-height: 0; aspect-ratio: 16 / 10; }
+  /* min-height floor: iOS Safari can collapse aspect-ratio on a grid child to 0,
+     which dropped the featured cover. The floor keeps it visible regardless. */
+  .wr-feat-media { min-height: 210px; aspect-ratio: 16 / 10; }
   .wr-railbtn { display: none; }
 }
 

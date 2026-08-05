@@ -2,13 +2,13 @@
 
 # shuckerVC writing
 
-9 pieces. Full text below; canonical HTML at https://shuckervc.github.io/shuckervc-website/writing.html — RSS at https://shuckervc.github.io/shuckervc-website/feed.xml.
+9 pieces. Full text below; canonical HTML at https://shucker.vc/writing.html — RSS at https://shucker.vc/feed.xml.
 
 ---
 ## Welcome Lodg
 *News · shuckerVC · Jun 2026 · 5 min read*
 AI workforce automates property management tasks, boosting efficiency across mid‑market.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#lodg
+Read: https://shucker.vc/writing.html#lodg
 
 
 ## AI Workforce for Property Management
@@ -83,7 +83,7 @@ We're glad to be backing Jake, Amitav, and the Lodg team as they put property ma
 ## Welcome Cascade
 *News · shuckerVC · May 2026 · 4 min read*
 Cascade builds AI construction graph, unlocking capital flow for builders.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#cascade
+Read: https://shucker.vc/writing.html#cascade
 
 
 ## Why We Invested in Cascade: Creating Value Through the First Construction Graph
@@ -154,7 +154,7 @@ We're glad to be backing Hannia, Joana, and the Cascade team as they build the s
 ## AI is Eating Software
 *White paper · JP Persico · May 2026 · 5 min read*
 Just as cloud and mobile once disrupted enterprise software, AI is now poised to be the next transformative force in the B2B SaaS landscape. With 60% of Y-Combinator's recent startups focused on AI, the potential for disruption is evident.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#saas-pricing
+Read: https://shucker.vc/writing.html#saas-pricing
 
 The introduction of the Macintosh computer was a watershed moment in personal computing, setting new standards and reshaping user experiences. Similarly, the enterprise B2B software landscape was profoundly disrupted by the cloud and mobile revolutions, giving birth to the B2B SaaS industry we recognize today. Now, as we stand on the cusp of an AI-driven transformation, it feels reminiscent of that Macintosh moment. AI is poised to be the next significant disruptor, promising to redefine the B2B SaaS space. This isn't just another technological wave; it's a foundational shift that redefines business models, value propositions, and the very essence of enterprise solutions.
 
@@ -207,7 +207,7 @@ With our specialized focus and a vast network that includes relationships with o
 ## Welcome Brev.io
 *News · shuckerVC · Apr 2026 · 7 min read*
 Brev uses autonomous AI agents to execute goals, replacing traditional tracking dashboards.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#brev
+Read: https://shucker.vc/writing.html#brev
 
 
 ## Why We Invested in Brev.io: The End of Goal Tracking, The Start of Goal Execution
@@ -308,7 +308,7 @@ We're glad to be backing Chris, Vic, and the Brev team as they build the future 
 ## Our Support Partner Model
 *Perspective · shuckerVC · Apr 2026 · 6 min read*
 The bottleneck for early founders isn't capital — it's operational drag. How we embed a full-time operator in every portfolio company, at cost and with zero dilution.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#support-partner
+Read: https://shucker.vc/writing.html#support-partner
 
 At shuckerVC, we believe the biggest bottleneck for technical founders isn't capital — it's operational drag. That's why we built the Support Partner Model: a dedicated, full-time operational partner embedded in each portfolio company to handle everything outside of product and engineering.
 
@@ -369,7 +369,7 @@ Technical founders face a fundamental tension: every hour spent on HR, finance, 
 ## Q1 2026 update
 *Newsletter · shuckerVC · Apr 2026 · 5 min read*
 A landmark quarter — we closed Fund I, welcomed Brev to the portfolio, Algorized closed its Series A, and the team was out across the Bay Area AI ecosystem.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#q1-2026-update
+Read: https://shucker.vc/writing.html#q1-2026-update
 
 Q1 was a landmark quarter for shuckerVC. We held the final close of Fund I, welcomed Brev as a new portfolio company, and Algorized closed its Series A — twelve months after our seed entry. We're now fully focused on deployment and portfolio support.
 
@@ -412,7 +412,7 @@ Q2 is shaping up to be packed with demo days and high-signal gatherings across t
 ## Why we backed Atlas: monetizing impact, not tokens
 *Perspective · Graham Siegel · Mar 2026 · 5 min read*
 As compute costs collapse, durable SaaS won't meter tokens — it'll price the outcomes it delivers. The thesis behind our investment in Atlas.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#atlas
+Read: https://shucker.vc/writing.html#atlas
 
 
 ## The end of token metering
@@ -433,7 +433,7 @@ It's a classic shuckerVC investment: a technical founder, a market ripe for chan
 ## Algorized raises its Series A
 *News · shuckerVC · Feb 2026 · 3 min read*
 Our edge-AI perception company closes its Series A alongside Amazon — bringing robots that sense and anticipate people to the factory floor.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#algorized
+Read: https://shucker.vc/writing.html#algorized
 
 Algorized, our edge-AI perception company, has closed its Series A alongside Amazon.
 
@@ -444,7 +444,7 @@ We backed Algorized at seed and embedded a Support Partner to handle finance ops
 ## 2025 in review
 *Newsletter · shuckerVC · Jan 2026 · 5 min read*
 A look back at 2025 — how we invested, what we're prioritizing in 2026, the Algorized × KUKA partnership at CES, and qualitative progress across the portfolio.
-Read: https://shuckervc.github.io/shuckervc-website/writing.html#2025-in-review
+Read: https://shucker.vc/writing.html#2025-in-review
 
 Heading into 2026, our conviction is unchanged: we back deep domain-expert founders building AI-native software. That expertise may be in building AI-native systems — as with Algorized and Sindarin — or in deep product and market understanding, as with Atlas and Runreal. As we invest alongside top-tier venture firms, we continue to build our own independent conviction about where durable value is created.
 

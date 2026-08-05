@@ -1,4 +1,4 @@
-<!-- Generated from site/v2/index.html + site/data/fund.json by scripts/build-agent-surfaces.mjs — do not hand-edit. -->
+<!-- Generated from site/index.html + site/data/fund.json by scripts/build-agent-surfaces.mjs — do not hand-edit. -->
 
 # shuckerVC — thesis and support model
 
@@ -15,8 +15,8 @@
 - **HQ:** Silicon Valley, California, USA
 - **Prior track record:** 3.08 DPI from the partners' prior seed-stage SaaS investing — not a Fund I return.
 - **What makes us different:** A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.
-- **Submit a company:** https://shuckervc.github.io/shuckervc-website/v2/#contact
-- **Last updated:** 2026-08-04
+- **Submit a company:** https://shucker.vc/#contact
+- **Last updated:** 2026-08-05
 - **Not a fit** (we do not invest in these, so please don't pitch them):
   - consumer / B2C
   - biotech, therapeutics, medical devices

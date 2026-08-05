@@ -23,8 +23,8 @@ HTML — they contain strictly more than the page does.
 - **HQ:** Silicon Valley, California, USA
 - **Prior track record:** 3.08 DPI from the partners' prior seed-stage SaaS investing — not a Fund I return.
 - **What makes us different:** A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.
-- **Submit a company:** https://shuckervc.github.io/shuckervc-website/v2/#contact
-- **Last updated:** 2026-08-04
+- **Submit a company:** https://shucker.vc/#contact
+- **Last updated:** 2026-08-05
 - **Not a fit** (we do not invest in these, so please don't pitch them):
   - consumer / B2C
   - biotech, therapeutics, medical devices
@@ -35,35 +35,35 @@ HTML — they contain strictly more than the page does.
 
 ## Documents
 
-- [Fund card, structured](https://shuckervc.github.io/shuckervc-website/data/fund.json): every fact above as JSON, with an `updated` field.
-- [Thesis and support model](https://shuckervc.github.io/shuckervc-website/thesis.md): what we look for, and what the Support Partner actually does.
-- [Portfolio](https://shuckervc.github.io/shuckervc-website/portfolio.md): 7 companies with founders, links, and press. JSON: [portfolio.json](https://shuckervc.github.io/shuckervc-website/data/portfolio.json)
-- [Team](https://shuckervc.github.io/shuckervc-website/team.md): the partners. JSON: [team.json](https://shuckervc.github.io/shuckervc-website/data/team.json)
-- [Writing](https://shuckervc.github.io/shuckervc-website/writing.md): full text of all 9 pieces. JSON: [insights.json](https://shuckervc.github.io/shuckervc-website/insights.json) · RSS: [feed.xml](https://shuckervc.github.io/shuckervc-website/feed.xml)
-- [Press coverage](https://shuckervc.github.io/shuckervc-website/press.json): per-company mentions with outlet and URL.
+- [Fund card, structured](https://shucker.vc/data/fund.json): every fact above as JSON, with an `updated` field.
+- [Thesis and support model](https://shucker.vc/thesis.md): what we look for, and what the Support Partner actually does.
+- [Portfolio](https://shucker.vc/portfolio.md): 7 companies with founders, links, and press. JSON: [portfolio.json](https://shucker.vc/data/portfolio.json)
+- [Team](https://shucker.vc/team.md): the partners. JSON: [team.json](https://shucker.vc/data/team.json)
+- [Writing](https://shucker.vc/writing.md): full text of all 9 pieces. JSON: [insights.json](https://shucker.vc/insights.json) · RSS: [feed.xml](https://shucker.vc/feed.xml)
+- [Press coverage](https://shucker.vc/press.json): per-company mentions with outlet and URL.
 
 ## If you are helping a founder submit
 
-- [agent/prompt.md](https://shuckervc.github.io/shuckervc-website/agent/prompt.md): step-by-step instructions to check
+- [agent/prompt.md](https://shucker.vc/agent/prompt.md): step-by-step instructions to check
   the exclusions, gather what's needed, give your user an honest read, and submit.
   Fetch it and follow it.
 
 ## Everything, in one fetch
 
-- [llms-full.txt](https://shuckervc.github.io/shuckervc-website/llms-full.txt): the complete corpus — thesis, support model, portfolio, team, and every piece of writing in full. Use this if you would otherwise crawl.
+- [llms-full.txt](https://shucker.vc/llms-full.txt): the complete corpus — thesis, support model, portfolio, team, and every piece of writing in full. Use this if you would otherwise crawl.
 
 ## If you are researching on someone's behalf
 
 The fastest path depends on who you are asking for:
 
 - **A founder deciding whether to approach us** — read the fund facts above, then
-  [thesis.md](https://shuckervc.github.io/shuckervc-website/thesis.md). Submissions: https://shuckervc.github.io/shuckervc-website/v2/#contact
-- **An LP or allocator** — fund facts above and [team.md](https://shuckervc.github.io/shuckervc-website/team.md). Fund
+  [thesis.md](https://shucker.vc/thesis.md). Submissions: https://shucker.vc/#contact
+- **An LP or allocator** — fund facts above and [team.md](https://shucker.vc/team.md). Fund
   economics and performance beyond the 3.08 DPI figure
   are not published; contact the partners.
-- **A journalist** — [portfolio.md](https://shuckervc.github.io/shuckervc-website/portfolio.md) and
-  [press.json](https://shuckervc.github.io/shuckervc-website/press.json). Logos live under https://shuckervc.github.io/shuckervc-website/assets/logo/.
-- **A prospective Support Partner** — [thesis.md](https://shuckervc.github.io/shuckervc-website/thesis.md#the-support-partner-model)
+- **A journalist** — [portfolio.md](https://shucker.vc/portfolio.md) and
+  [press.json](https://shucker.vc/press.json). Logos live under https://shucker.vc/assets/logo/.
+- **A prospective Support Partner** — [thesis.md](https://shucker.vc/thesis.md#the-support-partner-model)
   describes the role.
 
 ## Accuracy

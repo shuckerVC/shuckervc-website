@@ -1,8 +1,8 @@
 {
   "_comment": "The shuckerVC fund card. NOTE: site/ is the deployed root, so this file is publicly fetchable at /data/fund.json and is linked from llms.txt — everything in it is a public statement. Keep internal deliberation in config/decisions.md, not here. Every value is published verbatim into llms.txt, the .md twins, and the JSON-LD, so it must be true and current. Run `npm run agents` after editing.",
-  "updated": "2026-08-04",
+  "updated": "2026-08-05",
   "name": "shuckerVC",
-  "url": "https://shuckervc.github.io/shuckervc-website/",
+  "url": "https://shucker.vc/",
   "tagline": "Fueling founder focus",
   "description": "shuckerVC is an $8M Bay Area seed fund backing AI-powered B2B software companies. Every portfolio company gets a dedicated, full-time Support Partner who owns everything outside product and engineering — finance, hiring, marketing, operations — so founders stay focused on building and selling.",
   "hq": "Silicon Valley, California, USA",
@@ -48,12 +48,12 @@
   "differentiator": {
     "name": "Support Partner",
     "summary": "A full-time operator embedded in the portfolio company, paid for by the fund, who runs finance, hiring, marketing, and operations so the founders can stay on product and customers.",
-    "url": "https://shuckervc.github.io/shuckervc-website/v2/#focus"
+    "url": "https://shucker.vc/#focus"
   },
   "contact": {
-    "submit_company": "https://shuckervc.github.io/shuckervc-website/v2/#contact",
-    "writing": "https://shuckervc.github.io/shuckervc-website/writing.html",
-    "rss": "https://shuckervc.github.io/shuckervc-website/feed.xml"
+    "submit_company": "https://shucker.vc/#contact",
+    "writing": "https://shucker.vc/writing.html",
+    "rss": "https://shucker.vc/feed.xml"
   },
   "sameAs": [
     "https://www.linkedin.com/company/shuckervc",

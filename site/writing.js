@@ -22,9 +22,15 @@
     'Crunchbase': '#146AFF', 'Business Wire': '#0B5CAB', 'GlobeNewswire': '#0A66C2',
     'Yahoo Finance': '#5F01D1', 'Dealroom': '#E6005C', 'Qorvo': '#0091DA',
     'GGBA Switzerland': '#D8232A', 'New York Business Journal': '#10508C',
-    'citybiz': '#111111', 'Algorized': '#00b49b'
+    'citybiz': '#111111', 'Algorized': '#00b49b', 'The Next Web': '#ff5c35',
+    'Liftoff with Keith Newman': '#c8102e', 'Silicon Valley Impact': '#1a7f5a', '1Mby1M': '#0b5cab'
   };
-  var CO_NAME = { cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg' };
+  var CO_NAME = { shuckervc: 'shuckerVC', cascade: 'Cascade', brev: 'Brev.io', algorized: 'Algorized', lodg: 'Lodg', atlas: 'Atlas' };
+  // Posts whose cover is a branded full-frame text layout (headline + watermark)
+  // rather than art/screenshot — these must be letterboxed (contain), never
+  // cover-cropped, or the title clips. Keyed by post id (insights.json is
+  // Notion-generated, so this lives here where the sync can't overwrite it).
+  var CONTAIN_COVERS = { 'saas-pricing': 1, 'support-partner': 1, 'q1-2026-update': 1, '2025-in-review': 1, 'test-post': 1 };
   var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -36,7 +42,13 @@
     return '<span style="display:inline-flex;align-items:center;height:' + h + 'px;padding:0 ' + pad + 'px;border-radius:999px;background:' + c.solidBg + ';color:' + c.solidFg + ';font-size:' + fs + 'px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">' + esc(tag) + '</span>';
   }
   function cover(p, posClass) {
-    if (p.cover) return '<div class="wr-cover"><img src="' + esc(p.cover) + '" alt="" loading="lazy"></div>';
+    // Branded text covers (title + watermark filling the frame) must never be
+    // cropped, or the headline clips. Flag them coverFit:"contain" in the data
+    // and letterbox them on a matching dark background instead of cover-cropping.
+    if (p.cover) {
+      var fit = (p.coverFit === 'contain' || CONTAIN_COVERS[p.id]) ? ' wr-cover--contain' : '';
+      return '<div class="wr-cover' + fit + '"><img src="' + esc(p.cover) + '" alt="" loading="lazy"></div>';
+    }
     return '<div class="wr-cover wr-cover--empty" data-mark="sV"></div>';
   }
 
@@ -213,11 +225,13 @@
   // "In the news" list view — all portfolio press mentions, grouped by company.
   function renderPress() {
     var host = $('wrPress');
-    var order = Object.keys(PRESS).sort(function (a, b) {
-      var pa = POSTS.filter(function (p) { return p.id === a; })[0];
-      var pb = POSTS.filter(function (p) { return p.id === b; })[0];
-      return (pb ? pb.sort : 0) - (pa ? pa.sort : 0);
-    });
+    // shuckerVC's own mentions pin to the top; portfolio groups follow newest-first.
+    function grpSort(id) {
+      if (id === 'shuckervc') return Infinity;
+      var p = POSTS.filter(function (x) { return x.id === id; })[0];
+      return p ? p.sort : 0;
+    }
+    var order = Object.keys(PRESS).sort(function (a, b) { return grpSort(b) - grpSort(a); });
     host.innerHTML = order.map(function (cid) {
       var items = PRESS[cid] || [];
       if (!items.length) return '';

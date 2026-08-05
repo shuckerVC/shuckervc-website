@@ -1,0 +1,17 @@
+name = "shuckervc-decile-relay"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Secrets (set via CLI, never committed):
+#   npx wrangler secret put DECILE_API_KEY
+
+[vars]
+# Pipeline "Deals - shuckerVC Fund I, LP" (validated live).
+PIPELINE_ID = "2nEb978Z"
+# Origins allowed to call the relay. Production domain is shucker.vc;
+# github.io and the workers.dev site origin stay while they serve.
+ALLOWED_ORIGINS = "https://shuckervc.github.io,https://shucker.vc,https://www.shucker.vc,https://shuckervc-website.shuckervcwebsite.workers.dev"
+# Decile REST base — per Decile's agent docs, the account-subdomain host is
+# the documented REST base (bare decilehub.com worked for GETs but 401s
+# Worker-originated POSTs).
+DECILE_API_BASE = "https://shuckervc.decilehub.com/api/v1"

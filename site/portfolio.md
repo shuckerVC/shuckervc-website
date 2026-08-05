@@ -2,7 +2,7 @@
 
 # shuckerVC portfolio
 
-7 companies in Fund I. Updated 2026-08-04.
+7 companies in Fund I. Updated 2026-08-05.
 
 ### Lodg
 Lodg runs the full lead-to-lease workflow for property managers — qualification, scheduling, follow-up, and tenant operations.
@@ -25,6 +25,7 @@ Building the first AI-traversable graph of US construction — matching firms to
   - Proptech Connect: Cascade raises $3.5M to help construction firms — https://proptechconnect.com/cascade-raises-35m-to-help-construction-firms/
   - Informed Infrastructure: Cascade raises $3.5M to help construction firms predict the future and win more projects — https://informedinfrastructure.com/post/cascade-raises-35m-to-help-construction-firms-predict-the-future-and-win-more-projects
   - Seedtable: Cascade — seed round, July 2026 — https://seedtable.com/companies/usecascade/funding-rounds/seed-2026-07
+  - The Next Web: Cascade raises $3.5M for construction pursuit AI — https://thenextweb.com/news/cascade-3-5m-construction-pursuit-ai
 ### Brev.io
 Turns meetings, tools, and goals into an automatic system of record — capturing commitments and tracking whether they are met.
 - **Category:** Workflow AI
@@ -50,6 +51,8 @@ The dynamic, outcome-based pricing and monetization layer for AI-native SaaS.
 - **Website:** https://runonatlas.com
 - **Co-investors:** 500 Global
 - **Founders:** Michael Hoy (3x founder & CEO) — https://www.linkedin.com/in/michaelthoy
+- **Press:**
+  - Silicon Valley Impact: Silicon Valley Impact podcast — Michael Hoy of Atlas — https://youtu.be/XjF4WWTMnMc
 ### Runreal
 AI agents and self-serve tooling for studios building on Unreal Engine.
 - **Category:** Dev Tools

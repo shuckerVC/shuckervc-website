@@ -19,7 +19,7 @@
      site/data/roles.json       open roles (JobPosting emitted only when published)
      site/insights.json         Notion-synced writing (see sync-notion.mjs)
      site/press.json            per-company press coverage
-     site/v2/index.html         prose for the thesis + support-model sections
+     site/index.html            prose for the thesis + support-model sections
 
    Writes (all generated — do not hand-edit):
      site/llms.txt              index: what exists and where the canonical copy is
@@ -27,9 +27,9 @@
      site/robots.txt            explicit allow for agent crawlers + pointers
      site/sitemap.xml
      site/thesis.md  site/portfolio.md  site/team.md  site/writing.md
-     …and, injected between markers into site/index.html, site/v2/index.html
-     and site/writing.html: JSON-LD plus the <script type="application/json">
-     data blocks that both app.js files now read.
+     site/agent/prompt.md       executable instructions for a founder's agent
+     …and, injected between markers into site/index.html and site/writing.html:
+     JSON-LD plus the <script type="application/json"> data blocks home.js reads.
 
    Run: npm run agents
    ============================================================ */
@@ -41,12 +41,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = path.join(ROOT, 'site');
 
-/* The deployed origin. This is a GitHub *project* page, so everything lives
-   under /shuckervc-website/. Conventions like /llms.txt and /.well-known/ are
-   defined at the domain root, so agents looking for them by convention will
-   miss ours until the site moves to an apex domain — at which point only this
-   constant changes. */
-const BASE = 'https://shuckervc.github.io/shuckervc-website';
+/* Production origin. Cloudflare serves site/ as static assets at the apex, so
+   /llms.txt and /.well-known/ land where agents look for them by convention.
+   GitHub Pages still serves the old project-page URL in parallel as stale-link
+   insurance (see docs/ARCHITECTURE.md); these files are absolute, so they keep
+   pointing at the canonical origin from either host. */
+const BASE = 'https://shucker.vc';
 
 const readJSON = (p) => JSON.parse(fs.readFileSync(path.join(SITE, p), 'utf8'));
 const write = (rel, body) => {
@@ -126,9 +126,9 @@ function prose(html) {
   return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 }
 
-const v2html = fs.readFileSync(path.join(SITE, 'v2/index.html'), 'utf8');
-const thesisProse = prose(section(v2html, 'strategy'));
-const focusProse = prose(section(v2html, 'focus'));
+const homeHtml = fs.readFileSync(path.join(SITE, 'index.html'), 'utf8');
+const thesisProse = prose(section(homeHtml, 'strategy'));
+const focusProse = prose(section(homeHtml, 'focus'));
 
 /* ============================================================
    Prose twins
@@ -203,7 +203,7 @@ const teamMd = MDNOTE('site/data/team.json') + [
   ].filter(Boolean).join('\n'))
 ].join('\n') + '\n';
 
-const thesisMd = MDNOTE('site/v2/index.html + site/data/fund.json') + [
+const thesisMd = MDNOTE('site/index.html + site/data/fund.json') + [
   `# shuckerVC — thesis and support model`,
   ``,
   `## Fund facts`,
@@ -431,7 +431,7 @@ const llmsFull = [
   `Generated ${today}. Everything shuckerVC publishes, in one file, so you do not`,
   `have to crawl. Canonical HTML: ${BASE}/ · Index: ${BASE}/llms.txt`,
   ``,
-  thesisMd.replace(MDNOTE('site/v2/index.html + site/data/fund.json'), ''),
+  thesisMd.replace(MDNOTE('site/index.html + site/data/fund.json'), ''),
   ``,
   portfolioMd.replace(MDNOTE('site/data/portfolio.json + site/press.json'), ''),
   ``,
@@ -465,7 +465,7 @@ write('robots.txt', [
   ''
 ].join('\n'));
 
-const PAGES = ['/', '/v2/', '/writing.html', '/llms.txt', '/agent/prompt.md', '/thesis.md', '/portfolio.md', '/team.md', '/writing.md'];
+const PAGES = ['/', '/writing.html', '/llms.txt', '/agent/prompt.md', '/thesis.md', '/portfolio.md', '/team.md', '/writing.md'];
 write('sitemap.xml', [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -596,7 +596,6 @@ const homeBlock = [
 ].join('\n');
 
 inject('index.html', homeBlock);
-inject('v2/index.html', homeBlock);
 
 const articles = sorted.map((p) => ({
   '@context': 'https://schema.org',

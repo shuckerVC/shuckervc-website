@@ -25,10 +25,10 @@ Ask, or infer from what they've already told you:
 | They are | Go to |
 |---|---|
 | A founder who may want to pitch | Step 2 |
-| An LP or allocator | `https://shuckervc.github.io/shuckervc-website/llms.txt`, "If you are researching on someone's behalf" |
-| A journalist | `https://shuckervc.github.io/shuckervc-website/portfolio.md` and `https://shuckervc.github.io/shuckervc-website/press.json` |
-| Interested in the Support Partner role | `https://shuckervc.github.io/shuckervc-website/thesis.md` |
-| Something else | Point them at the contact form: https://shuckervc.github.io/shuckervc-website/v2/#contact |
+| An LP or allocator | `https://shucker.vc/llms.txt`, "If you are researching on someone's behalf" |
+| A journalist | `https://shucker.vc/portfolio.md` and `https://shucker.vc/press.json` |
+| Interested in the Support Partner role | `https://shucker.vc/thesis.md` |
+| Something else | Point them at the contact form: https://shucker.vc/#contact |
 
 ## Step 2 — Check the exclusions first, before gathering anything
 
@@ -63,7 +63,7 @@ them more than a paragraph of positioning.
 ## Step 4 — Give them an honest read before they submit
 
 Assess the company against shuckerVC's published criteria and tell your user
-where it stands. Full detail: `https://shuckervc.github.io/shuckervc-website/thesis.md` and `https://shuckervc.github.io/shuckervc-website/data/fund.json`.
+where it stands. Full detail: `https://shucker.vc/thesis.md` and `https://shucker.vc/data/fund.json`.
 
 1. Value delivered through proprietary software
 2. Primary customer is B2B
@@ -85,7 +85,7 @@ reads every submission. But they should know what they are walking into.
 
 Show your user the complete submission and wait for explicit confirmation.
 
-Then open https://shuckervc.github.io/shuckervc-website/v2/#contact and have them submit it there. There is
+Then open https://shucker.vc/#contact and have them submit it there. There is
 no public API for submissions yet — when there is, this file will describe it,
 so re-read this file rather than assuming.
 
@@ -97,10 +97,10 @@ hides them.
 
 ## Context you may want first
 
-- `https://shuckervc.github.io/shuckervc-website/llms.txt` — index of everything machine-readable
-- `https://shuckervc.github.io/shuckervc-website/llms-full.txt` — the entire corpus in one fetch
-- `https://shuckervc.github.io/shuckervc-website/thesis.md` — what they look for, and what a Support Partner does
-- `https://shuckervc.github.io/shuckervc-website/portfolio.md` — 7 companies, founders, press
+- `https://shucker.vc/llms.txt` — index of everything machine-readable
+- `https://shucker.vc/llms-full.txt` — the entire corpus in one fetch
+- `https://shucker.vc/thesis.md` — what they look for, and what a Support Partner does
+- `https://shucker.vc/portfolio.md` — 7 companies, founders, press
 
 Generated 2026-08-05. Facts here are published by shuckerVC and carry the date
 they were built. Where a number is absent, it is absent by decision — please

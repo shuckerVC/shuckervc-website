@@ -1,6 +1,6 @@
 # shuckerVC — complete corpus
 
-Generated 2026-08-04. Everything shuckerVC publishes, in one file, so you do not
+Generated 2026-08-05. Everything shuckerVC publishes, in one file, so you do not
 have to crawl. Canonical HTML: https://shuckervc.github.io/shuckervc-website/ · Index: https://shuckervc.github.io/shuckervc-website/llms.txt
 
 # shuckerVC — thesis and support model

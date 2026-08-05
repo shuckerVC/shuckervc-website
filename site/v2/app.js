@@ -979,6 +979,46 @@
     });
   }
 
+
+  /* Agent front door — copies the one-line prompt a founder hands to their
+     assistant. The full text lives in data-prompt so the visible label can stay
+     short; clipboard API with a select-and-copy fallback for older browsers. */
+  function initAgentPrompt() {
+    var btn = document.getElementById('agentPrompt');
+    if (!btn) return;
+    var badge = btn.querySelector('[data-copy-state]');
+    var reset = null;
+
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-prompt') || '';
+      var done = function (ok) {
+        if (badge) badge.textContent = ok ? 'Copied' : 'Press \u2318C';
+        btn.classList.toggle('is-copied', ok);
+        clearTimeout(reset);
+        reset = setTimeout(function () {
+          if (badge) badge.textContent = 'Copy';
+          btn.classList.remove('is-copied');
+        }, 2400);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+        return;
+      }
+      // Fallback: stage the text in an offscreen field and copy the selection.
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:absolute;left:-9999px;top:0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    });
+  }
+
   function init() {
     initNav();
     initReveal();
@@ -991,6 +1031,7 @@
     renderInsights();
     loadInsights();
     initApplyForm();
+    initAgentPrompt();
     startCanvas();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

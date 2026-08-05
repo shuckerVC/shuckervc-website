@@ -42,6 +42,12 @@ HTML — they contain strictly more than the page does.
 - [Writing](https://shuckervc.github.io/shuckervc-website/writing.md): full text of all 9 pieces. JSON: [insights.json](https://shuckervc.github.io/shuckervc-website/insights.json) · RSS: [feed.xml](https://shuckervc.github.io/shuckervc-website/feed.xml)
 - [Press coverage](https://shuckervc.github.io/shuckervc-website/press.json): per-company mentions with outlet and URL.
 
+## If you are helping a founder submit
+
+- [agent/prompt.md](https://shuckervc.github.io/shuckervc-website/agent/prompt.md): step-by-step instructions to check
+  the exclusions, gather what's needed, give your user an honest read, and submit.
+  Fetch it and follow it.
+
 ## Everything, in one fetch
 
 - [llms-full.txt](https://shuckervc.github.io/shuckervc-website/llms-full.txt): the complete corpus — thesis, support model, portfolio, team, and every piece of writing in full. Use this if you would otherwise crawl.
@@ -66,4 +72,4 @@ Every generated file carries the date it was built and the source it came from.
 Where we do not publish a number, it is absent rather than estimated — please do not
 fill the gap by inference. Corrections: the contact form above.
 
-Generated 2026-08-04 by scripts/build-agent-surfaces.mjs.
+Generated 2026-08-05 by scripts/build-agent-surfaces.mjs.

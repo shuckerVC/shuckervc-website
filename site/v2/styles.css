@@ -926,3 +926,45 @@ a.sp-card:hover .sp-name, a.sp-card:hover .sp-role { color: var(--ink-900); }
 .sp-card--open .sp-role { color: var(--gray-400); }
 
 @media (max-width: 640px) { .sp-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ── Agent front door ────────────────────────────────────────
+   The copy-paste line a founder hands to their assistant, above the intake
+   form. Sits on the gold CTA field, so it reads as ink-on-gold: a hairline
+   pill rather than a second button competing with "Submit your company". */
+.agent-cta {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  margin: 0 auto 28px; max-width: 720px; text-align: center;
+}
+.agent-cta-label {
+  font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(17, 17, 17, .62);
+}
+.agent-cta-pill {
+  display: inline-flex; align-items: center; gap: 14px; max-width: 100%;
+  padding: 10px 12px 10px 18px; border-radius: var(--radius-pill, 999px);
+  background: rgba(255, 255, 255, .82); border: 1px solid rgba(17, 17, 17, .14);
+  cursor: pointer; font: inherit; color: var(--ink-900);
+  transition: background .22s var(--ease-out, ease), border-color .22s var(--ease-out, ease),
+              transform .22s var(--ease-out, ease), box-shadow .22s var(--ease-out, ease);
+}
+.agent-cta-pill:hover {
+  background: #fff; border-color: rgba(17, 17, 17, .3);
+  transform: translateY(-1px); box-shadow: 0 10px 26px rgba(17, 17, 17, .12);
+}
+.agent-cta-pill:focus-visible { outline: 2px solid var(--ink-900); outline-offset: 3px; }
+.agent-cta-pill code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13.5px; line-height: 1.4; color: var(--ink-900);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.agent-cta-url { color: var(--gold-deep, #b97e00); }
+.agent-cta-copy {
+  flex: none; font-size: 12px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: rgba(17, 17, 17, .55);
+  padding: 5px 11px; border-radius: 999px; background: rgba(17, 17, 17, .07);
+}
+.agent-cta-pill.is-copied .agent-cta-copy { background: var(--ink-900); color: var(--gold-400, #ffcd3c); }
+@media (max-width: 760px) {
+  .agent-cta-pill { padding: 10px 12px; gap: 10px; }
+  .agent-cta-pill code { font-size: 12px; }
+}

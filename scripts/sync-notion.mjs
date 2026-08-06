@@ -127,14 +127,37 @@ async function coverFor(page, id) {
     if (!res.ok) return c.type === 'external' ? url : undefined;
     const buf = Buffer.from(await res.arrayBuffer());
     if (sharp) {
+      // Compose card-ready 16:10 images so the front-end never has to crop
+      // (cropping clips typography on designed covers). Two treatments:
+      //  - near-card-ratio images (photos/screenshots): plain cover-crop.
+      //  - ultra-wide Notion banners (or very tall images): the FULL image
+      //    centered over a blurred+darkened fill of itself — text never clips.
+      // Editors can force a mode with an optional Notion select property
+      // "Cover fit": "Full image" | "Crop". Absent → ratio decides.
+      const meta = await sharp(buf).rotate().metadata();
+      const r = (meta.width || 1600) / (meta.height || 1000);
+      const override = page.properties?.['Cover fit']?.select?.name;
+      const banner = override === 'Full image' ? true
+        : override === 'Crop' ? false
+        : (r > 2.05 || r < 1.15);
       const set = [];
       for (const w of COVER_WIDTHS) {
+        const h = Math.round(w / 1.6);
         const name = w === 1600 ? `${id}.jpg` : `${id}-${w}.jpg`;
-        await sharp(buf).rotate()
-          .resize({ width: w, withoutEnlargement: true })
-          .flatten({ background: '#111111' })
-          .jpeg({ quality: 82, mozjpeg: true })
-          .toFile(join(ROOT, 'site', 'assets', 'insights', name));
+        const out = join(ROOT, 'site', 'assets', 'insights', name);
+        if (!banner) {
+          await sharp(buf).rotate().flatten({ background: '#111111' })
+            .resize(w, h, { fit: 'cover' })
+            .jpeg({ quality: 82, mozjpeg: true }).toFile(out);
+        } else {
+          const bg = await sharp(buf).rotate().flatten({ background: '#111111' })
+            .resize(w, h, { fit: 'cover' })
+            .blur(24).modulate({ brightness: 0.55, saturation: 0.9 }).toBuffer();
+          const fg = await sharp(buf).rotate().flatten({ background: '#111111' })
+            .resize(w, h, { fit: 'inside' }).toBuffer();
+          await sharp(bg).composite([{ input: fg, gravity: 'centre' }])
+            .jpeg({ quality: 82, mozjpeg: true }).toFile(out);
+        }
         set.push(`assets/insights/${name} ${w}w`);
       }
       return { cover: `assets/insights/${id}.jpg`, coverSet: set.join(', ') };

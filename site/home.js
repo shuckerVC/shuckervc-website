@@ -691,7 +691,9 @@
     featEl.innerHTML = feat ?
       '<a class="ins-feat" href="writing.html#' + encodeURIComponent(feat.id) + '">' +
         '<div class="ins-feat-cover' + (INS_CONTAIN[feat.id] ? ' ins-feat-cover--contain' : '') + '">' +
-          (feat.cover ? '<img src="' + insCover(feat.cover) + '" alt="" loading="lazy">' : '') +
+          (feat.cover ? '<img src="' + insCover(feat.cover) + '"' +
+            (feat.coverSet ? ' srcset="' + feat.coverSet + '" sizes="(max-width: 900px) 100vw, 1040px"' : '') +
+            ' alt="" loading="lazy">' : '') +
           '<span class="ins-feat-badge-wrap">' + insSolidBadge(feat.tag) + '</span>' +
           '<span class="ins-feat-read">' + feat.read + '</span>' +
         '</div>' +

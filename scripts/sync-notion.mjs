@@ -103,26 +103,51 @@ async function fetchContent(pageId) {
   return { body, read: `${Math.max(2, Math.round(words / WPM))} min read` };
 }
 
-// Resolve a post's featured cover from its Notion page cover. External covers
-// are referenced by URL; Notion-hosted (file) covers have expiring URLs, so we
-// download them into site/assets/insights/ and reference the local copy.
+// sharp is optional (installed ad hoc in the sync workflow). Without it the
+// sync still works — covers just skip the responsive-variant step.
+let sharp = null;
+try { sharp = (await import('sharp')).default; } catch { /* variants skipped */ }
+const COVER_WIDTHS = [480, 960, 1600];
+
+// Resolve a post's featured cover from its Notion page cover (the header
+// image). Both external and Notion-hosted covers are DOWNLOADED (hosted URLs
+// expire; hotlinks rot) and re-encoded into responsive JPEG variants:
+//   assets/insights/<id>.jpg (1600w) + <id>-960.jpg + <id>-480.jpg
+// The post carries coverSet (a ready srcset string) so the front-end can let
+// the browser pick a size. Encoding is deterministic, so an unchanged Notion
+// cover produces byte-identical files and the sync's commit-only-on-change
+// behavior is preserved.
 async function coverFor(page, id) {
   const c = page.cover;
   if (!c) return undefined;
-  if (c.type === 'external') return c.external?.url || undefined;
-  if (c.type === 'file' && c.file?.url) {
-    try {
-      const res = await fetch(c.file.url);
-      if (!res.ok) return undefined;
-      const ext = (new URL(c.file.url).pathname.match(/\.(jpe?g|png|webp|gif)$/i) || ['', 'jpg'])[1].toLowerCase();
-      const rel = `assets/insights/${id}.${ext}`;
-      await writeFile(join(ROOT, 'site', rel), Buffer.from(await res.arrayBuffer()));
-      return rel;
-    } catch {
-      return undefined;
+  const url = c.type === 'external' ? c.external?.url : c.file?.url;
+  if (!url) return undefined;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return c.type === 'external' ? url : undefined;
+    const buf = Buffer.from(await res.arrayBuffer());
+    if (sharp) {
+      const set = [];
+      for (const w of COVER_WIDTHS) {
+        const name = w === 1600 ? `${id}.jpg` : `${id}-${w}.jpg`;
+        await sharp(buf).rotate()
+          .resize({ width: w, withoutEnlargement: true })
+          .flatten({ background: '#111111' })
+          .jpeg({ quality: 82, mozjpeg: true })
+          .toFile(join(ROOT, 'site', 'assets', 'insights', name));
+        set.push(`assets/insights/${name} ${w}w`);
+      }
+      return { cover: `assets/insights/${id}.jpg`, coverSet: set.join(', ') };
     }
+    // sharp unavailable: previous behavior (store original; hotlink external).
+    if (c.type === 'external') return url;
+    const ext = (new URL(url).pathname.match(/\.(jpe?g|png|webp|gif)$/i) || ['', 'jpg'])[1].toLowerCase();
+    const rel = `assets/insights/${id}.${ext}`;
+    await writeFile(join(ROOT, 'site', rel), buf);
+    return rel;
+  } catch {
+    return undefined;
   }
-  return undefined;
 }
 
 async function main() {
@@ -154,7 +179,10 @@ async function main() {
     const content = await fetchContent(p.id);
     // Notion page cover wins; otherwise fall back to a committed local cover.
     const localCover = `assets/insights/${id}.jpg`;
-    const cover = (await coverFor(p, id)) || (existsSync(join(ROOT, 'site', localCover)) ? localCover : undefined);
+    const cv = await coverFor(p, id);
+    const cover = (cv && typeof cv === 'object' ? cv.cover : cv) ||
+      (existsSync(join(ROOT, 'site', localCover)) ? localCover : undefined);
+    const coverSet = cv && typeof cv === 'object' ? cv.coverSet : undefined;
 
     posts.push({
       id,
@@ -167,6 +195,7 @@ async function main() {
       date: monthYear(published),
       read: content.read,
       cover,
+      ...(coverSet ? { coverSet } : {}),
       url: p.public_url || p.url,
       body: content.body,
     });

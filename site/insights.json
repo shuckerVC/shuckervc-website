@@ -2,7 +2,7 @@
   "_generated": "from Notion 🥁 shuckerVC Blog + scripts/essays.json",
   "posts": [
     {
-      "id": "notes-from-liquidity-202",
+      "id": "liquidity-2026",
       "tag": "Perspective",
       "sort": 20260805,
       "title": "Notes from Liquidity 2026",
@@ -11,8 +11,8 @@
       "initials": "sV",
       "date": "Aug 2026",
       "read": "5 min read",
-      "cover": "assets/insights/notes-from-liquidity-202.jpg",
-      "coverSet": "assets/insights/notes-from-liquidity-202-480.jpg 480w, assets/insights/notes-from-liquidity-202-960.jpg 960w, assets/insights/notes-from-liquidity-202.jpg 1600w",
+      "cover": "assets/insights/liquidity-2026.jpg",
+      "coverSet": "assets/insights/liquidity-2026-480.jpg 480w, assets/insights/liquidity-2026-960.jpg 960w, assets/insights/liquidity-2026.jpg 1600w",
       "url": "https://shuckervc.notion.site/Notes-from-Liquidity-2026-85ca28da39174e95a657419fde764ba6",
       "body": [
         {

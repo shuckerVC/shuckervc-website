@@ -1009,6 +1009,38 @@
     // Deep link straight to #contact should arrive with the form already open.
     if (location.hash === '#contact') openForm(false);
 
+    // Human-readable validation messages in place of the browser's raw
+    // constraint strings (Website Ticket: "Clarify field validation messages").
+    // Pattern: set the custom message in the invalid handler, clear on input.
+    function messageFor(el) {
+      var v = el.validity;
+      if (el.name === 'email') {
+        if (v.valueMissing) return 'Enter your email address.';
+        if (/\s/.test(el.value)) return 'Enter a valid email address — remove the extra space.';
+        return 'Enter a valid email address, like name@company.com.';
+      }
+      if (el.name === 'website') {
+        return v.valueMissing
+          ? 'Enter your company website, like https://yourcompany.com.'
+          : 'Enter a valid URL, like https://yourcompany.com.';
+      }
+      if (el.name === 'deck') return 'Enter a valid URL, like https://yourcompany.com/deck.';
+      if (v.valueMissing) {
+        return {
+          company: 'Enter your company name.',
+          name: 'Enter your full name.',
+          round: 'Please choose an option.',
+          pitch: 'Tell us what you’re building — a sentence is enough.',
+        }[el.name] || 'This field is required.';
+      }
+      return 'Please double-check this field.';
+    }
+    Array.prototype.forEach.call(form.querySelectorAll('.field-input'), function (el) {
+      el.addEventListener('invalid', function () { el.setCustomValidity(messageFor(el)); });
+      el.addEventListener('input', function () { el.setCustomValidity(''); });
+      el.addEventListener('change', function () { el.setCustomValidity(''); });
+    });
+
     // Decile relay endpoint (workers/decile-relay) — submissions land in the
     // "Deals - shuckerVC Fund I, LP" pipeline, Investment Inquiries Form stage.
     var RELAY_URL = 'https://shuckervc-decile-relay.shuckervcwebsite.workers.dev/submit';

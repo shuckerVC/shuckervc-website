@@ -16,6 +16,11 @@ permissions:
   contents: write
   actions: write   # to dispatch the deploy workflow on a real change
 
+# One sync at a time — overlapping runs race each other's git push.
+concurrency:
+  group: notion-sync
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -43,6 +48,12 @@ jobs:
             echo "No changes — skipping commit and deploy."
           else
             git commit -m "chore: sync insights from Notion"
-            git push
+            # A human push can land mid-run; rebase and retry instead of dying.
+            for i in 1 2 3; do
+              if git push; then break; fi
+              echo "Push rejected (attempt $i) — rebasing onto latest main."
+              git pull --rebase origin main
+              sleep 3
+            done
             gh workflow run "Deploy to GitHub Pages" --repo "$GITHUB_REPOSITORY"
           fi

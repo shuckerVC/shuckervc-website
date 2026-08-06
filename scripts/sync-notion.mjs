@@ -48,6 +48,7 @@ const TITLE_ID = {
   'Welcome Lodg': 'lodg',
   'Welcome Cascade': 'cascade',
   'Welcome Brev.io': 'brev',
+  'Notes from Liquidity 2026': 'liquidity-2026',
 };
 const slugify = (t) => (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 24) || 'post';
 

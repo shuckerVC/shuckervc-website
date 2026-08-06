@@ -11,6 +11,8 @@
       "initials": "sV",
       "date": "Aug 2026",
       "read": "5 min read",
+      "cover": "assets/insights/notes-from-liquidity-202.jpg",
+      "coverSet": "assets/insights/notes-from-liquidity-202-480.jpg 480w, assets/insights/notes-from-liquidity-202-960.jpg 960w, assets/insights/notes-from-liquidity-202.jpg 1600w",
       "url": "https://shuckervc.notion.site/Notes-from-Liquidity-2026-85ca28da39174e95a657419fde764ba6",
       "body": [
         {
@@ -146,6 +148,7 @@
       "date": "Jun 2026",
       "read": "5 min read",
       "cover": "assets/insights/lodg.jpg",
+      "coverSet": "assets/insights/lodg-480.jpg 480w, assets/insights/lodg-960.jpg 960w, assets/insights/lodg.jpg 1600w",
       "url": "https://shuckervc.notion.site/Welcome-Lodg-37511beb3a4381e3bdddf5839b0d78a2",
       "body": [
         {
@@ -260,7 +263,8 @@
       "initials": "sV",
       "date": "May 2026",
       "read": "4 min read",
-      "cover": "assets/insights/cascade.png",
+      "cover": "assets/insights/cascade.jpg",
+      "coverSet": "assets/insights/cascade-480.jpg 480w, assets/insights/cascade-960.jpg 960w, assets/insights/cascade.jpg 1600w",
       "url": "https://shuckervc.notion.site/Welcome-Cascade-36711beb3a438102bf91f263e53c963f",
       "body": [
         {
@@ -466,7 +470,8 @@
       "initials": "sV",
       "date": "Apr 2026",
       "read": "7 min read",
-      "cover": "assets/insights/brev.png",
+      "cover": "assets/insights/brev.jpg",
+      "coverSet": "assets/insights/brev-480.jpg 480w, assets/insights/brev-960.jpg 960w, assets/insights/brev.jpg 1600w",
       "url": "https://shuckervc.notion.site/Welcome-Brev-io-33411beb3a43805c8685e5ae31a9b175",
       "body": [
         {

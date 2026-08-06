@@ -2,6 +2,140 @@
   "_generated": "from Notion 🥁 shuckerVC Blog + scripts/essays.json",
   "posts": [
     {
+      "id": "notes-from-liquidity-202",
+      "tag": "Perspective",
+      "sort": 20260805,
+      "title": "Notes from Liquidity 2026",
+      "excerpt": "Liquidity 2026 predicts AI‑driven capital wave and retail private markets.",
+      "author": "shuckerVC",
+      "initials": "sV",
+      "date": "Aug 2026",
+      "read": "5 min read",
+      "url": "https://shuckervc.notion.site/Notes-from-Liquidity-2026-85ca28da39174e95a657419fde764ba6",
+      "body": [
+        {
+          "t": "p",
+          "text": "JP Persico, Managing Partner — June 2026"
+        },
+        {
+          "t": "p",
+          "text": "I spent three days at the Liquidity conference in Napa this June, in rooms with the people running some of the largest pools of capital in venture and public markets — Coatue's Thomas Laffont, OpenAI's Sarah Friar, Bill Ackman, Dan Loeb, Palo Alto Networks' Nikesh Arora, and Section 32's Bill Maris among them. The full sessions are now up on the All-In Podcast's Liquidity 2026 playlist — I've linked the individual talks throughout."
+        },
+        {
+          "t": "p",
+          "text": "The throughline was exactly what the conference's name promised: a wave of distributions is about to hit. SpaceX is weeks from public. Both AI leaders are now in the queue — Anthropic filed its confidential S-1 during the conference, and OpenAI followed on June 8 with its own confidential filing, reportedly at an ~$852B valuation with ~$2B a month in revenue and still deeply unprofitable. Laffont made the case that those names plus a handful of others will return more capital to LPs than the prior decade of exits combined."
+        },
+        {
+          "t": "p",
+          "text": "The interesting question isn't whether the wave comes. It's what LPs do with the cash once it lands."
+        },
+        {
+          "t": "h",
+          "text": "Small funds still win the math"
+        },
+        {
+          "t": "p",
+          "text": "My answer — and the data's answer — is the barbell: proven managers on one side, a wide base of small emerging-manager bets on the other, where a single hit can carry a whole vintage."
+        },
+        {
+          "t": "p",
+          "text": "Bill Maris put hard numbers on what we've always believed at shuckerVC:"
+        },
+        {
+          "t": "q",
+          "text": "Top-decile funds under $750M returned 4.76x versus 2.42x for funds over $1B — and sub-$750M funds were 95% of top-decile performers. In his words: \"This is simply the math, not an opinion.\""
+        },
+        {
+          "t": "p",
+          "text": "The arithmetic behind it is unforgiving. A $7B fund needs $210B of exits to return 3x — more than most years' total M&A and IPO value combined. Discipline and fund size are not constraints on a strategy. They are the strategy."
+        },
+        {
+          "t": "h",
+          "text": "The AI story is becoming a physical-world story"
+        },
+        {
+          "t": "p",
+          "text": "Behind every model is power, copper, and memory — and the physical inputs are where the bottlenecks now live."
+        },
+        {
+          "t": "p",
+          "text": "Dan Dreyfus framed the scale: GDP growth alone means the world will need as much copper over the next 18 years as humanity mined in the prior 10,000. A single gigawatt AI data center consumes 50,000 tons of it. And the US government is responding with something unprecedented — equity stakes, accelerated permits, and floor-priced offtakes to backstop domestic miners. That capital cycle has barely begun."
+        },
+        {
+          "t": "p",
+          "text": "Laffont made the parallel point on silicon: \"If I want to design a chip like OpenAI, I can go to TSMC. If I want to make memory — there is no TSMC.\""
+        },
+        {
+          "t": "p",
+          "text": "Sarah Friar was blunt about the demand side: \"If you want to buy more compute in '26 — good luck to you. Tell me where, because I don't know where else to find it.\" OpenAI expects the worst of the compute shortage between 2030 and 2032."
+        },
+        {
+          "t": "h",
+          "text": "Private markets are going retail"
+        },
+        {
+          "t": "p",
+          "text": "Schwab's acquisition of Forge opens pre-IPO names to 46 million investors, with $500-minimum interval funds holding the likes of SpaceX. Secondaries now run at 31% of primary venture activity, and pricing has flipped from 80 cents on the dollar to a premium — the secondary markets panel covered the mechanics in detail."
+        },
+        {
+          "t": "p",
+          "text": "Democratization of access is right. The timing risk is real. Brad Gerstner's caution stuck with me: when \"80% of America thinks it's a scam where they're left out, then they come rushing in\" — at the top. Fourteen leveraged SpaceX ETFs are already queued for IPO day."
+        },
+        {
+          "t": "h",
+          "text": "Defensibility is shifting up the stack"
+        },
+        {
+          "t": "p",
+          "text": "Nikesh Arora and Sarah Friar converged on the same point from opposite ends of the market: the model layer is commoditizing, and durable value is migrating to the harness — memory, context, and the agentic layer wrapped around the model."
+        },
+        {
+          "t": "q",
+          "text": "\"A year ago people talked about the commoditization of LLMs. Frankly, it's gone the opposite.\" — Sarah Friar"
+        },
+        {
+          "t": "p",
+          "text": "Arora's demonstration of the offensive side was striking: his team's AI found vulnerabilities in six weeks that would normally take five to seven years to surface, for a few million dollars in tokens. His conclusion for software builders: analytics-only SaaS is dead weight, agents replace UIs, and the best AI-native operators will run margins far in excess of the industry."
+        },
+        {
+          "t": "p",
+          "text": "For a seed fund underwriting AI-native B2B companies, this is the single most important input to our work: evaluating where a company's moat actually lives — in the model it rents, or in the harness it owns — has never mattered more."
+        },
+        {
+          "t": "h",
+          "text": "Going public is becoming an operational non-event"
+        },
+        {
+          "t": "p",
+          "text": "The IPO comeback panel was quietly encouraging. Cerebras priced at $185, opened at $320, and trades around $230 — a $50–60B company after nine and a half hard years and, as founder Andrew Feldman put it, twelve easy months. Planet Labs is up roughly 10x in a year, with ~200 satellites imaging the Earth daily. Launch costs have fallen 4–5x, and satellites have gone from 20-ton, billion-dollar machines to kilograms — the mainframe-to-desktop transition, but for space."
+        },
+        {
+          "t": "p",
+          "text": "The message from operators who have crossed over: going public adds overhead and a morale boost, and changes surprisingly little about how the company actually runs."
+        },
+        {
+          "t": "h",
+          "text": "The discipline beneath the euphoria"
+        },
+        {
+          "t": "p",
+          "text": "The energy in those rooms was real — and so was the discipline beneath it. The sharpest line of the conference was Laffont's: \"The public market is the great antiseptic. It will not care about my presentation.\" A lot of private valuations are about to meet it."
+        },
+        {
+          "t": "p",
+          "text": "That combination — euphoria about the wave, discipline about what survives it — is the right posture for the next few years. It's also why we run shuckerVC the way we do: small fund, concentrated thesis, AI-native B2B companies with moats above the model layer, and outcome-based pricing that ties our companies' revenue to the value they actually deliver."
+        },
+        {
+          "t": "p",
+          "text": "The wave is coming. We intend to be on the right side of the math when it lands."
+        },
+        {
+          "t": "p",
+          "text": "— JP"
+        }
+      ]
+    },
+    {
       "id": "lodg",
       "tag": "News",
       "sort": 20260604,

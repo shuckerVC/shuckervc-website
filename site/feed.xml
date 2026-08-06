@@ -6,7 +6,16 @@
     <atom:link href="https://shuckervc.github.io/shuckervc-website/feed.xml" rel="self" type="application/rss+xml" />
     <description>White papers, perspectives, and portfolio news from the shuckerVC team.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>Notes from Liquidity 2026</title>
+      <link>https://shuckervc.github.io/shuckervc-website/writing.html#notes-from-liquidity-202</link>
+      <guid isPermaLink="true">https://shuckervc.github.io/shuckervc-website/writing.html#notes-from-liquidity-202</guid>
+      <category>Perspective</category>
+      <dc:creator>shuckerVC</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 12:00:00 GMT</pubDate>
+      <description>Liquidity 2026 predicts AI‑driven capital wave and retail private markets.</description>
+    </item>
     <item>
       <title>Welcome Lodg</title>
       <link>https://shuckervc.github.io/shuckervc-website/writing.html#lodg</link>

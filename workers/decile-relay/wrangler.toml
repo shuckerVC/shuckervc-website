@@ -8,9 +8,10 @@ compatibility_date = "2026-08-01"
 [vars]
 # Pipeline "Deals - shuckerVC Fund I, LP" (validated live).
 PIPELINE_ID = "2nEb978Z"
-# Origins allowed to call the relay. Production domain is shucker.vc;
-# github.io and the workers.dev site origin stay while they serve.
-ALLOWED_ORIGINS = "https://shuckervc.github.io,https://shucker.vc,https://www.shucker.vc,https://shuckervc-website.shuckervcwebsite.workers.dev"
+# Origins allowed to call the relay. Production domain is shuckervc.com;
+# shucker.vc kept in case it's attached later; github.io + workers.dev stay
+# while they serve.
+ALLOWED_ORIGINS = "https://shuckervc.com,https://www.shuckervc.com,https://shuckervc.github.io,https://shucker.vc,https://www.shucker.vc,https://shuckervc-website.shuckervcwebsite.workers.dev"
 # Decile REST base — per Decile's agent docs, the account-subdomain host is
 # the documented REST base (bare decilehub.com worked for GETs but 401s
 # Worker-originated POSTs).

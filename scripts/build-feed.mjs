@@ -14,7 +14,7 @@ import { dirname, join } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 // Absolute base for feed links. Update alongside the <link rel=canonical> tags
 // if the production domain changes.
-const BASE = 'https://shuckervc.github.io/shuckervc-website/';
+const BASE = 'https://shuckervc.com/';
 
 const esc = (s) =>
   String(s == null ? '' : s).replace(/[<>&'"]/g, (c) =>

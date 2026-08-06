@@ -171,7 +171,7 @@ export default {
     try { f = await request.json(); } catch { return json(400, { ok: false, error: 'invalid JSON' }, cors); }
 
     // Honeypot: hidden field real users never fill. Pretend success for bots.
-    if (clean(f.website2, 'default')) return json(200, { ok: true }, cors);
+    if (clean(f.website2, 'default')) return json(200, { ok: true, relay: "v3-strict" }, cors);
 
     const data = {};
     for (const k of ['company', 'website', 'name', 'email', 'role', 'location', 'round', 'amount', 'deck', 'referral', 'pitch']) {
@@ -251,6 +251,6 @@ export default {
       if (!note.ok) console.error('Decile note attach failed (non-fatal)', note.http, note.raw_first_400);
     }
 
-    return json(200, { ok: true }, cors);
+    return json(200, { ok: true, relay: "v3-strict", prospect_id: prospectId }, cors);
   },
 };

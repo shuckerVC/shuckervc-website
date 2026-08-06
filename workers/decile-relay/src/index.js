@@ -121,12 +121,19 @@ async function mcpCall(env, toolName, args) {
   const raw = await r.text().catch(() => '');
   let payload = null;
   try { payload = JSON.parse(raw); } catch (e) {
-    // Streamable HTTP may answer as SSE — pull the JSON out of a data: line.
-    const m = raw.match(/^data:\s*(\{.*\})\s*$/m);
-    if (m) { try { payload = JSON.parse(m[1]); } catch (e2) { /* fall through */ } }
+    // Streamable HTTP may answer as SSE with several data: events — the FINAL
+    // one carries the tools/call result, so scan them all and keep the last
+    // parseable one that has a result or error.
+    const lines = raw.match(/^data:\s*(\{.*\})\s*$/gm) || [];
+    for (const line of lines) {
+      try {
+        const cand = JSON.parse(line.replace(/^data:\s*/, ''));
+        if (cand && (cand.result || cand.error)) payload = cand;
+      } catch (e2) { /* skip unparseable event */ }
+    }
   }
   const result = payload && payload.result;
-  const ok = r.status === 200 && result && !result.isError && !payload.error;
+  const ok = r.status === 200 && result && !result.isError && !(payload && payload.error);
   let inner = null;
   if (result && result.content && result.content[0] && result.content[0].type === 'text') {
     try { inner = JSON.parse(result.content[0].text); } catch (e) { inner = result.content[0].text; }
@@ -216,14 +223,26 @@ export default {
       },
     });
 
-    if (!upsert.ok) {
-      console.error('Decile MCP upsert failed', upsert.http, upsert.raw_first_400);
-      return json(502, { ok: false, error: 'upstream error' }, cors);
+    // STRICT success: the tool's inner result must confirm the write
+    // (verified canonical shape: { success: true, pipeline_prospect_id }).
+    // A transport-level 200 alone is NOT success — an earlier version
+    // returned ok:true here while nothing landed in Decile.
+    const prospectId = upsert.inner && (upsert.inner.pipeline_prospect_id ||
+      (upsert.inner.changes && upsert.inner.changes.id && upsert.inner.changes.id[1]));
+    const confirmed = upsert.ok && upsert.inner &&
+      (upsert.inner.success === true || upsert.inner.status === 'success') && prospectId;
+    if (!confirmed) {
+      console.error('Decile MCP upsert not confirmed', upsert.http, upsert.raw_first_400);
+      // Diagnostic payload (no secrets) — shows what the MCP actually said.
+      return json(502, {
+        ok: false, error: 'upstream error',
+        upstream_status: upsert.http,
+        inner: upsert.inner,
+        raw_first_400: upsert.raw_first_400,
+      }, cors);
     }
 
     // Best-effort: attach the human-readable submission note to the prospect.
-    const prospectId = upsert.inner && (upsert.inner.pipeline_prospect_id ||
-      (upsert.inner.changes && upsert.inner.changes.id && upsert.inner.changes.id[1]));
     if (prospectId) {
       const note = await mcpCall(env, 'add_pipeline_prospect_note', {
         pipeline_prospect_id: prospectId,

@@ -48,7 +48,7 @@ function corsHeaders(origin, env) {
   };
 }
 
-const RELAY_VERSION = 'v5';
+const RELAY_VERSION = 'v6';
 
 function json(status, body, extra = {}) {
   // Every response identifies its worker version — stale-edge responses are
@@ -179,10 +179,13 @@ export default {
       // Liveness only by default — does NOT call Decile, so /health can't be
       // used to burn API quota or probe whether the key is still valid.
       // Deep check (verifies the key against Decile) requires ?token=<HEALTH_TOKEN>.
+      // Config visibility (booleans only — never secret values) so we can
+      // confirm the serving version actually has the Turnstile secret bound.
+      const cfg = { turnstile: !!env.TURNSTILE_SECRET, rl: !!(env.RELAY_RL && env.RELAY_RL.limit) };
       const wantDeep = env.HEALTH_TOKEN && url.searchParams.get('token') === env.HEALTH_TOKEN;
-      if (!wantDeep) return json(200, { ok: true, alive: true });
+      if (!wantDeep) return json(200, { ok: true, alive: true, ...cfg });
       const r = await decile(env, 'GET', '/accounts');
-      return json(r.ok ? 200 : 502, { ok: r.ok, decile_status: r.status });
+      return json(r.ok ? 200 : 502, { ok: r.ok, decile_status: r.status, ...cfg });
     }
 
     if (url.pathname !== '/submit' || request.method !== 'POST') {

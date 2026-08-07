@@ -32,6 +32,9 @@
 
   <link rel="stylesheet" href="home.css?v=20260805a">
 
+  <!-- Cloudflare Turnstile (bot protection for the submit-your-company form). -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
   <!-- Google Analytics 4 — uncomment and replace G-XXXXXXXXXX with the real
        Measurement ID (GA4 property → Data streams → Web). The form-submit
        conversion event (generate_lead) is already wired in home.js and
@@ -428,6 +431,8 @@
           </label>
         </div>
         <div class="apply-actions">
+          <!-- Cloudflare Turnstile — bot check; token verified server-side by the relay. -->
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAEIv-6l9AlvLBax4" data-action="turnstile-spin-v2"></div>
           <button type="submit" class="btn btn--ink btn--lg">Submit your company</button>
           <p class="apply-note" role="status">We read every submission — your details go straight to the partners.</p>
         </div>
@@ -450,6 +455,6 @@
     </div>
   </footer>
 
-  <script src="home.js?v=20260807a"></script>
+  <script src="home.js?v=20260807b"></script>
 </body>
 </html>

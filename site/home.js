@@ -15,6 +15,16 @@
   }
   function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
+  // HTML-escape for values interpolated into innerHTML. The Insights feed is
+  // Notion-authored (semi-trusted); escaping prevents a stray tag/attribute in
+  // a title, excerpt, or byline from injecting markup. Safe for both text and
+  // double-quoted attribute contexts.
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
   /* ============================================================
      NAV — scroll scrim + color crossfade + mobile hamburger
      ============================================================ */
@@ -653,11 +663,11 @@
 
   function insSolidBadge(t) {
     var c = INS_TC[t];
-    return '<span class="ins-solid" style="background:' + c.dot + ';color:' + c.solidFg + '">' + t + '</span>';
+    return '<span class="ins-solid" style="background:' + c.dot + ';color:' + c.solidFg + '">' + esc(t) + '</span>';
   }
   function insLightBadge(t) {
     var c = INS_TC[t];
-    return '<span class="ins-badge" style="background:' + c.bg + ';color:' + c.fg + '"><span class="ins-badge-dot" style="background:' + c.dot + '"></span>' + t + '</span>';
+    return '<span class="ins-badge" style="background:' + c.bg + ';color:' + c.fg + '"><span class="ins-badge-dot" style="background:' + c.dot + '"></span>' + esc(t) + '</span>';
   }
 
   function renderInsights() {
@@ -691,16 +701,16 @@
     featEl.innerHTML = feat ?
       '<a class="ins-feat" href="writing.html#' + encodeURIComponent(feat.id) + '">' +
         '<div class="ins-feat-cover' + (INS_CONTAIN[feat.id] ? ' ins-feat-cover--contain' : '') + '">' +
-          (feat.cover ? '<img src="' + insCover(feat.cover) + '"' +
-            (feat.coverSet ? ' srcset="' + feat.coverSet + '" sizes="(max-width: 900px) 100vw, 1040px"' : '') +
+          (feat.cover ? '<img src="' + esc(insCover(feat.cover)) + '"' +
+            (feat.coverSet ? ' srcset="' + esc(feat.coverSet) + '" sizes="(max-width: 900px) 100vw, 1040px"' : '') +
             ' alt="" loading="lazy">' : '') +
           '<span class="ins-feat-badge-wrap">' + insSolidBadge(feat.tag) + '</span>' +
-          '<span class="ins-feat-read">' + feat.read + '</span>' +
+          '<span class="ins-feat-read">' + esc(feat.read) + '</span>' +
         '</div>' +
-        '<h3 class="ins-feat-title">' + feat.title + '</h3>' +
-        '<p class="ins-feat-excerpt">' + feat.excerpt + '</p>' +
-        '<div class="ins-feat-author"><span class="ins-initials">' + feat.initials + '</span>' +
-          '<span class="ins-feat-meta"><b>' + feat.author + '</b> · ' + feat.date + '</span></div>' +
+        '<h3 class="ins-feat-title">' + esc(feat.title) + '</h3>' +
+        '<p class="ins-feat-excerpt">' + esc(feat.excerpt) + '</p>' +
+        '<div class="ins-feat-author"><span class="ins-initials">' + esc(feat.initials) + '</span>' +
+          '<span class="ins-feat-meta"><b>' + esc(feat.author) + '</b> · ' + esc(feat.date) + '</span></div>' +
       '</a>' : '';
 
     // Homepage teaser: cap to a few recent; the full archive lives on writing.html.
@@ -708,8 +718,8 @@
       return '<a class="ins-row" href="writing.html#' + encodeURIComponent(p.id) + '">' +
         '<div class="ins-row-body">' +
           insLightBadge(p.tag) +
-          '<h4 class="ins-row-title">' + p.title + '</h4>' +
-          '<p class="ins-row-excerpt">' + p.excerpt + '</p>' +
+          '<h4 class="ins-row-title">' + esc(p.title) + '</h4>' +
+          '<p class="ins-row-excerpt">' + esc(p.excerpt) + '</p>' +
         '</div>' +
         '<span class="ins-arrow">↗</span>' +
       '</a>';
@@ -1060,6 +1070,8 @@
       var btn = form.querySelector('button[type="submit"]');
       if (btn) { btn.disabled = true; btn.textContent = 'Submitting…'; }
       var body = {};
+      // FormData includes the Turnstile widget's cf-turnstile-response token
+      // and the honeypot; both ride along to the worker.
       new FormData(form).forEach(function (v, k) { body[k] = v; });
 
       fetch(RELAY_URL, {
@@ -1076,6 +1088,8 @@
       }).catch(function () {
         setNote('Something went wrong sending your submission — email us instead at jp@shucker.vc.');
         if (btn) { btn.disabled = false; btn.textContent = 'Submit your company'; }
+        // Turnstile tokens are single-use — reset so a retry gets a fresh one.
+        if (window.turnstile && typeof window.turnstile.reset === 'function') window.turnstile.reset();
       });
     });
   }

@@ -1,0 +1,11 @@
+# Security headers for all pages (honored by Cloudflare Workers static assets).
+# CSP allows: self, Google Fonts, Cloudflare Turnstile (script+iframe+xhr),
+# YouTube thumbnails (press cards), the form relay, and GA4 (when enabled).
+# Domain-agnostic — works on shuckervc.com, shucker.vc, and the workers.dev host.
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.youtube.com https://www.google-analytics.com; connect-src 'self' https://shuckervc-decile-relay.shuckervcwebsite.workers.dev https://challenges.cloudflare.com https://www.google-analytics.com https://region1.google-analytics.com; frame-src https://challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'

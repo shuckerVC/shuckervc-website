@@ -651,13 +651,19 @@
       .catch(function () { /* keep fallback */ });
   }
 
+  // Escapes for HTML text and quoted-attribute contexts. The insights feed is
+  // built from insights.json (Notion-synced), so every feed-derived string is
+  // untrusted and must be escaped before it goes into innerHTML — otherwise a
+  // title/excerpt/cover value can inject markup or break out of an attribute.
+  function escH(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+
   function insSolidBadge(t) {
-    var c = INS_TC[t];
-    return '<span class="ins-solid" style="background:' + c.dot + ';color:' + c.solidFg + '">' + t + '</span>';
+    var c = INS_TC[t] || INS_TC.News;
+    return '<span class="ins-solid" style="background:' + c.dot + ';color:' + c.solidFg + '">' + escH(t) + '</span>';
   }
   function insLightBadge(t) {
-    var c = INS_TC[t];
-    return '<span class="ins-badge" style="background:' + c.bg + ';color:' + c.fg + '"><span class="ins-badge-dot" style="background:' + c.dot + '"></span>' + t + '</span>';
+    var c = INS_TC[t] || INS_TC.News;
+    return '<span class="ins-badge" style="background:' + c.bg + ';color:' + c.fg + '"><span class="ins-badge-dot" style="background:' + c.dot + '"></span>' + escH(t) + '</span>';
   }
 
   function renderInsights() {
@@ -691,16 +697,16 @@
     featEl.innerHTML = feat ?
       '<a class="ins-feat" href="writing.html#' + encodeURIComponent(feat.id) + '">' +
         '<div class="ins-feat-cover' + (INS_CONTAIN[feat.id] ? ' ins-feat-cover--contain' : '') + '">' +
-          (feat.cover ? '<img src="' + insCover(feat.cover) + '"' +
-            (feat.coverSet ? ' srcset="' + feat.coverSet + '" sizes="(max-width: 900px) 100vw, 1040px"' : '') +
+          (feat.cover ? '<img src="' + escH(insCover(feat.cover)) + '"' +
+            (feat.coverSet ? ' srcset="' + escH(feat.coverSet) + '" sizes="(max-width: 900px) 100vw, 1040px"' : '') +
             ' alt="" loading="lazy">' : '') +
           '<span class="ins-feat-badge-wrap">' + insSolidBadge(feat.tag) + '</span>' +
-          '<span class="ins-feat-read">' + feat.read + '</span>' +
+          '<span class="ins-feat-read">' + escH(feat.read) + '</span>' +
         '</div>' +
-        '<h3 class="ins-feat-title">' + feat.title + '</h3>' +
-        '<p class="ins-feat-excerpt">' + feat.excerpt + '</p>' +
-        '<div class="ins-feat-author"><span class="ins-initials">' + feat.initials + '</span>' +
-          '<span class="ins-feat-meta"><b>' + feat.author + '</b> · ' + feat.date + '</span></div>' +
+        '<h3 class="ins-feat-title">' + escH(feat.title) + '</h3>' +
+        '<p class="ins-feat-excerpt">' + escH(feat.excerpt) + '</p>' +
+        '<div class="ins-feat-author"><span class="ins-initials">' + escH(feat.initials) + '</span>' +
+          '<span class="ins-feat-meta"><b>' + escH(feat.author) + '</b> · ' + escH(feat.date) + '</span></div>' +
       '</a>' : '';
 
     // Homepage teaser: cap to a few recent; the full archive lives on writing.html.
@@ -708,8 +714,8 @@
       return '<a class="ins-row" href="writing.html#' + encodeURIComponent(p.id) + '">' +
         '<div class="ins-row-body">' +
           insLightBadge(p.tag) +
-          '<h4 class="ins-row-title">' + p.title + '</h4>' +
-          '<p class="ins-row-excerpt">' + p.excerpt + '</p>' +
+          '<h4 class="ins-row-title">' + escH(p.title) + '</h4>' +
+          '<p class="ins-row-excerpt">' + escH(p.excerpt) + '</p>' +
         '</div>' +
         '<span class="ins-arrow">↗</span>' +
       '</a>';

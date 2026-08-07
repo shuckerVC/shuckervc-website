@@ -29,6 +29,10 @@ const RATE = { windowMs: 60_000, max: 5 };
 
 function rateLimited(ip) {
   const now = Date.now();
+  // Evict stale entries so the map can't grow unbounded under IP rotation.
+  if (hits.size > 5000) {
+    for (const [k, v] of hits) { if (now - v.t > RATE.windowMs) hits.delete(k); }
+  }
   const rec = hits.get(ip) || { n: 0, t: now };
   if (now - rec.t > RATE.windowMs) { rec.n = 0; rec.t = now; }
   rec.n += 1;
@@ -154,6 +158,15 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
     if (url.pathname === '/health') {
+      // Liveness is public; the upstream key-validity check is NOT. An open
+      // probe that calls Decile on every hit is a free quota-burn amplifier
+      // and a key-validity oracle for anyone who finds the URL. Gate the
+      // upstream call behind HEALTH_TOKEN (set via `wrangler secret put`);
+      // without a correct token we only confirm the Worker itself is up.
+      const token = url.searchParams.get('token') || '';
+      if (!env.HEALTH_TOKEN || token !== env.HEALTH_TOKEN) {
+        return json(200, { ok: true, live: true });
+      }
       const r = await decile(env, 'GET', '/accounts');
       return json(r.ok ? 200 : 502, { ok: r.ok, decile_status: r.status });
     }
@@ -162,9 +175,16 @@ export default {
       return json(404, { ok: false, error: 'not found' });
     }
 
-    // Origin gate: browser calls must come from the site.
+    // Origin gate: the browser form always sends an Origin header, so REQUIRE
+    // one on the allowlist. Treating a MISSING Origin as trusted (the old
+    // `origin && ...` guard) let any non-browser client skip the check simply
+    // by omitting the header. NOTE: Origin is attacker-controllable from a
+    // non-browser client (curl can send any value), so this only blocks the
+    // lazy bypass and cross-site browser abuse — it is NOT bot authentication.
+    // Real anti-abuse for this public endpoint needs Cloudflare Turnstile
+    // (CAPTCHA) plus WAF rate-limiting on a zone route; see the relay README.
     const allowed = (env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
-    if (origin && !allowed.includes(origin)) {
+    if (!allowed.includes(origin)) {
       return json(403, { ok: false, error: 'origin not allowed' }, cors);
     }
 
@@ -185,6 +205,10 @@ export default {
     if (missing.length) return json(422, { ok: false, error: 'missing: ' + missing.join(', ') }, cors);
     if (!EMAIL_RE.test(data.email)) return json(422, { ok: false, error: 'invalid email' }, cors);
     if (!/^https?:\/\//i.test(data.website)) data.website = 'https://' + data.website;
+    // Only http(s) URLs land in the CRM. `website` gets a prefix forced above;
+    // the optional `deck` must be validated too, or a `javascript:`/`data:`
+    // link gets stored for a partner to click later. Drop anything non-http(s).
+    if (data.deck && !/^https?:\/\//i.test(data.deck)) data.deck = '';
 
     // Payload per swagger op upsert_pipeline_prospect (POST /pipeline_prospect):
     // org fields are company_url / short_description; extras ride along as a
@@ -236,14 +260,12 @@ export default {
     const confirmed = upsert.ok && upsert.inner &&
       (upsert.inner.success === true || upsert.inner.status === 'success') && prospectId;
     if (!confirmed) {
-      console.error('Decile MCP upsert not confirmed', upsert.http, upsert.raw_first_400);
-      // Diagnostic payload (no secrets) — shows what the MCP actually said.
-      return json(502, {
-        ok: false, error: 'upstream error',
-        upstream_status: upsert.http,
-        inner: upsert.inner,
-        raw_first_400: upsert.raw_first_400,
-      }, cors);
+      // Full upstream detail (status, inner result, raw body) goes to the logs
+      // ONLY. Echoing it to an anonymous caller leaks internal identifiers,
+      // error text, and pipeline/stage structure and makes probing the Decile
+      // integration easy — so the client gets a generic error.
+      console.error('Decile MCP upsert not confirmed', upsert.http, JSON.stringify(upsert.inner), upsert.raw_first_400);
+      return json(502, { ok: false, error: 'upstream error' }, cors);
     }
 
     // Best-effort: attach the human-readable submission note to the prospect.

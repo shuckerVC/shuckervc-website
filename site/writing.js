@@ -34,7 +34,11 @@
   var state = { filter: 'All', sortDir: 'desc', openId: null, press: false };
 
   var $ = function (id) { return document.getElementById(id); };
-  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  // Escapes for HTML text AND double/single-quoted attribute contexts. Quotes
+  // MUST be included: esc() is used inside src="…"/data-open="…" attributes, so
+  // without them a " in feed data (Notion-sourced) breaks out of the attribute
+  // and can inject an onerror= handler with no < needed.
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
 
   function badge(tag, size) {
     var c = TC[tag] || TC.News;

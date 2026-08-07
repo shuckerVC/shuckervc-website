@@ -4,6 +4,17 @@ compatibility_date = "2026-08-01"
 
 # Secrets (set via CLI, never committed):
 #   npx wrangler secret put DECILE_API_KEY
+#   npx wrangler secret put HEALTH_TOKEN   # gates the /health -> Decile check;
+#     without it (or with a wrong ?token=) /health returns liveness only and
+#     never calls Decile, so it can't be used to burn quota or probe the key.
+#
+# NOTE — the Origin allowlist below stops cross-site *browser* abuse and the
+# lazy no-Origin bypass, but Origin is spoofable by non-browser clients, so it
+# is NOT bot protection. To stop scripted spam into the CRM, add Cloudflare
+# Turnstile (verify the token in src/index.js before the upsert) and a WAF
+# rate-limiting rule. The WAF rule requires routing the relay under the
+# shuckervc.com zone; on the current *.workers.dev host, zone WAF/rate rules
+# do not apply.
 
 [vars]
 # Pipeline "Deals - shuckerVC Fund I, LP" (validated live).

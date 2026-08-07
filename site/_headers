@@ -1,0 +1,25 @@
+# Security headers for the static site, served by Cloudflare Workers assets
+# (same syntax as Cloudflare Pages / Netlify `_headers`). Applied to every
+# response under the matched path.
+#
+# CSP notes:
+#  - script-src is 'self' only (plus the GA host) — deliberately NO
+#    'unsafe-inline', so an injected <script> or onerror= handler is blocked.
+#    The site has no inline <script> that must run today. When GA is enabled
+#    (the commented gtag block in index.html/writing.html), either move its
+#    inline init into a .js file OR add its sha256 hash here — do NOT add
+#    'unsafe-inline', which would defeat the XSS protection below.
+#  - style-src allows 'unsafe-inline' because the feed renderer emits inline
+#    style="" attributes (badges). Style injection is low-risk; script is not.
+#  - connect-src allows the Decile form relay and self (insights.json fetch).
+#  - img-src allows https: so Notion-hosted covers render even if a sync ever
+#    skips the local download step.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://shuckervc-decile-relay.shuckervcwebsite.workers.dev https://www.google-analytics.com https://region1.google-analytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin

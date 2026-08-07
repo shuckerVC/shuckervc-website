@@ -947,7 +947,7 @@
     if (!form) return;
     var note = form.querySelector('.apply-note');
 
-    // Collapsed by default; expands when a visitor presses "Submit your company"
+    // Collapsed by default; expands when a visitor presses "Share your company"
     // (the CTA reveal button, the hero button, or a #contact link).
     var panel = document.getElementById('applyPanel');
     var reveal = document.getElementById('applyReveal');
@@ -1037,7 +1037,7 @@
         if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'submit_form' });
       }).catch(function () {
         setNote('Something went wrong sending your submission — email us instead at jp@shucker.vc.');
-        if (btn) { btn.disabled = false; btn.textContent = 'Submit your company'; }
+        if (btn) { btn.disabled = false; btn.textContent = 'Share your company'; }
         // Turnstile tokens are single-use — reset so a retry gets a fresh one.
         if (window.turnstile && typeof window.turnstile.reset === 'function') window.turnstile.reset();
       });

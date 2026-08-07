@@ -66,6 +66,7 @@
   function renderArchive() {
     $('archiveView').hidden = false;
     $('readerView').hidden = true;
+    document.body.classList.remove('is-reading');
 
     // chips
     var chips = $('wrChips');
@@ -158,6 +159,8 @@
   function renderReader(post) {
     $('archiveView').hidden = true;
     $('readerView').hidden = false;
+    // Collapse the tall dark header to a slim band while reading an article.
+    document.body.classList.add('is-reading');
     $('wrBarRead').textContent = post.read || '';
 
     var authorMeta = '<b>' + esc(post.author) + '</b> · ' + esc(post.date);

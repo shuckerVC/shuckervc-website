@@ -617,6 +617,11 @@ a.showcase-shot:hover img { transform: scale(1.03); }
 .wr-head-eyebrow span:last-child { font-size: 14px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-400); }
 .wr-h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.6rem, 5.2vw, 4.2rem); line-height: 1.06; letter-spacing: -0.01em; color: #fff; max-width: 18ch; margin: 22px 0 0; text-wrap: balance; }
 .wr-sub { font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.65; color: rgba(255,255,255,0.72); max-width: 60ch; margin: 24px 0 0; }
+/* Reading an article: collapse the tall dark header to a slim band (the big
+   intro headline is redundant next to the article's own title). */
+body.is-reading .wr-head-wrap { padding-top: 92px; padding-bottom: 20px; }
+body.is-reading .wr-back { margin-bottom: 14px; }
+body.is-reading .wr-h1, body.is-reading .wr-sub { display: none; }
 
 .wr-archive { background: var(--gray-50); padding: 64px 0 110px; }
 .wr-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }

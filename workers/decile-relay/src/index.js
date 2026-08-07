@@ -48,7 +48,7 @@ function corsHeaders(origin, env) {
   };
 }
 
-const RELAY_VERSION = 'v4';
+const RELAY_VERSION = 'v5';
 
 function json(status, body, extra = {}) {
   // Every response identifies its worker version — stale-edge responses are
@@ -63,6 +63,28 @@ function clean(v, key) {
   if (typeof v !== 'string') return '';
   const max = MAX_LEN[key] || MAX_LEN.default;
   return v.trim().slice(0, max);
+}
+
+// Canonical Cloudflare Turnstile server-side verification. Returns true only
+// when the token is valid (success === true); fails closed on any error.
+async function verifyTurnstile(env, token, clientIp) {
+  if (typeof token !== 'string' || !token) return false;
+  try {
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET,
+        response: token,
+        remoteip: clientIp,
+      }),
+    });
+    if (!r.ok) return false;
+    const result = await r.json();
+    return result && result.success === true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function decileOnce(url, method, body, authValue) {
@@ -154,6 +176,11 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
     if (url.pathname === '/health') {
+      // Liveness only by default — does NOT call Decile, so /health can't be
+      // used to burn API quota or probe whether the key is still valid.
+      // Deep check (verifies the key against Decile) requires ?token=<HEALTH_TOKEN>.
+      const wantDeep = env.HEALTH_TOKEN && url.searchParams.get('token') === env.HEALTH_TOKEN;
+      if (!wantDeep) return json(200, { ok: true, alive: true });
       const r = await decile(env, 'GET', '/accounts');
       return json(r.ok ? 200 : 502, { ok: r.ok, decile_status: r.status });
     }
@@ -162,17 +189,35 @@ export default {
       return json(404, { ok: false, error: 'not found' });
     }
 
-    // Origin gate: browser calls must come from the site.
+    // Origin gate: require a known Origin. A missing Origin (non-browser
+    // client) is NOT trusted — earlier the gate only checked when Origin was
+    // present, so `curl` with no Origin header sailed past it.
     const allowed = (env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
-    if (origin && !allowed.includes(origin)) {
+    if (!origin || !allowed.includes(origin)) {
       return json(403, { ok: false, error: 'origin not allowed' }, cors);
     }
 
+    // Rate limit: prefer Cloudflare's cross-isolate Rate Limiting binding
+    // (the in-memory map only counts within one isolate, so it never caps a
+    // real fleet). Falls back to the in-memory limiter if the binding is absent.
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-    if (rateLimited(ip)) return json(429, { ok: false, error: 'too many requests' }, cors);
+    if (env.RELAY_RL && typeof env.RELAY_RL.limit === 'function') {
+      const { success } = await env.RELAY_RL.limit({ key: ip });
+      if (!success) return json(429, { ok: false, error: 'too many requests' }, cors);
+    } else if (rateLimited(ip)) {
+      return json(429, { ok: false, error: 'too many requests' }, cors);
+    }
 
     let f;
     try { f = await request.json(); } catch { return json(400, { ok: false, error: 'invalid JSON' }, cors); }
+
+    // Cloudflare Turnstile: verify the bot-check token server-side before any
+    // write. Enforced only once TURNSTILE_SECRET is set (safe rollout — the
+    // worker skips verification until the secret is deployed).
+    if (env.TURNSTILE_SECRET) {
+      const ts = await verifyTurnstile(env, f['cf-turnstile-response'], ip);
+      if (!ts) return json(403, { ok: false, error: 'verification failed' }, cors);
+    }
 
     // Honeypot: hidden field real users never fill. Pretend success for bots.
     if (clean(f.website2, 'default')) return json(200, { ok: true }, cors);

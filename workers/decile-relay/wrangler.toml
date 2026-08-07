@@ -3,7 +3,17 @@ main = "src/index.js"
 compatibility_date = "2026-08-01"
 
 # Secrets (set via CLI, never committed):
-#   npx wrangler secret put DECILE_API_KEY
+#   npx wrangler secret put DECILE_API_KEY     # Decile API key
+#   npx wrangler secret put TURNSTILE_SECRET   # Cloudflare Turnstile secret
+#   npx wrangler secret put HEALTH_TOKEN       # optional: gates /health deep check
+
+# Cross-isolate rate limiter (5 requests / 60s per client IP). Unlike an
+# in-memory counter, this is consistent across the Worker fleet.
+[[unsafe.bindings]]
+name = "RELAY_RL"
+type = "ratelimit"
+namespace_id = "1101"
+simple = { limit = 5, period = 60 }
 
 [vars]
 # Pipeline "Deals - shuckerVC Fund I, LP" (validated live).

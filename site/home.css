@@ -302,23 +302,6 @@ a { color: inherit; }
   display: grid; grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(40px, 6vw, 80px); align-items: start; margin-top: 64px;
 }
-.focus-timeline { position: relative; padding-left: 46px; isolation: isolate; }
-/* Short rail segments live only between consecutive dots (added to steps 1..n-1),
-   so the line never runs behind a circle or past the last dot. */
-.focus-seg {
-  position: absolute; left: -35px; top: 34px; bottom: -5px; width: 3px;
-  border-radius: 3px; background: var(--border, #e6e0d3);
-  transition: background .3s ease;
-}
-.focus-step { min-height: 170px; padding-bottom: 28px; position: relative; opacity: .5; transition: opacity .4s ease; }
-.focus-dot {
-  position: absolute; left: -46px; top: 4px; width: 25px; height: 25px; border-radius: 50%;
-  background: #fff; border: 3px solid #e6e0d3; transition: background .3s ease, border-color .3s ease;
-  z-index: 2;
-  box-shadow: 0 0 0 5px #ffffff;
-}
-.focus-step-title { font-size: 1.2rem; font-weight: 700; margin: 0 0 8px; color: var(--ink-900); }
-.focus-step-body { font-size: 14px; line-height: 1.6; color: var(--gray-500); margin: 0; max-width: 420px; }
 .focus-tag-wrap { margin-top: 16px; }
 .focus-tag {
   display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 13px;
@@ -891,16 +874,9 @@ select.field-input {
 
 /* "Where the depth comes from" — static copy block. Extra top gap so an open
    vignette overlay never covers it. */
-.focus-depth { margin-top: 190px; }
+.focus-depth { align-self: center; max-width: 42ch; }
 .depth-title { font-family: var(--font-display); font-weight: 400; font-size: 2rem; line-height: 1.16; color: var(--ink-900); margin: 14px 0 0; text-wrap: balance; }
 .depth-lead { font-size: 15px; line-height: 1.66; color: var(--gray-500); margin: 18px 0 0; max-width: 60ch; }
-
-/* Timeline step pills (the three actors). */
-.focus-step-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-.focus-pill { display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 13px; border-radius: 999px; font-size: 12px; font-weight: 700; }
-.focus-pill--gold { background: var(--gold-100); border: 1px solid #ffe08a; color: var(--gold-text); }
-.focus-pill--neutral { background: var(--gray-100); color: var(--ink-700); }
-.focus-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-500); flex: none; }
 
 /* Tablet/mobile: overlay detail copy would clip and cover the row below, so
    drop to 2-up and render the detail in flow (no expand affordance). */

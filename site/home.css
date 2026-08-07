@@ -878,7 +878,7 @@ select.field-input {
    "Our Support Model" headline size (.focus-intro .h2). */
 .focus-depth { align-self: center; max-width: 42ch; }
 .depth-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.12; color: var(--ink-900); margin: 14px 0 0; text-wrap: balance; }
-.depth-lead { font-size: 15px; line-height: 1.66; color: var(--gray-500); margin: 18px 0 0; max-width: 60ch; }
+.depth-lead { font-size: 1.08rem; line-height: 1.65; color: var(--gray-500); margin: 18px 0 0; max-width: 60ch; }
 
 /* Tablet/mobile: overlay detail copy would clip and cover the row below, so
    drop to 2-up and render the detail in flow (no expand affordance). */

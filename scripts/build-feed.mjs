@@ -37,7 +37,7 @@ export async function buildFeed() {
   const lastBuild = newest ? rfc822(newest.sort) : new Date(0).toUTCString();
 
   const items = posts.map((p) => {
-    const link = BASE + 'writing.html#' + encodeURIComponent(p.id);
+    const link = BASE + 'writing#' + encodeURIComponent(p.id);
     let enclosure = '';
     if (p.cover) {
       const rel = p.cover.replace(/^\/+/, '');
@@ -64,7 +64,7 @@ export async function buildFeed() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>shuckerVC — Writing</title>
-    <link>${BASE}writing.html</link>
+    <link>${BASE}writing</link>
     <atom:link href="${BASE}feed.xml" rel="self" type="application/rss+xml" />
     <description>White papers, perspectives, and portfolio news from the shuckerVC team.</description>
     <language>en-us</language>

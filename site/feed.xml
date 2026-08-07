@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>shuckerVC — Writing</title>
-    <link>https://shucker.vc/writing.html</link>
+    <link>https://shucker.vc/writing</link>
     <atom:link href="https://shucker.vc/feed.xml" rel="self" type="application/rss+xml" />
     <description>White papers, perspectives, and portfolio news from the shuckerVC team.</description>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Aug 2026 12:00:00 GMT</lastBuildDate>
     <item>
       <title>Notes from Liquidity 2026</title>
-      <link>https://shucker.vc/writing.html#liquidity-2026</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#liquidity-2026</guid>
+      <link>https://shucker.vc/writing#liquidity-2026</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#liquidity-2026</guid>
       <category>Perspective</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Wed, 05 Aug 2026 12:00:00 GMT</pubDate>
@@ -19,8 +19,8 @@
     </item>
     <item>
       <title>Welcome Lodg</title>
-      <link>https://shucker.vc/writing.html#lodg</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#lodg</guid>
+      <link>https://shucker.vc/writing#lodg</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#lodg</guid>
       <category>News</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Thu, 04 Jun 2026 12:00:00 GMT</pubDate>
@@ -29,8 +29,8 @@
     </item>
     <item>
       <title>Welcome Cascade</title>
-      <link>https://shucker.vc/writing.html#cascade</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#cascade</guid>
+      <link>https://shucker.vc/writing#cascade</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#cascade</guid>
       <category>News</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Wed, 20 May 2026 12:00:00 GMT</pubDate>
@@ -39,8 +39,8 @@
     </item>
     <item>
       <title>AI is Eating Software</title>
-      <link>https://shucker.vc/writing.html#saas-pricing</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#saas-pricing</guid>
+      <link>https://shucker.vc/writing#saas-pricing</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#saas-pricing</guid>
       <category>White paper</category>
       <dc:creator>JP Persico</dc:creator>
       <pubDate>Fri, 15 May 2026 12:00:00 GMT</pubDate>
@@ -49,8 +49,8 @@
     </item>
     <item>
       <title>Welcome Brev.io</title>
-      <link>https://shucker.vc/writing.html#brev</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#brev</guid>
+      <link>https://shucker.vc/writing#brev</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#brev</guid>
       <category>News</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Thu, 23 Apr 2026 12:00:00 GMT</pubDate>
@@ -59,8 +59,8 @@
     </item>
     <item>
       <title>Our Support Partner Model</title>
-      <link>https://shucker.vc/writing.html#support-partner</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#support-partner</guid>
+      <link>https://shucker.vc/writing#support-partner</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#support-partner</guid>
       <category>Perspective</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Wed, 15 Apr 2026 12:00:00 GMT</pubDate>
@@ -69,8 +69,8 @@
     </item>
     <item>
       <title>Q1 2026 update</title>
-      <link>https://shucker.vc/writing.html#q1-2026-update</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#q1-2026-update</guid>
+      <link>https://shucker.vc/writing#q1-2026-update</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#q1-2026-update</guid>
       <category>Newsletter</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Wed, 01 Apr 2026 12:00:00 GMT</pubDate>
@@ -79,8 +79,8 @@
     </item>
     <item>
       <title>Why we backed Atlas: monetizing impact, not tokens</title>
-      <link>https://shucker.vc/writing.html#atlas</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#atlas</guid>
+      <link>https://shucker.vc/writing#atlas</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#atlas</guid>
       <category>Perspective</category>
       <dc:creator>Graham Siegel</dc:creator>
       <pubDate>Sun, 15 Mar 2026 12:00:00 GMT</pubDate>
@@ -89,8 +89,8 @@
     </item>
     <item>
       <title>Algorized raises its Series A</title>
-      <link>https://shucker.vc/writing.html#algorized</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#algorized</guid>
+      <link>https://shucker.vc/writing#algorized</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#algorized</guid>
       <category>News</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Sun, 15 Feb 2026 12:00:00 GMT</pubDate>
@@ -99,8 +99,8 @@
     </item>
     <item>
       <title>2025 in review</title>
-      <link>https://shucker.vc/writing.html#2025-in-review</link>
-      <guid isPermaLink="true">https://shucker.vc/writing.html#2025-in-review</guid>
+      <link>https://shucker.vc/writing#2025-in-review</link>
+      <guid isPermaLink="true">https://shucker.vc/writing#2025-in-review</guid>
       <category>Newsletter</category>
       <dc:creator>shuckerVC</dc:creator>
       <pubDate>Mon, 05 Jan 2026 12:00:00 GMT</pubDate>

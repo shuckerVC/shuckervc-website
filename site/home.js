@@ -970,24 +970,6 @@
   /* ============================================================
      INIT
      ============================================================ */
-  /* Vignette cards: one open at a time. Hover opens (desktop), tap opens (touch),
-     keyboard focus/Enter opens; leaving a card closes it. */
-  function initVignettes() {
-    var cards = [].slice.call(document.querySelectorAll('[data-vignette]'));
-    if (!cards.length) return;
-    function openOnly(card) { cards.forEach(function (c) { c.classList.toggle('is-open', c === card); }); }
-    cards.forEach(function (card) {
-      card.addEventListener('mouseenter', function () { openOnly(card); });
-      card.addEventListener('mouseleave', function () { card.classList.remove('is-open'); });
-      card.addEventListener('click', function () { openOnly(card); });
-      card.addEventListener('focus', function () { openOnly(card); });
-      card.addEventListener('blur', function () { card.classList.remove('is-open'); });
-      card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('is-open'); }
-      });
-    });
-  }
-
   /* Submit-your-company form. NOT WIRED YET — on submit it validates and shows
      a notice. When hosting is chosen, replace the marked stub with a fetch() to
      the serverless endpoint that relays to the Decile API (pipeline
@@ -1100,7 +1082,6 @@
     initCounters();
     initSpotlightAndMagnets();
     initFocusScroll();
-    initVignettes();
     renderTeam();
     renderPortfolio();
     renderInsights();

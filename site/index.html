@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="home.css?v=20260805a">
+  <link rel="stylesheet" href="home.css?v=20260807c">
 
   <!-- Cloudflare Turnstile (bot protection for the submit-your-company form). -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -138,59 +138,70 @@
         <p class="lead">Every shuckerVC portfolio company gets a full-time operator: the Support Partner. They run finance, hiring, vendors, and reporting—anything that pulls your attention away from your product and customers.</p>
       </div>
 
-      <!-- Movement 1 — What the model covers: collapsed vignette grid (hover/tap to open).
-           Stat-first cards: the outcome metric is the headline (founder time is
-           the key metric), the category labels it, and the body gives the detail.
+      <!-- Movement 1 — Support Partner Impact: static split cards.
+           Left panel carries the outcome metric, right side carries the
+           function (gold) and the detail. No hover, no expand — everything
+           is visible at rest.
            SECURITY card is parked below until it has a real outcome. -->
       <div data-reveal data-delay="120" class="focus-vignettes">
         <div class="vignette-head">
           <span class="eyebrow eyebrow--gold">Support Partner Impact</span>
         </div>
-        <div class="vignette-grid" id="vignetteGrid">
-          <article class="vignette" data-vignette role="listitem" tabindex="0">
-            <div class="vignette-top">
-              <span class="vignette-stat">2h<span class="vignette-per">/week</span></span>
-              <span class="vignette-chev" aria-hidden="true">+</span>
+        <div class="covers-grid" id="coversGrid">
+          <article class="covers-card">
+            <div class="covers-metric">
+              <span class="covers-stat">2h<span class="covers-per">/week</span></span>
+              <span class="covers-desc">of founder time</span>
             </div>
-            <div class="vignette-desc">of founder time</div>
-            <div class="vignette-cat">Finance ops</div>
-            <div class="vignette-body"><p>Books closed by the second week of the month — start to finish, on just two hours of your time a week.</p></div>
-          </article>
-          <article class="vignette" data-vignette role="listitem" tabindex="0">
-            <div class="vignette-top">
-              <span class="vignette-stat">8h<span class="vignette-per">/week</span></span>
-              <span class="vignette-chev" aria-hidden="true">+</span>
+            <div class="covers-main">
+              <h4 class="covers-cat">Finance ops</h4>
+              <p class="covers-body">Books closed by the second week of the month — start to finish, on just two hours of your time a week.</p>
             </div>
-            <div class="vignette-desc">of founder time</div>
-            <div class="vignette-cat">Recruiting</div>
-            <div class="vignette-body"><p>Four engineers hired end to end — sourced, screened, and closed — on eight hours of your time a week.</p></div>
           </article>
-          <article class="vignette" data-vignette role="listitem" tabindex="0">
-            <div class="vignette-top">
-              <span class="vignette-stat">100% qualified</span>
-              <span class="vignette-chev" aria-hidden="true">+</span>
+
+          <article class="covers-card">
+            <div class="covers-metric">
+              <span class="covers-stat">8h<span class="covers-per">/week</span></span>
+              <span class="covers-desc">of founder time</span>
             </div>
-            <div class="vignette-desc">no wasted meetings</div>
-            <div class="vignette-cat">GTM</div>
-            <div class="vignette-body"><p>Every sales call you take is a qualified lead — pipeline built and screened before it reaches you.</p></div>
-          </article>
-          <article class="vignette" data-vignette role="listitem" tabindex="0">
-            <div class="vignette-top">
-              <span class="vignette-stat">12h on podcasts</span>
-              <span class="vignette-chev" aria-hidden="true">+</span>
+            <div class="covers-main">
+              <h4 class="covers-cat">Recruiting</h4>
+              <p class="covers-body">Four engineers hired end to end — sourced, screened, and closed — on eight hours of your time a week.</p>
             </div>
-            <div class="vignette-desc">earned media</div>
-            <div class="vignette-cat">PR</div>
-            <div class="vignette-body"><p>Your Support Partner handles the media — right shows, right audiences — so you just show up, and your reach with customers and investors keeps compounding.</p></div>
           </article>
+
+          <article class="covers-card">
+            <div class="covers-metric">
+              <span class="covers-stat">100%</span>
+              <span class="covers-desc">qualified — no wasted meetings</span>
+            </div>
+            <div class="covers-main">
+              <h4 class="covers-cat">GTM</h4>
+              <p class="covers-body">Every sales call you take is a qualified lead — pipeline built and screened before it reaches you.</p>
+            </div>
+          </article>
+
+          <article class="covers-card">
+            <div class="covers-metric">
+              <span class="covers-stat">12h</span>
+              <span class="covers-desc">on podcasts — earned media</span>
+            </div>
+            <div class="covers-main">
+              <h4 class="covers-cat">PR</h4>
+              <p class="covers-body">Your Support Partner handles the media — right shows, right audiences — so you just show up, and your reach with customers and investors keeps compounding.</p>
+            </div>
+          </article>
+
           <!-- SECURITY — parked pending a real outcome metric:
-          <article class="vignette" data-vignette role="listitem" tabindex="0">
-            <div class="vignette-top">
-              <span class="vignette-stat">[outcome]</span>
-              <span class="vignette-chev" aria-hidden="true">+</span>
+          <article class="covers-card">
+            <div class="covers-metric">
+              <span class="covers-stat">[outcome]</span>
+              <span class="covers-desc">[unit]</span>
             </div>
-            <div class="vignette-cat">Security</div>
-            <div class="vignette-body"><p>[detail]</p></div>
+            <div class="covers-main">
+              <h4 class="covers-cat">Security</h4>
+              <p class="covers-body">[detail]</p>
+            </div>
           </article>
           -->
         </div>
@@ -236,10 +247,6 @@
             <video controls playsinline preload="metadata"
                    poster=""
                    src="assets/video/shuckerVC_Support_Partner_Teaser.mp4"></video>
-          </div>
-          <div class="video-cap">
-            <span class="eyebrow eyebrow--gold">Now showing</span>
-            <span class="video-cap-title" data-f-cap>Your Support Partner</span>
           </div>
         </div>
       </div>
@@ -301,7 +308,7 @@
               <span class="sp-flag sp-flag--grad">Alum</span>
             </div>
             <h4 class="sp-name">Megan Liu</h4>
-            <p class="sp-role">Remained with Algorized</p>
+            <p class="sp-role">Operations and Growth Manager @ Algorized</p>
           </article>
 
           <!-- Open role — Brev.io -->
@@ -455,6 +462,6 @@
     </div>
   </footer>
 
-  <script src="home.js?v=20260807b"></script>
+  <script src="home.js?v=20260807c"></script>
 </body>
 </html>

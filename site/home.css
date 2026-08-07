@@ -849,39 +849,45 @@ select.field-input {
    ============================================================ */
 .focus-vignettes { margin-top: 56px; }
 .vignette-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
-.vignette-hint { font-size: 13px; font-weight: 700; color: var(--gray-400); white-space: nowrap; }
 
-/* Collapsed cards; the description opens as a bottom OVERLAY panel that drops
-   over the content below — nothing shifts. */
-.vignette-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; align-items: start; }
-.vignette {
-  background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 26px;
-  box-shadow: var(--shadow-sm); cursor: default; position: relative; z-index: 1;
-  transition: box-shadow .3s ease, border-radius .25s ease .35s;
+/* Static split cards: warm metric panel left, function (gold) + copy right.
+   No hover, no expand — everything visible at rest. */
+.covers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; align-items: stretch; }
+
+.covers-card {
+  display: grid;
+  grid-template-columns: 158px 1fr;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(17,17,17,0.05);
 }
-.vignette.is-open {
-  z-index: 20; border-radius: 18px 18px 0 0; box-shadow: var(--shadow-md);
-  transition: box-shadow .3s ease, border-radius .25s ease;
+
+.covers-metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 26px 20px;
+  background: var(--gray-50);
+  border-right: 1px solid #efece4;
 }
-.vignette-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.vignette-stat { font-family: var(--font-sans); font-weight: 900; font-size: 23px; letter-spacing: -0.02em; color: var(--ink-900); line-height: 1.12; }
-.vignette-per { font-weight: 700; font-size: 15px; letter-spacing: 0; color: var(--gray-400); }
-.vignette-desc { font-size: 13px; font-weight: 700; color: var(--gray-500); margin-top: 6px; }
-.vignette-chev { font-size: 20px; font-weight: 300; line-height: 1; color: var(--gray-400); flex: none; transition: transform .45s ease; }
-.vignette.is-open .vignette-chev { transform: rotate(45deg); }
-.vignette-cat { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-top: 13px; }
-.vignette-body {
-  position: absolute; top: 100%; left: -1px; right: -1px;
-  background: #fff; border: 1px solid var(--border); border-top: none;
-  border-radius: 0 0 18px 18px; padding: 0 26px;
-  max-height: 0; opacity: 0; overflow: hidden; box-shadow: none;
-  transition: max-height .5s ease-in-out, opacity .4s ease, box-shadow .3s ease;
+.covers-stat { font-family: var(--font-display); font-size: 30px; line-height: 1.05; color: var(--ink-900); }
+.covers-per  { font-size: 17px; color: var(--gray-400); }
+.covers-desc { font-size: 12px; font-weight: 700; color: var(--gray-400); }
+
+.covers-main { padding: 24px 24px 26px; }
+.covers-cat {
+  margin: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--gold-700, #b97e00);
 }
-.vignette.is-open .vignette-body {
-  max-height: 180px; opacity: 1; box-shadow: 0 12px 24px rgba(17,17,17,0.08);
-  transition: max-height .5s ease-in-out, opacity .4s ease .1s, box-shadow .3s ease;
-}
-.vignette-body p { font-size: 14px; line-height: 1.6; color: var(--gray-500); margin: 0 0 20px; }
+.covers-body { margin: 0; font-size: 14px; line-height: 1.62; color: var(--gray-500); text-wrap: pretty; }
 
 /* "Where the depth comes from" — static copy block. Extra top gap so an open
    vignette overlay never covers it. */
@@ -899,22 +905,22 @@ select.field-input {
 /* Tablet/mobile: overlay detail copy would clip and cover the row below, so
    drop to 2-up and render the detail in flow (no expand affordance). */
 @media (max-width: 1100px) {
-  .vignette-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .vignette { border-radius: 18px !important; box-shadow: 0 2px 8px rgba(17,17,17,0.06) !important; }
-  .vignette-body {
-    position: static !important; max-height: none !important; opacity: 1 !important;
-    overflow: visible !important; background: transparent !important; border: none !important;
-    box-shadow: none !important; padding: 0 !important; border-radius: 0 !important;
-    margin-top: 12px; transition: none !important;
-  }
-  .vignette-body p { margin: 0 !important; }
-  .vignette-chev { display: none !important; }
+  .covers-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 760px) {
-  .vignette-grid { grid-template-columns: 1fr !important; }
-  .vignette { padding: 22px; }
-  .vignette-hint { display: none; }
+  .covers-card { grid-template-columns: 1fr; }
+  .covers-metric {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+    padding: 18px 20px;
+    border-right: 0;
+    border-bottom: 1px solid #efece4;
+  }
+  .covers-main { padding: 18px 20px 22px; }
+  .covers-cat { font-size: 16px; margin-bottom: 10px; }
+  .covers-body { font-size: 15px; line-height: 1.6; }
 }
 
 /* ============================================================

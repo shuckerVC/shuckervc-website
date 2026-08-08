@@ -35,19 +35,16 @@
   <!-- Cloudflare Turnstile (bot protection for the submit-your-company form). -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-  <!-- Google Analytics 4 — uncomment and replace G-XXXXXXXXXX with the real
-       Measurement ID (GA4 property → Data streams → Web). The form-submit
-       conversion event (generate_lead) is already wired in home.js and
-       activates automatically once gtag exists. -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Google Analytics 4 (property 327040798, stream shucker.vc). The
+       form-submit conversion event (generate_lead) is wired in home.js and
+       fires automatically once gtag exists. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6K11TWCBDE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-6K11TWCBDE');
   </script>
-  -->
 </head>
 <body>
   <!-- cursor spotlight (desktop only) -->

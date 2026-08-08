@@ -10,3 +10,19 @@ compatibility_date = "2026-08-05"
 
 [assets]
 directory = "./site"
+
+# --- Staging environment -------------------------------------------------
+# A second, identical deploy of ./site to its own Worker, built from the
+# `staging` branch and served at staging.shucker.vc (put Cloudflare Access in
+# front of it so it stays private and unindexed). Production is the top-level
+# config above and is unaffected.
+#
+#   Production build cmd:  npx wrangler deploy
+#   Staging build cmd:     npx wrangler deploy --env staging
+#
+# Named environments don't inherit `assets`, so it is repeated here.
+[env.staging]
+name = "shuckervc-website-staging"
+
+[env.staging.assets]
+directory = "./site"

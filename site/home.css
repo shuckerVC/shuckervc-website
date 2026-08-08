@@ -154,6 +154,9 @@ a { color: inherit; }
   transition: transform .25s var(--ease-out), background .25s ease, box-shadow .25s ease;
   will-change: transform;
 }
+/* Greyed-out disabled state — used to gate the apply-form submit until the
+   Cloudflare Turnstile token is validated. */
+.btn:disabled, .btn[disabled] { opacity: .45; cursor: not-allowed; box-shadow: none; transform: none; }
 .btn--lg { height: 54px; padding: 0 30px; font-size: 16px; }
 .btn--gold { background: var(--gold-400); color: var(--ink-900); box-shadow: 0 10px 34px rgba(255,192,9,0.4); }
 .btn--ghost { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.28); color: #fff; }

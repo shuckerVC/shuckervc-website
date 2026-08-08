@@ -947,6 +947,18 @@
     if (!form) return;
     var note = form.querySelector('.apply-note');
 
+    // Gate the submit button on a valid Cloudflare Turnstile token. The button
+    // is greyed out (disabled) until the widget fires its success callback, and
+    // re-disabled if the token expires or errors. These are referenced by name
+    // in the cf-turnstile div's data-callback attributes, so they must live on
+    // window. Tokens are single-use: a submit that fails resets the widget,
+    // which drops back to disabled until the visitor re-validates.
+    var submitBtn = form.querySelector('button[type="submit"]');
+    function setSubmitReady(on) { if (submitBtn) submitBtn.disabled = !on; }
+    setSubmitReady(false);
+    window.svTurnstileOk = function () { setSubmitReady(true); };
+    window.svTurnstileGone = function () { setSubmitReady(false); };
+
     // Collapsed by default; expands when a visitor presses "Share your company"
     // (the CTA reveal button, the hero button, or a #contact link).
     var panel = document.getElementById('applyPanel');
@@ -1036,9 +1048,11 @@
         // Analytics: count the conversion if GA4 is installed (no-op otherwise).
         if (typeof gtag === 'function') gtag('event', 'generate_lead', { method: 'submit_form' });
       }).catch(function () {
-        setNote('Something went wrong sending your submission — email us instead at jp@shucker.vc.');
-        if (btn) { btn.disabled = false; btn.textContent = 'Share your company'; }
+        setNote('Something went wrong sending your submission. Please try again in a moment.');
         // Turnstile tokens are single-use — reset so a retry gets a fresh one.
+        // The reset drops the token, so keep the button disabled until the
+        // visitor re-validates (svTurnstileOk re-enables it).
+        if (btn) { btn.textContent = 'Share your company'; btn.disabled = true; }
         if (window.turnstile && typeof window.turnstile.reset === 'function') window.turnstile.reset();
       });
     });

@@ -4,9 +4,24 @@
     {
       "name": "site",
       "runtimeExecutable": "node",
-      "runtimeArgs": [".claude/serve.js"],
+      "runtimeArgs": [
+        ".claude/serve.js"
+      ],
       "autoPort": true,
       "port": 8124
+    },
+    {
+      "name": "hatch",
+      "runtimeExecutable": "/Users/jppersico/.local/node22/bin/node",
+      "runtimeArgs": [
+        "/Users/jppersico/Downloads/hatch/node_modules/wrangler/bin/wrangler.js",
+        "dev",
+        "-c",
+        "/Users/jppersico/Downloads/hatch/wrangler.toml",
+        "--port",
+        "8787"
+      ],
+      "port": 8787
     }
   ]
 }

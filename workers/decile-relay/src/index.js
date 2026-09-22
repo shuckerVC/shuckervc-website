@@ -267,10 +267,14 @@ export default {
           referral: data.referral,
           source: 'shucker.vc submit form',
         },
+        // These keys are `company_url` / `short_description`, NOT url/description.
+        // The wrong names were accepted and silently ignored, which is why the
+        // Organization Info tab showed an empty Website and "Not provided" for
+        // Short description on every inbound deal (verified 2026-09-22).
         organization: {
           name: data.company,
-          url: data.website,
-          description: data.pitch,
+          company_url: data.website,
+          short_description: data.pitch,
         },
       },
     });

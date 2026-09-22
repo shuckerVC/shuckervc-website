@@ -296,9 +296,14 @@ export default {
 
     // Best-effort: attach the human-readable submission note to the prospect.
     if (prospectId) {
+      // Args are FLAT: body/context are top-level, NOT nested under `note`.
+      // The nested shape silently failed validation, so every submission from
+      // 2026-08 onward landed with no note attached (verified 2026-09-22).
+      // pipeline_prospect_id must be a string; the upsert returns it as a number.
       const note = await mcpCall(env, 'add_pipeline_prospect_note', {
-        pipeline_prospect_id: prospectId,
-        note: { body: noteLines.join('\n'), context: 'shucker.vc submit form' },
+        pipeline_prospect_id: String(prospectId),
+        body: noteLines.join('\n'),
+        context: 'shucker.vc submit form',
       });
       if (!note.ok) console.error('Decile note attach failed (non-fatal)', note.http, note.raw_first_400);
     }

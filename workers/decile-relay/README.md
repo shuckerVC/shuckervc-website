@@ -27,6 +27,47 @@ stated preference for agent integrations anyway.
   referral?, pitch, website2?` — `website2` is the honeypot).
 - `GET /health` — verifies the API key against Decile (`GET /accounts`).
 
+## Required Decile data points (MUST exist before writes land)
+
+`custom_data_points` keys are silently discarded unless a matching data point
+is declared on the account. Decile accepted the write, returned success, and
+stored nothing — the 2026-07-26 `DnBOM` submission landed with
+`custom_data_points: {}`. Decile is adding a check that rejects writes to
+undeclared keys, so after that ships an undeclared key becomes a hard failure
+and the form shows its error state to the founder.
+
+These nine were created 2026-09-22 (ids 103060-103068) and are account-scoped
+to `investment_data_points`, i.e. shared by all three investment pipelines:
+
+| key | format |
+| --- | --- |
+| `submitter_name`  | string |
+| `submitter_email` | string |
+| `submitter_role`  | string |
+| `location`        | string |
+| `round`           | string |
+| `raising`         | string |
+| `deck_url`        | url    |
+| `referral`        | string |
+| `source`          | string |
+
+**Adding a form field means adding its data point first**, via MCP
+`create_pipeline_data_point` (or `POST /api/v1/pipelines/{pipeline_id}/data_points`).
+The data point's `name` IS the `custom_data_points` key — they must match
+exactly. Created without `add_as_column`, which would fan the column out to
+every investment pipeline in the account.
+
+Verify a write actually persisted by reading it back — the write echo reports
+the values either way:
+
+```bash
+# get_prospects pipeline_id=2nEb978Z stage_id=315550 custom_data_points="*"
+```
+
+Note: the submission note attaches to the *organization*, not the prospect, so
+it does not appear under `get_prospects include=notes`. That empty array is
+expected and is not a dropped note.
+
 ## Deploy / operate
 
 ```bash

@@ -312,6 +312,31 @@ export default {
       if (!note.ok) console.error('Decile note attach failed (non-fatal)', note.http, note.raw_first_400);
     }
 
+    // Best-effort: the submitter becomes a Person on the organization, so they
+    // show up under the org's People tab instead of only as prospect data.
+    // `organizations` matches the company BY NAME, which is what makes this
+    // work: the upsert only returns an organization id when it creates a new
+    // org, so there is no id to use when the company already exists.
+    // Note `people` on the upsert's nested organization object is accepted and
+    // silently ignored — this separate call is the path that actually works.
+    {
+      const parts = data.name.trim().split(/\s+/);
+      const firstName = parts.shift() || '';
+      // A single-word name yields an empty last_name, which Decile rejects.
+      // That is deliberate: the call fails, gets logged, and the submission
+      // still succeeds — better than inventing a placeholder surname.
+      const person = await mcpCall(env, 'create_or_update_person', {
+        first_name: firstName,
+        last_name: parts.join(' '),
+        email: data.email,
+        tag_list: 'website-inbound',
+        organizations: [data.role
+          ? { name: data.company, title: data.role }
+          : { name: data.company }],
+      });
+      if (!person.ok) console.error('Decile person attach failed (non-fatal)', person.http, person.raw_first_400);
+    }
+
     return json(200, { ok: true, prospect_id: prospectId }, cors);
   },
 };

@@ -10,7 +10,16 @@ with a human-readable submission note attached.
 
 Writes go through **Decile's MCP endpoint** (`https://decilehub.com/mcp`,
 Streamable HTTP, `X-Decile-API-Key` header) calling the
-`upsert_pipeline_prospect` and `add_pipeline_prospect_note` tools.
+`upsert_pipeline_prospect`, `add_pipeline_prospect_note` and
+`create_or_update_person` tools.
+
+Decile accepts unknown keys and silently ignores them, so an argument with the
+wrong name looks like a success and writes nothing. Three separate bugs of
+exactly this kind were fixed on 2026-09-22: note args nested under `note`,
+org fields sent as `url`/`description` instead of `company_url`/`short_description`,
+and `people` passed on the upsert's nested organization object (ignored there —
+the submitter is attached via `create_or_update_person`, which matches the
+company by name). **Always read a write back before believing it landed.**
 
 This is deliberate: Decile's edge **401s POSTs to the REST write routes when
 they originate from Cloudflare Workers** (identical requests succeed from
